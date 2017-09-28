@@ -28,7 +28,8 @@ class SignUpForm extends React.Component{
     onSubmit(e){
         e.preventDefault();//to avoid storing default value
         this.setState({ errors:{},isLoading:true });//setting state to empty
-        this.props.userSignUpRequest(this.state).then(
+        this.props.userSignUpRequest(this.state)
+            .then(
             ()=>{},
             ({ data })=>
                 this.setState({ errors: data, isLoading:false })
@@ -38,10 +39,6 @@ class SignUpForm extends React.Component{
     render() {
 
         const { errors } = this.state;
-        if(!errors.isEmpty)
-        console.log(errors);
-        // console.log(errors.passwordConfirm);
-
         const options = map(timezones, (val, key)=>
             <option value={val} key={val}>{key}</option>
         );
