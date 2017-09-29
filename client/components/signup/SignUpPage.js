@@ -6,6 +6,7 @@ import {userSignUpRequest} from '../../actions/signUpActions'
 class SignUpPage extends React.Component{
     render() {
         const {userSignUpRequest}=this.props;
+        console.log("usersignup page"+ userSignUpRequest);
         return (
             <div className="row">
                 <div className="col-md-4 col-md-offset-4">

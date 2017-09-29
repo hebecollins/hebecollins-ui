@@ -1,10 +1,7 @@
-import express from 'express';
 import Validator from 'validator';
 import isEmpty from 'lodash/isEmpty';
 
-let router = express.Router();
-
-function validateInput(data){
+export default function validateInput(data){
     let errors={};
 
     if(Validator.isNull(data.nick_name)){
@@ -13,8 +10,17 @@ function validateInput(data){
     if(Validator.isNull(data.email)){
         errors.email = 'this field is required'
     }
+
+    if(!Validator.isNull(data.email)&&!Validator.isEmail(data.email)){
+        errors.email = 'invalid email'
+    }
+
     if(Validator.isNull(data.mobile)){
         errors.mobile = 'this fields is required'
+    }
+
+    if(!data.isMobileValid){
+        errors.mobile = 'invalid no.'
     }
 
     return {
@@ -22,13 +28,3 @@ function validateInput(data){
         isValid: isEmpty(errors)
     }
 }
-
-router.post('/',(req, res)=>{
-    const  {errors, isValid} = validateInput(req.body);
-
-    if(!isValid){
-        res.status(400).json(errors);
-    }
-});
-
-export default router;

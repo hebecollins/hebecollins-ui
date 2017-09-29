@@ -2,62 +2,92 @@ import React from 'react';
 import timezones from '../../data/timezones';
 import map from 'lodash/map';
 import classnames from 'classnames';
+import validateInput from "../../Toolbox/Validation/signup";
 
-class SignUpForm extends React.Component{
-    constructor(props){
+//for country code flag with mobile no.
+import IntlTelInput from 'react-intl-tel-input';
+import 'file?name=libphonenumber.js!./../../../node_modules/react-intl-tel-input/dist/libphonenumber.js';
+import './../../../node_modules/react-intl-tel-input/dist/main.css';
+//for country code flag with mobile no.
+
+
+class SignUpForm extends React.Component {
+    constructor(props) {
         super(props);
-        this.state={
-            username:'',
-            email:'',
-            password:'',
-            passwordConfirm:'',
-            timezone:'',
-            errors:{},
-            isLoading:false
-        }
+        this.state = {
+            nick_name: '',
+            email: '',
+            mobile: '',
+            country_code:'',
+            isMobileValid:'',
+            // timezone:'',
+            errors: {},
+            isLoading: false
+        };
 
         this.onChange = this.onChange.bind(this);
         this.onSubmit = this.onSubmit.bind(this);
+        this.handleMobileNo = this.handleMobileNo.bind(this);
+
     }
 
-    //event handler
-    onChange(e){
-        this.setState({ [e.target.name]: e.target.value});
-    }//this key word is refering to context of event not the component.. we gotta make it component
+    onChange(e) {
+        console.log(this.state)
+        this.setState({[e.target.name]: e.target.value});
+    }
 
-    onSubmit(e){
+    isValid() {
+        const {errors, isValid} = validateInput(this.state);
+
+        if (!isValid) {
+            this.setState({errors});
+        }
+        return isValid;
+    }
+
+    handleMobileNo(status, value, countryData, number){
+        this.setState({mobile:value, country_code:countryData.dialCode, isMobileValid:status})
+    }
+
+    onSubmit(e) {
         e.preventDefault();//to avoid storing default value
-        this.setState({ errors:{},isLoading:true });//setting state to empty
-        this.props.userSignUpRequest(this.state)
-            .then(
-            ()=>{},
-            ({ data })=>
-                this.setState({ errors: data, isLoading:false })
-        );
+
+        if (this.isValid()) {
+            this.setState({errors: {}, isLoading: true});//setting state to empty
+            this.props.userSignUpRequest(this.state).then(
+                (response) => {
+                    if (!response.data.status) {
+                        this.setState({errors: response.data.errors, isLoading: false})
+                    }
+                }
+            )
+        }
     }
 
     render() {
 
-        const { errors } = this.state;
-        const options = map(timezones, (val, key)=>
+        const {errors} = this.state;
+        console.log(errors);
+        console.log("see this");
+        const options = map(timezones, (val, key) =>
             <option value={val} key={val}>{key}</option>
         );
         return (
             <form onSubmit={this.onSubmit}>
-                <h1>Join World's biggest gym colony</h1>
-                <div className={classnames("form-group",{'has-error':errors.username})}>
-                    <label className="control-label">Username</label>
+                <h1>Become A Member Now!</h1>
+                <div className={classnames("form-group", {'has-error': errors.nick_name})}>
+                    <label className="control-label">Nickname</label>
                     <input
-                        value={this.state.username}
+                        value={this.state.nick_name}
                         onChange={this.onChange}
                         type="text"
-                        name="username"
+                        name="nick_name"
                         className="form-control"
                     />
-                    {errors.username && <span className="help-block">{errors.username}</span>}
+                    {errors.nick_name && <span className="help-block">{errors.nick_name}</span>}
                 </div>
 
-                <div className={classnames("form-group",{'has-error':errors.email})}>
+                <div className={classnames("form-group", {'has-error': errors.email})}>
                     <label className="control-label">Email</label>
                     <input
                         value={this.state.email}
@@ -70,45 +100,57 @@ class SignUpForm extends React.Component{
 
                 </div>
 
-                <div className={classnames("form-group",{'has-error':errors.password})}>
-                    <label className="control-label">Password</label>
-                    <input
-                        value={this.state.password}
-                        onChange={this.onChange}
-                        type="password"
-                        name="password"
-                        className="form-control"
+                <div className={classnames("form-group", {'has-error': errors.mobile})}>
+
+                    <label className="control-label">Mobile No.</label>
+                    {/*<input*/}
+                        {/*value={this.state.mobile}*/}
+                        {/*onChange={this.onChange}*/}
+                        {/*type="text"*/}
+                        {/*name="mobile"*/}
+                        {/*className="form-control"*/}
+                    {/*/>*/}
+
+                    <IntlTelInput
+                        fieldName={"mobile"}
+                        value={this.state.mobile}
+                        onPhoneNumberChange={this.handleMobileNo}
+                        preferredCountries={['in']}
+                        placeholder = {'9876543210'}
+                        numberType="MOBILE"
+                        css={ ['intl-tel-input', 'form-control'] }
+                        utilsScript={ 'libphonenumber.js' }
                     />
-                    {errors.password && <span className="help-block">{errors.password}</span>}
+                    {errors.mobile && <span className="help-block">{errors.mobile}</span>}
 
                 </div>
 
-                <div className={classnames("form-group",{'has-error':errors.passwordConfirm})}>
-                    <label className="control-label">Confirm Password</label>
-                    <input
-                        value={this.state.passwordConfirm}
-                        onChange={this.onChange}
-                        type="password"
-                        name="passwordConfirm"
-                        className="form-control"
-                    />
-                    {errors.passwordConfirm && <span className="help-block">{errors.passwordConfirm}</span>}
+                {/*<div className={classnames("form-group",{'has-error':errors.passwordConfirm})}>*/}
+                {/*<label className="control-label">Confirm Password</label>*/}
+                {/*<input*/}
+                {/*value={this.state.passwordConfirm}*/}
+                {/*onChange={this.onChange}*/}
+                {/*type="password"*/}
+                {/*name="passwordConfirm"*/}
+                {/*className="form-control"*/}
+                {/*/>*/}
+                {/*{errors.passwordConfirm && <span className="help-block">{errors.passwordConfirm}</span>}*/}
 
-                </div>
+                {/*</div>*/}
 
-                <div className={classnames("form-group",{'has-error':errors.timezone})}>
-                    <label className="control-label">Timezone</label>
-                    <select
-                        value={this.state.timezone}
-                        onChange={this.onChange}
-                        name="timezone"
-                        className="form-control"
-                    >
-                        <option value="" disabled>Choose Your Timezone</option>
-                        {options}
-                    </select>
-                    {errors.timezone && <span className="help-block">{errors.timezone}</span>}
-                </div>
+                {/*<div className={classnames("form-group",{'has-error':errors.timezone})}>*/}
+                {/*<label className="control-label">Timezone</label>*/}
+                {/*<select*/}
+                {/*value={this.state.timezone}*/}
+                {/*onChange={this.onChange}*/}
+                {/*name="timezone"*/}
+                {/*className="form-control"*/}
+                {/*>*/}
+                {/*<option value="" disabled>Choose Your Timezone</option>*/}
+                {/*{options}*/}
+                {/*</select>*/}
+                {/*{errors.timezone && <span className="help-block">{errors.timezone}</span>}*/}
+                {/*</div>*/}
 
                 <div className="form-group">
                     <button disabled={this.state.isLoading} className="btn btn-primary btn lg">
@@ -120,7 +162,7 @@ class SignUpForm extends React.Component{
     }
 }
 
-SignUpForm.propTypes={
+SignUpForm.propTypes = {
     userSignUpRequest: React.PropTypes.func.isRequired
 };
 
