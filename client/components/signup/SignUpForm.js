@@ -3,6 +3,7 @@ import timezones from '../../data/timezones';
 import map from 'lodash/map';
 import classnames from 'classnames';
 import validateInput from "../../Toolbox/Validation/signup";
+import {browserHistory} from 'react-router';
 
 //for country code flag with mobile no.
 import IntlTelInput from 'react-intl-tel-input';
@@ -46,6 +47,7 @@ class SignUpForm extends React.Component {
     }
 
     handleMobileNo(status, value, countryData, number){
+        console.log(countryData);
         this.setState({mobile:value, country_code:countryData.dialCode, isMobileValid:status})
     }
 
@@ -58,6 +60,9 @@ class SignUpForm extends React.Component {
                 (response) => {
                     if (!response.data.status) {
                         this.setState({errors: response.data.errors, isLoading: false})
+                    }
+                    if(response.data.status){
+                        browserHistory.push('/');
                     }
                 }
             )
