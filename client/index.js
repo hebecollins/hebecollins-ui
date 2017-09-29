@@ -5,11 +5,17 @@ import {Router, browserHistory} from 'react-router';
 import { Provider } from 'react-redux';
 import routes from './routes';
 import thunk from 'redux-thunk';
-import {createStore, applyMiddleware} from 'redux';
+import {createStore, applyMiddleware, compose} from 'redux';
+import rootReducer from './rootReducer';
 
 const store = createStore(
-    (state = {})=> state,
-    applyMiddleware(thunk)
+    // (state = {})=> state,//empty reducer
+    rootReducer,
+    compose(
+        applyMiddleware(thunk),
+        window.__REDUX_DEVTOOLS_EXTENSION__ && window.__REDUX_DEVTOOLS_EXTENSION__()
+    )
+
 );
 
 render(
