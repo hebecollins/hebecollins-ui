@@ -1,5 +1,6 @@
 const path = require('path');
 const webpack = require('webpack');
+// const conf = require('config/development');
 
 module.exports = {
     devServer: {
@@ -12,7 +13,7 @@ module.exports = {
     },
     devtools: 'cheap-module-eval-source-map',
     entry: [
-        path.join(__dirname, '/client/index.js')
+        path.join(__dirname, '/app/index.js')
     ],
     output: {
         path: path.join(__dirname, '/server'),
@@ -28,7 +29,11 @@ module.exports = {
         loaders: [
             {
                 test: /\.js$/,
-                include: path.join(__dirname, 'client'),
+                include:[
+                    path.join(__dirname, 'app'),
+                    path.join(__dirname, 'config'),
+                    path.join(__dirname, 'mode.js'),
+                ],
                 loaders: ['react-hot', 'babel']
             },
             {
@@ -73,5 +78,8 @@ module.exports = {
     },
     resolve: {
         extensions: ['', '.js']
-    }
+    },
+    externals: {
+        config: JSON.stringify(require('./config/routes.json')),
+    },
 };
