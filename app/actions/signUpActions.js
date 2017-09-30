@@ -1,4 +1,5 @@
 import axios from 'axios';
+import {sendJSONRequest} from '../Toolbox/Helpers/requestHandler';
 
 export function userSignUpRequest(userData) {
     const authOptions = {
