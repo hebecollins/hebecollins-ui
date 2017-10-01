@@ -1,6 +1,5 @@
 const path = require('path');
 const webpack = require('webpack');
-// const conf = require('config/development');
 
 module.exports = {
     devServer: {
@@ -80,6 +79,6 @@ module.exports = {
         extensions: ['', '.js']
     },
     externals: {
-        config: JSON.stringify(require('./config/routes.json')),
+        backendRoutes: JSON.stringify(require('./config/backendRoutes.json')),
     },
 };

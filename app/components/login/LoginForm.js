@@ -40,9 +40,10 @@ class LoginForm extends React.Component {
         if (this.isValid()) {
             this.setState({errors: {}, isLoading: true});
 
-            this.props.loginRequest(this.state).then(
-                (res) => console.log(res.data),
-                (err) => this.setState({errors: err.data.errors, isLoading: false})
+            this.props.loginRequest(this.state)
+                .then(
+                // (res) => console.log(res.data),
+                // (err) => this.setState({errors: err.data.errors, isLoading: false})
             );
         }
     }
