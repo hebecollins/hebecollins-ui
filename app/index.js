@@ -1,8 +1,8 @@
 import React from 'react';
-import { render } from 'react-dom';
+import {render} from 'react-dom';
 import App from './components/App';
 import {Router, browserHistory} from 'react-router';
-import { Provider } from 'react-redux';
+import {Provider} from 'react-redux';
 import routes from './routes';
 import thunk from 'redux-thunk';
 import {createStore, applyMiddleware, compose} from 'redux';
@@ -19,9 +19,10 @@ const store = createStore(
     )
 );
 
-if(localStorage.token){
-    setAuthToken(localStorage.token);
-    store.dispatch(setCurrentUser(localStorage.token))
+if (localStorage.user) {
+    const user = JSON.parse(localStorage.user);
+    setAuthToken(user.token);
+    store.dispatch(setCurrentUser(user))
 }
 
 render(

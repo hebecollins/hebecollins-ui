@@ -1,5 +1,7 @@
 import React from 'react';
 import {Link} from 'react-router';
+import {connect} from 'react-redux';
+import {logout} from '../../actions/loginActions'
 
 class Navigation extends React.Component {
 // <nav className="navbar navbar-inverse">
@@ -16,7 +18,46 @@ class Navigation extends React.Component {
 // </div>
 // </div>
 // </nav>
+
+    logout(e){
+        e.preventDefault();
+        this.props.logout();
+    }
     render() {
+
+
+        const {isAuthenticated}=this.props.auth;
+
+        const userLinks = (
+        <ul className="nav navbar-nav navbar-right">
+            <li className="active"><a href="#">Home</a></li>
+            <li className="dropdown">
+                <a href="#" className="dropdown-toggle" data-toggle="dropdown">GYM<b className="caret"></b></a>
+                <ul className="dropdown-menu">
+                    <li><a href="#">qfit, sashthamangalam</a></li>
+                    <li><a href="#">golds, kattangal</a></li>
+                    <li><a href="#">power, ambala</a></li>
+                </ul>
+            </li>
+            <li><a href="#">Profile</a></li>
+            <li><a href="#">Trainer</a></li>
+            <li><a href="#">Week Workout</a></li>
+            <li><a href="#">Upcoming Birthdays</a></li>
+            <li><a href="#">Suggestion Box</a></li>
+            <li><a href="#">About Us</a></li>
+            <li><a href="#">Contact Us</a></li>
+            <li><a href="#" onClick={this.logout.bind(this)}>Logout</a></li>
+        </ul>
+        );
+
+        const guestLinks = (
+        <ul className="nav navbar-nav navbar-right">
+            <li className="active"><a href="#">Home</a></li>
+            <li className="active"><a href="#">About Us</a></li>
+            <li className="active"><a href="#">Contact Us</a></li>
+        </ul>
+        );
+
         return (
 
             <div className="navbar navbar-inverse navbar-static-top">
@@ -30,24 +71,7 @@ class Navigation extends React.Component {
                         </button>
                     </div>
                     <div className="collapse navbar-collapse navHeaderCollapse">
-                        <ul className="nav navbar-nav navbar-right">
-                            <li className="active"><a href="#">Home</a></li>
-                            <li className="dropdown">
-                                <a href="#" className="dropdown-toggle" data-toggle="dropdown">GYM<b className="caret"></b></a>
-                                <ul className="dropdown-menu">
-                                    <li><a href="#">qfit, sashthamangalam</a></li>
-                                    <li><a href="#">golds, kattangal</a></li>
-                                    <li><a href="#">power, ambala</a></li>
-                                </ul>
-                            </li>
-                            <li><a href="#">Profile</a></li>
-                            <li><a href="#">Trainer</a></li>
-                            <li><a href="#">Week Workout</a></li>
-                            <li><a href="#">Upcoming Birthdays</a></li>
-                            <li><a href="#">Suggestion Box</a></li>
-                            <li><a href="#">About Us</a></li>
-                            <li><a href="#">Contact Us</a></li>
-                        </ul>
+                        {isAuthenticated? userLinks:guestLinks}
                     </div>
                 </div>
             </div>
@@ -55,4 +79,14 @@ class Navigation extends React.Component {
     }
 }
 
-export default Navigation;
+Navigation.propTypes = {
+    auth:React.PropTypes.object.isRequired,
+    logout: React.PropTypes.func.isRequired
+};
+
+function mapStateToProps(state) {
+    return{
+        auth:state.auth
+    }
+}
+export default connect(mapStateToProps,{logout})(Navigation);
