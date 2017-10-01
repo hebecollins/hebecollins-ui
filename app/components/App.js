@@ -15,12 +15,12 @@ class App extends React.Component {
             <div className="container-fluid">
                 <Home/>
                 <FlashMessageList/>
-                <div className="col col-lg-8 col-md-8 hidden-sm hidden-xs">
+                <div className="col col-lg-8 col-md-8 col-sm-6 hidden-xs">
                     <div className="col col-lg-9 col-md-9">
                         <Description/>
                     </div>
                 </div>
-                <div className="col col-lg-4 col-md-4 col-sm-12 col-xs-12">
+                <div className="col col-lg-4 col-md-4 col-sm-6 col-xs-12">
                     <LoginAndSignup/>
                 </div>
                 {this.props.children}

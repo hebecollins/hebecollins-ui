@@ -10,15 +10,14 @@ class Home extends React.Component {
     render() {
         return (
             <div>
-            //not signed in
 
             <Navigation>
                 {/*<ul className="nav navbar-nav navbar-left">*/}
                 {/*<li><Link to="/contact" className="navbar-brand">Contact Us</Link></li>*/}
                 {/*</ul>*/}
             </Navigation>
+
                 {/*{this.state.loginFormDisabled?<LoginPage/>:<SignUpPage/>}*/}
-            //when signed in and is a client
             </div>
         )
     }

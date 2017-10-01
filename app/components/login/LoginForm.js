@@ -3,6 +3,7 @@ import TextFieldGroup from '../common/TextFieldGroup'
 import validateInput from "../../Toolbox/Validation/login";
 import {connect} from 'react-redux';
 import {loginRequest} from "../../actions/loginActions"
+require('../../css/style.css');
 
 class LoginForm extends React.Component {
 
@@ -40,10 +41,8 @@ class LoginForm extends React.Component {
         if (this.isValid()) {
             this.setState({errors: {}, isLoading: true});
 
-            this.props.loginRequest(this.state)
-                .then(
-                // (res) => console.log(res.data),
-                // (err) => this.setState({errors: err.data.errors, isLoading: false})
+            this.props.loginRequest(this.state).catch(
+                (err) => this.setState({errors: err.data.errors, isLoading: false})
             );
         }
     }
@@ -51,8 +50,8 @@ class LoginForm extends React.Component {
     render() {
         const {errors, identifier, password, remember, isLoading} = this.state;
         return (
-            <form onSubmit={this.onSubmit}>
-                {/*<h1>Login</h1>*/}
+            <form className="form-hebecollins" onSubmit={this.onSubmit}>
+                <p className="white-center">Welcome!</p>
                 <TextFieldGroup
                     field="identifier"
                     label="Email/Mobile"
@@ -68,7 +67,7 @@ class LoginForm extends React.Component {
                     onChange={this.onChange}
                     error={errors.password}
                     type="password"
-                /><br/>
+                />
 
                 <div>
                     <input
@@ -81,7 +80,7 @@ class LoginForm extends React.Component {
                     <label className="control-label">Remember Me</label>
                 </div>
                 <div className="form-group">
-                    <button disabled={isLoading} className="btn btn-group-justified btn-primary btn-lg">Submit</button>
+                    <button disabled={isLoading} className="btn btn-group-justified btn-hebecollins btn-lg">Submit</button>
                 </div>
             </form>
         )

@@ -79,7 +79,9 @@ class SignUpForm extends React.Component {
         //     <option value={val} key={val}>{key}</option>
         // );
         return (
+
             <form onSubmit={this.onSubmit}>
+            <p className="white-center">Sign up for free!</p>
                 <TextFieldGroup
                     error={errors.nick_name}
                     label="Nick Name"
@@ -97,14 +99,13 @@ class SignUpForm extends React.Component {
                 />
 
                 <div className={classnames("form-group", {'has-error': errors.mobile})}>
-                    <span className="glyphicon glyphicon-phone"/>
-                    <label className="control-label">Mobile No.</label><br/>
+                    {/*<span className="glyphicon glyphicon-phone"/>*/}
                     <IntlTelInput
                         fieldName={"mobile"}
                         value={this.state.mobile}
                         onPhoneNumberChange={this.handleMobileNo}
                         preferredCountries={['in']}
-                        placeholder={'9876543210'}
+                        placeholder={'Mobile number'}
                         numberType="MOBILE"
                         style={{width:'100%'}}
                         css={['intl-tel-input', 'form-control']}
@@ -115,8 +116,8 @@ class SignUpForm extends React.Component {
 
                 <div className="form-group">
                     <button disabled={this.state.isLoading}
-                            className="btn btn-group-justified btn-primary btn-lg">
-                        Get Started Now!
+                            className="btn btn-group-justified btn-hebecollins btn-lg">
+                        GET STARTED!
                     </button>
                 </div>
             </form>

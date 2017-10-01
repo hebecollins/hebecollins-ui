@@ -33,12 +33,12 @@ class LoginAndSignup extends React.Component {
         return (
             <div className="well">
                 <div className="btn-group btn-group-justified">
-                    {/*<span className="glyphicon glyphicon-log-in"/>*/}
-                    <a className="btn btn-primary btn-lg"
+                    {/*<span  className="glyphicon glyphicon-log-in"/>*/}
+                    <a className="btn btn-hebecollins btn-lg"
                             name="login" onClick={this.onClick}
                             disabled={this.state.loginFormDisabled}>Login</a>
                     {/*<span class="glyphicon glyphicon-user"/>*/}
-                    <a className="btn btn-primary btn-lg"
+                    <a className="btn btn-hebecollins btn-lg"
                             name="signup" onClick={this.onClick}
                             disabled={this.state.signupFormDisabled}>Signup</a>
                 </div><br/>

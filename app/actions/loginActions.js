@@ -20,15 +20,10 @@ export function loginRequest(data) {
 
     return dispatch => {
         return postForm(dataToBePosted, backendRoutes.login).then(res=>{
-            console.log(res);
-            const token = res.data.token;
-            localStorage.setItem('token', token);
-            setAuthToken(token);
-            // const user={
-            //     token:token
-            // }
-            console.log(token);
-            dispatch(setCurrentUser(token))
+            const user = res.data.data;
+            localStorage.setItem('user', data);
+            setAuthToken(user.token);
+            dispatch(setCurrentUser(user))
             }
         );
     }
