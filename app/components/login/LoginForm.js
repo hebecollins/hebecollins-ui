@@ -67,7 +67,7 @@ class LoginForm extends React.Component {
                     onChange={this.onChange}
                     error={errors.password}
                     type="password"
-                />
+                /><br/>
 
                 <div>
                     <input

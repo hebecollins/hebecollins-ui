@@ -1,6 +1,8 @@
 import {MODE} from '../../../mode';
 import axios from 'axios';
 import {developmentURL, productionURL} from '../../../config/baseURL';
+import backendRoutes from 'backendRoutes';
+import querystring from 'querystring';
 
 if (MODE === 'production') {
     axios.defaults.baseURL = productionURL
@@ -10,12 +12,29 @@ if (MODE === 'production') {
     axios.defaults.baseURL = ""
 }
 
-export function postJSON() {
-    return "hello";
+export function postJSON(data,route) {
+    const authOptions = {
+        method: 'POST',
+        url: route,
+        data:data,
+        headers: {
+            'Content-Type': 'application/x-www-form-urlencoded'
+        }
+    };
+    return axios(authOptions);
 }
 
-export function postForm() {
-    return "helllllllo";
+export function postForm(data,route) {
+    const authOptions = {
+        method: 'POST',
+        url: route,
+        data: querystring.stringify(data),
+        headers: {
+            'Content-Type': 'application/x-www-form-urlencoded'
+        }
+
+    };
+    return axios(authOptions);
 }
 
 export function get() {
