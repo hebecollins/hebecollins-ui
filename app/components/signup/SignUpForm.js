@@ -57,30 +57,17 @@ class SignUpForm extends React.Component {
         if (this.isValid()) {
             this.setState({errors: {}, isLoading: true});//setting state to empty
             this.props.userSignUpRequest(this.state).then(
-                (res)=> {
+                (res) => {
                     browserHistory.push('/');
                     this.props.addFlashMessage({
                         type: 'success',
                         text: res.data.msg
                     })
                 },
-                (err)=> this.setState({errors: err.data.errors, isLoading: false})
+                (err) => this.setState({errors: err.data.errors, isLoading: false})
             )
-                //
-                // (response) => {
-                //     if (!response.data.status) {
-                //         this.setState({errors: response.data.errors, isLoading: false})
-                //     }
-                //     if (response.data.status) {
-                //         browserHistory.push('/');
-                //         this.props.addFlashMessage({
-                //             type: 'success',
-                //             text: response.data.msg
-                //         })
-                    }
-                }
-
-
+        }
+    }
 
 
     render() {
@@ -93,7 +80,6 @@ class SignUpForm extends React.Component {
         // );
         return (
             <form onSubmit={this.onSubmit}>
-                <h1>Become A Member Now!</h1>
                 <TextFieldGroup
                     error={errors.nick_name}
                     label="Nick Name"
@@ -111,7 +97,8 @@ class SignUpForm extends React.Component {
                 />
 
                 <div className={classnames("form-group", {'has-error': errors.mobile})}>
-                    <label className="control-label">Mobile No.</label>
+                    <span className="glyphicon glyphicon-phone"/>
+                    <label className="control-label">Mobile No.</label><br/>
                     <IntlTelInput
                         fieldName={"mobile"}
                         value={this.state.mobile}
@@ -119,6 +106,7 @@ class SignUpForm extends React.Component {
                         preferredCountries={['in']}
                         placeholder={'9876543210'}
                         numberType="MOBILE"
+                        style={{width:'100%'}}
                         css={['intl-tel-input', 'form-control']}
                         utilsScript={'libphonenumber.js'}
                     />
@@ -126,8 +114,9 @@ class SignUpForm extends React.Component {
                 </div>
 
                 <div className="form-group">
-                    <button disabled={this.state.isLoading} className="btn btn-primary btn lg">
-                        Sign up
+                    <button disabled={this.state.isLoading}
+                            className="btn btn-group-justified btn-primary btn-lg">
+                        Get Started Now!
                     </button>
                 </div>
             </form>

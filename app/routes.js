@@ -8,8 +8,8 @@ import LoginPage from "./components/login/LoginPage";
 
 export default (
     <Route path="/" component={App}>
-        <IndexRoute component={Greetings}/>
-        <Route path="signup" component={SignUpPage}/>
-        <Route path="login" component={LoginPage}/>
+        {/*<IndexRoute component={Greetings}/>*/}
+        {/*<Route path="signup" component={SignUpPage}/>*/}
+        {/*<Route path="login" component={LoginPage}/>*/}
     </Route>
 )//IndexRoute is default route.. when nothing else is called , it gets called

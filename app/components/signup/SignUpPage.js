@@ -9,10 +9,8 @@ class SignUpPage extends React.Component{
     render() {
         const {userSignUpRequest, addFlashMessage}=this.props;
         return (
-            <div className="row">
-                <div className="col-md-4 col-md-offset-4">
-                    <SignUpForm userSignUpRequest={userSignUpRequest} addFlashMessage={addFlashMessage}/>
-                </div>
+            <div>
+                <SignUpForm userSignUpRequest={userSignUpRequest} addFlashMessage={addFlashMessage}/>
             </div>
         );
     }

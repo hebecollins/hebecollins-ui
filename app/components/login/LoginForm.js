@@ -2,7 +2,7 @@ import React from 'react';
 import TextFieldGroup from '../common/TextFieldGroup'
 import validateInput from "../../Toolbox/Validation/login";
 import {connect} from 'react-redux';
-import { loginRequest } from "../../actions/loginActions"
+import {loginRequest} from "../../actions/loginActions"
 
 class LoginForm extends React.Component {
 
@@ -11,6 +11,7 @@ class LoginForm extends React.Component {
         this.state = {
             identifier: "",
             password: "",
+            remember: false,
             errors: {},
             isLoading: false
         };
@@ -21,6 +22,9 @@ class LoginForm extends React.Component {
 
     onChange(e) {
         this.setState({[e.target.name]: e.target.value});
+        if(e.target.name === "remember"){
+            this.setState({remember:e.target.checked})
+        }
     }
 
     isValid() {
@@ -37,17 +41,17 @@ class LoginForm extends React.Component {
             this.setState({errors: {}, isLoading: true});
 
             this.props.loginRequest(this.state).then(
-                (res)=>console.log(res.data),
-                (err)=> this.setState({errors: err.data.errors, isLoading: false})
+                (res) => console.log(res.data),
+                (err) => this.setState({errors: err.data.errors, isLoading: false})
             );
         }
     }
 
     render() {
-        const {errors, identifier, password, isLoading} = this.state;
+        const {errors, identifier, password, remember, isLoading} = this.state;
         return (
             <form onSubmit={this.onSubmit}>
-                <h1>Login</h1>
+                {/*<h1>Login</h1>*/}
                 <TextFieldGroup
                     field="identifier"
                     label="Email/Mobile"
@@ -64,8 +68,19 @@ class LoginForm extends React.Component {
                     error={errors.password}
                     type="password"
                 />
+
+                <div>
+                    <input
+                        value={remember}
+                        onChange={this.onChange}
+                        type="checkbox"
+                        name="remember"
+                        className="form-group"
+                    />
+                    <label className="control-label">Remember Me</label>
+                </div>
                 <div className="form-group">
-                    <button disabled={isLoading} className="btn btn-primary btn-lg">Login</button>
+                    <button disabled={isLoading} className="btn btn-group-justified btn-primary btn-lg">Submit</button>
                 </div>
             </form>
         )
@@ -76,4 +91,4 @@ LoginForm.propTypes = {
     loginRequest: React.PropTypes.func.isRequired
 };
 
-export default connect(null, {loginRequest})( LoginForm);
+export default connect(null, {loginRequest})(LoginForm);

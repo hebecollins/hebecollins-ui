@@ -1,10 +1,8 @@
 import axios from 'axios';
 import querystring from 'querystring';
-// import config from '../production';
-import {sendJSONRequest, messages} from '../Toolbox/Helpers/requestHandler';
+import {sendJSONRequest} from '../Toolbox/Helpers/requestHandler';
 
 export  function loginRequest(data) {
-    console.log(messages.required);
     // console.log(sendJSONRequest(data,route));
 
     axios.defaults.baseURL='http://hebecollinsapi';
@@ -14,7 +12,8 @@ export  function loginRequest(data) {
         data: querystring.stringify(
             {
                 "identifier": data.identifier,
-                "password": data.password
+                "password": data.password,
+                "remember": data.remember
             }
             ),
         headers: {
@@ -22,7 +21,7 @@ export  function loginRequest(data) {
         }
     };
     return dispatch => {
-        const a=axios(authOptions);
+        const a = axios(authOptions);
         return a;
     }
 }
