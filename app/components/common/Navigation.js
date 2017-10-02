@@ -4,20 +4,6 @@ import {connect} from 'react-redux';
 import {logout} from '../../actions/loginActions'
 
 class Navigation extends React.Component {
-// <nav className="navbar navbar-inverse">
-// <div className="container-fluid">
-// <div className="navbar-header">
-// <Link to="/" className="navbar-brand">Hebecollins</Link>
-// </div>
-// <div className="collapse navbar-collapse">
-// <ul className="nav navbar-nav navbar-right">
-// <Link to="/suggestion" className="navbar-brand">Suggestion Box</Link>
-// <Link to="/contact" className="navbar-brand">Contact Us</Link>
-// </ul>
-// {this.props.children}
-// </div>
-// </div>
-// </nav>
 
     logout(e){
         e.preventDefault();
@@ -25,10 +11,10 @@ class Navigation extends React.Component {
     }
     render() {
 
-
         const {isAuthenticated}=this.props.auth;
+        const {user_type}=this.props.auth.user;
 
-        const userLinks = (
+        const clientLinks = (
         <ul className="nav navbar-nav navbar-right">
             <li className="active"><a href="#">Home</a></li>
             <li className="dropdown">
@@ -40,7 +26,7 @@ class Navigation extends React.Component {
                 </ul>
             </li>
             <li><a href="#">Profile</a></li>
-            <li><a href="#">Trainer</a></li>
+            <li><a href="#">Trainers</a></li>
             <li><a href="#">Week Workout</a></li>
             <li><a href="#">Upcoming Birthdays</a></li>
             <li><a href="#">Suggestion Box</a></li>
@@ -50,11 +36,55 @@ class Navigation extends React.Component {
         </ul>
         );
 
+        const trainerLinks = (
+            <ul className="nav navbar-nav navbar-right">
+                <li className="active"><a href="#">Home</a></li>
+                <li className="dropdown">
+                    <a href="#" className="dropdown-toggle" data-toggle="dropdown">GYM<b className="caret"></b></a>
+                    <ul className="dropdown-menu">
+                        <li><a href="#">qfit, sashthamangalam</a></li>
+                        <li><a href="#">golds, kattangal</a></li>
+                        <li><a href="#">power, ambala</a></li>
+                    </ul>
+                </li>
+                <li><a href="#">Profile</a></li>
+                <li><a href="#">Clients</a></li>
+                <li><a href="#">Saved Workouts</a></li>
+                <li><a href="#">Upcoming Birthdays</a></li>
+                <li><a href="#">Suggestion Box</a></li>
+                <li><a href="#">About Us</a></li>
+                <li><a href="#">Contact Us</a></li>
+                <li><a href="#" onClick={this.logout.bind(this)}>Logout</a></li>
+            </ul>
+        );
+
+        const managerLinks = (
+            <ul className="nav navbar-nav navbar-right">
+                <li className="active"><a href="#">Home</a></li>
+                <li className="dropdown">
+                    <a href="#" className="dropdown-toggle" data-toggle="dropdown">GYM<b className="caret"></b></a>
+                    <ul className="dropdown-menu">
+                        <li><a href="#">qfit, sashthamangalam</a></li>
+                        <li><a href="#">golds, kattangal</a></li>
+                        <li><a href="#">power, ambala</a></li>
+                    </ul>
+                </li>
+                <li><a href="#">Profile</a></li>
+                <li><a href="#">Trainers</a></li>
+                <li><a href="#">Gyms</a></li>
+                <li><a href="#">Upcoming Birthdays</a></li>
+                <li><a href="#">Suggestion Box</a></li>
+                <li><a href="#">About Us</a></li>
+                <li><a href="#">Contact Us</a></li>
+                <li><a href="#" onClick={this.logout.bind(this)}>Logout</a></li>
+            </ul>
+        );
+
         const guestLinks = (
         <ul className="nav navbar-nav navbar-right">
             <li className="active"><a href="#">Home</a></li>
-            <li className="active"><a href="#">About Us</a></li>
-            <li className="active"><a href="#">Contact Us</a></li>
+            <li><a href="#">About Us</a></li>
+            <li><a href="#">Contact Us</a></li>
         </ul>
         );
 
@@ -71,7 +101,9 @@ class Navigation extends React.Component {
                         </button>
                     </div>
                     <div className="collapse navbar-collapse navHeaderCollapse">
-                        {isAuthenticated? userLinks:guestLinks}
+                        {!isAuthenticated? guestLinks:
+                            (user_type === 'client')? clientLinks :
+                                (user_type === 'trainer')? trainerLinks: managerLinks}
                     </div>
                 </div>
             </div>

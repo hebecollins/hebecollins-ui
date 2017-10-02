@@ -42,7 +42,7 @@ class LoginForm extends React.Component {
             this.setState({errors: {}, isLoading: true});
 
             this.props.loginRequest(this.state).catch(
-                (err) => this.setState({errors: err.data.errors, isLoading: false})
+                (err) => this.setState({errors: err.response.data.errors, isLoading: false})
             );
         }
     }

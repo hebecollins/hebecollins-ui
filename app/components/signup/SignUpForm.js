@@ -64,7 +64,10 @@ class SignUpForm extends React.Component {
                         text: res.data.msg
                     })
                 },
-                (err) => this.setState({errors: err.data.errors, isLoading: false})
+                (err) => {
+                    console.log(err);
+                    this.setState({errors: err.response.data.errors, isLoading: false})
+                }
             )
         }
     }
@@ -81,7 +84,7 @@ class SignUpForm extends React.Component {
         return (
 
             <form onSubmit={this.onSubmit}>
-            <p className="white-center">Sign up for free!</p>
+                <p className="white-center">Sign up for free!</p>
                 <TextFieldGroup
                     error={errors.nick_name}
                     label="Nick Name"
@@ -107,7 +110,7 @@ class SignUpForm extends React.Component {
                         preferredCountries={['in']}
                         placeholder={'Mobile number'}
                         numberType="MOBILE"
-                        style={{width:'100%'}}
+                        style={{width: '100%'}}
                         css={['intl-tel-input', 'form-control']}
                         utilsScript={'libphonenumber.js'}
                     />

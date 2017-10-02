@@ -13,10 +13,10 @@ import {setCurrentUser} from "./actions/loginActions";
 const store = createStore(
     // (state = {})=> state,//empty reducer
     rootReducer,
-    compose(
+    // compose(
         applyMiddleware(thunk),
-        window.__REDUX_DEVTOOLS_EXTENSION__ && window.__REDUX_DEVTOOLS_EXTENSION__()
-    )
+        // window.__REDUX_DEVTOOLS_EXTENSION__ && window.__REDUX_DEVTOOLS_EXTENSION__()
+    // )
 );
 
 if (localStorage.user) {

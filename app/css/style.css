@@ -7,7 +7,7 @@
     border-radius: 0;
 }
 .btn-hebecollins:focus{
-    background-color: #111111;
+    background-color: #cccccc;
     border-color: #1e1e1e;
 }
 /*.btn-hebecollins:active:hover{*/
@@ -38,6 +38,11 @@
     border-radius: 0;
     float: left;
 
+}
+
+/*warning signs*/
+.has-error .help-block
+{    color: white;
 }
 
 .container-fluid{
