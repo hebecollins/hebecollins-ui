@@ -3,16 +3,18 @@ import validateInput from "../../Toolbox/Validation/signup";
 import {browserHistory} from 'react-router';
 import AddUser from './../common/AddUser';
 
-class SignUpForm extends React.Component {
+class AddTrainers extends React.Component {
     constructor(props) {
         super(props);
         this.state = {
-            nick_name: '',
-            email: '',
-            mobile: '',
-            country_code: '',
-            isMobileValid: '',
-            errors: {},
+            trainer: [{
+                nick_name: '',
+                email: '',
+                mobile: '',
+                country_code: '',
+                isMobileValid: '',
+                errors: {},
+            }],
             isLoading: false
         };
 
@@ -80,9 +82,9 @@ class SignUpForm extends React.Component {
     }
 }
 
-SignUpForm.propTypes = {
+AddTrainers.propTypes = {
     userSignUpRequest: React.PropTypes.func.isRequired,
     addFlashMessage: React.PropTypes.func.isRequired
 };
 
-export default SignUpForm;
+export default AddTrainers;

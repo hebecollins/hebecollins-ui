@@ -4,7 +4,7 @@ import {message} from './messages';
 
 export default function validateInput(data){
     let errors={};
-
+    console.log("here ir is"+data.email);
     if(Validator.isNull(data.nick_name)){
         errors.nick_name = message.required
     }

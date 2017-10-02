@@ -1,16 +1,12 @@
 import React from 'react';
-import {Link} from 'react-router';
 import {connect} from 'react-redux';
 import {logoutRequest} from '../../actions/authActions'
-import {addFlashMessage} from "../../actions/flashMessages";
 
 class Navigation extends React.Component {
 
     logout(e){
         e.preventDefault();
-        const b = this.props.logoutRequest();
-        console.log("something")
-        b.then(res=>res)
+        this.props.logoutRequest();
     }
     render() {
 
