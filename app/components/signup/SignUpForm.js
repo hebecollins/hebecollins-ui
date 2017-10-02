@@ -76,11 +76,6 @@ class SignUpForm extends React.Component {
     render() {
 
         const {errors} = this.state;
-        console.log(errors);
-        console.log("see this");
-        // const options = map(timezones, (val, key) =>
-        //     <option value={val} key={val}>{key}</option>
-        // );
         return (
 
             <form onSubmit={this.onSubmit}>

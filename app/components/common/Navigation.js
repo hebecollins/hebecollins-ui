@@ -1,13 +1,16 @@
 import React from 'react';
 import {Link} from 'react-router';
 import {connect} from 'react-redux';
-import {logout} from '../../actions/loginActions'
+import {logoutRequest} from '../../actions/authActions'
+import {addFlashMessage} from "../../actions/flashMessages";
 
 class Navigation extends React.Component {
 
     logout(e){
         e.preventDefault();
-        this.props.logout();
+        const b = this.props.logoutRequest();
+        console.log("something")
+        b.then(res=>res)
     }
     render() {
 
@@ -113,7 +116,7 @@ class Navigation extends React.Component {
 
 Navigation.propTypes = {
     auth:React.PropTypes.object.isRequired,
-    logout: React.PropTypes.func.isRequired
+    logoutRequest: React.PropTypes.func.isRequired
 };
 
 function mapStateToProps(state) {
@@ -121,4 +124,4 @@ function mapStateToProps(state) {
         auth:state.auth
     }
 }
-export default connect(mapStateToProps,{logout})(Navigation);
+export default connect(mapStateToProps,{logoutRequest})(Navigation);

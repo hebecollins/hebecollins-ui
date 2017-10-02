@@ -1,10 +1,10 @@
 import React from 'react';
 import Navigation from "../common/Navigation";
-import {Link} from 'react-router';
 import FlashMessageList from './../flash/FlashMessageList'
 import {connect} from 'react-redux';
 import Description from "./../hebecollins/Description";
 import LoginAndSignup from "./../hebecollins/LoginAndSignup";
+import {logoutRequest} from './../../actions/authActions';
 
 class Home extends React.Component {
     constructor(props) {
