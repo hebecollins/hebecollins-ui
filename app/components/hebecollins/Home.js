@@ -4,7 +4,6 @@ import FlashMessageList from './../flash/FlashMessageList'
 import {connect} from 'react-redux';
 import Description from "./../hebecollins/Description";
 import LoginAndSignup from "./../hebecollins/LoginAndSignup";
-import {logoutRequest} from './../../actions/authActions';
 
 class Home extends React.Component {
     constructor(props) {
@@ -31,7 +30,7 @@ class Home extends React.Component {
 
         return (
             <div>
-                <Navigation/>
+                {/*<Navigation/>*/}
                 {isAuthenticated ?
                     <div>
                         <h1>Work under progress! I am a {user_type}</h1>

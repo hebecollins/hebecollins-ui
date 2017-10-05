@@ -1,6 +1,6 @@
 import React from 'react';
 import TextFieldGroup from '../common/TextFieldGroup'
-import validateInput from "../../Toolbox/Validation/login";
+import validateInput from "../../Toolbox/Validation/category/login";
 import {connect} from 'react-redux';
 import {loginRequest} from "../../actions/authActions"
 require('../../css/style.css');
@@ -41,7 +41,8 @@ class LoginForm extends React.Component {
         if (this.isValid()) {
             this.setState({errors: {}, isLoading: true});
 
-            this.props.loginRequest(this.state).catch(
+            this.props.loginRequest(this.state).then(
+                (res) => browserHistory.push('/'),
                 (err) => this.setState({errors: err.response.data.errors, isLoading: false})
             );
         }

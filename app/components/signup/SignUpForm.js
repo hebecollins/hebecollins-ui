@@ -1,5 +1,5 @@
 import React from 'react';
-import validateInput from "../../Toolbox/Validation/signup";
+import validateInput from "../../Toolbox/Validation/category/signup";
 import {browserHistory} from 'react-router';
 import AddUser from './../common/AddUser';
 

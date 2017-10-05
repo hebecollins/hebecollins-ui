@@ -1,5 +1,5 @@
 import React from 'react';
-import validateInput from "../../Toolbox/Validation/signup";
+import validateInput from "../../Toolbox/Validation/category/signup";
 import {browserHistory} from 'react-router';
 import AddUser from './../common/AddUser';
 
@@ -7,14 +7,12 @@ class AddTrainers extends React.Component {
     constructor(props) {
         super(props);
         this.state = {
-            trainer: [{
-                nick_name: '',
-                email: '',
-                mobile: '',
-                country_code: '',
-                isMobileValid: '',
-                errors: {},
-            }],
+            nick_name: '',
+            email: '',
+            mobile: '',
+            country_code: '',
+            isMobileValid: '',
+            errors: {},
             isLoading: false
         };
 
@@ -25,7 +23,7 @@ class AddTrainers extends React.Component {
     }
 
     onChange(e) {
-        this.setState({[e.target.name]: e.target.value});
+        // this.setState({[e.target.name]: e.target.value});
     }
 
     isValid() {
@@ -37,8 +35,8 @@ class AddTrainers extends React.Component {
     }
 
     handleMobileNo(status, value, countryData, number) {
-        console.log(countryData);
-        this.setState({mobile: value, country_code: countryData.dialCode, isMobileValid: status})
+        // console.log(countryData);
+        // this.setState({mobile: value, country_code: countryData.dialCode, isMobileValid: status})
     }
 
     onSubmit(e) {
@@ -62,15 +60,27 @@ class AddTrainers extends React.Component {
         }
     }
 
+
+
     render() {
+        function addMore() {
+            console.log("i reacher");
+            return <input type="text">Name</input>
+        }
         return (
             <form onSubmit={this.onSubmit}>
                 <p className="white-center">Sign up for free!</p>
-                <AddUser
-                    onChange={this.onChange}
-                    handleMobileNo={this.handleMobileNo}
-                    state={this.state}/>
-
+                <input
+                    type="text"
+                    name="test"
+                    className="form-control"
+                    placeholder="nm"
+                />
+                {/*<AddUser*/}
+                    {/*onChange={this.onChange}*/}
+                    {/*handleMobileNo={this.handleMobileNo}*/}
+                    {/*state={this.state}/>*/}
+                <button onClick={addMore}>Add more</button>
                 <div className="form-group">
                     <button disabled={this.state.isLoading}
                             className="btn btn-group-justified btn-hebecollins btn-lg">
@@ -82,9 +92,9 @@ class AddTrainers extends React.Component {
     }
 }
 
-AddTrainers.propTypes = {
-    userSignUpRequest: React.PropTypes.func.isRequired,
-    addFlashMessage: React.PropTypes.func.isRequired
-};
+// AddTrainers.propTypes = {
+//     userSignUpRequest: React.PropTypes.func.isRequired,
+//     addFlashMessage: React.PropTypes.func.isRequired
+// };
 
 export default AddTrainers;

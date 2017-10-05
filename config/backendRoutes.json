@@ -1,5 +1,6 @@
 {
   "login": "/login",
   "signup":"/register-manager",
-  "logout":"/logout"
+  "logout":"/logout",
+  "activate":"/activate-manager"
 }

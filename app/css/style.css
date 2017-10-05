@@ -1,4 +1,12 @@
 /*btn-hebecollins*/
+.btn-hebecollins-reverse{
+    background-color: #cccccc;
+    color:black;
+    -webkit-border-radius: 0;
+    -moz-border-radius: 0;
+    border-radius: 0;
+}
+
 .btn-hebecollins{
     background-color: #ea3e0d;
     color:black;
@@ -14,6 +22,14 @@
     /*background-color: #111111;*/
     /*border-color: #000000;*/
 /*}*/
+
+.btn-hebecollins-reverse:disabled,
+.btn-hebecollins-reverse[disabled]{
+    border: 0px solid #999999;
+    background-color: #ea3e0d;
+    color: black;
+}
+
 .btn-hebecollins:disabled,
 .btn-hebecollins[disabled]{
     border: 1px solid #999999;
