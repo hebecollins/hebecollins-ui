@@ -2,6 +2,9 @@ import React from 'react';
 import TextFieldGroup from './../common/TextFieldGroup'
 import validateInput from "../../Toolbox/Validation/category/activate";
 import {browserHistory} from 'react-router';
+import Address from './../common/Address';
+import UserDetails from './../common/UserDetails';
+import {message} from './../../Toolbox/Validation/messages'
 
 class Activate extends React.Component {
     constructor(props) {
@@ -27,13 +30,17 @@ class Activate extends React.Component {
 
         this.onChange = this.onChange.bind(this);
         this.onSubmit = this.onSubmit.bind(this);
-        this.handleMobileNo = this.handleMobileNo.bind(this);
+        this.onDobUpdate= this.onDobUpdate.bind(this);
     }
 
     onChange(e) {
+        console.log(this.state);
         this.setState({[e.target.name]: e.target.value});
     }
 
+    onDobUpdate(dob) {
+            this.state.dob = dob.format("YYYY-MM-DD")
+    }
 
     isValid() {
         const {errors, isValid} = validateInput(this.state);
@@ -44,16 +51,12 @@ class Activate extends React.Component {
         return isValid;
     }
 
-    handleMobileNo(status, value, countryData, number) {
-        console.log(countryData);
-        this.setState({mobile: value, country_code: countryData.dialCode, isMobileValid: status})
-    }
-
     onSubmit(e) {
-
         e.preventDefault();
         if (this.isValid()) {
             this.setState({errors: {}, isLoading: true});//setting state to empty
+
+            //action call
             this.props.activateManagerRequest(this.state, this.props.params).then(
                 (res) => {
                     console.log("passed");
@@ -73,77 +76,29 @@ class Activate extends React.Component {
         }
     }
 
-
     render() {
         const {errors} = this.state;
         return (
             <form onSubmit={this.onSubmit}>
                 <p className="white-center">Fill this form to activate your account bitch!</p>
-                <div className="col col-lg-4 col-md-4">
-                    <TextFieldGroup error={errors.first_name} label="First Name" onChange={this.onChange}
-                                    value={this.state.first_name} field="first_name"
-                    />
-                </div>
-                <div className="col col-lg-4">
+                <p className="white-center">Personal Information</p>
 
-                    <TextFieldGroup error={errors.middle_name} label="Middle Name(Optional)"
-                                    onChange={this.onChange}
-                                    value={this.state.middle_name} field="middle_name"
-                    />
-                </div>
-                <div className="col col-lg-4">
+                <UserDetails
+                    onChange={this.onChange}
+                    onDobUpdate={this.onDobUpdate}
+                    state={this.state}/>
+                <br/>
 
-                    <TextFieldGroup error={errors.last_name} label="Last Name" onChange={this.onChange}
-                                    value={this.state.last_name} field="last_name"
-                    />
-                </div>
-                <TextFieldGroup error={errors.dob} label="Date of Birth" onChange={this.onChange}
-                                value={this.state.dob} field="dob" type="date"
+                <p className="white-center">Gym Details</p>
+                <TextFieldGroup
+                    error={errors.gym_name}
+                    label="Gym Name"
+                    onChange={this.onChange}
+                    value={this.state.gym_name}
+                    field="gym_name"
                 />
 
-                <select className="select-hebecollins" onChange={this.onChange} name="gender">
-                    <option defaultValue="" disabled selected hidden>Gender</option>
-                    <option value='m'>Male</option>
-                    <option value='f'>Female</option>
-                    <option value='o'>Others</option>
-                </select><br/><br/>
-
-
-                <TextFieldGroup error={errors.gym_name} label="Gym Name" onChange={this.onChange}
-                                value={this.state.gym_name} field="gym_name"
-                />
-
-                <TextFieldGroup error={errors.street_address} label="Street Address" onChange={this.onChange}
-                                value={this.state.street_address} field="street_address"
-                />
-
-                <TextFieldGroup error={errors.locality} label="Locality" onChange={this.onChange}
-                                value={this.state.locality} field="locality"
-                />
-
-                <TextFieldGroup error={errors.district} label="District" onChange={this.onChange}
-                                value={this.state.district} field="district"
-                />
-
-                <TextFieldGroup error={errors.pin} label="Pin Code" onChange={this.onChange}
-                                value={this.state.pin} field="pin"
-                />
-
-                <TextFieldGroup error={errors.state} label="State" onChange={this.onChange}
-                                value={this.state.state} field="state"
-                />
-
-                <TextFieldGroup error={errors.country} label="Country*" onChange={this.onChange}
-                                value={this.state.country} field="country"
-                />
-
-                <TextFieldGroup error={errors.password} label="Password*" onChange={this.onChange}
-                                value={this.state.password} field="password" type="password"
-                />
-
-                <TextFieldGroup error={errors.password_confirm} label="Confirm Password" onChange={this.onChange}
-                                value={this.state.password_confirm} field="password_confirm" type="password"
-                />
+                <Address onChange={this.onChange} state={this.state}/>
 
                 <div className="form-group">
                     <button disabled={this.state.isLoading}

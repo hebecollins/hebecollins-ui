@@ -34,8 +34,8 @@ class SignUpForm extends React.Component {
         return isValid;
     }
 
+    //called only on mobile no change
     handleMobileNo(status, value, countryData, number) {
-        console.log(countryData);
         this.setState({mobile: value, country_code: countryData.dialCode, isMobileValid: status})
     }
 

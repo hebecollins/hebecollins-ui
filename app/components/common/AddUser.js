@@ -7,44 +7,7 @@ import IntlTelInput from 'react-intl-tel-input';
 import 'file?name=libphonenumber.js!./../../../node_modules/react-intl-tel-input/dist/libphonenumber.js';
 import './../../../node_modules/react-intl-tel-input/dist/main.css';
 
-
 class AddUser extends React.Component {
-//todo: make it use its own state to do the validation, so that it can be reused in case of addClient and addTrainer
-    // constructor(props) {
-    //     super(props);
-    //     this.state = {
-    //         nick_name: '',
-    //         email: '',
-    //         mobile: '',
-    //         country_code: '',
-    //         isMobileValid: '',
-    //         errors: {},
-    //         isLoading: false
-    //     };
-    //
-    //     // this.onChange = this.onChange.bind(this);
-    //     this.handleMobileNo = this.handleMobileNo.bind(this);
-    //
-    // }
-    //
-    // // onChange(e) {
-    // //     console.log(this.state);
-    // //     this.setState({[e.target.name]: e.target.value});
-    // // }
-    //
-    // isValid() {
-    //     const {errors, isValid} = validateInput(this.state);
-    //     if (!isValid) {
-    //         this.setState({errors});
-    //     }
-    //     return isValid;
-    // }
-    //
-    // handleMobileNo(status, value, countryData, number) {
-    //     console.log(countryData);
-    //     this.setState({mobile: value, country_code: countryData.dialCode, isMobileValid: status})
-    // }
-
     render() {
         const {errors} = this.props.state;
         return (
@@ -85,8 +48,6 @@ class AddUser extends React.Component {
 }
 
 AddUser.propTypes = {
-    // addUserRequest: React.PropTypes.func.isRequired,
-    // addFlashMessage: React.PropTypes.func.isRequired,
     onChange: React.PropTypes.func.isRequired,
     handleMobileNo:React.PropTypes.func.isRequired,
     state:React.PropTypes.object.isRequired
