@@ -1,0 +1,17 @@
+img {
+    width:inherit;
+}
+
+.img-responsive2{
+    width: 45px;
+    float: left;
+    margin: 3px;
+    padding: 3px;
+}
+
+.logo-extended{
+    width: 100%;
+    float: left;
+    margin: 3px;
+    padding: 3px;
+}

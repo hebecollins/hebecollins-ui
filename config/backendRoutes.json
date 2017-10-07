@@ -2,5 +2,7 @@
   "login": "/login",
   "signup":"/register-manager",
   "logout":"/logout",
-  "activate":"/activate-manager"
+  "activate":"/activate-manager",
+  "password_recover":"/password-recover",
+  "password_reset":"/password-reset"
 }

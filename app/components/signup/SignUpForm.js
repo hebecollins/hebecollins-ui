@@ -45,14 +45,7 @@ class SignUpForm extends React.Component {
         e.preventDefault();
         if (this.isValid()) {
             this.setState({errors: {}, isLoading: true});//setting state to empty
-            this.props.userSignUpRequest(this.state).then(
-                (res) => {
-                    browserHistory.push('/');
-                    this.props.addFlashMessage({
-                        type: 'success',
-                        text: res.data.msg
-                    })
-                },
+            this.props.userSignUpRequest(this.state).catch(
                 (err) => {
                     const response = errorResponse(err);
                     this.setState({errors: response, isLoading: false})

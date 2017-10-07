@@ -4,8 +4,7 @@ import validateInput from "../../Toolbox/Validation/category/login";
 import {connect} from 'react-redux';
 import {loginRequest} from "../../actions/authActions"
 import {errorResponse} from "../../Toolbox/Helpers/responseHandler";
-import {browserHistory} from 'react-router';
-
+import backendRoutes from 'backendRoutes';
 
 require('../../css/style.css');
 
@@ -45,8 +44,7 @@ class LoginForm extends React.Component {
         if (this.isValid()) {
             this.setState({errors: {}, isLoading: true});
 
-            this.props.loginRequest(this.state).then(
-                (res) => browserHistory.push('/'),
+            this.props.loginRequest(this.state).catch(
                 (err) => {
                     const response=errorResponse(err);
                     this.setState({errors: response, isLoading: false})
@@ -77,7 +75,7 @@ class LoginForm extends React.Component {
                     type="password"
                 />
 
-                <div>
+                <div className="remember">
                     <input
                         value={remember}
                         onChange={this.onChange}
@@ -86,12 +84,15 @@ class LoginForm extends React.Component {
                         className="form-group"
                     />
                     <label className="control-label">Remember Me</label>
-                    <p><a href="#">forgot password?</a></p>
                 </div>
                 <div className="form-group">
                     <button disabled={isLoading} className="btn btn-group-justified btn-hebecollins btn-lg">Submit
                     </button>
                 </div>
+
+                <label className="control-label">
+                    <a className="forgot-password" href={backendRoutes.password_recover}>forgot password?</a>
+                </label>
             </form>
         )
     }

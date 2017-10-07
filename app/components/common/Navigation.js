@@ -3,6 +3,8 @@ import {connect} from 'react-redux';
 import {logoutRequest} from '../../actions/authActions'
 import FlashMessageList from './../flash/FlashMessageList'
 
+require('./../../css/images.css')
+
 class Navigation extends React.Component {
 
     logout(e) {
@@ -17,7 +19,7 @@ class Navigation extends React.Component {
 
         const clientLinks = (
             <ul className="nav navbar-nav navbar-right">
-                <li className="active"><a href="#">Home</a></li>
+                <li className="active"><a href="/">Home</a></li>
                 <li className="dropdown">
                     <a href="#" className="dropdown-toggle" data-toggle="dropdown">GYM<b className="caret"></b></a>
                     <ul className="dropdown-menu">
@@ -39,7 +41,7 @@ class Navigation extends React.Component {
 
         const trainerLinks = (
             <ul className="nav navbar-nav navbar-right">
-                <li className="active"><a href="#">Home</a></li>
+                <li className="active"><a href="/">Home</a></li>
                 <li className="dropdown">
                     <a href="#" className="dropdown-toggle" data-toggle="dropdown">GYM<b className="caret"></b></a>
                     <ul className="dropdown-menu">
@@ -61,7 +63,7 @@ class Navigation extends React.Component {
 
         const managerLinks = (
             <ul className="nav navbar-nav navbar-right">
-                <li className="active"><a href="#">Home</a></li>
+                <li className="active"><a href="/">Home</a></li>
                 <li className="dropdown">
                     <a href="#" className="dropdown-toggle" data-toggle="dropdown">GYM<b className="caret"></b></a>
                     <ul className="dropdown-menu">
@@ -83,7 +85,7 @@ class Navigation extends React.Component {
 
         const guestLinks = (
             <ul className="nav navbar-nav navbar-right">
-                <li className="active"><a href="#">Home</a></li>
+                <li className="active"><a href="/">Home</a></li>
                 <li><a href="#">About Us</a></li>
                 <li><a href="#">Contact Us</a></li>
             </ul>
@@ -94,7 +96,12 @@ class Navigation extends React.Component {
                 <div className="navbar navbar-inverse navbar-static-top">
                     <div className="container-fluid">
                         <div className="navbar-header">
-                            <a href="#" className="navbar-brand">Hebe collins</a>
+                            <a href="/" className="pull-left">
+                                <img className="img-responsive2" src={require('./../../../images/HC_logo.png')}/>
+                            </a>
+                            <a href="#" className="navbar-brand">
+                                {/*Hebecollins*/}
+                            </a>
                             <button className="navbar-toggle" data-toggle="collapse" data-target=".navHeaderCollapse">
                                 <span className="icon-bar"></span>
                                 <span className="icon-bar"></span>
