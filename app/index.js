@@ -13,10 +13,10 @@ import {setCurrentUser} from "./actions/authActions";
 const store = createStore(
     // (state = {})=> state,//empty reducer
     rootReducer,
-    // compose(
+    compose(
         applyMiddleware(thunk),
-        // window.__REDUX_DEVTOOLS_EXTENSION__ && window.__REDUX_DEVTOOLS_EXTENSION__()
-    // )
+        window.__REDUX_DEVTOOLS_EXTENSION__ && window.__REDUX_DEVTOOLS_EXTENSION__()
+    )
 );
 
 if (localStorage.user) {
@@ -29,3 +29,5 @@ render(
     <Provider store={store}>
         <Router history={browserHistory} routes={routes}/>
     </Provider>, document.getElementById('app'))
+
+export {store};

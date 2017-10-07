@@ -9,7 +9,6 @@ import {message} from './messages';
  * */
 export function isRequired(data, optionalFields=[]){
 
-    console.log(optionalFields);
     let errors={};
     for (let key in data) {
         if (data.hasOwnProperty(key)) {

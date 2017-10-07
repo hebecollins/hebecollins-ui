@@ -1,5 +1,5 @@
 import React from 'react';
-import LoginPage from "../login/LoginPage";
+import LoginForm from "../auth/LoginForm";
 import SignUpPage from "../signup/SignUpPage";
 
 class LoginAndSignup extends React.Component {
@@ -44,7 +44,7 @@ class LoginAndSignup extends React.Component {
                 </div>
                 <br/>
                 <div>
-                    {this.state.loginFormDisabled ? <LoginPage/> : <SignUpPage/>}
+                    {this.state.loginFormDisabled ? <LoginForm/> : <SignUpPage/>}
                 </div>
             </div>
         )

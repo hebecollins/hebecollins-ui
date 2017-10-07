@@ -3,6 +3,10 @@ import TextFieldGroup from '../common/TextFieldGroup'
 import validateInput from "../../Toolbox/Validation/category/login";
 import {connect} from 'react-redux';
 import {loginRequest} from "../../actions/authActions"
+import {errorResponse} from "../../Toolbox/Helpers/responseHandler";
+import {browserHistory} from 'react-router';
+
+
 require('../../css/style.css');
 
 class LoginForm extends React.Component {
@@ -23,8 +27,8 @@ class LoginForm extends React.Component {
 
     onChange(e) {
         this.setState({[e.target.name]: e.target.value});
-        if(e.target.name === "remember"){
-            this.setState({remember:e.target.checked})
+        if (e.target.name === "remember") {
+            this.setState({remember: e.target.checked})
         }
     }
 
@@ -43,7 +47,10 @@ class LoginForm extends React.Component {
 
             this.props.loginRequest(this.state).then(
                 (res) => browserHistory.push('/'),
-                (err) => this.setState({errors: err.response.data.errors, isLoading: false})
+                (err) => {
+                    const response=errorResponse(err);
+                    this.setState({errors: response, isLoading: false})
+                }
             );
         }
     }
@@ -79,9 +86,11 @@ class LoginForm extends React.Component {
                         className="form-group"
                     />
                     <label className="control-label">Remember Me</label>
+                    <p><a href="#">forgot password?</a></p>
                 </div>
                 <div className="form-group">
-                    <button disabled={isLoading} className="btn btn-group-justified btn-hebecollins btn-lg">Submit</button>
+                    <button disabled={isLoading} className="btn btn-group-justified btn-hebecollins btn-lg">Submit
+                    </button>
                 </div>
             </form>
         )

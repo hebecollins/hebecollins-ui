@@ -15,8 +15,6 @@ if (MODE === 'production') {
 axios.defaults.withCredentials=true;
 
 export function postJSON(data,route,params={}) {
-    console.log("insdide post json");
-    console.log(params);
     const authOptions = {
         method: 'POST',
         url: route,
@@ -47,21 +45,6 @@ export function get(route) {
     const authOptions = {
         method: 'GET',
         url: route,
-    };
-    return axios(authOptions);
-}
-
-export function postJSONWithParams(data,route) {
-    const authOptions = {
-        method: 'POST',
-        url: route,
-        params:{
-            a:'b'
-        },
-        data:data,
-        headers: {
-            'Content-Type': 'application/json'
-        }
     };
     return axios(authOptions);
 }

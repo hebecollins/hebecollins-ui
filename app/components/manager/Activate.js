@@ -4,7 +4,7 @@ import validateInput from "../../Toolbox/Validation/category/activate";
 import {browserHistory} from 'react-router';
 import Address from './../common/Address';
 import UserDetails from './../common/UserDetails';
-import {message} from './../../Toolbox/Validation/messages'
+import {errorResponse} from "../../Toolbox/Helpers/responseHandler";
 
 class Activate extends React.Component {
     constructor(props) {
@@ -59,8 +59,6 @@ class Activate extends React.Component {
             //action call
             this.props.activateManagerRequest(this.state, this.props.params).then(
                 (res) => {
-                    console.log("passed");
-                    console.log(res);
                     browserHistory.push('/');
                     this.props.addFlashMessage({
                         type: 'success',
@@ -68,9 +66,8 @@ class Activate extends React.Component {
                     })
                 },
                 (err) => {
-                    console.log("failed");
-                    console.log(err);
-                    this.setState({errors: err.response.data.errors, isLoading: false})
+                    const response = errorResponse(err);
+                    this.setState({errors: response, isLoading: false})
                 }
             )
         }

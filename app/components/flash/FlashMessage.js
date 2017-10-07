@@ -1,6 +1,8 @@
 import React from 'react';
 import classnames from 'classnames';
 
+/**mounts a component and then deletes it after 5 seconds
+ * */
 class FlashMessage extends React.Component {
     constructor(props){
         super(props);
@@ -9,6 +11,13 @@ class FlashMessage extends React.Component {
 
     onClick(){
         this.props.deleteFlashMessage(this.props.message.id)
+    }
+
+    componentDidMount() {
+        let self=this;
+        setTimeout(function(){
+            self.onClick();
+        }, 5000);
     }
 
     render() {

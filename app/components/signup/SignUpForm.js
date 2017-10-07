@@ -2,6 +2,7 @@ import React from 'react';
 import validateInput from "../../Toolbox/Validation/category/signup";
 import {browserHistory} from 'react-router';
 import AddUser from './../common/AddUser';
+import {errorResponse} from "../../Toolbox/Helpers/responseHandler";
 
 class SignUpForm extends React.Component {
     constructor(props) {
@@ -53,8 +54,8 @@ class SignUpForm extends React.Component {
                     })
                 },
                 (err) => {
-                    console.log(err);
-                    this.setState({errors: err.response.data.errors, isLoading: false})
+                    const response = errorResponse(err);
+                    this.setState({errors: response, isLoading: false})
                 }
             )
         }

@@ -16,7 +16,6 @@ class Home extends React.Component {
         const {user_type} = this.props.auth.user;
         const guestHomePage = (
             <div className="container-fluid">
-                <FlashMessageList/>
                 <div className="col col-lg-8 col-md-8 col-sm-6 hidden-xs">
                     <div className="col col-lg-9 col-md-9">
                         <Description/>
