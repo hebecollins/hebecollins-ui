@@ -1,6 +1,6 @@
 import Validator from 'validator';
 import isEmpty from 'lodash/isEmpty';
-import {message} from '../messages';
+import {message} from '../../Helpers/messages';
 
 export default function validateInput(data){
     let errors={};

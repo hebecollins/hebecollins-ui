@@ -1,5 +1,5 @@
 import {addFlashMessage} from "../../actions/flashMessages"
-import {message} from "../Validation/messages";
+import {message} from "./messages";
 import {store} from '../../index'
 
 export function errorResponse(err) {

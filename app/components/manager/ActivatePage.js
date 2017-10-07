@@ -8,9 +8,7 @@ class ActivatePage extends React.Component {
     render() {
         const {activateManagerRequest, addFlashMessage} = this.props;
         const {params} = this.props.location.query;
-        console.log("see thif");
         console.log(this.props.location.query);
-        console.log("see thif agains");
         return (
             <div className="container-fluid">
                 <Activate

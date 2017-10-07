@@ -1,6 +1,6 @@
 import Validator from 'validator';
 import isEmpty from 'lodash/isEmpty';
-import {message} from './messages';
+import {message} from '../Helpers/messages';
 
 /**Purpose => to determine whether a field is non-empty or not
  * @param data => the state of the component
