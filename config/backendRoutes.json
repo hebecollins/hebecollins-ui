@@ -4,5 +4,6 @@
   "logout":"/logout",
   "activate":"/activate-manager",
   "password_recover":"/password-recover",
-  "password_reset":"/password-reset"
+  "password_reset":"/password-reset",
+  "add_trainers":"/add_trainers"
 }

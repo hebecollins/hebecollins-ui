@@ -1,7 +1,6 @@
 import {MODE} from '../../../mode';
 import axios from 'axios';
-import {developmentURL, productionURL} from '../../../config/baseURL';
-import backendRoutes from 'backendRoutes';
+import {developmentURL, productionURL, localURL} from '../../../config/baseURL';
 import querystring from 'querystring';
 
 if (MODE === 'production') {
@@ -9,7 +8,7 @@ if (MODE === 'production') {
 } else if (MODE === 'development') {
     axios.defaults.baseURL = developmentURL
 } else {
-    axios.defaults.baseURL = ""
+    axios.defaults.baseURL = localURL
 }
 
 axios.defaults.withCredentials=true;
