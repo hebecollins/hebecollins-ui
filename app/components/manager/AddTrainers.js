@@ -3,6 +3,10 @@ import validateInput from "../../Toolbox/Validation/category/signup";
 import {browserHistory} from 'react-router';
 import AddUser from './../common/AddUser';
 import {errorResponse} from "../../Toolbox/Helpers/responseHandler";
+import {addUserToDBAndStore} from "../../actions/common/addUser"
+import {connect} from 'react-redux';
+
+require('./../../css/style.css');
 
 class AddTrainers extends React.Component {
     constructor(props) {
@@ -18,7 +22,8 @@ class AddTrainers extends React.Component {
         };
 
         this.onChange = this.onChange.bind(this);
-        this.onSubmit = this.onSubmit.bind(this);
+        this.submit = this.submit.bind(this);
+        this.addMore = this.addMore.bind(this);
         this.handleMobileNo = this.handleMobileNo.bind(this);
 
     }
@@ -40,7 +45,23 @@ class AddTrainers extends React.Component {
         this.setState({mobile: value, country_code: countryData.dialCode, isMobileValid: status})
     }
 
-    onSubmit(e) {
+    addMore(e) {
+        console.log(this.state);
+        if (this.isValid()) {
+            this.props.addUserToDBAndStore(this.state,'trainer');
+        }
+        this.setState({
+            nick_name: '',
+            email: '',
+            mobile: '',
+            country_code: '',
+            isMobileValid: '',
+            errors: {},
+            isLoading: false
+        });
+    }
+
+    submit(e) {
         console.log();
         e.preventDefault();
         if (this.isValid()) {
@@ -63,20 +84,29 @@ class AddTrainers extends React.Component {
                     handleMobileNo={this.handleMobileNo}
                     state={this.state}/>
 
-                <div className="form-group">
-                    <button disabled={this.state.isLoading}
-                            className="btn btn-group-justified btn-hebecollins btn-lg">
-                        GET STARTED!
-                    </button>
+                {/*<div className="form-group">*/}
+                {/*<button disabled={this.state.isLoading}*/}
+                {/*className="btn btn-group-justified btn-hebecollins btn-lg">*/}
+                {/*GET STARTED!*/}
+                {/*</button>*/}
+                <div className="btn-group btn-group-justified">
+                    <a className="btn btn-hebecollins-reverse btn-lg"
+                       name="login" onClick={this.addMore}
+                       disabled={this.state.isLoading}>Add More</a>
+                    {/*<span class="glyphicon glyphicon-user"/>*/}
+                    <a className="btn btn-hebecollins-reverse btn-lg"
+                       name="signup" onClick={this.submit}
+                       disabled={this.state.signupFormDisabled}>Done</a>
+
                 </div>
             </form>
         );
     }
 }
 
-SignUpForm.propTypes = {
-    userSignUpRequest: React.PropTypes.func.isRequired,
-    addFlashMessage: React.PropTypes.func.isRequired
+AddTrainers.propTypes = {
+    // addTrainerToDB: React.PropTypes.func.isRequired,
+    addUserToDBAndStore: React.PropTypes.func.isRequired
 };
 
-export default SignUpForm;
+export default connect(null,{addUserToDBAndStore})(AddTrainers);

@@ -8,11 +8,11 @@ export function userSignUpRequest(userData) {
 
     return dispatch => {
         return postJSON(userData, backendRoutes.signup).then(res => {
-                // browserHistory.push('/');
-                dispatch(addFlashMessage({
-                    type: 'success',
-                    text: res.data.msg
-                }))
-            })
+            // browserHistory.push('/');
+            dispatch(addFlashMessage({
+                type: 'success',
+                text: res.data.msg
+            }))
+        })
     }
 }
