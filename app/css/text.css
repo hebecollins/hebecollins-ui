@@ -1,0 +1,26 @@
+.forgot-password {
+    color: #cccccc;
+    text-decoration: underline;
+}
+
+/* unvisited link */
+.forgot-password:visited {
+    color: #cccccc;
+}
+
+/* visited link */
+.forgot-password:hover {
+    color: #ea3e0d;
+}
+
+/* mouse over link */
+.forgot-password:active {
+    color: #cccccc;
+}
+
+/*txt at signup page Sign Up for free*/
+.white-center {
+    color: white;
+    text-align: center;
+    font-size: 25px;
+}

@@ -14,8 +14,10 @@ export function setCurrentUser(user) {
 
 export function logoutRequest() {
     return dispatch => {
+        console.log("hello");
         return get(backendRoutes.logout).then(res => {
-                localStorage.removeItem('user');
+            console.log(res.data);
+            localStorage.removeItem('user');
                 setAuthToken(false);
                 dispatch(addFlashMessage({
                     type: 'success',
@@ -23,7 +25,7 @@ export function logoutRequest() {
                 }));
                 dispatch(setCurrentUser({}));
             }
-        );
+        )
     }
 }
 
@@ -68,9 +70,6 @@ export function passwordResetRequest(data,params) {
         "password": data.password,
         "password_confirm":data.password_confirm
     };
-    console.log("take a look");
-console.log(params);
-    console.log("take a look");
     return dispatch => {
         return postForm(dataToBePosted, backendRoutes.password_reset, params).then(res => {
                 browserHistory.push('/');

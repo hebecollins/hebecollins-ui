@@ -1,0 +1,21 @@
+
+.alert{
+    position: absolute;
+    top: 70px;
+    width: 100%;
+}
+
+
+.alert-danger {
+    /*background: rgba(204, 500, 204, 0.2);*/
+    /*color:white;*/
+    /*border-top: none;*/
+    /*border-bottom: none;*/
+    /*border-left : none;*/
+    /*border-right: 20px solid #ea3e0d;*/
+}
+
+.alert-success {
+    /*background: rgba(204, 500, 204, 0.2);*/
+    /*color:white;*/
+}

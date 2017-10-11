@@ -6,10 +6,11 @@ import {loginRequest} from "../../actions/authActions"
 import {errorResponse} from "../../Toolbox/Helpers/responseHandler";
 import backendRoutes from 'backendRoutes';
 
-require('../../css/style.css');
+require('../../css/contentBox.css');
 
 class LoginForm extends React.Component {
 
+   //defining state
     constructor(props) {
         super(props);
         this.state = {
@@ -19,7 +20,6 @@ class LoginForm extends React.Component {
             errors: {},
             isLoading: false
         };
-
         this.onChange = this.onChange.bind(this);
         this.onSubmit = this.onSubmit.bind(this);
     }
@@ -56,7 +56,7 @@ class LoginForm extends React.Component {
     render() {
         const {errors, identifier, password, remember, isLoading} = this.state;
         return (
-            <form className="form-hebecollins" onSubmit={this.onSubmit}>
+            <form onSubmit={this.onSubmit}>
                 <p className="white-center">Welcome!</p>
                 <TextFieldGroup
                     field="identifier"
@@ -83,7 +83,7 @@ class LoginForm extends React.Component {
                         name="remember"
                         className="form-group"
                     />
-                    <label className="control-label">Remember Me</label>
+                    <label className="checkbox-text">Remember Me</label>
                 </div>
                 <div className="form-group">
                     <button disabled={isLoading} className="btn btn-group-justified btn-hebecollins btn-lg">Submit

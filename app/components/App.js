@@ -1,16 +1,19 @@
 import React from 'react';
-import Home from "./hebecollins/Home";
-import AddUser from "./common/AddUser";
-import AddTrainers from "./manager/AddTrainers";
 import Navigation from './common/Navigation';
+require('./../css/alerts.css');
+require('./../css/text.css');
+require('./../css/formFields.css');
+require('./../css/contentBox.css');
+require('./../css/images.css');
 
 class App extends React.Component {
     render() {
         return (
-            <div className="container">
+            <div className="hebecollins-home">
                 <Navigation/>
-                {this.props.children}
-                {/*<AddTrainers/>*/}
+                <div className="hebecollins-content">
+                    {this.props.children}
+                </div>
             </div>
         );
     }

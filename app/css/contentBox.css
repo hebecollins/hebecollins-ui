@@ -1,0 +1,45 @@
+/*
+    hebecollins color 1- #ea3e0d dark orange
+    hebecollins color 2- #e67817 light orange
+    hebecollins color 3- #1e1e1e dark grey
+*/
+
+.navbar {
+    position: absolute;
+    left: 0;
+    right: 0;
+    z-index: 99;
+    background-color: black;
+    border-bottom-style: solid;
+    border-bottom-color: #e67817; /*hebecollins-theme-color-2*/
+}
+
+.hebecollins-home {
+    background-image: url("../../images/home.jpg");
+    max-width: 100%;
+    max-height: 100%;
+    object-fit: cover;
+    justify-content: center;
+}
+
+.hebecollins-content {
+    padding-top: 10em;
+    padding-bottom: 10em;
+}
+
+.container-fluid{
+    position: relative;
+    align-content: center;
+}
+
+/*box around signup and login*/
+.well {
+    background: rgba(204, 204, 204, 0.2);
+    border-color: transparent;
+    -webkit-border-radius: 0;
+    -moz-border-radius: 0;
+    border-radius: 0;
+    float: left;
+
+}
+

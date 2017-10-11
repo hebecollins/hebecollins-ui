@@ -17,6 +17,6 @@ export default (
         {/*<Route path="login" component={LoginPage}/>*/}
         <Route path="password-recover" component={PasswordRecover}/>
         <Route path="password-reset" component={PasswordReset}/>
-        <Route path="/add-trainers" component={Notification}/>
+        <Route path="add-trainers" component={Notification}/>
     </Route>
 )

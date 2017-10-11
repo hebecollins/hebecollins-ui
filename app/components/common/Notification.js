@@ -11,21 +11,29 @@ import {ADD_TRAINERS} from "../../actions/types";
 import addUsers from './../../reducers/addUsers'
 
 class Notification extends React.Component {
-    constructor(props){
+    constructor(props) {
         super(props);
         this.component = this.component.bind(this);
     }
-    component(){
+
+    component() {
         console.log("see=>");
-        return (<h1> <ul>
-            {
-                this.props.trainer && this.props.trainer.trainers.map( trainers=> {
-                    console.log(trainers.nick_name);
-                    // console.log("see=>"+trainers);
-                     return <h1>{trainers.nick_name}</h1>
-                })
-            }
-        </ul> </h1>)
+        return (<h1>
+            <ul>
+                {
+                    this.props.trainer && this.props.trainer.trainers.map(trainers => {
+                        console.log(trainers.nick_name);
+                        // console.log("see=>"+trainers);
+                        return (
+                            <div className="alert alert-danger">
+                                <h4>Nick Name:{trainers.nick_name}</h4>
+                                <h4>Email:{trainers.email}</h4>
+                                <h4>Mobile No.:{trainers.mobile}</h4>
+                            </div>)
+                    })
+                }
+            </ul>
+        </h1>)
     }
 
     render() {
@@ -38,10 +46,10 @@ class Notification extends React.Component {
                 <div className="col col-lg-6">
                     <AddTrainers/>
                 </div>
-                <div className="col col-lg-6">
+                <div className="col col-lg-6 container-fluid">
                     {/*<h1><component/></h1>*/}
                     <div>
-                    <div className="alert alert-danger">{this.component()}</div>
+                        <div>{this.component()}</div>
                     </div>
                 </div>
             </div>
@@ -54,18 +62,18 @@ class Notification extends React.Component {
 //     handleMobileNo: React.PropTypes.func.isRequired,
 //     state: React.PropTypes.object.isRequired
 // };
-const mapStateToProps=(state)=>{
-  return{
-      trainer:state.addUsers
-  }
+const mapStateToProps = (state) => {
+    return {
+        trainer: state.addUsers
+    }
 };//which properties we want from redux
 
-const mapDispatchToProps=(dispatch)=>{
-    return{
-        addTrainer:(trainer)=>{
+const mapDispatchToProps = (dispatch) => {
+    return {
+        addTrainer: (trainer) => {
             dispatch({
-                type:ADD_TRAINERS,
-                trainers:trainer//or this.state
+                type: ADD_TRAINERS,
+                trainers: trainer//or this.state
             })
         }
     }

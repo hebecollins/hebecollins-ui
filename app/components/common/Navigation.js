@@ -3,8 +3,6 @@ import {connect} from 'react-redux';
 import {logoutRequest} from '../../actions/authActions'
 import FlashMessageList from './../flash/FlashMessageList'
 
-require('./../../css/images.css')
-
 class Navigation extends React.Component {
 
     logout(e) {
@@ -92,8 +90,8 @@ class Navigation extends React.Component {
         );
 
         return (
-            <div>
-                <div className="navbar navbar-inverse navbar-static-top">
+            <div className="container">
+                <div className="navbar navbar-inverse">
                     <div className="container-fluid">
                         <div className="navbar-header">
                             <a href="/" className="pull-left">
@@ -115,7 +113,9 @@ class Navigation extends React.Component {
                         </div>
                     </div>
                 </div>
-                <FlashMessageList/>
+                <div className="col col-lg-12 col-md-12 col-sm-11 col-xs-11">
+                    <FlashMessageList/>
+                </div>
             </div>
         );
     }

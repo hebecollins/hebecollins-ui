@@ -6,7 +6,7 @@ import {errorResponse} from "../../Toolbox/Helpers/responseHandler";
 import {addUserToDBAndStore} from "../../actions/common/addUser"
 import {connect} from 'react-redux';
 
-require('./../../css/style.css');
+require('../../css/contentBox.css');
 
 class AddTrainers extends React.Component {
     constructor(props) {
@@ -48,6 +48,7 @@ class AddTrainers extends React.Component {
     addMore(e) {
         console.log(this.state);
         if (this.isValid()) {
+            this.setState({errors: {}, isLoading: true})
             this.props.addUserToDBAndStore(this.state,'trainer');
         }
         this.setState({
@@ -90,11 +91,10 @@ class AddTrainers extends React.Component {
                 {/*GET STARTED!*/}
                 {/*</button>*/}
                 <div className="btn-group btn-group-justified">
-                    <a className="btn btn-hebecollins-reverse btn-lg"
+                    <a className="btn btn-hebecollins btn-lg"
                        name="login" onClick={this.addMore}
                        disabled={this.state.isLoading}>Add More</a>
-                    {/*<span class="glyphicon glyphicon-user"/>*/}
-                    <a className="btn btn-hebecollins-reverse btn-lg"
+                    <a className="btn btn-hebecollins btn-lg"
                        name="signup" onClick={this.submit}
                        disabled={this.state.signupFormDisabled}>Done</a>
 
@@ -105,7 +105,6 @@ class AddTrainers extends React.Component {
 }
 
 AddTrainers.propTypes = {
-    // addTrainerToDB: React.PropTypes.func.isRequired,
     addUserToDBAndStore: React.PropTypes.func.isRequired
 };
 
