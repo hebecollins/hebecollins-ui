@@ -1,7 +1,7 @@
 import React from 'react';
 import classnames from 'classnames';
-import TextFieldGroup from '../common/TextFieldGroup';
-import AddTrainers from './../manager/AddTrainers'
+import TextFieldGroup from '../dumbComponents/TextFieldGroup';
+import AddTrainers from './AddTrainers'
 import {connect} from 'react-redux';
 //for country code flag with mobile no.
 import IntlTelInput from 'react-intl-tel-input';
@@ -17,13 +17,11 @@ class Notification extends React.Component {
     }
 
     component() {
-        console.log("see=>");
         return (<h1>
             <ul>
                 {
                     this.props.trainer && this.props.trainer.trainers.map(trainers => {
                         console.log(trainers.nick_name);
-                        // console.log("see=>"+trainers);
                         return (
                             <div className="alert alert-danger">
                                 <h4>Nick Name:{trainers.nick_name}</h4>
@@ -37,17 +35,13 @@ class Notification extends React.Component {
     }
 
     render() {
-        console.log("hello");
         console.log(this.props.trainer.trainers);
-        // const trainer = this.props.trainer.map(a=>a.nick_name);
-        // console.log(trainer );
         return (
             <div className="row">
                 <div className="col col-lg-6">
                     <AddTrainers/>
                 </div>
                 <div className="col col-lg-6 container-fluid">
-                    {/*<h1><component/></h1>*/}
                     <div>
                         <div>{this.component()}</div>
                     </div>
@@ -57,16 +51,11 @@ class Notification extends React.Component {
     }
 }
 
-// Notification.propTypes = {
-//     onChange: React.PropTypes.func.isRequired,
-//     handleMobileNo: React.PropTypes.func.isRequired,
-//     state: React.PropTypes.object.isRequired
-// };
 const mapStateToProps = (state) => {
     return {
         trainer: state.addUsers
     }
-};//which properties we want from redux
+};
 
 const mapDispatchToProps = (dispatch) => {
     return {
@@ -77,7 +66,6 @@ const mapDispatchToProps = (dispatch) => {
             })
         }
     }
-};//which actions we want to dispatch to redux
-
+};
 
 export default connect(mapStateToProps, null)(Notification);

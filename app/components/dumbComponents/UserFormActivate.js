@@ -1,12 +1,12 @@
 import React from 'react';
-import TextFieldGroup from './../common/TextFieldGroup'
+import TextFieldGroup from './TextFieldGroup'
 import DateTime from 'react-datetime';
-import moment from 'moment';
 import classnames from 'classnames';
 
-
-require('./../../css/dateTime.css');
-
+/**Fields:  First Name      Middle Name     Last Name
+ *          Date of Birth   Gender
+ *          Password        Confirm Password
+ * */
 //TODO: design a proper validation architecture
 class UserDetails extends React.Component {
     constructor(props) {

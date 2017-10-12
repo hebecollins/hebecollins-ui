@@ -1,9 +1,9 @@
 import React from 'react';
-import TextFieldGroup from './../common/TextFieldGroup'
+import TextFieldGroup from '../dumbComponents/TextFieldGroup'
 import validateInput from "../../Toolbox/Validation/category/activate";
 import {browserHistory} from 'react-router';
-import Address from './../common/Address';
-import UserDetails from './../common/UserDetails';
+import Address from '../dumbComponents/Address';
+import UserDetails from '../dumbComponents/UserFormActivate';
 import {errorResponse} from "../../Toolbox/Helpers/responseHandler";
 
 class Activate extends React.Component {

@@ -7,7 +7,7 @@ import Home from './components/hebecollins/Home'
 import Navigation from "./components/common/Navigation";
 import PasswordRecover from './components/auth/PasswordRecover'
 import PasswordReset from './components/auth/PasswordReset'
-import AddTrainers from './components/manager/AddTrainers'
+import AddTrainers from './components/common/AddTrainers'
 import Notification from './components/common/Notification';
 export default (
     <Route path="/" component={App}>

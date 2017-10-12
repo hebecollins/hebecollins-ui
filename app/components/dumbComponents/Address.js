@@ -1,6 +1,13 @@
 import React from 'react';
-import TextFieldGroup from './../common/TextFieldGroup';
+import TextFieldGroup from './TextFieldGroup';
 
+/** Fields :    Street Address(Optional)
+ *              Locality
+ *              District
+ *              Pin
+ *              State
+ *              Country
+ */
 class Address extends React.Component {
 
     render() {

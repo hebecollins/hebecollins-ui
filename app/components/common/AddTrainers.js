@@ -1,7 +1,7 @@
 import React from 'react';
 import validateInput from "../../Toolbox/Validation/category/signup";
 import {browserHistory} from 'react-router';
-import AddUser from './../common/AddUser';
+import AddUser from '../dumbComponents/UserFormRegister';
 import {errorResponse} from "../../Toolbox/Helpers/responseHandler";
 import {addUserToDBAndStore} from "../../actions/common/addUser"
 import {connect} from 'react-redux';
@@ -49,7 +49,7 @@ class AddTrainers extends React.Component {
         console.log(this.state);
         if (this.isValid()) {
             this.setState({errors: {}, isLoading: true})
-            this.props.addUserToDBAndStore(this.state,'trainer');
+            this.props.addUserToDBAndStore(this.state, 'trainer');
         }
         this.setState({
             nick_name: '',
@@ -79,17 +79,11 @@ class AddTrainers extends React.Component {
     render() {
         return (
             <form onSubmit={this.onSubmit}>
-                <p className="white-center">Sign up for free!</p>
+
                 <AddUser
                     onChange={this.onChange}
                     handleMobileNo={this.handleMobileNo}
                     state={this.state}/>
-
-                {/*<div className="form-group">*/}
-                {/*<button disabled={this.state.isLoading}*/}
-                {/*className="btn btn-group-justified btn-hebecollins btn-lg">*/}
-                {/*GET STARTED!*/}
-                {/*</button>*/}
                 <div className="btn-group btn-group-justified">
                     <a className="btn btn-hebecollins btn-lg"
                        name="login" onClick={this.addMore}
@@ -97,15 +91,16 @@ class AddTrainers extends React.Component {
                     <a className="btn btn-hebecollins btn-lg"
                        name="signup" onClick={this.submit}
                        disabled={this.state.signupFormDisabled}>Done</a>
-
                 </div>
+
             </form>
         );
     }
 }
 
 AddTrainers.propTypes = {
+    mapStateToProps:React.PropTypes.func.isRequired,
     addUserToDBAndStore: React.PropTypes.func.isRequired
 };
 
-export default connect(null,{addUserToDBAndStore})(AddTrainers);
+export default connect(null, {addUserToDBAndStore})(AddTrainers);

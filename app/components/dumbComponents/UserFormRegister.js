@@ -1,10 +1,10 @@
 import React from 'react';
 import classnames from 'classnames';
-import TextFieldGroup from '../common/TextFieldGroup';
+import TextFieldGroup from './TextFieldGroup';
 
 //for country code flag with mobile no.
 import IntlTelInput from 'react-intl-tel-input';
-import 'file?name=libphonenumber.js!./../../../node_modules/react-intl-tel-input/dist/libphonenumber.js';
+import 'file?name=libphonenumber.js!../../../node_modules/react-intl-tel-input/dist/libphonenumber.js';
 import './../../../node_modules/react-intl-tel-input/dist/main.css';
 
 class AddUser extends React.Component {

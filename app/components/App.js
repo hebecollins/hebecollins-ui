@@ -5,6 +5,8 @@ require('./../css/text.css');
 require('./../css/formFields.css');
 require('./../css/contentBox.css');
 require('./../css/images.css');
+require('./../css/dateTime.css');
+
 
 class App extends React.Component {
     render() {
