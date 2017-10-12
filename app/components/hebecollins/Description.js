@@ -7,7 +7,7 @@ class Description extends React.Component {
 
     render() {
         return (
-            <div className="well white-center">
+            <div className="white-center">
                 <p>Wrestle with an alligator, tussel with a whale,</p>
                 <p>I handcuffed lightening.</p>
                 <p>Last week, I injured a stone, hospitalized a brick.</p>

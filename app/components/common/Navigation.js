@@ -113,7 +113,7 @@ class Navigation extends React.Component {
                         </div>
                     </div>
                 </div>
-                <div className="col col-lg-12 col-md-12 col-sm-11 col-xs-11">
+                <div className="hebecollins-absolute">
                     <FlashMessageList/>
                 </div>
             </div>

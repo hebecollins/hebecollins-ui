@@ -51,8 +51,8 @@ class PasswordRecover extends React.Component {
     render() {
         const {errors, email, isLoading} = this.state;
         return (
-            <div className="container-fluid">
-                <div className="col-lg-offset-3 col-lg-6 col-md-offset-3 col-md-6">
+            <div className="col-lg-offset-3 col-lg-6 col-md-offset-3 col-md-6">
+                <div className="hebecollins-content-child">
                     <img className="logo-extended" src={require('./../../../images/HC_logo_extended.png')}/>
                     <form className="form-hebecollins" onSubmit={this.onSubmit}>
                         <p className="white-center">Enter Your email to get a password-reset link</p>

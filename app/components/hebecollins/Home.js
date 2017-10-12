@@ -15,14 +15,19 @@ class Home extends React.Component {
         const {isAuthenticated} = this.props.auth;
         const {user_type} = this.props.auth.user;
         const guestHomePage = (
-            <div className="container">
-                <div className="col col-lg-8 col-md-8 col-sm-6 hidden-xs">
-                    <div className="col col-lg-9 col-md-9">
+            <div className="row">
+                <div className="col col-lg-6 col-md-6 hidden-sm hidden-xs">
+                    <div className="left"><div className="hebecollins-content-child">
                         <Description/>
                     </div>
+                    </div>
                 </div>
-                <div className="col col-lg-4 col-md-4 col-sm-6 col-xs-12">
-                    <LoginAndSignup/>
+                <div className="col col-lg-6 col-md-6 col-sm-12 col-xs-12">
+                    <div className="right">
+                        <div className="hebecollins-content-child">
+                        <LoginAndSignup/>
+                    </div>
+                    </div>
                 </div>
             </div>
         );
@@ -34,7 +39,7 @@ class Home extends React.Component {
                     <div>
                         <h1>Work under progress! I am a {user_type}</h1>
                         <h2>'GYM' coloumn is for anyone having multiple gym access.
-                        It can be a trainer, manager or a client</h2>
+                            It can be a trainer, manager or a client</h2>
                     </div>
 
                     : guestHomePage

@@ -10,7 +10,7 @@ class ActivatePage extends React.Component {
         const {params} = this.props.location.query;
         console.log(this.props.location.query);
         return (
-            <div className="container-fluid">
+            <div className="hebecollins-content-child">
                 <Activate
                     params={this.props.location.query}
                     activateManagerRequest={activateManagerRequest}

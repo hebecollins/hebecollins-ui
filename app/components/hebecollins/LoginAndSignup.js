@@ -31,7 +31,7 @@ class LoginAndSignup extends React.Component {
 
     render() {
         return (
-            <div className="well">
+            <div>
                 <div className="btn-group btn-group-justified">
                     {/*<span  className="glyphicon glyphicon-log-in"/>*/}
                     <a className="btn btn-hebecollins-reverse btn-lg"

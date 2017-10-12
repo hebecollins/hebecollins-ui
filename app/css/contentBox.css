@@ -16,15 +16,28 @@
 
 .hebecollins-home {
     background-image: url("../../images/home.jpg");
-    max-width: 100%;
-    max-height: 100%;
-    object-fit: cover;
-    justify-content: center;
+    display: inline-block;
+    /*top: 0; right: 0; bottom: 0; left: 0;*/
+    /*height: 100vh;*/
+    /*width: 100vw;*/
+    top:0;
+    left:0;
+    height:100%;
+    width:100%;
+    /*min-width: 100%;*/
+    /*min-height: 100%;*/
+    /*object-fit: cover;*/
+    /*justify-content: center;*/
+}
+
+.row{
+    display: flex; /* equal height of the children */
+
 }
 
 .hebecollins-content {
-    padding-top: 10em;
-    padding-bottom: 10em;
+    padding-top: 11em;
+    padding-bottom: 5em;
 }
 
 .container-fluid{
@@ -32,14 +45,32 @@
     align-content: center;
 }
 
-/*box around signup and login*/
-.well {
+.hebecollins-content-child {
     background: rgba(204, 204, 204, 0.2);
     border-color: transparent;
     -webkit-border-radius: 0;
     -moz-border-radius: 0;
     border-radius: 0;
+    width: 100%;
+    height:100%;
     float: left;
-
+    padding: 30px 30px 50px 30px;
 }
 
+/*.left{*/
+    /*padding: 5% 15% 5% 5%;*/
+/*}*/
+
+/*.right{*/
+    /*padding: 5% 0% 5% 15%;*/
+/*}*/
+
+.col{
+    padding: 0 9% 0 9%;
+}
+
+.hebecollins-absolute{
+    position: absolute;
+    width: 100%;
+    left: 10%;
+}

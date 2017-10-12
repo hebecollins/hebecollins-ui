@@ -51,3 +51,8 @@
     width: 100%;
 }
 
+.form-control{
+    background-color:transparent;
+    color: white;
+    font-family: "Times New Roman";
+}
