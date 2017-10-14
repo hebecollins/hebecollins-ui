@@ -1,9 +1,11 @@
 import React from 'react';
-import Navigation from "../common/Navigation";
-import FlashMessageList from './../flash/FlashMessageList'
+import FlashMessageList from '../../commons/flash/FlashMessageList'
 import {connect} from 'react-redux';
-import Description from "./../hebecollins/Description";
-import LoginAndSignup from "./../hebecollins/LoginAndSignup";
+import Description from "../../guest/Description";
+import LoginAndSignup from "../../guest/LoginAndSignup";
+import {userSignUpRequest} from '../../../actions/signUpActions'
+import {addFlashMessage} from '../../../actions/flashMessages';
+import {loginRequest} from "../../../actions/authActions"
 
 class Home extends React.Component {
     constructor(props) {
@@ -11,9 +13,7 @@ class Home extends React.Component {
     }
 
     render() {
-
-        const {isAuthenticated} = this.props.auth;
-        const {user_type} = this.props.auth.user;
+        const {userSignUpRequest, addFlashMessage, loginRequest} = this.props;
         const guestHomePage = (
             <div className="row">
                 <div className="col col-lg-6 col-md-6 hidden-sm hidden-xs">
@@ -26,7 +26,11 @@ class Home extends React.Component {
                 <div className="col col-lg-6 col-md-6 col-sm-12 col-xs-12">
                     <div className="right">
                         <div className="hebecollins-content-child">
-                            <LoginAndSignup/>
+                            <LoginAndSignup
+                                loginRequest={loginRequest}
+                                userSignUpRequest={userSignUpRequest}
+                                addFlashMessage={addFlashMessage}/>
+                            />
                         </div>
                     </div>
                 </div>
@@ -39,15 +43,7 @@ class Home extends React.Component {
                     <FlashMessageList/>
                 </div>
                 <div className="hebecollins-needs-alert">
-                    {isAuthenticated ?
-                        <div>
-                            <h1>Work under progress! I am a {user_type}</h1>
-                            <h2>'GYM' coloumn is for anyone having multiple gym access.
-                                It can be a trainer, manager or a client</h2>
-                        </div>
-
-                        : guestHomePage
-                    }
+                    {guestHomePage}
                 </div>
             </div>
         )
@@ -55,13 +51,9 @@ class Home extends React.Component {
 }
 
 Home.propTypes = {
-    auth: React.PropTypes.object.isRequired
+    userSignUpRequest: React.PropTypes.func.isRequired,
+    addFlashMessage: React.PropTypes.func.isRequired,
+    loginRequest: React.PropTypes.func.isRequired
 };
 
-function mapStateToProps(state) {
-    return {
-        auth: state.auth
-    }
-}
-
-export default connect(mapStateToProps)(Home);
+export default connect(null, {userSignUpRequest, addFlashMessage, loginRequest})(Home);

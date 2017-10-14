@@ -102,4 +102,4 @@ LoginForm.propTypes = {
     loginRequest: React.PropTypes.func.isRequired
 };
 
-export default connect(null, {loginRequest})(LoginForm);
+export default LoginForm;

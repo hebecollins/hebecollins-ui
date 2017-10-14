@@ -1,5 +1,5 @@
 import React from 'react';
-import GuestNavigation from './guest/GuestNavigation';
+import ClientNavigation from './client/ClientNavigation';
 require('./../css/alerts.css');
 require('./../css/text.css');
 require('./../css/formFields.css');
@@ -8,11 +8,11 @@ require('./../css/images.css');
 require('./../css/dateTime.css');
 
 
-class App extends React.Component {
+class ClientApp extends React.Component {
     render() {
         return (
             <div className="hebecollins-home">
-                <GuestNavigation/>
+                <ClientNavigation/>
                 <div className="hebecollins-content">
                     {this.props.children}
                 </div>
@@ -21,4 +21,4 @@ class App extends React.Component {
     }
 }
 
-export default App;
+export default ClientApp;

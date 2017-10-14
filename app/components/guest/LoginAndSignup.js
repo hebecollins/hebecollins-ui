@@ -1,6 +1,6 @@
 import React from 'react';
-import LoginForm from "../auth/LoginForm";
-import SignUpPage from "../signup/SignUpPage";
+import Login from "./Login";
+import SignUp from './SignUp';
 
 class LoginAndSignup extends React.Component {
     constructor(props) {
@@ -13,8 +13,7 @@ class LoginAndSignup extends React.Component {
     };
 
     onClick(e) {
-        // e.preventDefault();
-        console.log(this.state.loginFormDisabled);
+        e.preventDefault();
         if (this.state.loginFormDisabled === false && e.target.name === "login") {
             this.setState({
                 loginFormDisabled: !this.state.loginFormDisabled,
@@ -30,6 +29,7 @@ class LoginAndSignup extends React.Component {
     }
 
     render() {
+        const {userSignUpRequest, addFlashMessage, loginRequest}=this.props;
         return (
             <div>
                 <div className="btn-group btn-group-justified">
@@ -42,11 +42,24 @@ class LoginAndSignup extends React.Component {
                 </div>
                 <br/>
                 <div>
-                    {this.state.loginFormDisabled ? <LoginForm/> : <SignUpPage/>}
+                    {
+                        this.state.loginFormDisabled ?
+                        <Login
+                            loginRequest={loginRequest}/> :
+                        <SignUp
+                            userSignUpRequest={userSignUpRequest}
+                            addFlashMessage={addFlashMessage}/>
+                    }
                 </div>
             </div>
         )
     }
 }
+
+LoginAndSignup.propTypes={
+    userSignUpRequest: React.PropTypes.func.isRequired,
+    addFlashMessage: React.PropTypes.func.isRequired,
+    loginRequest: React.PropTypes.func.isRequired
+};
 
 export default LoginAndSignup;
