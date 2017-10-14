@@ -1,14 +1,12 @@
 import React from 'react';
-import classnames from 'classnames';
-import TextFieldGroup from '../dumbComponents/TextFieldGroup';
 import AddTrainers from './AddUsersInBulk'
 import {connect} from 'react-redux';
+
 //for country code flag with mobile no.
 import IntlTelInput from 'react-intl-tel-input';
-import 'file?name=libphonenumber.js!./../../../node_modules/react-intl-tel-input/dist/libphonenumber.js';
-import './../../../node_modules/react-intl-tel-input/dist/main.css';
-import {ADD_TRAINERS} from "../../actions/types";
-import addUsers from './../../reducers/addUsers'
+import 'file?name=libphonenumber.js!../../../../node_modules/react-intl-tel-input/dist/libphonenumber.js';
+import './../../../../node_modules/react-intl-tel-input/dist/main.css';
+import {ADD_TRAINERS} from "../../../actions/types";
 
 class Monitor extends React.Component {
     constructor(props) {

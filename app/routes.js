@@ -1,22 +1,22 @@
 import React from 'react';
 import {Route, IndexRoute} from 'react-router';
 
-import ActivatePage from './components/manager/ActivatePage';
+import ActivatePage from './components/dumb/manager/ActivatePage';
 import PasswordRecover from './components/hebecollins/guest/PasswordRecover'
-import PasswordReset from './components/auth/PasswordReset'
-import Monitor from './components/commons/Monitor';
-import authCheck from './components/auth/AuthCheck';
+import PasswordReset from './components/hebecollins/commons/PasswordReset'
+import Monitor from './components/dumb/commons/Monitor';
+import authCheck from './components/filters/AuthCheck';
 
-import App from './components/App';
+import App from './components/Application/App';
 import GuestHome from './components/hebecollins/guest/Home'
 
-import ClientApp from './components/ClientApp';
+import ClientApp from './components/Application/ClientApp';
 import ClientHome from './components/hebecollins/client/ClientHome';
 
-import TrainerApp from './components/TrainerApp';
+import TrainerApp from './components/Application/TrainerApp';
 import TrainerHome from './components/hebecollins/trainer/TrainerHome'
 
-import ManagerApp from './components/ManagerApp';
+import ManagerApp from './components/Application/ManagerApp';
 import ManagerHome from './components/hebecollins/manager/ManagerHome'
 
 export default (

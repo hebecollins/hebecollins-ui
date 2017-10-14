@@ -1,10 +1,10 @@
 import React from 'react';
-import TextFieldGroup from '../dumbComponents/TextFieldGroup'
-import validateInput from "../../Toolbox/Validation/category/userActivateForm";
+import TextFieldGroup from '../TextFieldGroup'
+import validateInput from "../../../Toolbox/Validation/category/userActivateForm";
 import {browserHistory} from 'react-router';
-import Address from '../dumbComponents/Address';
-import UserDetails from '../dumbComponents/UserFormActivate';
-import {errorResponse} from "../../Toolbox/Helpers/responseHandler";
+import Address from '../commons/Address';
+import UserDetails from '../UserFormActivate';
+import {errorResponse} from "../../../Toolbox/Helpers/responseHandler";
 
 class Activate extends React.Component {
     constructor(props) {

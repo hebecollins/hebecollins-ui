@@ -11,7 +11,7 @@ class NavigationBar extends React.Component {
                     <div className="container-fluid">
                         <div className="navbar-header">
                             <a href="/" className="pull-left">
-                                <img className="img-responsive2" src={require('../../../images/HC_logo.png')}/>
+                                <img className="img-responsive2" src={require('../../../../images/HC_logo.png')}/>
                             </a>
                             <a href="#" className="navbar-brand">
                                 {/*Hebecollins*/}

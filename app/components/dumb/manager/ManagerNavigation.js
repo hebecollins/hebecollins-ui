@@ -1,6 +1,6 @@
 import React from 'react';
 import {connect} from 'react-redux';
-import {logoutRequest} from '../../actions/authActions'
+import {logoutRequest} from '../../../actions/authActions'
 
 class ManagerNavigation extends React.Component {
 
@@ -39,7 +39,7 @@ class ManagerNavigation extends React.Component {
                     <div className="container-fluid">
                         <div className="navbar-header">
                             <a href="/" className="pull-left">
-                                <img className="img-responsive2" src={require('./../../../images/HC_logo.png')}/>
+                                <img className="img-responsive2" src={require('../../../../images/HC_logo.png')}/>
                             </a>
                             <a href="#" className="navbar-brand">
                                 {/*Hebecollins*/}

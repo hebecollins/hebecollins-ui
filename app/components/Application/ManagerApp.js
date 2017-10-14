@@ -1,11 +1,11 @@
 import React from 'react';
-import ManagerNavigation from './manager/ManagerNavigation';
-require('./../css/alerts.css');
-require('./../css/text.css');
-require('./../css/formFields.css');
-require('./../css/contentBox.css');
-require('./../css/images.css');
-require('./../css/dateTime.css');
+import ManagerNavigation from '../dumb/manager/ManagerNavigation';
+require('../../css/alerts.css');
+require('../../css/text.css');
+require('../../css/formFields.css');
+require('../../css/contentBox.css');
+require('../../css/images.css');
+require('../../css/dateTime.css');
 
 
 class ManagerApp extends React.Component {

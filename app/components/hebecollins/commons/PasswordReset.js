@@ -1,12 +1,12 @@
 import React from 'react';
-import TextFieldGroup from '../dumbComponents/TextFieldGroup'
-import validateInput from "../../Toolbox/Validation/category/login";
+import TextFieldGroup from '../../dumb/TextFieldGroup'
+import validateInput from "../../../Toolbox/Validation/category/login";
 import {connect} from 'react-redux';
-import {loginRequest} from "../../actions/authActions"
-import {errorResponse} from "../../Toolbox/Helpers/responseHandler";
+import {loginRequest} from "../../../actions/authActions"
+import {errorResponse} from "../../../Toolbox/Helpers/responseHandler";
 import {browserHistory} from 'react-router';
-import {addFlashMessage} from "../../actions/flashMessages";
-import {passwordResetRequest} from "../../actions/authActions"
+import {addFlashMessage} from "../../../actions/flashMessages";
+import {passwordResetRequest} from "../../../actions/authActions"
 
 class PasswordReset extends React.Component {
 
@@ -55,7 +55,7 @@ class PasswordReset extends React.Component {
         return (
             <div className="container-fluid">
                 <div className="col-lg-offset-3 col-lg-6 col-md-offset-3 col-md-6">
-                    <img className="logo-extended" src={require('./../../../images/HC_logo_extended.jpg')}/>
+                    <img className="logo-extended" src={require('../../../../images/HC_logo_extended.jpg')}/>
                     <form className="form-hebecollins" onSubmit={this.onSubmit}>
                         <p className="white-center">Enter a new password</p>
                         <TextFieldGroup

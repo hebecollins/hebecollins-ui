@@ -1,11 +1,11 @@
 import React from 'react';
-import GuestNavigation from './guest/GuestNavigation';
-require('./../css/alerts.css');
-require('./../css/text.css');
-require('./../css/formFields.css');
-require('./../css/contentBox.css');
-require('./../css/images.css');
-require('./../css/dateTime.css');
+import GuestNavigation from '../dumb/guest/GuestNavigation';
+require('../../css/alerts.css');
+require('../../css/text.css');
+require('../../css/formFields.css');
+require('../../css/contentBox.css');
+require('../../css/images.css');
+require('../../css/dateTime.css');
 
 
 class App extends React.Component {

@@ -1,8 +1,8 @@
 import React from 'react';
-import validateInput from "../../Toolbox/Validation/category/userRegisterForm";
+import validateInput from "../../../Toolbox/Validation/category/userRegisterForm";
 import {browserHistory} from 'react-router';
-import AddUser from '../dumbComponents/UserFormRegister';
-import {errorResponse} from "../../Toolbox/Helpers/responseHandler";
+import AddUser from '../UserFormRegister';
+import {errorResponse} from "../../../Toolbox/Helpers/responseHandler";
 
 class SignUpForm extends React.Component {
     constructor(props) {

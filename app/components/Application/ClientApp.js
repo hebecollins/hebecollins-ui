@@ -1,11 +1,11 @@
 import React from 'react';
-import ClientNavigation from './client/ClientNavigation';
-require('./../css/alerts.css');
-require('./../css/text.css');
-require('./../css/formFields.css');
-require('./../css/contentBox.css');
-require('./../css/images.css');
-require('./../css/dateTime.css');
+import ClientNavigation from '../dumb/client/ClientNavigation';
+require('../../css/alerts.css');
+require('../../css/text.css');
+require('../../css/formFields.css');
+require('../../css/contentBox.css');
+require('../../css/images.css');
+require('../../css/dateTime.css');
 
 
 class ClientApp extends React.Component {

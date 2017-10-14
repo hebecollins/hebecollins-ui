@@ -1,12 +1,12 @@
 import React from 'react';
-import TextFieldGroup from '../dumbComponents/TextFieldGroup'
-import validateInput from "../../Toolbox/Validation/category/login";
+import TextFieldGroup from '../TextFieldGroup'
+import validateInput from "../../../Toolbox/Validation/category/login";
 import {connect} from 'react-redux';
-import {loginRequest} from "../../actions/authActions"
-import {errorResponse} from "../../Toolbox/Helpers/responseHandler";
+import {loginRequest} from "../../../actions/authActions"
+import {errorResponse} from "../../../Toolbox/Helpers/responseHandler";
 import backendRoutes from 'backendRoutes';
 
-require('../../css/contentBox.css');
+require('../../../css/contentBox.css');
 
 class LoginForm extends React.Component {
 
