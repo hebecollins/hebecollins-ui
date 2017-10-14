@@ -14,7 +14,6 @@ export function setCurrentUser(user) {
 
 export function logoutRequest() {
     return dispatch => {
-        console.log("hello");
         return get(backendRoutes.logout).then(res => {
             console.log(res.data);
             localStorage.removeItem('user');

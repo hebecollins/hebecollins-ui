@@ -1,5 +1,5 @@
 import React from 'react';
-import TextFieldGroup from '../TextFieldGroup';
+import TextFieldGroup from './TextFieldGroup';
 
 /** Fields :    Street Address(Optional)
  *              Locality
