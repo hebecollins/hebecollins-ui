@@ -6,5 +6,6 @@ export const message={
     "passwordNotMatch":"Password doesn't match",
     "invalidDate":"Not a valid date",
     "badConnection":"unable to connect",
-    "errorAtServer":"Some error occurred at the server"
+    "errorAtServer":"Some error occurred at the server",
+    "":""
 };

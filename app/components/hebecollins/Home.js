@@ -17,16 +17,17 @@ class Home extends React.Component {
         const guestHomePage = (
             <div className="row">
                 <div className="col col-lg-6 col-md-6 hidden-sm hidden-xs">
-                    <div className="left"><div className="hebecollins-content-child">
-                        <Description/>
-                    </div>
+                    <div className="left">
+                        <div className="hebecollins-content-child">
+                            <Description/>
+                        </div>
                     </div>
                 </div>
                 <div className="col col-lg-6 col-md-6 col-sm-12 col-xs-12">
                     <div className="right">
                         <div className="hebecollins-content-child">
-                        <LoginAndSignup/>
-                    </div>
+                            <LoginAndSignup/>
+                        </div>
                     </div>
                 </div>
             </div>
@@ -34,16 +35,20 @@ class Home extends React.Component {
 
         return (
             <div>
-                {/*<Navigation/>*/}
-                {isAuthenticated ?
-                    <div>
-                        <h1>Work under progress! I am a {user_type}</h1>
-                        <h2>'GYM' coloumn is for anyone having multiple gym access.
-                            It can be a trainer, manager or a client</h2>
-                    </div>
+                <div className="hebecollins-absolute">
+                    <FlashMessageList/>
+                </div>
+                <div className="hebecollins-needs-alert">
+                    {isAuthenticated ?
+                        <div>
+                            <h1>Work under progress! I am a {user_type}</h1>
+                            <h2>'GYM' coloumn is for anyone having multiple gym access.
+                                It can be a trainer, manager or a client</h2>
+                        </div>
 
-                    : guestHomePage
-                }
+                        : guestHomePage
+                    }
+                </div>
             </div>
         )
     }

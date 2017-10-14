@@ -2,6 +2,7 @@ import {postJSON} from '../../Toolbox/Helpers/requestHandler';
 import backendRoutes from 'backendRoutes';
 import {ADD_CLIENTS, ADD_TRAINERS} from "../types";
 import {store} from "../../index"
+import {browserHistory} from 'react-router';
 
 function addTrainerToRedux(data) {
     console.log("hello");
@@ -29,24 +30,20 @@ export function addUserToDBAndStore(user, userType, route) {
         };
     return dispatch => {
         // return postJSON(userData, route).then(res => {
-            // browserHistory.push('/');
-            // console.log(res.data.msg);
-        console.log("hello brooo");
-            return dispatch(addTrainerToRedux(userData));
-        // })
+        // browserHistory.push('/');
+        // console.log(res.data.msg);
+        dispatch(addUserToRedux(userType, userData));
+        if (user.isSubmitted === true){
+            browserHistory.push('/');
+        }
     }
 }
 
 function addUserToRedux(userType, data) {
     if (userType === 'client') {
-        return dispatch=>{
-            dispatch(addclientToRedux(data))
-        }
+        return addclientToRedux(data);
     }
     if (userType === 'trainer') {
-        console.log(data);
-        return dispatch=>{
-            dispatch(addTrainerToRedux(data))
-        }
+        return addTrainerToRedux(data);
     }
 }

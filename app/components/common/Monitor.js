@@ -1,7 +1,7 @@
 import React from 'react';
 import classnames from 'classnames';
 import TextFieldGroup from '../dumbComponents/TextFieldGroup';
-import AddTrainers from './AddTrainers'
+import AddTrainers from './AddUsersInBulk'
 import {connect} from 'react-redux';
 //for country code flag with mobile no.
 import IntlTelInput from 'react-intl-tel-input';
@@ -10,7 +10,7 @@ import './../../../node_modules/react-intl-tel-input/dist/main.css';
 import {ADD_TRAINERS} from "../../actions/types";
 import addUsers from './../../reducers/addUsers'
 
-class Notification extends React.Component {
+class Monitor extends React.Component {
     constructor(props) {
         super(props);
         this.component = this.component.bind(this);
@@ -43,7 +43,9 @@ class Notification extends React.Component {
                 </div>
                 <div className="col col-lg-6 container-fluid">
                     <div>
-                        <div>{this.component()}</div>
+                        <div className="hebecollins-scroll-monitor">
+                            {this.component()}
+                        </div>
                     </div>
                 </div>
             </div>
@@ -68,4 +70,4 @@ const mapDispatchToProps = (dispatch) => {
     }
 };
 
-export default connect(mapStateToProps, null)(Notification);
+export default connect(mapStateToProps, null)(Monitor);

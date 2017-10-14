@@ -113,9 +113,6 @@ class Navigation extends React.Component {
                         </div>
                     </div>
                 </div>
-                <div className="hebecollins-absolute">
-                    <FlashMessageList/>
-                </div>
             </div>
         );
     }

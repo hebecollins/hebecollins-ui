@@ -1,5 +1,5 @@
 import React from 'react';
-import validateInput from "../../Toolbox/Validation/category/signup";
+import validateInput from "../../Toolbox/Validation/category/userRegisterForm";
 import {browserHistory} from 'react-router';
 import AddUser from '../dumbComponents/UserFormRegister';
 import {errorResponse} from "../../Toolbox/Helpers/responseHandler";
