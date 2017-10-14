@@ -3,7 +3,7 @@ import validateInput from "../../../Toolbox/Validation/category/userRegisterForm
 import {browserHistory} from 'react-router';
 import AddUser from './AddUser';
 import {errorResponse} from "../../../Toolbox/Helpers/responseHandler";
-import {addUserToDBAndStore} from "../../../actions/common/addUser"
+import {addUserToDBAndStore} from "../../../actions/commons/addUser"
 import {connect} from 'react-redux';
 
 class AddUsersInBulk extends React.Component {

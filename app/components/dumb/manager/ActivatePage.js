@@ -1,7 +1,7 @@
 import React from 'react';
 import Activate from './Activate';
 import {connect} from 'react-redux';
-import {addFlashMessage} from '../../../actions/flashMessages';
+import {addFlashMessage} from '../../../actions/commons/flashMessages';
 import {activateManagerRequest} from "../../../actions/manager/activate"
 
 class ActivatePage extends React.Component {

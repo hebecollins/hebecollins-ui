@@ -1,9 +1,15 @@
 {
   "login": "/login",
-  "signup":"/register-manager",
-  "logout":"/logout",
-  "activate":"/activate-manager",
-  "password_recover":"/password-recover",
-  "password_reset":"/password-reset",
-  "add_trainers":"/add_trainers"
+  "signup": "/register-manager",
+  "logout": "/logout",
+  "activate": {
+    "manager": "/activate-manager",
+    "client":"activate-client",
+    "trainer":"activate-trainer"
+  },
+
+  "password_recover": "/password-recover",
+  "password_reset": "/password-reset",
+  "add_trainers": "/add-trainers",
+  "verify": "/verify"
 }

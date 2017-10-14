@@ -1,6 +1,5 @@
 import {ADD_CLIENTS, ADD_TRAINERS} from "../actions/types";
 
-
 const initialState = {
     trainers: []
 };
@@ -8,14 +7,10 @@ const initialState = {
 export default (state = initialState, action = {}) => {
     switch (action.type) {
         case ADD_TRAINERS:
-            // return state + action.payload;
-            // state.result += action.payload;
-        // state =[...state,
             {
                  state={
                      trainers:[...state.trainers, action.trainers]}
             }
-        // ];
             break;
 
         case ADD_CLIENTS:

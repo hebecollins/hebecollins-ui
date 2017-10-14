@@ -1,6 +1,6 @@
 import React from 'react';
 import {connect} from 'react-redux';
-import {logoutRequest} from '../../../actions/authActions'
+import {logoutRequest} from '../../../actions/commons/authActions'
 
 class TrainerNavigation extends React.Component {
 

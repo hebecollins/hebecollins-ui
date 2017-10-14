@@ -1,7 +1,11 @@
 {
+  "/":["guest"],
   "Login":["guest"],
-  "/password/recover":["client","trainer","manager","admin"],
-  "/password/reset":["client","trainer","manager","admin"],
+  "password/recover":["guest"],
+  "client":["client"],
+  "trainer":["trainer"],
+  "manager":["manager"],
+  "password/reset":["client","trainer","manager","admin"],
   "AddTrainers":["manager"],
   "AddClients":["trainer"],
   "AddWorkout":["trainer"]

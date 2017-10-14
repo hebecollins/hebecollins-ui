@@ -1,9 +1,10 @@
-import {postForm, get} from '../Toolbox/Helpers/requestHandler';
+import {postForm, get} from '../../Toolbox/Helpers/requestHandler';
 import backendRoutes from 'backendRoutes';
-import setAuthToken from '../Toolbox/Auth/SetAuthToken'
-import {SET_CURRENT_USER} from "./types";
+import setAuthToken from '../../Toolbox/Auth/SetAuthToken'
+import {SET_CURRENT_USER} from "../types";
 import {addFlashMessage} from "./flashMessages";
 import {browserHistory} from 'react-router';
+import {redirect} from './redirect'
 
 export function setCurrentUser(user) {
     return {
@@ -15,8 +16,8 @@ export function setCurrentUser(user) {
 export function logoutRequest() {
     return dispatch => {
         return get(backendRoutes.logout).then(res => {
-            console.log(res.data);
-            localStorage.removeItem('user');
+                console.log(res.data);
+                localStorage.removeItem('user');
                 setAuthToken(false);
                 dispatch(addFlashMessage({
                     type: 'success',
@@ -40,7 +41,8 @@ export function loginRequest(data) {
                 const user = res.data.data;
                 localStorage.setItem('user', JSON.stringify(user));
                 setAuthToken(user.token);
-                dispatch(setCurrentUser(user))
+                dispatch(setCurrentUser(user));
+                redirect('/' + user.user_type);
             }
         );
     }
@@ -53,7 +55,7 @@ export function passwordRecoverRequest(data) {
 
     return dispatch => {
         return postForm(dataToBePosted, backendRoutes.password_recover).then(res => {
-                browserHistory.push('/');
+                redirect('/');
                 dispatch(addFlashMessage({
                     type: 'success',
                     text: res.data.msg
@@ -64,10 +66,10 @@ export function passwordRecoverRequest(data) {
 }
 
 
-export function passwordResetRequest(data,params) {
+export function passwordResetRequest(data, params) {
     const dataToBePosted = {
         "password": data.password,
-        "password_confirm":data.password_confirm
+        "password_confirm": data.password_confirm
     };
     return dispatch => {
         return postForm(dataToBePosted, backendRoutes.password_reset, params).then(res => {

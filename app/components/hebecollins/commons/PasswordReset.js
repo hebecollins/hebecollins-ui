@@ -2,11 +2,11 @@ import React from 'react';
 import TextFieldGroup from '../../dumb/commons/TextFieldGroup'
 import validateInput from "../../../Toolbox/Validation/category/login";
 import {connect} from 'react-redux';
-import {loginRequest} from "../../../actions/authActions"
+import {loginRequest} from "../../../actions/commons/authActions"
 import {errorResponse} from "../../../Toolbox/Helpers/responseHandler";
 import {browserHistory} from 'react-router';
-import {addFlashMessage} from "../../../actions/flashMessages";
-import {passwordResetRequest} from "../../../actions/authActions"
+import {addFlashMessage} from "../../../actions/commons/flashMessages";
+import {passwordResetRequest} from "../../../actions/commons/authActions"
 
 class PasswordReset extends React.Component {
 

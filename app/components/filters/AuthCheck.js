@@ -1,7 +1,7 @@
 import React from 'react';
 import {connect} from 'react-redux';
 import permission from 'permission';
-import {addFlashMessage} from "../../actions/flashMessages"
+import {addFlashMessage} from "../../actions/commons/flashMessages"
 import {browserHistory} from 'react-router';
 
 
@@ -15,6 +15,9 @@ export default function (Component) {
         componentWillMount() {//gets called just once before first render
             console.log("componentWillMount");
             const route = this.props.location.pathname;
+            console.log(this.props.location.pathname);
+            console.log(permission[route]);
+            console.log(permission["/"]);
             const {isAuthenticated, user} = this.props;
 
             /** if(notAutheticated AND requires authentication){
@@ -30,24 +33,25 @@ export default function (Component) {
                         type: 'error',
                         text: 'You need to login to access this page'
                     });
+                    browserHistory.push('/');
+
                 }
             }
             else {
-
                 const userType = user.user_type;
                 if (!permission[route].includes(userType)) {
                     this.props.addFlashMessage({
                         type: 'error',
-                        text: 'You need to login to acces this page'
+                        text: 'You already are logged in'
                     });
-                    browserHistory.push('/forbidden');
+                    browserHistory.push('/'+userType);
                 }
             }
         }
 
         componentWillUpdate(nextProps) {//gets called whenever render updates
             if (!nextProps.isAuthenticated) {
-                browserHistory.push('/guest');
+                browserHistory.push('/');
             }
         }
 
@@ -62,6 +66,7 @@ export default function (Component) {
 
     Permission.propTypes = {
         isAuthenticated: React.PropTypes.bool.isRequired,
+        user: React.PropTypes.object.isRequired,
         addFlashMessage: React.PropTypes.func.isRequired
     };
 

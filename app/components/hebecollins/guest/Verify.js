@@ -3,16 +3,15 @@ import TextFieldGroup from '../../dumb/commons/TextFieldGroup'
 import validateInput from "../../../Toolbox/Validation/category/login";
 import {connect} from 'react-redux';
 import {errorResponse} from "../../../Toolbox/Helpers/responseHandler";
-import {passwordRecoverRequest} from "../../../actions/commons/authActions"
 import {FormatForm} from "../../dumb/commons/FormatForm"
+import {sendOTP} from "../../../actions/guest/signUpActions"
 
-
-class PasswordRecover extends React.Component {
+class Verify extends React.Component {
 
     constructor(props) {
         super(props);
         this.state = {
-            email: "",
+            otp: "",
             errors: {},
             isLoading: false
         };
@@ -25,7 +24,7 @@ class PasswordRecover extends React.Component {
         this.setState({[e.target.name]: e.target.value});
     }
 
-    isValid() {
+    isValid() {//todo : must be a number
         const {errors, isValid} = validateInput(this.state);
         if (!isValid) {
             this.setState({errors});
@@ -37,8 +36,7 @@ class PasswordRecover extends React.Component {
         e.preventDefault();
         if (this.isValid()) {
             this.setState({errors: {}, isLoading: true});
-
-            this.props.passwordRecoverRequest(this.state).catch(
+            this.props.sendOTP(this.state, this.props.userId).catch(
                 (err) => {
                     const response = errorResponse(err);
                     this.setState({errors: response, isLoading: false})
@@ -48,25 +46,34 @@ class PasswordRecover extends React.Component {
     }
 
     render() {
-        const {errors, email, isLoading} = this.state;
+        const {errors, otp, isLoading} = this.state;
         return (
             <FormatForm
                 onSubmit={this.onSubmit}
-                instruction="Enter Your Email"
+                instruction="Enter Your 5 digit OTP"
                 isLoading={isLoading}>
                 <TextFieldGroup
-                    field="email"
-                    label="Email"
-                    value={email}
+                    field="otp"
+                    label="One Time Password"
+                    value={otp}
                     onChange={this.onChange}
-                    error={errors.email}
-                /></FormatForm>
+                    error={errors.otp}
+                />
+            </FormatForm>
         )
     }
 }
 
-PasswordRecover.propTypes = {
-    passwordRecoverRequest: React.PropTypes.func.isRequired
+Verify.propTypes = {
+    sendOTP: React.PropTypes.func.isRequired,
+    userId: React.PropTypes.string.isRequired
 };
 
-export default connect(null, {passwordRecoverRequest})(PasswordRecover);
+function mapStateToProps(state) {
+    return{
+        userId:state.verificationData.userId
+    }
+
+}
+
+export default connect(mapStateToProps, {sendOTP})(Verify);

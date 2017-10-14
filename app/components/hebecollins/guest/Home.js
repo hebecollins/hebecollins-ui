@@ -3,9 +3,9 @@ import FlashMessageList from '../../smart/commons/FlashMessageList'
 import {connect} from 'react-redux';
 import Description from "../../dumb/guest/Description";
 import LoginAndSignup from "../../dumb/guest/LoginAndSignup";
-import {userSignUpRequest} from '../../../actions/signUpActions'
-import {addFlashMessage} from '../../../actions/flashMessages';
-import {loginRequest} from "../../../actions/authActions"
+import {userSignUpRequest} from '../../../actions/guest/signUpActions'
+import {addFlashMessage} from '../../../actions/commons/flashMessages';
+import {loginRequest} from "../../../actions/commons/authActions"
 
 class Home extends React.Component {
     constructor(props) {

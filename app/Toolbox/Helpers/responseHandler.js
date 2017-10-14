@@ -1,4 +1,4 @@
-import {addFlashMessage} from "../../actions/flashMessages"
+import {addFlashMessage} from "../../actions/commons/flashMessages"
 import {message} from "./messages";
 import {store} from '../../index'
 

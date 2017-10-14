@@ -1,8 +1,6 @@
 import React from 'react';
 import TextFieldGroup from '../commons/TextFieldGroup'
 import validateInput from "../../../Toolbox/Validation/category/login";
-import {connect} from 'react-redux';
-import {loginRequest} from "../../../actions/authActions"
 import {errorResponse} from "../../../Toolbox/Helpers/responseHandler";
 import backendRoutes from 'backendRoutes';
 

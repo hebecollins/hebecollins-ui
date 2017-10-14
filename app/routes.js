@@ -18,24 +18,34 @@ import TrainerHome from './components/hebecollins/trainer/TrainerHome'
 
 import ManagerApp from './components/Application/ManagerApp';
 import ManagerHome from './components/hebecollins/manager/ManagerHome'
+import ManagerTest from './components/hebecollins/manager/ManagerTest'
+import Verify from "./components/hebecollins/guest/Verify";
 
 export default (
     <div>
         <Route path="/" component={App}>
-            <IndexRoute component={GuestHome}/>
-            <Route path="activate-manager" component={ActivatePage}/>
+            <IndexRoute component={authCheck(GuestHome)}/>
+            <Route path="activate/manager" component={ActivatePage}/>
+            <Route path="verify" component={Verify}/>
             <Route path="password/recover" component={authCheck(PasswordRecover)}/>
             <Route path="password/reset" component={PasswordReset}/>
-            <Route path="add-trainers" component={Monitor}/>
         </Route>
-        <Route path="/client" component={ClientApp}>
+
+        /*Client-only routes*/
+        <Route path="/client" component={authCheck(ClientApp)}>
             <IndexRoute component={ClientHome}/>
         </Route>
-        <Route path="/trainer" component={TrainerApp}>
+
+        /*Trainer-only routes*/
+        <Route path="/trainer" component={authCheck(TrainerApp)}>
             <IndexRoute component={TrainerHome}/>
         </Route>
-        <Route path="/manager" component={ManagerApp}>
+
+        /*Manager-only routes*/
+        <Route path="/manager" component={authCheck(ManagerApp)}>
             <IndexRoute component={ManagerHome}/>
+            <Route path="add/trainer" component={Monitor}/>
+            <Route path="test/test" component={ManagerTest}/>
         </Route>
     </div>
 )
