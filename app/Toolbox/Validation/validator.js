@@ -37,7 +37,7 @@ export function validate(array) {
 /** eval is converting string into function call
  * @param value => value, which has to be validated
  * @param property => property against which value will be validated
- * @return object => error msg from helper functions
+ * @return string => error msg from helper functions
  * */
 function getValidationForProperty(value, property) {
     if (property.indexOf('(') > -1) {
@@ -82,7 +82,14 @@ function isAlpha(value) {
             return message.notAlpha;
         }
     }
+}
 
+function isNumber(value) {
+    if(!Validator.isNull(value)){
+        if (!Validator.isInt(value)) {
+            return message.notNumber;
+        }
+    }
 }
 
 function passwordMatch(password,passwordConfirm) {
@@ -94,5 +101,15 @@ function passwordMatch(password,passwordConfirm) {
 function isDate(value) {
     if (!Validator.isISO8601(value)) {
         return message.invalidDate;
+    }
+}
+
+/**@param isMobileValid => It is sent by the state. So if it is false it returns the error message
+ * @param value => Not required but it is better to just write it in the function rather than recreating a logic
+ * @return string => message
+ * */
+function isMobile(isMobileValid,value ) {
+    if (isMobileValid !== 'true') {
+        return message.invalidMobile;
     }
 }

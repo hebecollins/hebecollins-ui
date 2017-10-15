@@ -39,9 +39,9 @@ class Home extends React.Component {
 
         return (
             <div>
-                <div className="hebecollins-absolute">
-                    <FlashMessageList/>
-                </div>
+                {/*<div className="hebecollins-absolute">*/}
+                    {/*<FlashMessageList/>*/}
+                {/*</div>*/}
                 <div className="hebecollins-needs-alert">
                     {guestHomePage}
                 </div>

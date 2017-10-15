@@ -1,10 +1,12 @@
 import React from 'react';
 import TextFieldGroup from '../commons/TextFieldGroup'
-import validateInput from "../../../Toolbox/Validation/category/personalDetails";
-import {browserHistory} from 'react-router';
+import {validatePersonalDetails, validateGymDetails} from "../../../Toolbox/Validation/helpers";
+import {connect} from 'react-redux';
 import Address from '../commons/Address';
 import UserDetails from '../commons/PersonalDetails';
 import {errorResponse} from "../../../Toolbox/Helpers/responseHandler";
+import {FormatForm} from "../../dumb/commons/FormatForm"
+import {activateManagerRequest} from "../../../actions/manager/activate"
 
 class Activate extends React.Component {
     constructor(props) {
@@ -15,6 +17,8 @@ class Activate extends React.Component {
             last_name: '',
             dob: '',
             gender: '',
+            password: '',
+            password_confirm: '',
             gym_name: '',
             street_address: '',
             locality: '',
@@ -22,49 +26,41 @@ class Activate extends React.Component {
             pin: '',
             state: '',
             country: '',
-            password: '',
-            password_confirm: '',
             errors: {},
+            isNext: false,
             isLoading: false
         };
 
         this.onChange = this.onChange.bind(this);
         this.onSubmit = this.onSubmit.bind(this);
-        this.onDobUpdate= this.onDobUpdate.bind(this);
+        this.onNext = this.onNext.bind(this);
+        this.onBack = this.onBack.bind(this);
+        this.onDobUpdate = this.onDobUpdate.bind(this);
     }
 
     onChange(e) {
-        console.log(this.state);
         this.setState({[e.target.name]: e.target.value});
     }
 
+    /*For date update, as DateTime library does not have a attribute name*/
     onDobUpdate(dob) {
-            this.state.dob = dob.format("YYYY-MM-DD")
+        this.state.dob = dob.format("YYYY-MM-DD")
     }
 
     isValid() {
-        const {errors, isValid} = validateInput(this.state);
+        const {errors, isValid} = validateGymDetails(this.state);
         if (!isValid) {
             this.setState({errors});
         }
-        console.log(errors);
         return isValid;
     }
 
     onSubmit(e) {
         e.preventDefault();
         if (this.isValid()) {
-            this.setState({errors: {}, isLoading: true});//setting state to empty
-
-            //action call
-            this.props.activateManagerRequest(this.state, this.props.params).then(
-                (res) => {
-                    browserHistory.push('/');
-                    this.props.addFlashMessage({
-                        type: 'success',
-                        text: res.data.msg
-                    })
-                },
+            console.log(this.state);
+            this.setState({errors: {}, isLoading: true});
+            this.props.activateManagerRequest(this.state, this.props.userId).catch(
                 (err) => {
                     const response = errorResponse(err);
                     this.setState({errors: response, isLoading: false})
@@ -73,45 +69,100 @@ class Activate extends React.Component {
         }
     }
 
+    /*==================================================================================*/
+    /** onNext and onBack is for switching between personal detail and gym detail window
+     * IF(isNext === true) personal detail window
+     * ELSE gym detail window
+     * */
+    onNext(e) {
+        e.preventDefault();
+        const {errors, isValid} = validatePersonalDetails(this.state);
+        if (!isValid) {
+            this.setState({errors});
+        }
+        if (isValid) {
+            this.setState({isNext: true})
+        }
+    }
+
+    onBack(e) {
+        e.preventDefault();
+        this.setState({isNext: false})
+    }
+
+    /*===================================================================================*/
+
+    /**For clearing up the errors after 15 seconds
+     * */
+    // componentDidMount() {
+    //     let self = this;
+    //     setTimeout(function () {
+    //         self.setState({errors: {}});
+    //     }, 15000);
+    // }
+    //
+    // componentDidUpdate() {
+    //     let self = this;
+    //     setTimeout(function () {
+    //         self.setState({errors: {}});
+    //     }, 15000);
+    // }
+
+
     render() {
         const {errors} = this.state;
         return (
-            <form onSubmit={this.onSubmit}>
+            <div>
                 <p className="white-center">Fill this form to activate your account bitch!</p>
-                <p className="white-center">Personal Information</p>
+                {!this.state.isNext ? <FormatForm
+                        instruction="Personal Details"
+                        isLoading={this.state.isLoading}
+                        enableImage={false}
+                        submitButton={false}
+                        nextButton={true}
+                        onNextButtonClick={this.onNext}
+                    >
+                        <UserDetails
+                            onChange={this.onChange}
+                            onDobUpdate={this.onDobUpdate}
+                            state={this.state}/>
+                        <br/>
+                    </FormatForm> :
 
-                <UserDetails
-                    onChange={this.onChange}
-                    onDobUpdate={this.onDobUpdate}
-                    state={this.state}/>
-                <br/>
+                    <FormatForm
+                        onSubmit={this.onSubmit}
+                        instruction="Gym Details"
+                        isLoading={this.state.isLoading}
+                        enableImage={false}
+                        backButton={true}
+                        onBackButtonClick={this.onBack}
+                    >
 
-                <p className="white-center">Gym Details</p>
-                <TextFieldGroup
-                    error={errors.gym_name}
-                    label="Gym Name"
-                    onChange={this.onChange}
-                    value={this.state.gym_name}
-                    field="gym_name"
-                />
+                        <p className="white-center">Gym Details</p>
 
-                <Address onChange={this.onChange} state={this.state}/>
+                        <TextFieldGroup
+                            error={errors.gym_name}
+                            label="Gym Name"
+                            onChange={this.onChange}
+                            value={this.state.gym_name}
+                            field="gym_name"/>
 
-                <div className="form-group">
-                    <button disabled={this.state.isLoading}
-                            className="btn btn-group-justified btn-hebecollins btn-lg">
-                        GET STARTED!
-                    </button>
-                </div>
-            </form>
+                        <Address onChange={this.onChange} state={this.state}/>
+                    </FormatForm>
+                }
+            </div>
         );
     }
 }
 
 Activate.propTypes = {
-    // params: React.PropTypes.const.isRequired,
     activateManagerRequest: React.PropTypes.func.isRequired,
-    addFlashMessage: React.PropTypes.func.isRequired
 };
 
-export default Activate;
+function mapStateToProps(state) {
+    return {
+        userId: state.verificationData.userId
+    }
+}
+
+export default connect(mapStateToProps, {activateManagerRequest})(Activate);

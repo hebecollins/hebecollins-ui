@@ -1,10 +1,11 @@
 import React from 'react';
 import TextFieldGroup from '../../dumb/commons/TextFieldGroup'
-import validateInput from "../../../Toolbox/Validation/category/login";
+import {validateEmail} from "../../../Toolbox/Validation/helpers";
 import {connect} from 'react-redux';
 import {errorResponse} from "../../../Toolbox/Helpers/responseHandler";
 import {passwordRecoverRequest} from "../../../actions/commons/authActions"
 import {FormatForm} from "../../dumb/commons/FormatForm"
+import {validate} from "../../../Toolbox/Validation/validator";
 
 
 class PasswordRecover extends React.Component {
@@ -26,7 +27,7 @@ class PasswordRecover extends React.Component {
     }
 
     isValid() {
-        const {errors, isValid} = validateInput(this.state);
+        const {errors, isValid} = validateEmail(this.state);
         if (!isValid) {
             this.setState({errors});
         }

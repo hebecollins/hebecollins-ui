@@ -1,8 +1,6 @@
 import React from 'react';
-import validateInput from "../../../Toolbox/Validation/category/userRegisterForm";
-import {browserHistory} from 'react-router';
+import {validateUserRegistrationFields} from "../../../Toolbox/Validation/helpers";
 import AddUser from './AddUser';
-import {errorResponse} from "../../../Toolbox/Helpers/responseHandler";
 import {addUserToDBAndStore} from "../../../actions/commons/addUser"
 import {connect} from 'react-redux';
 
@@ -32,7 +30,7 @@ class AddUsersInBulk extends React.Component {
     }
 
     isValid() {
-        const {errors, isValid} = validateInput(this.state);
+        const {errors, isValid} = validateUserRegistrationFields(this.state);
         if (!isValid) {
             this.setState({errors});
         }

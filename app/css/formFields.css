@@ -29,6 +29,24 @@
     border-color: #1e1e1e;
 }
 
+.btn-hebecollins-next {
+    background-color: #ea3e0d;
+    float:right;
+    color: black;
+    -webkit-border-radius: 0;
+    -moz-border-radius: 0;
+    border-radius: 0;
+}
+
+.btn-hebecollins-back {
+    background-color: #ea3e0d;
+    float:left;
+    color: black;
+    -webkit-border-radius: 0;
+    -moz-border-radius: 0;
+    border-radius: 0;
+}
+
 /*.btn-hebecollins:active:hover{*/
 /*background-color: #111111;*/
 /*border-color: #000000;*/
@@ -56,3 +74,9 @@
     color: white;
     font-family: "Times New Roman";
 }
+
+/*.select-hebecollins{*/
+    /*background-color:transparent;*/
+    /*font-family: "Times New Roman";*/
+    /*color: white;*/
+/*}*/

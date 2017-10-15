@@ -6,6 +6,7 @@ export const message={
     "notAlpha":"Input should only consist of alphabets",
     "passwordNotMatch":"Password doesn't match",
     "invalidDate":"Not a valid date",
+    "notNumber":"Input should only consist of numbers",
 
     //non-validation errors
     "badConnection":"unable to connect",

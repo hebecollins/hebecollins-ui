@@ -1,6 +1,6 @@
 import React from 'react';
 import TextFieldGroup from '../commons/TextFieldGroup'
-import validateInput from "../../../Toolbox/Validation/category/login";
+import {validateLogin} from "../../../Toolbox/Validation/helpers";
 import {errorResponse} from "../../../Toolbox/Helpers/responseHandler";
 import backendRoutes from 'backendRoutes';
 
@@ -30,12 +30,14 @@ class LoginForm extends React.Component {
     }
 
     isValid() {
-        const {errors, isValid} = validateInput(this.state);
+        const {errors, isValid} = validateLogin(this.state);
         if (!isValid) {
             this.setState({errors});
         }
         return isValid;
     }
+
+
 
     onSubmit(e) {
         e.preventDefault();

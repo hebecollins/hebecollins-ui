@@ -1,7 +1,7 @@
 import React from 'react';
 import {Route, IndexRoute} from 'react-router';
 
-import ActivatePage from './components/dumb/manager/ActivatePage';
+import Activate from './components/dumb/manager/Activate';
 import PasswordRecover from './components/hebecollins/guest/PasswordRecover'
 import PasswordReset from './components/hebecollins/commons/PasswordReset'
 import Monitor from './components/dumb/commons/Monitor';
@@ -25,7 +25,7 @@ export default (
     <div>
         <Route path="/" component={App}>
             <IndexRoute component={authCheck(GuestHome)}/>
-            <Route path="activate/manager" component={ActivatePage}/>
+            <Route path="activate/manager" component={Activate}/>
             <Route path="verify" component={Verify}/>
             <Route path="password/recover" component={authCheck(PasswordRecover)}/>
             <Route path="password/reset" component={PasswordReset}/>

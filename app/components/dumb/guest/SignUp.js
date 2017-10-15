@@ -1,5 +1,5 @@
 import React from 'react';
-import validateInput from "../../../Toolbox/Validation/category/userRegisterForm";
+import {validateUserRegistrationFields} from "../../../Toolbox/Validation/helpers";
 import {browserHistory} from 'react-router';
 import AddUser from '../commons/AddUser';
 import {errorResponse} from "../../../Toolbox/Helpers/responseHandler";
@@ -28,7 +28,7 @@ class SignUpForm extends React.Component {
     }
 
     isValid() {
-        const {errors, isValid} = validateInput(this.state);
+        const {errors, isValid} = validateUserRegistrationFields(this.state);
         if (!isValid) {
             this.setState({errors});
         }

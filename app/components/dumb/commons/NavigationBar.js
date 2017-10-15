@@ -1,4 +1,5 @@
 import React from 'react';
+import FlashMessageList from './../../smart/commons/FlashMessageList';
 
 /** Designs the navigation bar look
  * */
@@ -26,6 +27,9 @@ class NavigationBar extends React.Component {
                             {this.props.children}
                         </div>
                     </div>
+                </div>
+                <div className="hebecollins-absolute">
+                    <FlashMessageList/>
                 </div>
             </div>
         );

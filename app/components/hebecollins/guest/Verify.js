@@ -1,6 +1,6 @@
 import React from 'react';
 import TextFieldGroup from '../../dumb/commons/TextFieldGroup'
-import validateInput from "../../../Toolbox/Validation/category/login";
+import {validateOTP} from "../../../Toolbox/Validation/helpers";
 import {connect} from 'react-redux';
 import {errorResponse} from "../../../Toolbox/Helpers/responseHandler";
 import {FormatForm} from "../../dumb/commons/FormatForm"
@@ -24,8 +24,8 @@ class Verify extends React.Component {
         this.setState({[e.target.name]: e.target.value});
     }
 
-    isValid() {//todo : must be a number
-        const {errors, isValid} = validateInput(this.state);
+    isValid() {
+        const {errors, isValid} = validateOTP(this.state);
         if (!isValid) {
             this.setState({errors});
         }

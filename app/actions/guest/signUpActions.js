@@ -12,13 +12,6 @@ function storeVerificationData(data) {
     }
 }
 
-function deleteVerificationData() {
-    return{
-        type: STORE_VERIFICATION_DATA,
-        userId:""
-    }
-}
-
 export function userSignUpRequest(data) {
     const dataToBeSent={
       "nick_name":data.nick_name,
@@ -42,8 +35,7 @@ export function sendOTP(data,userId) {
     };
     return dispatch => {
         return postForm(dataToBeSent, backendRoutes.verify).then(res => {
-            dispatch(deleteVerificationData());
-            redirect('/manager/activate');
+            redirect('/activate/manager');
         })
     }
 }

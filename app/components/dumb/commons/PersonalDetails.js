@@ -65,8 +65,6 @@ class UserDetails extends React.Component {
                     closeOnSelect={true}
                     viewMode={'days'}
                     timeFormat={false}
-                    // defaultValue="Date of Birth(yyyy-MM-dd)"
-                    // placeholder="some"
                     inputProps={{ placeholder: 'date of birth(yyyy-MM-dd)'}}
                     isValidDate={this.isValidDate}
                     value={dob}
