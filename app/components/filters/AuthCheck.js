@@ -1,9 +1,11 @@
 import React from 'react';
 import {connect} from 'react-redux';
-import permission from 'permission';
 import {addFlashMessage} from "../../actions/commons/flashMessages"
 import {browserHistory} from 'react-router';
-
+import query from 'array-query';
+import {ROUTES} from "../../../config/frontendRoutes";
+import {getPermissionByRoute} from "../../Toolbox/Helpers/routeHandler"
+import {redirectTo, redirectToHome} from "../../Toolbox/Helpers/redirect";
 
 /**This method checks if user is allowed to access a certain route or not based on user type/
  * user types are: ["guest","client","trainer","manager","admin"]
@@ -13,45 +15,39 @@ import {browserHistory} from 'react-router';
 export default function (Component) {
     class Permission extends React.Component {
         componentWillMount() {//gets called just once before first render
-            console.log("componentWillMount");
             const route = this.props.location.pathname;
-            console.log(this.props.location.pathname);
-            console.log(permission[route]);
-            console.log(permission["/"]);
             const {isAuthenticated, user} = this.props;
-
             /** if(notAutheticated AND requires authentication){
-            *           redirect to login page with error message asking to log in
+            *           redirectTo to login page with error message asking to log in
             *   }
              *  if(authenticated but his userType is not allowed){
              *          a forbidden response page
              *  }
              * */
             if (!isAuthenticated) {
-                if (!permission[route].includes('guest')) {
+                if (!getPermissionByRoute(route).includes('guest')) {
                     this.props.addFlashMessage({
                         type: 'error',
                         text: 'You need to login to access this page'
                     });
-                    browserHistory.push('/');
-
+                    redirectToHome();
                 }
             }
             else {
                 const userType = user.user_type;
-                if (!permission[route].includes(userType)) {
+                if (!getPermissionByRoute(route).includes(userType)) {
                     this.props.addFlashMessage({
                         type: 'error',
                         text: 'You already are logged in'
                     });
-                    browserHistory.push('/'+userType);
+                    redirectTo('/'+userType);
                 }
             }
         }
 
         componentWillUpdate(nextProps) {//gets called whenever render updates
             if (!nextProps.isAuthenticated) {
-                browserHistory.push('/');
+                redirectToHome();
             }
         }
 

@@ -2,7 +2,7 @@ import React from 'react';
 import TextFieldGroup from '../commons/TextFieldGroup'
 import {validateLogin} from "../../../Toolbox/Validation/helpers";
 import {errorResponse} from "../../../Toolbox/Helpers/responseHandler";
-import backendRoutes from 'backendRoutes';
+import {getRouteByName} from "../../../Toolbox/Helpers/routeHandler";
 
 require('../../../css/contentBox.css');
 
@@ -91,7 +91,7 @@ class LoginForm extends React.Component {
                 </div>
 
                 <label className="control-label">
-                    <a className="forgot-password" href={backendRoutes.password_recover}>forgot password?</a>
+                    <a className="forgot-password" href={getRouteByName('PASSWORD_RECOVER')}>forgot password?</a>
                 </label>
             </form>
         )

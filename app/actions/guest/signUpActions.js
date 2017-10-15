@@ -1,7 +1,7 @@
 import {postForm, postJSON} from '../../Toolbox/Helpers/requestHandler';
 import backendRoutes from 'backendRoutes';
 import {addFlashMessage} from "../commons/flashMessages"
-import {redirect} from '../../Toolbox/Helpers/redirect';
+import {redirectTo} from '../../Toolbox/Helpers/redirect';
 import {STORE_VERIFICATION_DATA} from "../types";
 
 function storeVerificationData(data) {
@@ -23,7 +23,7 @@ export function userSignUpRequest(data) {
         return postJSON(dataToBeSent, backendRoutes.signup).then(res => {
             console.log(res.data);
             dispatch(storeVerificationData(res.data.data));
-            redirect('/verify');
+            redirectTo('/verify');
         })
     }
 }
@@ -35,7 +35,7 @@ export function sendOTP(data,userId) {
     };
     return dispatch => {
         return postForm(dataToBeSent, backendRoutes.verify).then(res => {
-            redirect('/activate/manager');
+            redirectTo('/activate/manager');
         })
     }
 }

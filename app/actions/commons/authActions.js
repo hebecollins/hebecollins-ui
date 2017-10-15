@@ -3,7 +3,7 @@ import backendRoutes from 'backendRoutes';
 import setAuthToken from '../../Toolbox/Auth/SetAuthToken'
 import {SET_CURRENT_USER} from "../types";
 import {addFlashMessage} from "./flashMessages";
-import {redirect} from '../../Toolbox/Helpers/redirect'
+import {redirectTo} from '../../Toolbox/Helpers/redirect'
 
 export function setCurrentUser(user) {
     return {
@@ -26,7 +26,7 @@ export function logoutRequest() {
             }
         ).catch(err=>{
             dispatch(setCurrentUser({}));
-            redirect('/')
+            redirectTo('/')
         }
     )
     }
@@ -45,7 +45,7 @@ export function loginRequest(data) {
                 localStorage.setItem('user', JSON.stringify(user));
                 setAuthToken(user.token);
                 dispatch(setCurrentUser(user));
-                redirect('/' + user.user_type);
+                redirectTo('/' + user.user_type);
             }
         );
     }
@@ -58,7 +58,7 @@ export function passwordRecoverRequest(data) {
 
     return dispatch => {
         return postForm(dataToBePosted, backendRoutes.password_recover).then(res => {
-                redirect('/');
+                redirectTo('/');
                 dispatch(addFlashMessage({
                     type: 'success',
                     text: res.data.msg
@@ -76,7 +76,7 @@ export function passwordResetRequest(data, params) {
     };
     return dispatch => {
         return postForm(dataToBePosted, backendRoutes.password_reset, params).then(res => {
-                redirect('/');
+                redirectTo('/');
                 dispatch(addFlashMessage({
                     type: 'success',
                     text: res.data.msg
@@ -95,7 +95,7 @@ export function passwordChangeRequest(data) {
     };
     return dispatch => {
         return postForm(dataToBePosted, backendRoutes.password_change).then(res => {
-                redirect('/');
+                redirectTo('/');
                 dispatch(addFlashMessage({
                     type: 'success',
                     text: res.data.msg
