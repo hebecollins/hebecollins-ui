@@ -1,7 +1,7 @@
 import {postForm, postJSON} from '../../Toolbox/Helpers/requestHandler';
 import backendRoutes from 'backendRoutes';
 import {addFlashMessage} from "../commons/flashMessages"
-import {redirect} from '../commons/redirect';
+import {redirect} from '../../Toolbox/Helpers/redirect';
 import {STORE_VERIFICATION_DATA} from "../types";
 
 function storeVerificationData(data) {

@@ -19,10 +19,7 @@ export function isRequired(data, optionalFields=[]){
             }
         }
     }
-    return {
-        errors,
-        isValid: isEmpty(errors)
-    }
+    return errors;
 }
 
 /**Purpose => to determine whether a field is alpha or not
@@ -32,7 +29,6 @@ export function isRequired(data, optionalFields=[]){
  * */
 export function isAlpha(data, optionalFields=[]){
 
-    console.log(optionalFields);
     let errors={};
     for (let key in data) {
         if (data.hasOwnProperty(key)) {
@@ -43,8 +39,5 @@ export function isAlpha(data, optionalFields=[]){
             }
         }
     }
-    return {
-        errors,
-        isValid: isEmpty(errors)
-    }
+    return errors;
 }

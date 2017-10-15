@@ -1,6 +1,6 @@
 import React from 'react';
 import TextFieldGroup from '../commons/TextFieldGroup'
-import validateInput from "../../../Toolbox/Validation/category/userActivateForm";
+import validateInput from "../../../Toolbox/Validation/category/personalDetails";
 import {browserHistory} from 'react-router';
 import Address from '../commons/Address';
 import UserDetails from '../commons/PersonalDetails';

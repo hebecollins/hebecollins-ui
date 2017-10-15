@@ -4,7 +4,7 @@ import setAuthToken from '../../Toolbox/Auth/SetAuthToken'
 import {SET_CURRENT_USER} from "../types";
 import {addFlashMessage} from "./flashMessages";
 import {browserHistory} from 'react-router';
-import {redirect} from './redirect'
+import {redirect} from '../../Toolbox/Helpers/redirect'
 
 export function setCurrentUser(user) {
     return {
