@@ -23,23 +23,23 @@ export function validatePersonalDetails(data) {
  *  @return object => {object,bool} array of errors and isValid
  * */
 export function validateGymDetails(data) {
-    const {gym_name,street_address, locality, district, pin, state, country} = data;
-    const {errors,isValid}=validate({
-        gym_name:[gym_name,'isRequired','isAlpha','max(15)','min(3)'],
+    const {gym_name, street_address, locality, district, pin, state, country} = data;
+    const {errors, isValid} = validate({
+        gym_name: [gym_name, 'isRequired', 'isAlpha', 'max(15)', 'min(3)'],
         street_address: [street_address, 'max(40)'],
         locality: [locality, 'isRequired', 'isAlpha', 'max(30)', 'min(2)'],
-        district:[district,'isRequired','isAlpha', 'max(30)', 'min(2)'],
-        pin:[pin,'isRequired','isNumber','min(4)','max(8)'],
-        state: [state, 'isRequired','isAlpha', 'max(30)', 'min(2)'],
-        country: [country,'isRequired','isAlpha', 'max(30)', 'min(2)'],
+        district: [district, 'isRequired', 'isAlpha', 'max(30)', 'min(2)'],
+        pin: [pin, 'isRequired', 'isNumber', 'min(4)', 'max(8)'],
+        state: [state, 'isRequired', 'isAlpha', 'max(30)', 'min(2)'],
+        country: [country, 'isRequired', 'isAlpha', 'max(30)', 'min(2)'],
     });
-    return {errors,isValid}
+    return {errors, isValid}
 }
 
 export function validateOTP(data) {
     const {otp} = data;
     const {errors, isValid} = validate({
-        otp: [otp, 'isRequired','min(5)','max(6)'],
+        otp: [otp, 'isRequired', 'min(5)', 'max(6)'],
     });
     return {
         errors,
@@ -90,8 +90,22 @@ export function validatePassword(data) {
     const {password, password_confirm} = data;
     const {errors, isValid} = validate({
         password: [password, 'isRequired', 'min(6)', 'max(25)'],
-        password_confirm: [password_confirm, 'isRequired', 'min(6)', 'max(25)', `passwordMatch('${password}')`],
+        password_confirm: [password_confirm, 'isRequired', `passwordMatch('${password}')`],
 
+    });
+    return {
+        errors,
+        isValid
+    }
+}
+
+
+export function validateChangedPassword(data) {
+    const {old_password, new_password, confirm_new_password} = data;
+    const {errors, isValid} = validate({
+        old_password: [old_password, 'isRequired'],
+        new_password: [new_password, 'isRequired', 'min(6)', 'max(25)',`shouldNotMatch('${old_password}')`],
+        confirm_new_password: [confirm_new_password, 'isRequired',`passwordMatch('${new_password}')`],
     });
     return {
         errors,

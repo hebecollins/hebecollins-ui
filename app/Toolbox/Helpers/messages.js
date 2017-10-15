@@ -7,6 +7,7 @@ export const message={
     "passwordNotMatch":"Password doesn't match",
     "invalidDate":"Not a valid date",
     "notNumber":"Input should only consist of numbers",
+    "passwordIsSame":"new password is same as old. Please choose a different password.",
 
     //non-validation errors
     "badConnection":"unable to connect",

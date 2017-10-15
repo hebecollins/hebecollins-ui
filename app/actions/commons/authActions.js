@@ -3,7 +3,6 @@ import backendRoutes from 'backendRoutes';
 import setAuthToken from '../../Toolbox/Auth/SetAuthToken'
 import {SET_CURRENT_USER} from "../types";
 import {addFlashMessage} from "./flashMessages";
-import {browserHistory} from 'react-router';
 import {redirect} from '../../Toolbox/Helpers/redirect'
 
 export function setCurrentUser(user) {
@@ -25,7 +24,11 @@ export function logoutRequest() {
                 }));
                 dispatch(setCurrentUser({}));
             }
-        )
+        ).catch(err=>{
+            dispatch(setCurrentUser({}));
+            redirect('/')
+        }
+    )
     }
 }
 
@@ -73,7 +76,26 @@ export function passwordResetRequest(data, params) {
     };
     return dispatch => {
         return postForm(dataToBePosted, backendRoutes.password_reset, params).then(res => {
-                browserHistory.push('/');
+                redirect('/');
+                dispatch(addFlashMessage({
+                    type: 'success',
+                    text: res.data.msg
+                }))
+            }
+        );
+    }
+}
+
+
+export function passwordChangeRequest(data) {
+    const dataToBePosted = {
+        "old_password": data.old_password,
+        "new_password": data.new_password,
+        "confirm_new_password": data.confirm_new_password
+    };
+    return dispatch => {
+        return postForm(dataToBePosted, backendRoutes.password_change).then(res => {
+                redirect('/');
                 dispatch(addFlashMessage({
                     type: 'success',
                     text: res.data.msg

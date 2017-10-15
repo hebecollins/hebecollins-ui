@@ -1,9 +1,9 @@
 import React from 'react';
-import TextFieldGroup from '../commons/TextFieldGroup'
+import TextFieldGroup from '../../dumb/commons/TextFieldGroup'
 import {validatePersonalDetails, validateGymDetails} from "../../../Toolbox/Validation/helpers";
 import {connect} from 'react-redux';
-import Address from '../commons/Address';
-import UserDetails from '../commons/PersonalDetails';
+import Address from '../../dumb/commons/Address';
+import UserDetails from '../../dumb/commons/PersonalDetails';
 import {errorResponse} from "../../../Toolbox/Helpers/responseHandler";
 import {FormatForm} from "../../dumb/commons/FormatForm"
 import {activateManagerRequest} from "../../../actions/manager/activate"

@@ -27,7 +27,6 @@ export function postJSON(data,route,params={}) {
 }
 
 export function postForm(data,route,params={}) {
-    console.log("hello");
     const authOptions = {
         method: 'POST',
         url: route,

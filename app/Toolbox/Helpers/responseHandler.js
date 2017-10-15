@@ -4,6 +4,7 @@ import {store} from '../../index'
 
 export function errorResponse(err) {
 
+    console.log(err);
     if (typeof err.response === 'undefined') {
             store.dispatch(addFlashMessage({
                 type: 'error',

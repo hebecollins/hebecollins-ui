@@ -2,6 +2,7 @@ import {postJSON} from '../../Toolbox/Helpers/requestHandler';
 import backendRoutes from 'backendRoutes';
 import {redirect} from "../../Toolbox/Helpers/redirect";
 import {STORE_VERIFICATION_DATA} from "../types"
+import {addFlashMessage} from "../commons/flashMessages"
 
 export function activateManagerRequest(data,userId) {
     const dataToBeSent ={
@@ -27,10 +28,10 @@ export function activateManagerRequest(data,userId) {
     return dispatch => {
         return postJSON(dataToBeSent, backendRoutes.activate.manager,param).then(res=>{
             redirect('/');
-            this.props.addFlashMessage({
+            dispatch(addFlashMessage({
                 type: 'success',
                 text: res.data.msg
-            });
+            }));
             dispatch(deleteVerificationData());
         });
     }

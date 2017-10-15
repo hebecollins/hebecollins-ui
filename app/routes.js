@@ -1,7 +1,7 @@
 import React from 'react';
 import {Route, IndexRoute} from 'react-router';
 
-import Activate from './components/dumb/manager/Activate';
+import Activate from './components/hebecollins/manager/Activate';
 import PasswordRecover from './components/hebecollins/guest/PasswordRecover'
 import PasswordReset from './components/hebecollins/commons/PasswordReset'
 import Monitor from './components/dumb/commons/Monitor';
@@ -20,6 +20,7 @@ import ManagerApp from './components/Application/ManagerApp';
 import ManagerHome from './components/hebecollins/manager/ManagerHome'
 import ManagerTest from './components/hebecollins/manager/ManagerTest'
 import Verify from "./components/hebecollins/guest/Verify";
+import PasswordChange from "./components/hebecollins/commons/PasswordChange";
 
 export default (
     <div>
@@ -34,16 +35,19 @@ export default (
         /*Client-only routes*/
         <Route path="/client" component={authCheck(ClientApp)}>
             <IndexRoute component={ClientHome}/>
+            <Route path="password/change" component={authCheck(PasswordChange)}/>
         </Route>
 
         /*Trainer-only routes*/
         <Route path="/trainer" component={authCheck(TrainerApp)}>
             <IndexRoute component={TrainerHome}/>
+            <Route path="password/change" component={authCheck(PasswordChange)}/>
         </Route>
 
         /*Manager-only routes*/
         <Route path="/manager" component={authCheck(ManagerApp)}>
             <IndexRoute component={ManagerHome}/>
+            <Route path="password/change" component={authCheck(PasswordChange)}/>
             <Route path="add/trainer" component={Monitor}/>
             <Route path="test/test" component={ManagerTest}/>
         </Route>

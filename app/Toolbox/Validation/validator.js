@@ -98,6 +98,13 @@ function passwordMatch(password,passwordConfirm) {
     }
 }
 
+
+function shouldNotMatch(oldPassword,newPassword) {
+    if (Validator.equals(oldPassword,newPassword)) {
+        return message.passwordIsSame;
+    }
+}
+
 function isDate(value) {
     if (!Validator.isISO8601(value)) {
         return message.invalidDate;

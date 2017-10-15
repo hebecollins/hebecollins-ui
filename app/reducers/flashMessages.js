@@ -22,7 +22,7 @@ export default (state = [], action = {}) => {
                     ...state.slice(index + 1)
                 ]
             }
-            return index;
+            return state;
 
         default:
             return state;
