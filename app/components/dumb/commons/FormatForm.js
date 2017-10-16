@@ -1,5 +1,6 @@
 import React from 'react';
 import {IMG_URL_OF} from "../../../../config/imageUrl";
+import SingleScreen from "./frames/SingleScreen";
 
 /**Defines a Box on a page in which a styling is set. Only things required to pass is the fields
  * and the onSubmit function
@@ -39,34 +40,28 @@ export const FormatForm = (props) => {
         </button>;
 
     return (
-        <div className="row">
-            <div className="col-lg-offset-3 col-lg-6 col-md-offset-3 col-md-6">
-                <div className="hebecollins-content-child">
-                    {props.enableImage ?
-                        <img className="logo-extended" src={IMG_URL_OF.LOGO_EXTENDED}/>
-                        : <div></div>
+        <SingleScreen>
+            {props.enableImage ?
+                <img className="logo-extended" src={IMG_URL_OF.LOGO_EXTENDED}/>
+                : <div></div>
+            }
+            <form className="form-hebecollins" onSubmit={props.onSubmit}>
+                <p className="white-center">{props.instruction}</p>
+                {props.children}
+                <div className="form-group">
+                    {props.submitButton ?
+                        submitBtn : <div></div>
                     }
-                    <form className="form-hebecollins" onSubmit={props.onSubmit}>
-                        <p className="white-center">{props.instruction}</p>
-                        {props.children}
-                        <div className="form-group">
-                            {props.submitButton ?
-                                submitBtn : <div></div>
-                            }
-                        </div>
-                    </form>
-                    {props.nextButton ?
-                        nextBtn : <div></div>
-                    }
-
-                    {props.backButton ?
-                        backBtn : <div></div>
-                    }
-
-
                 </div>
-            </div>
-        </div>
+            </form>
+            {props.nextButton ?
+                nextBtn : <div></div>
+            }
+
+            {props.backButton ?
+                backBtn : <div></div>
+            }
+        </SingleScreen>
     )
 };
 

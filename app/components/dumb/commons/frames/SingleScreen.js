@@ -1,6 +1,6 @@
 import React from 'react';
 
-class OneScreen extends React.Component {
+class SingleScreen extends React.Component {
     render() {
         return (
             <div className="row">
@@ -14,4 +14,4 @@ class OneScreen extends React.Component {
     }
 }
 
-export default OneScreen;
+export default SingleScreen;

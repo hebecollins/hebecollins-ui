@@ -27,7 +27,7 @@ export default (
 
             <Route path={getRouteByName('ACTIVATE_MANAGER')} component={authCheck(Activate)}/>
             <Route path={getRouteByName('VERIFY')} component={authCheck(Verify)}/>
-            <Route path={getRouteByName('PASSWORD_RECOVER')} component={authCheck(PasswordRecover)}/>
+            <Route path={getRouteByName('PASSWORD_RECOVER')} component={PasswordRecover}/>
             <Route path={getRouteByName('PASSWORD_RESET')} component={authCheck(PasswordReset)}/>
             <Route path={getRouteByName('PASSWORD_CHANGE')} component={authCheck(PasswordChange)}/>
             <Route path={getRouteByName('ADD_TRAINER')} component={authCheck(Monitor)}/>
