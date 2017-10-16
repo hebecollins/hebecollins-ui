@@ -9,9 +9,21 @@ img {
     padding: 3px;
 }
 
+/*for margin between logo and left end*/
+.container-fluid>.navbar-collapse, .container-fluid>.navbar-header, .container>.navbar-collapse, .container>.navbar-header {
+    margin-left:-10px
+}
+
+/*menu icon for small screens*/
+.navbar-toggle{
+    margin-right: 5%;
+}
+
+
 .logo-extended{
     width: 100%;
     float: left;
     margin: 3px;
     padding: 3px;
 }
+

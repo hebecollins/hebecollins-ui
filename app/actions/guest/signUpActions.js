@@ -1,8 +1,7 @@
 import {postForm, postJSON} from '../../Toolbox/Helpers/requestHandler';
-import backendRoutes from 'backendRoutes';
-import {addFlashMessage} from "../commons/flashMessages"
 import {redirectTo} from '../../Toolbox/Helpers/redirect';
 import {STORE_VERIFICATION_DATA} from "../types";
+import {BACKEND_ROUTES} from "../../../config/backendRoutes";
 
 function storeVerificationData(data) {
     console.log(data);
@@ -20,7 +19,7 @@ export function userSignUpRequest(data) {
       "country_code":data.country_code
     };
     return dispatch => {
-        return postJSON(dataToBeSent, backendRoutes.signup).then(res => {
+        return postJSON(dataToBeSent, BACKEND_ROUTES.SIGNUP).then(res => {
             console.log(res.data);
             dispatch(storeVerificationData(res.data.data));
             redirectTo('/verify');
@@ -34,7 +33,7 @@ export function sendOTP(data,userId) {
         "user_id":userId
     };
     return dispatch => {
-        return postForm(dataToBeSent, backendRoutes.verify).then(res => {
+        return postForm(dataToBeSent, BACKEND_ROUTES.VERIFY).then(res => {
             redirectTo('/activate/manager');
         })
     }

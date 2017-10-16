@@ -1,8 +1,8 @@
 import {postJSON} from '../../Toolbox/Helpers/requestHandler';
-import backendRoutes from 'backendRoutes';
 import {redirectTo} from "../../Toolbox/Helpers/redirect";
 import {STORE_VERIFICATION_DATA} from "../types"
 import {addFlashMessage} from "../commons/flashMessages"
+import {BACKEND_ROUTES} from "../../../config/backendRoutes";
 
 export function activateManagerRequest(data,userId) {
     const dataToBeSent ={
@@ -26,7 +26,7 @@ export function activateManagerRequest(data,userId) {
     };
 
     return dispatch => {
-        return postJSON(dataToBeSent, backendRoutes.activate.manager,param).then(res=>{
+        return postJSON(dataToBeSent, BACKEND_ROUTES.ACTIVATE.MANAGER, param).then(res=>{
             redirectTo('/');
             dispatch(addFlashMessage({
                 type: 'success',

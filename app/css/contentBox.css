@@ -1,39 +1,64 @@
-/*
-    hebecollins color 1- #ea3e0d dark orange
-    hebecollins color 2- #e67817 light orange
-    hebecollins color 3- #1e1e1e dark grey
-*/
+:root{
+    --dark-orange: #ea3e0d;
+    --light-orange: #e67817;
+    --dark-grey: #1e1e1e;
+}
+#app{
+    background-color: black;
+}
+
+@media (max-width: 768px) {
+    #page{
+        background-image: url("http://dev.hebecollins.com/images/guest_home_mobile.jpg");
+        background-size: cover;
+        background-repeat: no-repeat;
+        background-attachment: fixed;
+        height: 100%;
+        top: 0;
+        left: 0;
+        display: inline-block;
+        width: 100%;
+    }}
+
+@media (min-width: 768px) {
+    #page{
+        background-image: url("http://dev.hebecollins.com/images/guest_home.jpg");
+        /*display: inline-block;*/
+        /*height: 100vh;*/
+        left: 0;
+        top: 0;
+        bottom:0;
+        height: 100%;
+        width: 100%;
+        background-size: cover;
+        background-repeat: no-repeat;
+        background-attachment: fixed;
+    }
+}
+
+#flash-message{
+    position: relative;
+    top:65px;
+}
+
+#content{
+    padding:5% 0 5% 0;
+}
+
+.content-child-two-screen{
+
+}
 
 .navbar {
-    position: absolute;
+    position: fixed;
     left: 0;
     right: 0;
+    top: 0;
     z-index: 99;
     background-color: black;
-    border-bottom-style: solid;
-    border-bottom-color: #e67817; /*hebecollins-theme-color-2*/
+    border-width: 2px;
+    border-bottom-color: var(--light-orange); /*hebecollins-theme-color-2*/
 }
-
-.hebecollins-home {
-    background-image: url("../../images/home2.jpg");
-    display: inline-block;
-    /*top: 0; right: 0; bottom: 0; left: 0;*/
-    /*height: 100vh;*/
-    /*width: 100vw;*/
-    top: 0;
-    left: 0;
-    height: 100%;
-    width: 100%;
-    /*min-width: 100%;*/
-    /*min-height: 100%;*/
-    /*object-fit: cover;*/
-    /*justify-content: center;*/
-    background-size:     cover;                      /* <------ */
-    background-repeat:   no-repeat;
-    background-attachment: fixed;
-    background-position: center center;
-}
-
 
 .row {
     display: flex; /* equal height of the children */
@@ -43,11 +68,6 @@
     padding-top: 6em;
     padding-bottom: 10em;
     min-height: 100%;
-}
-
-.container-fluid {
-    position: relative;
-    align-content: center;
 }
 
 .hebecollins-content-child {
@@ -62,16 +82,16 @@
     padding: 30px 30px 50px 30px;
 }
 
-.col {
-    padding: 0 9% 0 9%;
-}
+/*.col {*/
+    /*padding: 0 9% 0 9%;*/
+/*}*/
 
-.hebecollins-absolute {
-    position: absolute;
-    top: 60px;
-    width: 100%;
-    left: 10%;
-}
+/*.hebecollins-absolute {*/
+    /*position: absolute;*/
+    /*top: 60px;*/
+    /*width: 100%;*/
+    /*left: 10%;*/
+/*}*/
 
 .hebecollins-needs-alert{
     position: relative;
@@ -98,4 +118,9 @@
     background-color: #ea3e0d;
     border-radius: 10px;
     -webkit-box-shadow: inset 0 0 6px rgba(0, 0, 0, 0.5);
+}
+
+.format-form{
+    padding-left: 5%;
+    padding-right: 5%;
 }

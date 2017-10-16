@@ -2,6 +2,7 @@ import React from 'react';
 import {connect} from 'react-redux';
 import {logoutRequest} from '../../../actions/commons/authActions'
 import NavigationBar from "../commons/NavigationBar";
+import {getRouteByName} from "../../../Toolbox/Helpers/routeHandler";
 
 class ManagerNavigation extends React.Component {
 
@@ -34,7 +35,7 @@ class ManagerNavigation extends React.Component {
                     <a href="/" className="dropdown-toggle" data-toggle="dropdown">Account<b className="caret"></b></a>
                     <ul className="dropdown-menu">
                         <li><a href="#">qfit, sashthamangalam</a></li>
-                        <li><a href="manager/password/change">Password Change</a></li>
+                        <li><a href={getRouteByName('PASSWORD_CHANGE')}>Password Change</a></li>
                         <li><a href="#" onClick={this.logout.bind(this)}>Logout</a></li>
                     </ul>
                 </li>

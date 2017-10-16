@@ -1,9 +1,9 @@
 import {postForm, get} from '../../Toolbox/Helpers/requestHandler';
-import backendRoutes from 'backendRoutes';
 import setAuthToken from '../../Toolbox/Auth/SetAuthToken'
 import {SET_CURRENT_USER} from "../types";
 import {addFlashMessage} from "./flashMessages";
-import {redirectTo} from '../../Toolbox/Helpers/redirect'
+import {redirectTo, redirectToHome} from '../../Toolbox/Helpers/redirect'
+import {BACKEND_ROUTES} from "../../../config/backendRoutes";
 
 export function setCurrentUser(user) {
     return {
@@ -14,8 +14,7 @@ export function setCurrentUser(user) {
 
 export function logoutRequest() {
     return dispatch => {
-        return get(backendRoutes.logout).then(res => {
-                console.log(res.data);
+        return get(BACKEND_ROUTES.LOGOUT).then(res => {
                 localStorage.removeItem('user');
                 setAuthToken(false);
                 dispatch(addFlashMessage({
@@ -24,9 +23,9 @@ export function logoutRequest() {
                 }));
                 dispatch(setCurrentUser({}));
             }
-        ).catch(err=>{
+        ).catch( err=>{
             dispatch(setCurrentUser({}));
-            redirectTo('/')
+            redirectToHome();
         }
     )
     }
@@ -40,7 +39,7 @@ export function loginRequest(data) {
     };
 
     return dispatch => {
-        return postForm(dataToBePosted, backendRoutes.login).then(res => {
+        return postForm(dataToBePosted, BACKEND_ROUTES.LOGIN).then(res => {
                 const user = res.data.data;
                 localStorage.setItem('user', JSON.stringify(user));
                 setAuthToken(user.token);
@@ -57,7 +56,7 @@ export function passwordRecoverRequest(data) {
     };
 
     return dispatch => {
-        return postForm(dataToBePosted, backendRoutes.password_recover).then(res => {
+        return postForm(dataToBePosted, BACKEND_ROUTES.PASSWORD.RECOVER).then(res => {
                 redirectTo('/');
                 dispatch(addFlashMessage({
                     type: 'success',
@@ -75,8 +74,8 @@ export function passwordResetRequest(data, params) {
         "password_confirm": data.password_confirm
     };
     return dispatch => {
-        return postForm(dataToBePosted, backendRoutes.password_reset, params).then(res => {
-                redirectTo('/');
+        return postForm(dataToBePosted, BACKEND_ROUTES.PASSWORD.RESET, params).then(res => {
+                redirectToHome();
                 dispatch(addFlashMessage({
                     type: 'success',
                     text: res.data.msg
@@ -94,7 +93,7 @@ export function passwordChangeRequest(data) {
         "confirm_new_password": data.confirm_new_password
     };
     return dispatch => {
-        return postForm(dataToBePosted, backendRoutes.password_change).then(res => {
+        return postForm(dataToBePosted, BACKEND_ROUTES.PASSWORD.CHANGE).then(res => {
                 redirectTo('/');
                 dispatch(addFlashMessage({
                     type: 'success',

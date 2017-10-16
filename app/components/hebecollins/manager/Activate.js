@@ -113,7 +113,6 @@ class Activate extends React.Component {
         const {errors} = this.state;
         return (
             <div>
-                <p className="white-center">Fill this form to activate your account bitch!</p>
                 {!this.state.isNext ? <FormatForm
                         instruction="Personal Details"
                         isLoading={this.state.isLoading}
@@ -137,8 +136,6 @@ class Activate extends React.Component {
                         backButton={true}
                         onBackButtonClick={this.onBack}
                     >
-
-                        <p className="white-center">Gym Details</p>
 
                         <TextFieldGroup
                             error={errors.gym_name}

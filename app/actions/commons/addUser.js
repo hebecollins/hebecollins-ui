@@ -1,8 +1,5 @@
-import {postJSON} from '../../Toolbox/Helpers/requestHandler';
-import backendRoutes from 'backendRoutes';
 import {ADD_CLIENTS, ADD_TRAINERS} from "../types";
-import {store} from "../../index"
-import {browserHistory} from 'react-router';
+import {redirectToHome} from "../../Toolbox/Helpers/redirect";
 
 function addTrainerToRedux(data) {
     console.log("hello");
@@ -34,7 +31,7 @@ export function addUserToDBAndStore(user, userType, route) {
         // console.log(res.data.msg);
         dispatch(addUserToRedux(userType, userData));
         if (user.isSubmitted === true){
-            browserHistory.push('/');
+            redirectToHome();
         }
     }
 }

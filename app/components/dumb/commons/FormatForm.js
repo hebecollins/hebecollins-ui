@@ -1,4 +1,5 @@
 import React from 'react';
+import {IMG_URL_OF} from "../../../../config/imageUrl";
 
 /**Defines a Box on a page in which a styling is set. Only things required to pass is the fields
  * and the onSubmit function
@@ -38,11 +39,11 @@ export const FormatForm = (props) => {
         </button>;
 
     return (
-        <div className="passwordRecover">
+        <div className="row">
             <div className="col-lg-offset-3 col-lg-6 col-md-offset-3 col-md-6">
                 <div className="hebecollins-content-child">
                     {props.enableImage ?
-                        <img className="logo-extended" src={require('../../../../images/HC_logo_extended.jpg')}/>
+                        <img className="logo-extended" src={IMG_URL_OF.LOGO_EXTENDED}/>
                         : <div></div>
                     }
                     <form className="form-hebecollins" onSubmit={props.onSubmit}>

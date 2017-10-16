@@ -77,9 +77,5 @@ module.exports = {
     },
     resolve: {
         extensions: ['', '.js']
-    },
-    externals: {
-        backendRoutes: JSON.stringify(require('./config/backendRoutes.json')),
-        permission: JSON.stringify(require('./config/permission.json')),
-    },
+    }
 };
