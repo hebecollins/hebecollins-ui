@@ -19,17 +19,17 @@ import SingleScreen from "./frames/SingleScreen";
 export const FormatForm = (props) => {
     const nextBtn =
         <button disabled={props.isLoading} onClick={props.onNextButtonClick}
-                className="btn btn-hebecollins-next btn-lg">
+                className="btn btn-group-justified btn-hebecollins btn-lg">
             Next
-            <span className="glyphicon glyphicon-chevron-right"
-                  aria-hidden="true"> </span>
+            <span className="glyphicon glyphicon-chevron-right"> </span>
+            <span className="glyphicon glyphicon-chevron-right"> </span>
         </button>;
 
     const backBtn =
         <button disabled={props.isLoading} onClick={props.onBackButtonClick}
-                className="btn btn-hebecollins-back btn-lg">
-                                            <span className="glyphicon glyphicon-chevron-left"
-                                                  aria-hidden="true"> </span>
+                className="btn btn-group-justified btn-hebecollins btn-lg">
+            <span className="glyphicon glyphicon-chevron-left"> </span>
+            <span className="glyphicon glyphicon-chevron-left"> </span>
             Back
         </button>;
 
@@ -41,6 +41,7 @@ export const FormatForm = (props) => {
 
     return (
         <SingleScreen>
+
             {props.enableImage ?
                 <img className="logo-extended" src={IMG_URL_OF.LOGO_EXTENDED}/>
                 : <div></div>
@@ -48,16 +49,15 @@ export const FormatForm = (props) => {
             <form className="form-hebecollins" onSubmit={props.onSubmit}>
                 <p className="white-center">{props.instruction}</p>
                 {props.children}
-                <div className="form-group">
+                {/*<div className="form-group">*/}
                     {props.submitButton ?
-                        submitBtn : <div></div>
+                        submitBtn : <p></p>
                     }
-                </div>
+                {/*</div>*/}
             </form>
             {props.nextButton ?
                 nextBtn : <div></div>
             }
-
             {props.backButton ?
                 backBtn : <div></div>
             }

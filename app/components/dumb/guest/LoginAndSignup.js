@@ -29,34 +29,38 @@ class LoginAndSignup extends React.Component {
     }
 
     render() {
-        const {userSignUpRequest, addFlashMessage, loginRequest}=this.props;
+        const {userSignUpRequest, addFlashMessage, loginRequest} = this.props;
         return (
-            <div>
-                <div className="btn-group btn-group-justified">
-                    <a className="btn btn-hebecollins-reverse btn-lg"
-                       name="login" onClick={this.onClick}
-                       disabled={this.state.loginFormDisabled}>Login</a>
-                    <a className="btn btn-hebecollins-reverse btn-lg"
-                       name="signup" onClick={this.onClick}
-                       disabled={this.state.signupFormDisabled}>Signup</a>
-                </div>
-                <br/>
-                <div>
-                    {
-                        this.state.loginFormDisabled ?
-                        <Login
-                            loginRequest={loginRequest}/> :
-                        <SignUp
-                            userSignUpRequest={userSignUpRequest}
-                            addFlashMessage={addFlashMessage}/>
-                    }
+            <div className="row">
+                <div className="col col-lg-offset-3">
+                    <div className="login-signup">
+                        <div className="btn-group btn-group-justified">
+                            <a className="btn btn-hebecollins-reverse btn-lg"
+                               name="login" onClick={this.onClick}
+                               disabled={this.state.loginFormDisabled}>Login</a>
+                            <a className="btn btn-hebecollins-reverse btn-lg"
+                               name="signup" onClick={this.onClick}
+                               disabled={this.state.signupFormDisabled}>Signup</a>
+                        </div>
+                        <br/>
+                        <div>
+                            {
+                                this.state.loginFormDisabled ?
+                                    <Login
+                                        loginRequest={loginRequest}/> :
+                                    <SignUp
+                                        userSignUpRequest={userSignUpRequest}
+                                        addFlashMessage={addFlashMessage}/>
+                            }
+                        </div>
+                    </div>
                 </div>
             </div>
         )
     }
 }
 
-LoginAndSignup.propTypes={
+LoginAndSignup.propTypes = {
     userSignUpRequest: React.PropTypes.func.isRequired,
     addFlashMessage: React.PropTypes.func.isRequired,
     loginRequest: React.PropTypes.func.isRequired

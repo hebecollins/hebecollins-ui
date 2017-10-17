@@ -24,3 +24,12 @@
     text-align: center;
     font-size: 25px;
 }
+
+.white-fade{
+    text-align: center  ;
+    opacity: 0.40;
+}
+
+#horizontal-line{
+    opacity: 0.40;
+}

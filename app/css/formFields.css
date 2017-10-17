@@ -75,8 +75,10 @@
     font-family: "Times New Roman";
 }
 
-/*.select-hebecollins{*/
-    /*background-color:transparent;*/
-    /*font-family: "Times New Roman";*/
-    /*color: white;*/
-/*}*/
+.form-group{
+    margin-top: 25px;
+}
+
+.help-block{
+    /*position: absolute;*/
+}

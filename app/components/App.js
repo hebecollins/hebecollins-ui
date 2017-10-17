@@ -1,6 +1,7 @@
 import React from 'react';
 import Navigation from './smart/commons/Navigation'
 import FlashMessageList from './smart/commons/FlashMessageList';
+import Footer from "./dumb/commons/Footer";
 
 require('../css/alerts.css');
 require('../css/text.css');
@@ -22,6 +23,7 @@ class App extends React.Component {
                     {this.props.children}
                 </div>
                 <div id="footer">
+                    <Footer/>
                 </div>
             </div>
         );
