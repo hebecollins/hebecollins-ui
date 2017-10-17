@@ -37,24 +37,35 @@
 }
 
 #flash-message{
-    position: relative;
-    top:65px;
+    position: absolute;
+    top:62px;
+    min-width: 100%;
+    min-height: 60px;
+    z-index: 98;
 }
 
 #content{
-    padding:5% 0 5% 0;
+    position: relative;
+    padding:6% 0 0 0;
+    margin-top:3% ;
+}
+
+#footer{
+    min-width: 100%;
+    min-height: 100px;
 }
 
 .content-child-two-screen{
-    padding: 7%;
+    padding: 0 7% 7% 7%;
 }
 
 .content-child-one-screen{
-    padding: 7%;
+    padding: 0 7% 7% 7%;
 }
 
 .navbar {
     position: fixed;
+    margin-bottom: 0;
     left: 0;
     right: 0;
     top: 0;
@@ -89,18 +100,6 @@
 /*.col {*/
     /*padding: 0 9% 0 9%;*/
 /*}*/
-
-/*.hebecollins-absolute {*/
-    /*position: absolute;*/
-    /*top: 60px;*/
-    /*width: 100%;*/
-    /*left: 10%;*/
-/*}*/
-
-.hebecollins-needs-alert{
-    position: relative;
-    top: 70px;
-}
 
 .hebecollins-scroll-monitor {
     overflow: auto;

@@ -21,6 +21,8 @@ class App extends React.Component {
                 <div id="content">
                     {this.props.children}
                 </div>
+                <div id="footer">
+                </div>
             </div>
         );
     }
