@@ -10,7 +10,7 @@ export const message={
     "passwordIsSame":"new password is same as old. Please choose a different password.",
 
     //non-validation errors
-    "badConnection":"unable to connect",
+    "badConnection":"Unable to connect",
     "errorAtServer":"Some error occurred at the server"
 };
 

@@ -14,9 +14,9 @@ class Footer extends React.Component {
                     {/*<div className="col col-lg-4"><a href="#">About Us</a></div>*/}
                 {/*</div>*/}
                 <div className="white-fade">
-                    <p id="horizontal-line">
+                    <div id="horizontal-line">
                         <hr/>
-                    </p>
+                    </div>
                     <p>&copy; 2017 Hebecollins.com</p>
                 </div>
             </div>

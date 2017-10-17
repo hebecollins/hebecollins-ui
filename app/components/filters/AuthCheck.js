@@ -1,9 +1,6 @@
 import React from 'react';
 import {connect} from 'react-redux';
 import {addFlashMessage} from "../../actions/commons/flashMessages"
-import {browserHistory} from 'react-router';
-import query from 'array-query';
-import {ROUTES} from "../../../config/frontendRoutes";
 import {getPermissionByRoute} from "../../Toolbox/Helpers/routeHandler"
 import {redirectTo, redirectToHome} from "../../Toolbox/Helpers/redirect";
 
@@ -36,10 +33,6 @@ export default function (Component) {
             else {
                 const userType = user.user_type;
                 if (!getPermissionByRoute(route).includes(userType)) {
-                    this.props.addFlashMessage({
-                        type: 'error',
-                        text: 'You already are logged in'
-                    });
                     redirectTo('/'+userType);
                 }
             }
