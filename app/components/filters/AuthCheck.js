@@ -1,7 +1,7 @@
 import React from 'react';
 import {connect} from 'react-redux';
 import {addFlashMessage} from "../../actions/commons/flashMessages"
-import {getPermissionByRoute} from "../../Toolbox/Helpers/routeHandler"
+import {getPermissionByRoute, getRouteByName} from "../../Toolbox/Helpers/routeHandler"
 import {redirectTo, redirectToHome} from "../../Toolbox/Helpers/redirect";
 
 /**This method checks if user is allowed to access a certain route or not based on user type/
@@ -39,14 +39,14 @@ export default function (Component) {
         }
 
         componentWillUpdate(nextProps) {//gets called whenever render updates
-            if (!nextProps.isAuthenticated) {
+            const route = this.props.location.pathname;
+           console.log("hello");
+            if (!nextProps.isAuthenticated && route !== getRouteByName("GUEST_HOME")) {
                 redirectToHome();
             }
         }
 
         render() {
-            console.log(Component.property);
-
             return (
                 <Component {...this.props}/>
             );

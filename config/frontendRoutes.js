@@ -16,37 +16,37 @@ export const ROUTES = [
     },
     {
         ROUTE_NAME: 'MANAGER_HOME',
-        ROUTE:'manager',
+        ROUTE:'/manager',
         PERMISSION:['manager']
     },
     {
         ROUTE_NAME: 'ACTIVATE_MANAGER',
-        ROUTE:'activate/manager',
+        ROUTE:'/activate/manager',
         PERMISSION:['guest']
     },
     {
         ROUTE_NAME: 'VERIFY',
-        ROUTE:'verify',
+        ROUTE:'/verify',
         PERMISSION:['guest']
     },
     {
         ROUTE_NAME: 'PASSWORD_RECOVER',
-        ROUTE:'password/recover',
+        ROUTE:'/password/recover',
         PERMISSION:['guest']
     },
     {
         ROUTE_NAME: 'PASSWORD_RESET',
-        ROUTE:'password/reset',
+        ROUTE:'/password/reset',
         PERMISSION:['guest']
     },
     {
         ROUTE_NAME: 'PASSWORD_CHANGE',
-        ROUTE:'password/change',
+        ROUTE:'/password/change',
         PERMISSION:['client','trainer','manager']
     },
     {
         ROUTE_NAME: 'ADD_TRAINER',
-        ROUTE:'add/trainer',
+        ROUTE:'/add/trainer',
         PERMISSION:['manager']
     }
 ];

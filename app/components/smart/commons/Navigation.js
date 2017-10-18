@@ -8,7 +8,7 @@ import {connect} from 'react-redux';
 
 class Navigation extends React.Component {
     render() {
-        const {isAuthenticated, user} = this.props
+        const {isAuthenticated, user} = this.props;
         return (
             <div>{
                 !isAuthenticated ? <GuestNavigation/>

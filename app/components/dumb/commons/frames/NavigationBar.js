@@ -1,5 +1,5 @@
 import React from 'react';
-import {IMG_URL_OF} from "../../../../config/imageUrl";
+import {IMG_URL_OF} from "../../../../../config/imageUrl";
 
 /** Designs the navigation bar look
  * */
