@@ -44,3 +44,8 @@ opacity:1 !important;
     font-size: 100px;
     background: rgba(0, 0, 0, 0.6);
 }
+
+.icon-text-field{
+    color:var(--light-orange);
+    background-color: transparent;
+}

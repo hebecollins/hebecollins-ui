@@ -16,10 +16,10 @@ option{
     background: rgba(0, 0, 0, 0.8);
 }
 
-.select{
-    opacity: 0.6 !important;
-}
-select option { color: white; }
+/*.select{*/
+    /*opacity: 0.6 !important;*/
+/*}*/
+/*select option { color: white; }*/
 
 
 
@@ -65,7 +65,6 @@ select option { color: white; }
 .form-control{
     background-color:transparent;
     color: white;
-    font-family: "Times New Roman";
 }
 
 .form-group{

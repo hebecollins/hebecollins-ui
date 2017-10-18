@@ -5,6 +5,7 @@ import {connect} from 'react-redux';
 import {errorResponse} from "../../../Toolbox/Helpers/responseHandler";
 import {FormatForm} from "../../dumb/commons/templates/FormatForm"
 import {sendOTP} from "../../../actions/guest/signUpActions"
+import SingleScreen from "../../dumb/commons/templates/SingleScreen";
 
 class Verify extends React.Component {
 
@@ -48,7 +49,9 @@ class Verify extends React.Component {
     render() {
         const {errors, otp, isLoading} = this.state;
         return (
+            <SingleScreen>
             <FormatForm
+                iconClass="fa fa-key"
                 onSubmit={this.onSubmit}
                 instruction="Enter Your 5 digit OTP"
                 isLoading={isLoading}>
@@ -60,7 +63,7 @@ class Verify extends React.Component {
                     error={errors.otp}
                 />
             </FormatForm>
-        )
+            </SingleScreen>        )
     }
 }
 

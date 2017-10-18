@@ -17,6 +17,7 @@ class AddUser extends React.Component {
                     label="Nick Name"
                     onChange={this.props.onChange}
                     value={this.props.state.nick_name}
+                    iconClass="glyphicon glyphicon-user"
                     field="nick_name"
                 />
 
@@ -25,11 +26,16 @@ class AddUser extends React.Component {
                     label="Email"
                     onChange={this.props.onChange}
                     value={this.props.state.email}
+                    iconClass="glyphicon glyphicon-envelope"
                     field="email"
                 />
 
                 <div className={classnames("form-group", {'has-error': errors.mobile})}>
-                    <IntlTelInput
+                    <div className="input-group">
+                <span className="icon-text-field input-group-addon">
+                    <i className="glyphicon glyphicon-phone"/>
+                </span>
+                        <IntlTelInput
                         fieldName={"mobile"}
                         value={this.props.state.mobile}
                         onPhoneNumberChange={this.props.handleMobileNo}
@@ -39,7 +45,7 @@ class AddUser extends React.Component {
                         style={{width: '100%'}}
                         css={['intl-tel-input', 'form-control']}
                         utilsScript={'libphonenumber.js'}
-                    />
+                        /></div>
                     {errors.mobile && <span className="help-block">{errors.mobile}</span>}
                 </div>
             </div>

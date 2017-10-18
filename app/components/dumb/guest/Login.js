@@ -62,6 +62,7 @@ class LoginForm extends React.Component {
                     field="identifier"
                     label="Email/Mobile"
                     value={identifier}
+                    iconClass="glyphicon glyphicon-user"
                     onChange={this.onChange}
                     error={errors.identifier}
                 />
@@ -71,6 +72,7 @@ class LoginForm extends React.Component {
                     label="Password"
                     value={password}
                     onChange={this.onChange}
+                    iconClass="fa fa-unlock"
                     error={errors.password}
                     type="password"
                 />

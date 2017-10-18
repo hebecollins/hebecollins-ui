@@ -6,6 +6,7 @@ import {errorResponse} from "../../../Toolbox/Helpers/responseHandler";
 import {passwordRecoverRequest} from "../../../actions/commons/authActions"
 import {FormatForm} from "../../dumb/commons/templates/FormatForm"
 import {validate} from "../../../Toolbox/Validation/validator";
+import SingleScreen from "../../dumb/commons/templates/SingleScreen";
 
 
 class PasswordRecover extends React.Component {
@@ -51,17 +52,21 @@ class PasswordRecover extends React.Component {
     render() {
         const {errors, email, isLoading} = this.state;
         return (
+            <SingleScreen>
             <FormatForm
+                iconClass="fa fa-lock"
                 onSubmit={this.onSubmit}
-                instruction="Enter Your Email"
+                instruction="Enter your email to get activation link"
                 isLoading={isLoading}>
                 <TextFieldGroup
                     field="email"
                     label="Email"
                     value={email}
                     onChange={this.onChange}
+                    iconClass="glyphicon glyphicon-envelope"
                     error={errors.email}
                 /></FormatForm>
+            </SingleScreen>
         )
     }
 }

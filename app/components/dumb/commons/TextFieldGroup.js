@@ -1,17 +1,21 @@
 import React from 'react';
 import classnames from 'classnames';
 
-const TextFieldGroup = ({field, value, label, error, type, onChange}) => {
-    return(
+const TextFieldGroup = ({field, value, label, error, type, onChange, iconClass}) => {
+    return (
         <div className={classnames('form-group', {'has-error': error})}>
-            <input
-                value={value}
-                onChange={onChange}
-                type={type}
-                name={field}
-                className="form-control"
-                placeholder={label}
-            />
+            <div className="input-group">
+                <span className="icon-text-field input-group-addon">
+                    <b><b><i className={iconClass}/></b></b>
+                </span>
+                <input
+                    value={value}
+                    onChange={onChange}
+                    type={type}
+                    name={field}
+                    className="form-control"
+                    placeholder={label}
+                /></div>
             {error && <span className="help-block">{error}</span>}
         </div>
     )
