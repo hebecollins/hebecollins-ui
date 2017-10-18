@@ -26,6 +26,14 @@
         border-radius: 0;
         padding: 10% 5% 15% 5%;
     }
+
+    .content-child-single-screen {
+        background: rgba(204, 204, 204, 0.2);
+        border-radius: 0;
+        overflow: auto;
+        padding: 30px 5% 50px 5%;
+        margin: 0 20px 0 20px;
+    }
 }
 
 @media (min-width: 768px) {
@@ -150,3 +158,4 @@
     padding-left: 5%;
     padding-right: 5%;
 }
+

@@ -28,7 +28,7 @@ module.exports = {
         loaders: [
             {
                 test: /\.js$/,
-                include:[
+                include: [
                     path.join(__dirname, 'app'),
                     path.join(__dirname, 'config'),
                     path.join(__dirname, 'mode.js'),
@@ -49,18 +49,20 @@ module.exports = {
                     'file-loader?hash=sha512&digest=hex&name=[hash].[ext]',
                     'image-webpack-loader'
                 ]
-            }
+            },
+            {test: /\.woff(2)?(\?v=[0-9]\.[0-9]\.[0-9])?$/, loader: "url-loader"},
+            {test: /\.(ttf|eot|svg)(\?v=[0-9]\.[0-9]\.[0-9])?$/, loader: "url-loader"},
         ],
     },
     imageWebpackLoader: {
         mozjpeg: {
             quality: 65
         },
-        pngquant:{
+        pngquant: {
             quality: "65-90",
             speed: 4
         },
-        svgo:{
+        svgo: {
             plugins: [
                 {
                     removeViewBox: false

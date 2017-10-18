@@ -5,8 +5,10 @@ import {connect} from 'react-redux';
 import Address from '../../dumb/commons/Address';
 import UserDetails from '../../dumb/commons/PersonalDetails';
 import {errorResponse} from "../../../Toolbox/Helpers/responseHandler";
-import {FormatForm} from "../../dumb/commons/FormatForm"
+import {FormatForm} from "../../dumb/commons/templates/FormatForm"
 import {activateManagerRequest} from "../../../actions/manager/activate"
+import SingleScreen from "./../../dumb/commons/templates/SingleScreen";
+
 
 class Activate extends React.Component {
     constructor(props) {
@@ -112,11 +114,11 @@ class Activate extends React.Component {
     render() {
         const {errors} = this.state;
         return (
-            <div>
+            <SingleScreen>
                 {!this.state.isNext ? <FormatForm
-                        instruction="Personal Details"
+                        instruction="Tell us about you"
                         isLoading={this.state.isLoading}
-                        enableImage={false}
+                        iconClass="fa fa-id-card"
                         submitButton={false}
                         nextButton={true}
                         onNextButtonClick={this.onNext}
@@ -125,29 +127,36 @@ class Activate extends React.Component {
                             onChange={this.onChange}
                             onDobUpdate={this.onDobUpdate}
                             state={this.state}/>
-                        <br/>
+                        <button className="btn-next btn-lg pull-right" onClick={this.onNext}>Next<span>&rarr;</span>
+                        </button>
                     </FormatForm> :
 
-                    <FormatForm
-                        onSubmit={this.onSubmit}
-                        instruction="Gym Details"
-                        isLoading={this.state.isLoading}
-                        enableImage={false}
-                        backButton={true}
-                        onBackButtonClick={this.onBack}
-                    >
+                    <div>
+                        <FormatForm
+                            onSubmit={this.onSubmit}
+                            instruction="Gym Address"
+                            iconClass="glyphicon glyphicon-map-marker"
+                            isLoading={this.state.isLoading}
+                            enableImage={false}
+                            backButton={true}
+                            onBackButtonClick={this.onBack}
+                        >
 
-                        <TextFieldGroup
-                            error={errors.gym_name}
-                            label="Gym Name"
-                            onChange={this.onChange}
-                            value={this.state.gym_name}
-                            field="gym_name"/>
+                            <TextFieldGroup
+                                error={errors.gym_name}
+                                label="Gym Name"
+                                onChange={this.onChange}
+                                value={this.state.gym_name}
+                                field="gym_name"/>
 
-                        <Address onChange={this.onChange} state={this.state}/>
-                    </FormatForm>
+                            <Address onChange={this.onChange} state={this.state}/>
+                        </FormatForm>
+                        <br/>
+                        <button className="btn-next btn-lg pull-left" onClick={this.onBack}><span>&larr;</span>Back
+                        </button>
+                    </div>
                 }
-            </div>
+            </SingleScreen>
         );
     }
 }

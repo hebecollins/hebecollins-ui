@@ -1,7 +1,7 @@
 import React from 'react';
 import {connect} from 'react-redux';
 import {logoutRequest} from '../../../actions/commons/authActions'
-import NavigationBar from "../commons/frames/NavigationBar";
+import NavigationBar from "../commons/templates/NavigationBar";
 
 class ClientNavigation extends React.Component {
 

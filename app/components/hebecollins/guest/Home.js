@@ -5,7 +5,7 @@ import LoginAndSignup from "../../dumb/guest/LoginAndSignup";
 import {userSignUpRequest} from '../../../actions/guest/signUpActions'
 import {addFlashMessage} from '../../../actions/commons/flashMessages';
 import {loginRequest} from "../../../actions/commons/authActions"
-import TwoScreen from "../../dumb/commons/frames/TwoScreen";
+import TwoScreen from "../../dumb/commons/templates/TwoScreen";
 
 class Home extends React.Component {
     constructor(props) {

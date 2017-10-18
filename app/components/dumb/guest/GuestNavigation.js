@@ -1,5 +1,5 @@
 import React from 'react';
-import NavigationBar from '../commons/frames/NavigationBar';
+import NavigationBar from '../commons/templates/NavigationBar';
 import {Link} from 'react-router'
 import {getRouteByName} from "../../../Toolbox/Helpers/routeHandler";
 

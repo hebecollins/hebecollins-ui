@@ -33,3 +33,14 @@
 #horizontal-line{
     opacity: 0.40;
 }
+
+.icon {
+opacity:1 !important;
+}
+
+.icon-center{
+    color: var(--dark-orange);
+    text-align: center;
+    font-size: 100px;
+    background: rgba(0, 0, 0, 0.6);
+}

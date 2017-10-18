@@ -32,7 +32,7 @@ class LoginAndSignup extends React.Component {
         const {userSignUpRequest, addFlashMessage, loginRequest} = this.props;
         return (
             <div className="row">
-                <div className="col col-lg-offset-3">
+                <div className="col col-lg-offset-2 col-lg-10">
                     <div className="login-signup">
                         <div className="btn-group btn-group-justified">
                             <a className="btn btn-hebecollins-reverse btn-lg"

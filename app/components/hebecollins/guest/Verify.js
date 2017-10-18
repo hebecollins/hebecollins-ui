@@ -3,7 +3,7 @@ import TextFieldGroup from '../../dumb/commons/TextFieldGroup'
 import {validateOTP} from "../../../Toolbox/Validation/helpers";
 import {connect} from 'react-redux';
 import {errorResponse} from "../../../Toolbox/Helpers/responseHandler";
-import {FormatForm} from "../../dumb/commons/FormatForm"
+import {FormatForm} from "../../dumb/commons/templates/FormatForm"
 import {sendOTP} from "../../../actions/guest/signUpActions"
 
 class Verify extends React.Component {

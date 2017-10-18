@@ -76,10 +76,10 @@ class UserDetails extends React.Component {
 
                 <div className={classnames('form-group', {'has-error': errors.gender})}>
                 <select
-                    className="select-hebecollins"
+                    className="select form-control"
                     onChange={onChange}
                     name="gender">
-                    <option value="" disabled selected hidden>Select your Gender</option>
+                    <option className="select-placeholder"  disabled="disabled" selected="selected">Select your Gender</option>
                     <option value='m'>Male</option>
                     <option value='f'>Female</option>
                     <option value='o'>Others</option>

@@ -7,6 +7,22 @@
     color: #cccccc;
 }
 
+.gender{
+    background: rgba(0, 0, 0, 0.6);
+    color:white;
+}
+
+option{
+    background: rgba(0, 0, 0, 0.8);
+}
+
+.select{
+    opacity: 0.6 !important;
+}
+select option { color: white; }
+
+
+
 /*btn-hebecollins*/
 .btn-hebecollins-reverse {
     background-color: #cccccc;
@@ -29,32 +45,9 @@
     border-color: #1e1e1e;
 }
 
-.btn-hebecollins-next {
-    background-color: #ea3e0d;
-    float:right;
-    color: black;
-    -webkit-border-radius: 0;
-    -moz-border-radius: 0;
-    border-radius: 0;
-}
-
-.btn-hebecollins-back {
-    background-color: #ea3e0d;
-    float:left;
-    color: black;
-    -webkit-border-radius: 0;
-    -moz-border-radius: 0;
-    border-radius: 0;
-}
-
-/*.btn-hebecollins:active:hover{*/
-/*background-color: #111111;*/
-/*border-color: #000000;*/
-/*}*/
-
 .btn-hebecollins-reverse:disabled,
 .btn-hebecollins-reverse[disabled] {
-    border: 0px solid #999999;
+    border: 0;
     background-color: #ea3e0d;
     color: black;
     opacity: 1;
@@ -81,5 +74,12 @@
 
 .help-block{
     /*position: absolute;*/
+}
+
+.btn-next{
+    border-radius:0 !important;
+    background-color: var(--dark-orange);
+    color:black;
+    border-width: 0;
 }
 

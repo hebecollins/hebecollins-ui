@@ -4,7 +4,7 @@ import {validateEmail} from "../../../Toolbox/Validation/helpers";
 import {connect} from 'react-redux';
 import {errorResponse} from "../../../Toolbox/Helpers/responseHandler";
 import {passwordRecoverRequest} from "../../../actions/commons/authActions"
-import {FormatForm} from "../../dumb/commons/FormatForm"
+import {FormatForm} from "../../dumb/commons/templates/FormatForm"
 import {validate} from "../../../Toolbox/Validation/validator";
 
 

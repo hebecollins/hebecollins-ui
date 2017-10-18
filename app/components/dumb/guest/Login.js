@@ -4,7 +4,7 @@ import {validateLogin} from "../../../Toolbox/Validation/helpers";
 import {errorResponse} from "../../../Toolbox/Helpers/responseHandler";
 import {getRouteByName} from "../../../Toolbox/Helpers/routeHandler";
 
-require('../../../css/contentBox.css');
+require('../../../Toolbox/css/contentBox.css');
 
 class LoginForm extends React.Component {
 

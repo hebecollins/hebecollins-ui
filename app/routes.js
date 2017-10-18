@@ -7,7 +7,7 @@ import Activate from './components/hebecollins/manager/Activate';
 import PasswordRecover from './components/hebecollins/guest/PasswordRecover'
 import PasswordReset from './components/hebecollins/commons/PasswordReset'
 import Monitor from './components/smart/commons/Monitor';
-import authCheck from './components/filters/AuthCheck';
+import authCheck from './AuthCheck';
 
 import App from './components/App';
 import GuestHome from './components/hebecollins/guest/Home'

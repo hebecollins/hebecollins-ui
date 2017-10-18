@@ -1,8 +1,8 @@
 import React from 'react';
 import {connect} from 'react-redux';
-import {addFlashMessage} from "../../actions/commons/flashMessages"
-import {getPermissionByRoute, getRouteByName} from "../../Toolbox/Helpers/routeHandler"
-import {redirectTo, redirectToHome} from "../../Toolbox/Helpers/redirect";
+import {addFlashMessage} from "./actions/commons/flashMessages"
+import {getPermissionByRoute, getRouteByName} from "./Toolbox/Helpers/routeHandler"
+import {redirectTo, redirectToHome} from "./Toolbox/Helpers/redirect";
 
 /**This method checks if user is allowed to access a certain route or not based on user type/
  * user types are: ["guest","client","trainer","manager","admin"]

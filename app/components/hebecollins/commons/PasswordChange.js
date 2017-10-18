@@ -3,7 +3,7 @@ import TextFieldGroup from '../../dumb/commons/TextFieldGroup'
 import {validateChangedPassword} from "../../../Toolbox/Validation/helpers";
 import {connect} from 'react-redux';
 import {errorResponse} from "../../../Toolbox/Helpers/responseHandler";
-import {FormatForm} from "../../dumb/commons/FormatForm";
+import {FormatForm} from "../../dumb/commons/templates/FormatForm";
 import {passwordChangeRequest} from "../../../actions/commons/authActions"
 class PasswordChange extends React.Component {
 

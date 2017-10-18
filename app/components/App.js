@@ -4,12 +4,13 @@ import FlashMessageList from './smart/commons/FlashMessageList';
 import Footer from "./dumb/commons/Footer";
 import {Link} from 'react-router'
 import GuestNavigation from "./dumb/guest/GuestNavigation";
-require('../css/alerts.css');
-require('../css/text.css');
-require('../css/formFields.css');
-require('../css/contentBox.css');
-require('../css/images.css');
-require('../css/dateTime.css');
+require('../Toolbox/css/alerts.css');
+require('../Toolbox/css/text.css');
+require('../Toolbox/css/formFields.css');
+require('../Toolbox/css/contentBox.css');
+require('../Toolbox/css/images.css');
+require('../Toolbox/css/dateTime.css');
+require('../Toolbox/css/font-awesome.min.css');
 
 
 class App extends React.Component {
