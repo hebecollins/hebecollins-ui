@@ -15,14 +15,16 @@ class Home extends React.Component {
     render() {
         const {userSignUpRequest, addFlashMessage, loginRequest} = this.props;
         return (
-            <TwoScreen>
-                <Description key="desktopOnly"/>
-                <LoginAndSignup
-                    key="mobileVisible"
-                    loginRequest={loginRequest}
-                    userSignUpRequest={userSignUpRequest}
-                    addFlashMessage={addFlashMessage}/>
-            </TwoScreen>
+            <div className="content">
+                <TwoScreen>
+                    <Description key="desktopOnly"/>
+                    <LoginAndSignup
+                        key="mobileVisible"
+                        loginRequest={loginRequest}
+                        userSignUpRequest={userSignUpRequest}
+                        addFlashMessage={addFlashMessage}/>
+                </TwoScreen>
+            </div>
         )
     }
 }

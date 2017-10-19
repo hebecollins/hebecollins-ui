@@ -2,6 +2,7 @@ import {postForm, postJSON} from '../../Toolbox/Helpers/requestHandler';
 import {redirectTo} from '../../Toolbox/Helpers/redirect';
 import {STORE_VERIFICATION_DATA} from "../types";
 import {BACKEND_ROUTES} from "../../../config/backendRoutes";
+import {addFlashMessage} from "../commons/flashMessages";
 
 function storeVerificationData(data) {
     console.log(data);
@@ -20,9 +21,12 @@ export function userSignUpRequest(data) {
     };
     return dispatch => {
         return postJSON(dataToBeSent, BACKEND_ROUTES.SIGNUP).then(res => {
-            console.log(res.data);
             dispatch(storeVerificationData(res.data.data));
             redirectTo('/verify');
+            dispatch(addFlashMessage({
+                type: 'success',
+                text: res.data.msg
+            }));
         })
     }
 }

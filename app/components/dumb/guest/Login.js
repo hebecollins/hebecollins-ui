@@ -72,7 +72,7 @@ class LoginForm extends React.Component {
                     label="Password"
                     value={password}
                     onChange={this.onChange}
-                    iconClass="fa fa-unlock"
+                    iconClass="fa fa-key"
                     error={errors.password}
                     type="password"
                 />

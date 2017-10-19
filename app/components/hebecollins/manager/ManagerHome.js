@@ -1,13 +1,16 @@
 import React from 'react';
+import QuoteBox from "../../smart/commons/templates/QuoteBox";
 
 /** Takes random quotes from Db and display here along with add trainer button
  * */
 class ManagerHome extends React.Component {
-    render() {
 
+    render() {
         return (
             <div>
-                <h1>This is manager home page</h1>
+                <QuoteBox>
+                    <li><button className="btn-hebecollins-black">Add Trainer</button></li>
+                </QuoteBox>
             </div>
         )
     }

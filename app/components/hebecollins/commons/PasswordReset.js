@@ -52,7 +52,7 @@ class PasswordReset extends React.Component {
     render() {
         const {errors, password, password_confirm, isLoading} = this.state;
         return (
-            <div className="container-fluid">
+            <div className="content">
                 <div className="col-lg-offset-3 col-lg-6 col-md-offset-3 col-md-6">
                     <img className="logo-extended" src={require('../../../../images/HC_logo_extended.jpg')}/>
                     <form className="form-hebecollins" onSubmit={this.onSubmit}>

@@ -1,6 +1,5 @@
 import React from 'react';
 import {validateUserRegistrationFields} from "../../../Toolbox/Validation/helpers";
-import {browserHistory} from 'react-router';
 import AddUser from '../commons/AddUser';
 import {errorResponse} from "../../../Toolbox/Helpers/responseHandler";
 

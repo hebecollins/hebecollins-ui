@@ -2,11 +2,9 @@ import {ADD_CLIENTS, ADD_TRAINERS} from "../types";
 import {redirectToHome} from "../../Toolbox/Helpers/redirect";
 
 function addTrainerToRedux(data) {
-    console.log("hello");
     return {
         type: ADD_TRAINERS,
         trainers: data
-        // payload:100
     }
 }
 

@@ -49,21 +49,24 @@ class Verify extends React.Component {
     render() {
         const {errors, otp, isLoading} = this.state;
         return (
-            <SingleScreen>
-            <FormatForm
-                iconClass="fa fa-key"
-                onSubmit={this.onSubmit}
-                instruction="Enter Your 5 digit OTP"
-                isLoading={isLoading}>
-                <TextFieldGroup
-                    field="otp"
-                    label="One Time Password"
-                    value={otp}
-                    onChange={this.onChange}
-                    error={errors.otp}
-                />
-            </FormatForm>
-            </SingleScreen>        )
+            <div className="content">
+                <SingleScreen>
+                    <FormatForm
+                        iconClass="fa fa-key"
+                        onSubmit={this.onSubmit}
+                        instruction="Enter Your 5 digit OTP"
+                        isLoading={isLoading}>
+                        <TextFieldGroup
+                            field="otp"
+                            label="One Time Password"
+                            value={otp}
+                            onChange={this.onChange}
+                            error={errors.otp}
+                        />
+                    </FormatForm>
+                </SingleScreen>
+            </div>
+        )
     }
 }
 
@@ -73,8 +76,8 @@ Verify.propTypes = {
 };
 
 function mapStateToProps(state) {
-    return{
-        userId:state.verificationData.userId
+    return {
+        userId: state.verificationData.userId
     }
 
 }

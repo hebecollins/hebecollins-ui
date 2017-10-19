@@ -114,49 +114,51 @@ class Activate extends React.Component {
     render() {
         const {errors} = this.state;
         return (
-            <SingleScreen>
-                {!this.state.isNext ? <FormatForm
-                        instruction="Tell us about you"
-                        isLoading={this.state.isLoading}
-                        iconClass="fa fa-id-card"
-                        submitButton={false}
-                        nextButton={true}
-                        onNextButtonClick={this.onNext}
-                    >
-                        <UserDetails
-                            onChange={this.onChange}
-                            onDobUpdate={this.onDobUpdate}
-                            state={this.state}/>
-                        <button className="btn-next btn-lg pull-right" onClick={this.onNext}>Next<span>&rarr;</span>
-                        </button>
-                    </FormatForm> :
-
-                    <div>
-                        <FormatForm
-                            onSubmit={this.onSubmit}
-                            instruction="Gym Address"
-                            iconClass="glyphicon glyphicon-map-marker"
+            <div className="content">
+                <SingleScreen>
+                    {!this.state.isNext ? <FormatForm
+                            instruction="Tell us about you"
                             isLoading={this.state.isLoading}
-                            enableImage={false}
-                            backButton={true}
-                            onBackButtonClick={this.onBack}
+                            iconClass="fa fa-id-card"
+                            submitButton={false}
+                            nextButton={true}
+                            onNextButtonClick={this.onNext}
                         >
-
-                            <TextFieldGroup
-                                error={errors.gym_name}
-                                label="Gym Name"
+                            <UserDetails
                                 onChange={this.onChange}
-                                value={this.state.gym_name}
-                                field="gym_name"/>
+                                onDobUpdate={this.onDobUpdate}
+                                state={this.state}/>
+                            <button className="btn-next btn-lg pull-right" onClick={this.onNext}>Next<span>&rarr;</span>
+                            </button>
+                        </FormatForm> :
 
-                            <Address onChange={this.onChange} state={this.state}/>
-                        </FormatForm>
-                        <br/>
-                        <button className="btn-next btn-lg pull-left" onClick={this.onBack}><span>&larr;</span>Back
-                        </button>
-                    </div>
-                }
-            </SingleScreen>
+                        <div>
+                            <FormatForm
+                                onSubmit={this.onSubmit}
+                                instruction="Gym Address"
+                                iconClass="glyphicon glyphicon-map-marker"
+                                isLoading={this.state.isLoading}
+                                enableImage={false}
+                                backButton={true}
+                                onBackButtonClick={this.onBack}
+                            >
+
+                                <TextFieldGroup
+                                    error={errors.gym_name}
+                                    label="Gym Name"
+                                    onChange={this.onChange}
+                                    value={this.state.gym_name}
+                                    field="gym_name"/>
+
+                                <Address onChange={this.onChange} state={this.state}/>
+                            </FormatForm>
+                            <br/>
+                            <button className="btn-next btn-lg pull-left" onClick={this.onBack}><span>&larr;</span>Back
+                            </button>
+                        </div>
+                    }
+                </SingleScreen>
+            </div>
         );
     }
 }

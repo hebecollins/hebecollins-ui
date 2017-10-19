@@ -52,21 +52,23 @@ class PasswordRecover extends React.Component {
     render() {
         const {errors, email, isLoading} = this.state;
         return (
-            <SingleScreen>
-            <FormatForm
-                iconClass="fa fa-lock"
-                onSubmit={this.onSubmit}
-                instruction="Enter your email to get activation link"
-                isLoading={isLoading}>
-                <TextFieldGroup
-                    field="email"
-                    label="Email"
-                    value={email}
-                    onChange={this.onChange}
-                    iconClass="glyphicon glyphicon-envelope"
-                    error={errors.email}
-                /></FormatForm>
-            </SingleScreen>
+            <div className="content">
+                <SingleScreen>
+                    <FormatForm
+                        iconClass="fa fa-lock"
+                        onSubmit={this.onSubmit}
+                        instruction="Enter your email to get activation link"
+                        isLoading={isLoading}>
+                        <TextFieldGroup
+                            field="email"
+                            label="Email"
+                            value={email}
+                            onChange={this.onChange}
+                            iconClass="glyphicon glyphicon-envelope"
+                            error={errors.email}
+                        /></FormatForm>
+                </SingleScreen>
+            </div>
         )
     }
 }

@@ -5,6 +5,8 @@ import {connect} from 'react-redux';
 import {errorResponse} from "../../../Toolbox/Helpers/responseHandler";
 import {FormatForm} from "../../dumb/commons/templates/FormatForm";
 import {passwordChangeRequest} from "../../../actions/commons/authActions"
+import SingleScreen from "../../dumb/commons/templates/SingleScreen";
+
 class PasswordChange extends React.Component {
 
     constructor(props) {
@@ -49,41 +51,47 @@ class PasswordChange extends React.Component {
     render() {
         const {errors, old_password, new_password, confirm_new_password, isLoading} = this.state;
         return (
-            <div>
-                <FormatForm
-                    onSubmit={this.onSubmit}
-                    instruction="Change Your password"
-                    submitLabel="Submit"
-                    isLoading={isLoading}
-                    enableImage={false}
-                >
-                    <TextFieldGroup
-                        field="old_password"
-                        value={old_password}
-                        label="Old Password"
-                        type="password"
-                        error={errors.old_password}
-                        onChange={this.onChange}
-                    />
+            <div className="content">
+                <SingleScreen>
+                    <FormatForm
+                        iconClass="fa fa-lock"
+                        onSubmit={this.onSubmit}
+                        instruction="Change Your password"
+                        submitLabel="Submit"
+                        isLoading={isLoading}
+                        enableImage={false}
+                    >
+                        <TextFieldGroup
+                            field="old_password"
+                            value={old_password}
+                            label="Old Password"
+                            type="password"
+                            iconClass="fa fa-key"
+                            error={errors.old_password}
+                            onChange={this.onChange}
+                        />
 
-                    <TextFieldGroup
-                        field="new_password"
-                        value={new_password}
-                        label="New Password"
-                        type="password"
-                        error={errors.new_password}
-                        onChange={this.onChange}
-                    />
+                        <TextFieldGroup
+                            field="new_password"
+                            value={new_password}
+                            label="New Password"
+                            type="password"
+                            iconClass="fa fa-key"
+                            error={errors.new_password}
+                            onChange={this.onChange}
+                        />
 
-                    <TextFieldGroup
-                        field="confirm_new_password"
-                        value={confirm_new_password}
-                        label="Confirm New Password"
-                        type="password"
-                        error={errors.confirm_new_password}
-                        onChange={this.onChange}
-                    />
-                </FormatForm>
+                        <TextFieldGroup
+                            field="confirm_new_password"
+                            value={confirm_new_password}
+                            label="Confirm New Password"
+                            type="password"
+                            iconClass="fa fa-key"
+                            error={errors.confirm_new_password}
+                            onChange={this.onChange}
+                        />
+                    </FormatForm>
+                </SingleScreen>
             </div>
         )
     }

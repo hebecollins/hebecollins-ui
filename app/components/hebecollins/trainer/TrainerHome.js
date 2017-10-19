@@ -1,10 +1,14 @@
 import React from 'react';
+import QuoteBox from "../../smart/commons/templates/QuoteBox";
 
 class TrainerHome extends React.Component {
     render() {
         return (
             <div>
-                <h1>This is trainer home page</h1>
+                <QuoteBox>
+                    <li><button className="btn-hebecollins-black">Add Client</button></li>
+                    <li><button className="btn-hebecollins-black">Add Workout</button></li>
+                </QuoteBox>
             </div>
         )
     }

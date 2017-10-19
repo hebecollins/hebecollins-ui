@@ -1,15 +1,27 @@
 import {addFlashMessage} from "../../actions/commons/flashMessages"
 import {message} from "./messages";
 import {store} from '../../index'
+import {setCurrentUser} from "../../actions/commons/authActions";
+import {redirectToHome} from "./redirect";
+import setAuthToken from "../Auth/SetAuthToken";
 
 export function errorResponse(err) {
 
     console.log(err);
     if (typeof err.response === 'undefined') {
+        if (store.getState().auth.isAuthenticated === true) {
+            localStorage.removeItem('user');
+            setAuthToken(false);
+            store.dispatch(setCurrentUser({}));
+            redirectToHome();
+        }
+        else {
             store.dispatch(addFlashMessage({
                 type: 'error',
                 text: message.badConnection
             }));
+        }
+
         return {};
     }
 
