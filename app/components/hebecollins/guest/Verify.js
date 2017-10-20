@@ -37,6 +37,7 @@ class Verify extends React.Component {
         e.preventDefault();
         if (this.isValid()) {
             this.setState({errors: {}, isLoading: true});
+
             this.props.sendOTP(this.state, this.props.userId).catch(
                 (err) => {
                     const response = errorResponse(err);

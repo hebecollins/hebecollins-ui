@@ -33,7 +33,6 @@ class Monitor extends React.Component {
     }
 
     render() {
-        console.log(this.props.trainer.trainers);
         return (
             <div className="row">
                 <div className="col col-lg-6">

@@ -1,13 +1,15 @@
 import {MODE} from '../../../mode';
 import axios from 'axios';
-import {developmentURL, productionURL, localURL} from '../../../config/baseURL';
+import {developmentURL, productionURL, localURL, localQburstURL} from '../../../config/baseURL';
 import querystring from 'querystring';
 
 if (MODE === 'production') {
     axios.defaults.baseURL = productionURL
 } else if (MODE === 'development') {
     axios.defaults.baseURL = developmentURL
-} else {
+} else if(MODE === 'local_qburst'){
+    axios.defaults.baseURL = localQburstURL
+}else{
     axios.defaults.baseURL = localURL
 }
 

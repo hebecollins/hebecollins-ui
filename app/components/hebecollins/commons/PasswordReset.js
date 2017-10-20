@@ -6,6 +6,7 @@ import {loginRequest} from "../../../actions/commons/authActions"
 import {errorResponse} from "../../../Toolbox/Helpers/responseHandler";
 import {addFlashMessage} from "../../../actions/commons/flashMessages";
 import {passwordResetRequest} from "../../../actions/commons/authActions"
+import {IMG_URL_OF} from "../../../../config/imageUrl";
 
 class PasswordReset extends React.Component {
 
@@ -54,7 +55,7 @@ class PasswordReset extends React.Component {
         return (
             <div className="content">
                 <div className="col-lg-offset-3 col-lg-6 col-md-offset-3 col-md-6">
-                    <img className="logo-extended" src={require('../../../../images/HC_logo_extended.jpg')}/>
+                    <img className="logo-extended" src={IMG_URL_OF.LOGO_EXTENDED}/>
                     <form className="form-hebecollins" onSubmit={this.onSubmit}>
                         <p className="white-center">Enter a new password</p>
                         <TextFieldGroup
