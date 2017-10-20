@@ -1,5 +1,4 @@
 import React from 'react';
-import classnames from 'classnames';
 
 /**mounts a component and then deletes it after 10 seconds
  * */
@@ -17,7 +16,7 @@ class FlashMessage extends React.Component {
         let self = this;
         setTimeout(function () {
             self.onClick();
-        }, 500000);
+        }, 10000);
     }
 
     render() {

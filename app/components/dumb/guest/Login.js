@@ -47,7 +47,9 @@ class LoginForm extends React.Component {
             this.props.loginRequest(this.state).catch(
                 (err) => {
                     const response=errorResponse(err);
-                    this.setState({errors: response, isLoading: false})
+                    if (response !== null) {
+                        this.setState({errors: response, isLoading: false})
+                    }
                 }
             );
         }

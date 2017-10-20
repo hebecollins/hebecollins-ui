@@ -38,7 +38,26 @@ export function sendOTP(data,userId) {
     };
     return dispatch => {
         return postForm(dataToBeSent, BACKEND_ROUTES.VERIFY).then(res => {
-            redirectTo('/activate/manager');
+            redirectTo('ACTIVATE_MANAGER');
+            dispatch(addFlashMessage({
+                type: 'success',
+                text: res.data.msg
+            }));
+        })
+    }
+}
+
+export function resendOTP(userId) {
+    const dataToBeSent={
+        "user_id":userId
+    };
+
+    return dispatch => {
+        return postForm(dataToBeSent, BACKEND_ROUTES.RESEND_OTP).then(res => {
+            dispatch(addFlashMessage({
+                type: 'success',
+                text: res.data.msg
+            }));
         })
     }
 }

@@ -8,6 +8,7 @@ export const BACKEND_ROUTES = {
         RESET: "/password-reset",
     },
     VERIFY: "/verify",
+    RESEND_OTP: "/resend/otp",
     ACTIVATE: {
         MANAGER: "/activate-manager",
         CLIENT:"activate-client",

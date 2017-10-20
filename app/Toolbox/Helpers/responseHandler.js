@@ -16,22 +16,22 @@ export function errorResponse(err) {
      *  it will delete the current user Data from local storage and redux store and then it will redirect to home page
      *  ELSE show that error as a flash message
      * */
-    console.log(err);
     if (typeof err.response === 'undefined') {
         if (store.getState().auth.isAuthenticated === true) {
             localStorage.removeItem('user');
             setAuthToken(false);
             store.dispatch(setCurrentUser({}));
             redirectToHome();
+            return null;
         }
         else {
             store.dispatch(addFlashMessage({
                 type: 'error',
                 text: message.badConnection
             }));
+            return {};
         }
 
-        return {};
     }
 
 
@@ -80,7 +80,7 @@ export function errorResponse(err) {
             text: err.response.data.forbidden
         }));
         redirectToHome();
-        return {};
+        return null;
     }
 
 

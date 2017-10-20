@@ -4,7 +4,7 @@ import {validateOTP} from "../../../Toolbox/Validation/helpers";
 import {connect} from 'react-redux';
 import {errorResponse} from "../../../Toolbox/Helpers/responseHandler";
 import {FormatForm} from "../../dumb/commons/templates/FormatForm"
-import {sendOTP} from "../../../actions/guest/signUpActions"
+import {sendOTP,resendOTP} from "../../../actions/guest/signUpActions"
 import SingleScreen from "../../dumb/commons/templates/SingleScreen";
 
 class Verify extends React.Component {
@@ -19,6 +19,7 @@ class Verify extends React.Component {
 
         this.onChange = this.onChange.bind(this);
         this.onSubmit = this.onSubmit.bind(this);
+        this.onResend = this.onResend.bind(this);
     }
 
     onChange(e) {
@@ -41,11 +42,23 @@ class Verify extends React.Component {
             this.props.sendOTP(this.state, this.props.userId).catch(
                 (err) => {
                     const response = errorResponse(err);
-                    this.setState({errors: response, isLoading: false})
+                    if (response !== null) {
+                        this.setState({errors: response, isLoading: false})
+                    }
                 }
             );
         }
     }
+
+
+    onResend(e) {
+            this.props.resendOTP(this.props.userId).catch(
+                (err) => {
+                    console.log(err);
+                }
+            );
+        }
+
 
     render() {
         const {errors, otp, isLoading} = this.state;
@@ -65,6 +78,9 @@ class Verify extends React.Component {
                             error={errors.otp}
                         />
                     </FormatForm>
+                    <br/>
+
+                    <a onClick={this.onResend} className="forgot-password">Resend OTP ?</a>
                 </SingleScreen>
             </div>
         )
@@ -73,6 +89,7 @@ class Verify extends React.Component {
 
 Verify.propTypes = {
     sendOTP: React.PropTypes.func.isRequired,
+    resendOTP: React.PropTypes.func.isRequired,
     userId: React.PropTypes.string.isRequired
 };
 
@@ -83,4 +100,4 @@ function mapStateToProps(state) {
 
 }
 
-export default connect(mapStateToProps, {sendOTP})(Verify);
+export default connect(mapStateToProps, {sendOTP, resendOTP})(Verify);
