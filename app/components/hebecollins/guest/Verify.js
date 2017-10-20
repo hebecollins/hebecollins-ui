@@ -66,7 +66,7 @@ class Verify extends React.Component {
             <div className="content">
                 <SingleScreen>
                     <FormatForm
-                        iconClass="fa fa-key"
+                        iconClass="glyphicon glyphicon-phone"
                         onSubmit={this.onSubmit}
                         instruction="Enter Your 5 digit OTP"
                         isLoading={isLoading}>
@@ -75,6 +75,7 @@ class Verify extends React.Component {
                             label="One Time Password"
                             value={otp}
                             onChange={this.onChange}
+                            iconClass="fa fa-key"
                             error={errors.otp}
                         />
                     </FormatForm>

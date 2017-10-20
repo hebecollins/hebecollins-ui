@@ -2,11 +2,11 @@ import React from 'react';
 import TextFieldGroup from '../../dumb/commons/TextFieldGroup'
 import {validatePassword} from "../../../Toolbox/Validation/helpers";
 import {connect} from 'react-redux';
-import {loginRequest} from "../../../actions/commons/authActions"
 import {errorResponse} from "../../../Toolbox/Helpers/responseHandler";
-import {addFlashMessage} from "../../../actions/commons/flashMessages";
 import {passwordResetRequest} from "../../../actions/commons/authActions"
-import {IMG_URL_OF} from "../../../../config/imageUrl";
+import SingleScreen from "../../dumb/commons/templates/SingleScreen";
+import {FormatForm} from "../../dumb/commons/templates/FormatForm";
+
 
 class PasswordReset extends React.Component {
 
@@ -40,8 +40,8 @@ class PasswordReset extends React.Component {
         if (this.isValid()) {
             this.setState({errors: {}, isLoading: true});
 
-            const params= this.props.location.query;
-            this.props.passwordResetRequest(this.state,params ).catch(
+            const params = this.props.location.query;
+            this.props.passwordResetRequest(this.state, params).catch(
                 (err) => {
                     const response = errorResponse(err);
                     this.setState({errors: response, isLoading: false})
@@ -54,16 +54,19 @@ class PasswordReset extends React.Component {
         const {errors, password, password_confirm, isLoading} = this.state;
         return (
             <div className="content">
-                <div className="col-lg-offset-3 col-lg-6 col-md-offset-3 col-md-6">
-                    <img className="logo-extended" src={IMG_URL_OF.LOGO_EXTENDED}/>
-                    <form className="form-hebecollins" onSubmit={this.onSubmit}>
-                        <p className="white-center">Enter a new password</p>
+                <SingleScreen>
+                    <FormatForm
+                        iconClass="fa fa-lock"
+                        onSubmit={this.onSubmit}
+                        instruction="Reset Your Password"
+                        isLoading={isLoading}>
                         <TextFieldGroup
                             field="password"
                             label="Password"
                             value={password}
                             onChange={this.onChange}
                             error={errors.password}
+                            iconClass="fa fa-key"
                             type="password"
                         />
                         <TextFieldGroup
@@ -72,15 +75,11 @@ class PasswordReset extends React.Component {
                             value={password_confirm}
                             onChange={this.onChange}
                             error={errors.password_confirm}
+                            iconClass="fa fa-key"
                             type="password"
                         />
-                        <div className="form-group">
-                            <button disabled={isLoading} className="btn btn-group-justified btn-hebecollins btn-lg">
-                                Reset Password
-                            </button>
-                        </div>
-                    </form>
-                </div>
+                    </FormatForm>
+                </SingleScreen>
             </div>
         )
     }
