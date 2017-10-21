@@ -1,16 +1,7 @@
 import React from 'react';
-import {connect} from 'react-redux';
-import {logoutRequest} from '../../../actions/commons/authActions'
 import {NavigationBar} from "../commons/templates/NavigationBar";
 
-class TrainerNavigation extends React.Component {
-
-    logout(e) {
-        e.preventDefault();
-        this.props.logoutRequest();
-    }
-
-    render() {
+export const TrainerNavigation =({logout})=>{
         const trainerLinks = (
             <ul className="nav navbar-nav navbar-right">
                 <li className="active"><a href="/">Home</a></li>
@@ -29,7 +20,7 @@ class TrainerNavigation extends React.Component {
                 <li><a href="#">Suggestion Box</a></li>
                 <li><a href="#">About Us</a></li>
                 <li><a href="#">Contact Us</a></li>
-                <li><a href="#" onClick={this.logout.bind(this)}>Logout</a></li>
+                <li><a href="#" onClick={logout}>Logout</a></li>
             </ul>
         );
 
@@ -38,11 +29,8 @@ class TrainerNavigation extends React.Component {
                 {trainerLinks}
             </NavigationBar>
         );
-    }
-}
+    };
 
 TrainerNavigation.propTypes = {
-    logoutRequest: React.PropTypes.func.isRequired
+    logout: React.PropTypes.func.isRequired
 };
-
-export default connect(null, {logoutRequest})(TrainerNavigation);

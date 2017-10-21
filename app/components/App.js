@@ -2,8 +2,6 @@ import React from 'react';
 import Navigation from './smart/commons/Navigation'
 import FlashMessageList from './smart/commons/FlashMessageList';
 import Footer from "./dumb/commons/Footer";
-import {Link} from 'react-router'
-import GuestNavigation from "./dumb/guest/GuestNavigation";
 
 require('../Toolbox/css/alerts.css');
 require('../Toolbox/css/text.css');
@@ -15,8 +13,6 @@ require('../Toolbox/css/font-awesome.min.css');
 
 
 class App extends React.Component {
-    // static propTypes = {};
-
     constructor(props) {
         super(props);
     }
