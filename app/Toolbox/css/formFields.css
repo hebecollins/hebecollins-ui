@@ -71,9 +71,15 @@ option{
     height:45px;
     font-size:16px;
 }
+.form-control[disabled], fieldset[disabled] .form-control {
+     cursor: default;
+}
 
+.form-control[disabled], .form-control[readonly], fieldset[disabled] .form-control {
+    background-color: transparent;
+}
 .form-group{
-    margin-top: 25px;
+    /*margin-top: 25px;*/
 }
 
 .help-block{

@@ -51,9 +51,12 @@ export function loginRequest(data) {
 }
 
 export function passwordRecoverRequest(data) {
-    const dataToBePosted = {
-        "email": data.email,
-    };
+        const dataToBePosted = {
+            "target":data.target,
+            "email": data.email,
+            "mobile":data.mobile,
+            "country_code":data.country_code
+        };
 
     return dispatch => {
         return postForm(dataToBePosted, BACKEND_ROUTES.PASSWORD.RECOVER).then(res => {

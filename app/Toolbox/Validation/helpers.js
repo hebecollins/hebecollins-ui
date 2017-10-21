@@ -1,4 +1,5 @@
 import {validate} from "./validator"
+import isEmpty from 'lodash/isEmpty';
 
 /** Takes complete state and only filter out personal variables and validate those
  *  @param data => object with fields {first_name,middle_name,last_name,dob,gender,password,password_confirm}
@@ -75,15 +76,24 @@ export function validateUserRegistrationFields(data) {
     }
 }
 
-export function validateEmail(data) {
-    const {email} = data;
-    const {errors, isValid} = validate({
-        email: [email, 'isRequired', 'isEmail', 'max(30)'],
-    });
-    return {
-        errors,
-        isValid
-    }
+export function validateEmailOrMobile(data) {
+    const {email,mobile,isMobileValid,target} = data;
+    if(target === "mobile"){
+        const {errors, isValid} = validate({
+            mobile: [mobile, 'isRequired', `isMobile('${isMobileValid}')`],
+        });
+        return {
+            errors,
+            isValid
+        }}
+    if(target === "email"){
+        const {errors, isValid} = validate({
+            email: [email, 'isRequired', 'isEmail', 'max(30)'],
+        });
+        return {
+            errors,
+            isValid
+        } }
 }
 
 export function validatePassword(data) {

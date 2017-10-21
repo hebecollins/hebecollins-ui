@@ -70,15 +70,14 @@
     .login-signup {
         background: rgba(204, 204, 204, 0.2);
         border-radius: 0;
-        padding: 30px 5% 50px 5%;
-        margin-top: 10%
+        padding: 30px 5% 30px 5%;
     }
 
     .content-child-single-screen {
         background: rgba(204, 204, 204, 0.2);
         border-radius: 0;
         overflow: auto;
-        padding: 30px 5% 50px 5%;
+        padding: 30px 5% 40px 5%;
     }
 
     /*home page*/
@@ -92,7 +91,6 @@
     background: rgba(204, 204, 204, 0.2);
     border-radius: 0;
     padding: 30px 5% 50px 5%;
-    margin-top: 10%;
     color: white;
     font-size: larger;
 }
