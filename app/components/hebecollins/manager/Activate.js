@@ -1,14 +1,13 @@
 import React from 'react';
-import TextFieldGroup from '../../dumb/commons/TextFieldGroup'
+import {TextField} from '../../dumb/commons/InputFieldGroup'
 import {validatePersonalDetails, validateGymDetails} from "../../../Toolbox/Validation/helpers";
 import {connect} from 'react-redux';
-import Address from '../../dumb/commons/Address';
-import UserDetails from '../../dumb/commons/PersonalDetails';
+import {Address} from '../../dumb/commons/Address';
+import {UserDetails} from '../../dumb/commons/PersonalDetails';
 import {errorResponse} from "../../../Toolbox/Helpers/responseHandler";
 import {FormatForm} from "../../dumb/commons/templates/FormatForm"
 import {activateManagerRequest} from "../../../actions/manager/activate"
 import SingleScreen from "./../../dumb/commons/templates/SingleScreen";
-
 
 class Activate extends React.Component {
     constructor(props) {
@@ -116,7 +115,8 @@ class Activate extends React.Component {
         return (
             <div className="content">
                 <SingleScreen>
-                    {!this.state.isNext ? <FormatForm
+                    {!this.state.isNext ?
+                        <FormatForm
                             instruction="Tell us about you"
                             isLoading={this.state.isLoading}
                             iconClass="fa fa-id-card"
@@ -143,7 +143,7 @@ class Activate extends React.Component {
                                 onBackButtonClick={this.onBack}
                             >
 
-                                <TextFieldGroup
+                                <TextField
                                     error={errors.gym_name}
                                     label="Gym Name"
                                     onChange={this.onChange}

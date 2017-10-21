@@ -1,5 +1,5 @@
 import React from 'react';
-import TextFieldGroup from '../../dumb/commons/TextFieldGroup'
+import {TextField} from '../../dumb/commons/InputFieldGroup'
 import {validateOTP} from "../../../Toolbox/Validation/helpers";
 import {connect} from 'react-redux';
 import {errorResponse} from "../../../Toolbox/Helpers/responseHandler";
@@ -70,7 +70,7 @@ class Verify extends React.Component {
                         onSubmit={this.onSubmit}
                         instruction="Enter Your 5 digit OTP"
                         isLoading={isLoading}>
-                        <TextFieldGroup
+                        <TextField
                             field="otp"
                             label="One Time Password"
                             value={otp}

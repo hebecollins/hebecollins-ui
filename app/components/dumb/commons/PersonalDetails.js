@@ -1,117 +1,87 @@
 import React from 'react';
-import TextFieldGroup from './TextFieldGroup'
-import DateTime from 'react-datetime';
-import classnames from 'classnames';
+import {TextField, Date, Select} from './InputFieldGroup'
 
-/**Fields:  First Name      Middle Name     Last Name
- *          Date of Birth   Gender
- *          Password        Confirm Password
+/**Fields:  *First Name      *Middle Name(Optional)     *Last Name
+ *          *Date of Birth   *Gender
+ *          *Password        *Confirm Password
  * */
-//TODO: design a proper validation architecture
-class UserDetails extends React.Component {
-    constructor(props) {
-        super(props);
-        this.isValidDate = this.isValidDate.bind(this)
-    }
+export const UserDetails = (props) => {
+    const {errors, first_name, middle_name, last_name, dob, gender, password, password_confirm}
+        = props.state;
 
-    //can be changed to any valid date
-    isValidDate(current) {
-        let yesterday = DateTime.moment().subtract(1, 'day');
-        return current.isBefore(yesterday);
-    }
+    const {onChange, onDobUpdate} = props;
 
-    render() {
-        const {
-            errors,
-            first_name,
-            middle_name,
-            last_name,
-            dob,
-            gender,
-            password,
-            password_confirm
-        } = this.props.state;
+    return (
+        <div>
+            <TextField
+                error={errors.first_name}
+                label="First Name"
+                onChange={onChange}
+                value={first_name}
+                iconClass="glyphicon glyphicon-user"
+                field="first_name"
+            />
 
-        const {onChange, onDobUpdate} = this.props
+            <TextField
+                error={errors.middle_name}
+                label="Middle Name(Optional)"
+                onChange={onChange}
+                value={middle_name}
+                iconClass="glyphicon glyphicon-user"
+                field="middle_name"
+            />
 
-        return (
-            <div>
-                <TextFieldGroup
-                    error={errors.first_name}
-                    label="First Name"
-                    onChange={onChange}
-                    value={first_name}
-                    field="first_name"
-                />
+            <TextField
+                error={errors.last_name}
+                label="Last Name"
+                onChange={onChange}
+                value={last_name}
+                iconClass="glyphicon glyphicon-user"
+                field="last_name"
+            />
 
-                <TextFieldGroup
-                    error={errors.middle_name}
-                    label="Middle Name(Optional)"
-                    onChange={onChange}
-                    value={middle_name}
-                    field="middle_name"
-                />
+            <Date
+                label="date of birth(yyyy-MM-dd)"
+                value={dob}
+                error={errors.dob}
+                onDateUpdate={onDobUpdate}
+            />
 
-                <TextFieldGroup
-                    error={errors.last_name}
-                    label="Last Name"
-                    onChange={onChange}
-                    value={last_name}
-                    field="last_name"
-                />
+            <Select
+                field="gender"
+                label="Gender"
+                error={errors.gender}
+                onChange={onChange}
+            >
+                <option value='m'>Male</option>
+                <option value='f'>Female</option>
+                <option value='o'>Others</option>
+            </Select>
 
-                <div className={classnames('form-group', {'has-error': errors.dob})}>
-                <DateTime
-                    closeOnSelect={true}
-                    viewMode={'days'}
-                    timeFormat={false}
-                    inputProps={{ placeholder: 'date of birth(yyyy-MM-dd)'}}
-                    isValidDate={this.isValidDate}
-                    value={dob}
-                    onChange={onDobUpdate}
-                    name="dob"
-                    dateFormat="YYYY-MM-DD"
-                />  {errors.dob && <span className="help-block">{errors.dob}</span>}
-                </div>
+            <TextField
+                error={errors.password}
+                label="Password"
+                onChange={onChange}
+                value={password}
+                field="password"
+                iconClass="fa fa-key"
+                type="password"
+            />
 
-                <div className={classnames('form-group', {'has-error': errors.gender})}>
-                <select
-                    className="select form-control"
-                    onChange={onChange}
-                    name="gender">
-                    <option className="select-placeholder"  disabled="disabled" selected="selected">Select your Gender</option>
-                    <option value='m'>Male</option>
-                    <option value='f'>Female</option>
-                    <option value='o'>Others</option>
-                </select>
-                    {errors.gender && <span className="help-block">{errors.gender}</span>}
-                </div>
-
-                <TextFieldGroup
-                    error={errors.password}
-                    label="Password"
-                    onChange={onChange}
-                    value={password}
-                    field="password"
-                    type="password"
-                />
-
-                <TextFieldGroup
-                    error={errors.password_confirm}
-                    label="Confirm Password"
-                    onChange={onChange}
-                    value={password_confirm}
-                    field="password_confirm"
-                    type="password"
-                />
-            </div>
-        );
-    }
-}
+            <TextField
+                error={errors.password_confirm}
+                label="Confirm Password"
+                onChange={onChange}
+                value={password_confirm}
+                field="password_confirm"
+                iconClass="fa fa-key"
+                type="password"
+            />
+        </div>
+    );
+};
 
 UserDetails.propTypes = {
     onChange: React.PropTypes.func.isRequired,
     state: React.PropTypes.object.isRequired
 };
-
-export default UserDetails;

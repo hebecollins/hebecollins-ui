@@ -1,11 +1,9 @@
 import React from 'react'
 import {connect} from 'react-redux'
 import {logoutRequest} from '../../../actions/commons/authActions'
-import NavigationBar from "../commons/templates/NavigationBar"
+import {NavigationBar} from "../commons/templates/NavigationBar"
 import {getRouteByName} from "../../../Toolbox/Helpers/routeHandler"
-import {redirectByName} from "../../../Toolbox/Helpers/redirect"
-import {Link} from 'react-router'
-import NavLink from './../commons/NavLink'
+import {NavLink} from './../commons/NavLink'
 
 class ManagerNavigation extends React.Component {
     logout(e) {

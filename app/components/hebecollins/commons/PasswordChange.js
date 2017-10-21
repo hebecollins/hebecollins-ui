@@ -1,5 +1,5 @@
 import React from 'react';
-import TextFieldGroup from '../../dumb/commons/TextFieldGroup'
+import {TextField} from '../../dumb/commons/InputFieldGroup'
 import {validateChangedPassword} from "../../../Toolbox/Validation/helpers";
 import {connect} from 'react-redux';
 import {errorResponse} from "../../../Toolbox/Helpers/responseHandler";
@@ -61,7 +61,7 @@ class PasswordChange extends React.Component {
                         isLoading={isLoading}
                         enableImage={false}
                     >
-                        <TextFieldGroup
+                        <TextField
                             field="old_password"
                             value={old_password}
                             label="Old Password"
@@ -71,7 +71,7 @@ class PasswordChange extends React.Component {
                             onChange={this.onChange}
                         />
 
-                        <TextFieldGroup
+                        <TextField
                             field="new_password"
                             value={new_password}
                             label="New Password"
@@ -81,7 +81,7 @@ class PasswordChange extends React.Component {
                             onChange={this.onChange}
                         />
 
-                        <TextFieldGroup
+                        <TextField
                             field="confirm_new_password"
                             value={confirm_new_password}
                             label="Confirm New Password"

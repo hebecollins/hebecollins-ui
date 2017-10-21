@@ -2,15 +2,10 @@ import React from 'react';
 
 /**Defines a Box on a page in which a styling is set. Only things required to pass is the fields
  * and the onSubmit function
- * ===========================================================================
- *  *Purpose: To use it on pages with a form and no fancy stuff. Eg OTP Form *
- * ===========================================================================
+ *
+ * Purpose: To use it on pages with a form and no fancy stuff. Eg OTP Form *
  *
  * Buttons:
- *      *Next button : If wanted a Next button to appear on right side of the screen,
- *                  pass nextButton=true as props
- *      *Back button : If wanted a Back button to appear on left side of the screen,
- *                  pass backButton=true as props
  *      *Submit button : Submit button appears at the center of the page.
  *                  No need to pass as props
  * */

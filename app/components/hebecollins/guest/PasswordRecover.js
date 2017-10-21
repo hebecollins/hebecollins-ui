@@ -1,16 +1,11 @@
 import React from 'react';
-import TextFieldGroup from '../../dumb/commons/TextFieldGroup'
+import {MobileNumber, Select, TextField} from '../../dumb/commons/InputFieldGroup'
 import {validateEmailOrMobile} from "../../../Toolbox/Validation/helpers";
 import {connect} from 'react-redux';
 import {errorResponse} from "../../../Toolbox/Helpers/responseHandler";
 import {passwordRecoverRequest} from "../../../actions/commons/authActions"
 import {FormatForm} from "../../dumb/commons/templates/FormatForm"
-import classnames from 'classnames';
 import SingleScreen from "../../dumb/commons/templates/SingleScreen";
-
-import IntlTelInput from 'react-intl-tel-input';
-import 'file?name=libphonenumber.js!../../../../node_modules/react-intl-tel-input/dist/libphonenumber.js';
-import './../../../../node_modules/react-intl-tel-input/dist/main.css';
 
 class PasswordRecover extends React.Component {
 
@@ -19,7 +14,7 @@ class PasswordRecover extends React.Component {
         this.state = {
             email: "",
             mobile: "",
-            country_code:"",
+            country_code: "",
             isMobileValid: '',
             target: "",
             errors: {},
@@ -73,22 +68,22 @@ class PasswordRecover extends React.Component {
                         instruction="How would you like to recover your password?"
                         isLoading={isLoading}
                         submitButton={false}>
-                        <div className={classnames('form-group', {'has-error': errors.gender})}>
-                            <select
-                                className="select form-control"
-                                onChange={this.onChange}
-                                name="target">
-                                <option className="select-placeholder" disabled="disabled" selected="selected">Select
-                                    a recovery medium
-                                </option>
-                                <option value='mobile'>Text me the recovery link</option>
-                                <option value='email'>Email me the recovery link</option>
-                            </select>
-                            {errors.target && <span className="help-block">{errors.target}</span>}
-                        </div>
+
+                        <Select
+                            field="target"
+                            label="Select a password recovery option"
+                            error={errors.target}
+                            onChange={this.onChange}
+                            isIconNeeded={false}
+                        >
+                            <option value='mobile'>Text me the recovery link</option>
+                            <option value='email'>Email me the recovery link</option>
+
+                        </Select>
+
                         {this.state.target === "email" ?
                             <div>
-                                <TextFieldGroup
+                                <TextField
                                     field="email"
                                     label="Email"
                                     value={email}
@@ -103,31 +98,20 @@ class PasswordRecover extends React.Component {
                             </div>
 
                             : this.state.target === "mobile" ?
+                                <div>
+                                    <MobileNumber
+                                        field="mobile"
+                                        value={mobile}
+                                        handleMobileNo={this.handleMobileNo}
+                                        error={errors.mobile}
+                                    />
 
-                                <div><div className={classnames("form-group", {'has-error': errors.mobile})}>
-                                    <div className="input-group">
-                            <span className="icon-text-field input-group-addon">
-                                <i className="glyphicon glyphicon-phone"/>
-                            </span>
-                                        <IntlTelInput
-                                            fieldName={"mobile"}
-                                            value={mobile}
-                                            onPhoneNumberChange={this.handleMobileNo}
-                                            preferredCountries={['in']}
-                                            placeholder={'Mobile number'}
-                                            numberType="MOBILE"
-                                            style={{width: '100%'}}
-                                            css={['intl-tel-input', 'form-control']}
-                                            utilsScript={'libphonenumber.js'}
-                                        /></div>
-                                    {errors.mobile && <span className="help-block">{errors.mobile}</span>}
-                                    </div>
                                     <button disabled={isLoading} onClick={this.onSubmit}
                                             className="btn btn-group-justified btn-hebecollins btn-lg">
                                         Send Me Recovery Link
                                     </button>
                                 </div>
-                                    : <div></div>
+                                : <div></div>
                         }
                     </FormatForm>
                 </SingleScreen>

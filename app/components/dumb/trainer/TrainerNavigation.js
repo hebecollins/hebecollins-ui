@@ -1,7 +1,7 @@
 import React from 'react';
 import {connect} from 'react-redux';
 import {logoutRequest} from '../../../actions/commons/authActions'
-import {IMG_URL_OF} from "../../../../config/imageUrl";
+import {NavigationBar} from "../commons/templates/NavigationBar";
 
 class TrainerNavigation extends React.Component {
 
@@ -34,28 +34,9 @@ class TrainerNavigation extends React.Component {
         );
 
         return (
-            <div className="container">
-                <div className="navbar navbar-inverse">
-                    <div className="container-fluid">
-                        <div className="navbar-header">
-                            <a href="/" className="pull-left">
-                                <img className="img-responsive2" src={IMG_URL_OF.LOGO_SHORT}/>
-                            </a>
-                            <a href="#" className="navbar-brand">
-                                {/*Hebecollins*/}
-                            </a>
-                            <button className="navbar-toggle" data-toggle="collapse" data-target=".navHeaderCollapse">
-                                <span className="icon-bar"></span>
-                                <span className="icon-bar"></span>
-                                <span className="icon-bar"></span>
-                            </button>
-                        </div>
-                        <div className="collapse navbar-collapse navHeaderCollapse">
-                            {trainerLinks}
-                        </div>
-                    </div>
-                </div>
-            </div>
+            <NavigationBar>
+                {trainerLinks}
+            </NavigationBar>
         );
     }
 }

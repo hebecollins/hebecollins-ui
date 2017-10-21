@@ -1,62 +1,42 @@
 import React from 'react';
-import classnames from 'classnames';
-import TextFieldGroup from './TextFieldGroup';
+import {TextField, MobileNumber} from './InputFieldGroup';
 
-//for country code flag with mobile no.
-import IntlTelInput from 'react-intl-tel-input';
-import 'file?name=libphonenumber.js!../../../../node_modules/react-intl-tel-input/dist/libphonenumber.js';
-import './../../../../node_modules/react-intl-tel-input/dist/main.css';
+export const AddUser=(props)=>{
 
-class AddUser extends React.Component {
-    render() {
-        const {errors} = this.props.state;
+        const {errors,nick_name,email,mobile} = props.state;
         return (
             <div>
-                <TextFieldGroup
+                <TextField
                     error={errors.nick_name}
                     label="Nick Name"
-                    onChange={this.props.onChange}
-                    value={this.props.state.nick_name}
+                    onChange={props.onChange}
+                    value={nick_name}
                     iconClass="glyphicon glyphicon-user"
                     field="nick_name"
                 />
 
-                <TextFieldGroup
+                <TextField
                     error={errors.email}
                     label="Email"
-                    onChange={this.props.onChange}
-                    value={this.props.state.email}
+                    onChange={props.onChange}
+                    value={email}
                     iconClass="glyphicon glyphicon-envelope"
                     field="email"
                 />
 
-                <div className={classnames("form-group", {'has-error': errors.mobile})}>
-                    <div className="input-group">
-                <span className="icon-text-field input-group-addon">
-                    <i className="glyphicon glyphicon-phone"/>
-                </span>
-                        <IntlTelInput
-                        fieldName={"mobile"}
-                        value={this.props.state.mobile}
-                        onPhoneNumberChange={this.props.handleMobileNo}
-                        preferredCountries={['in']}
-                        placeholder={'Mobile number'}
-                        numberType="MOBILE"
-                        style={{width: '100%'}}
-                        css={['intl-tel-input', 'form-control']}
-                        utilsScript={'libphonenumber.js'}
-                        /></div>
-                    {errors.mobile && <span className="help-block">{errors.mobile}</span>}
-                </div>
+                <MobileNumber
+                    label="Mobile Number"
+                    field="mobile"
+                    value={mobile}
+                    handleMobileNo={props.handleMobileNo}
+                    error={errors.mobile}
+                />
             </div>
         );
-    }
-}
+    };
 
 AddUser.propTypes = {
     onChange: React.PropTypes.func.isRequired,
-    handleMobileNo:React.PropTypes.func.isRequired,
-    state:React.PropTypes.object.isRequired
+    handleMobileNo: React.PropTypes.func.isRequired,
+    state: React.PropTypes.object.isRequired
 };
-
-export default AddUser;

@@ -16,6 +16,7 @@ import TrainerHome from './components/hebecollins/trainer/TrainerHome'
 import ManagerHome from './components/hebecollins/manager/ManagerHome'
 import Verify from "./components/hebecollins/guest/Verify";
 import PasswordChange from "./components/hebecollins/commons/PasswordChange";
+import AdminHome from "./components/hebecollins/admin/AdminHome";
 
 export default (
     <div className="something">
@@ -24,6 +25,7 @@ export default (
             <Route path={getRouteByName('CLIENT_HOME')} component={authCheck(ClientHome)}/>
             <Route path={getRouteByName('TRAINER_HOME')} component={authCheck(TrainerHome)}/>
             <Route path={getRouteByName('MANAGER_HOME')} component={authCheck(ManagerHome)}/>
+            <Route path={getRouteByName('ADMIN_HOME')} component={authCheck(AdminHome)}/>
 
             <Route path={getRouteByName('ACTIVATE_MANAGER')} component={authCheck(Activate)}/>
             <Route path={getRouteByName('VERIFY')} component={authCheck(Verify)}/>

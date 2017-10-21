@@ -1,14 +1,11 @@
 import React from 'react';
-import TextFieldGroup from '../commons/TextFieldGroup'
+import {TextField} from '../commons/InputFieldGroup'
 import {validateLogin} from "../../../Toolbox/Validation/helpers";
 import {errorResponse} from "../../../Toolbox/Helpers/responseHandler";
 import {getRouteByName} from "../../../Toolbox/Helpers/routeHandler";
 
-require('../../../Toolbox/css/contentBox.css');
-
 class LoginForm extends React.Component {
 
-   //defining state
     constructor(props) {
         super(props);
         this.state = {
@@ -60,7 +57,7 @@ class LoginForm extends React.Component {
         return (
             <form onSubmit={this.onSubmit}>
                 <p className="white-center">Welcome!</p>
-                <TextFieldGroup
+                <TextField
                     field="identifier"
                     label="Email/Mobile"
                     value={identifier}
@@ -69,7 +66,7 @@ class LoginForm extends React.Component {
                     error={errors.identifier}
                 />
 
-                <TextFieldGroup
+                <TextField
                     field="password"
                     label="Password"
                     value={password}
@@ -89,6 +86,7 @@ class LoginForm extends React.Component {
                     />
                     <label className="checkbox-text">Remember Me</label>
                 </div>
+
                 <div className="form-group">
                     <button disabled={isLoading} className="btn btn-group-justified btn-hebecollins btn-lg">Submit
                     </button>

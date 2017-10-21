@@ -20,6 +20,11 @@ export const ROUTES = [
         PERMISSION:['manager']
     },
     {
+        ROUTE_NAME: 'ADMIN_HOME',
+        ROUTE:'/admin',
+        PERMISSION:['admin']
+    },
+    {
         ROUTE_NAME: 'ACTIVATE_MANAGER',
         ROUTE:'/activate/manager',
         PERMISSION:['guest']

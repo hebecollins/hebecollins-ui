@@ -1,5 +1,5 @@
 import React from 'react';
-import TextFieldGroup from '../../dumb/commons/TextFieldGroup'
+import TextFieldGroup from '../../dumb/commons/InputFieldGroup'
 import {validatePassword} from "../../../Toolbox/Validation/helpers";
 import {connect} from 'react-redux';
 import {errorResponse} from "../../../Toolbox/Helpers/responseHandler";
