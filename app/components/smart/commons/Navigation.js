@@ -5,6 +5,7 @@ import {TrainerNavigation} from '../../dumb/Navigation/TrainerNavigation';
 import {ManagerNavigation} from '../../dumb/Navigation/ManagerNavigation';
 import {connect} from 'react-redux';
 import {logoutRequest} from '../../../actions/commons/authActions'
+import {AdminNavigation} from "../../dumb/Navigation/AdminNavigation";
 
 class Navigation extends React.Component {
 
@@ -19,13 +20,14 @@ class Navigation extends React.Component {
     }
 
     render() {
-        const {isAuthenticated, user, logoutRequest} = this.props;
+        const {isAuthenticated, user} = this.props;
         return (
             <div>
                 {
                     !isAuthenticated ? <GuestNavigation/>
                         : (user.user_type === 'client') ? <ClientNavigation logout={this.logout}/>
                         : (user.user_type === 'trainer') ? <TrainerNavigation logout={this.logout}/>
+                        : (user.user_type === 'admin') ? <AdminNavigation logout={this.logout}/>
                             : <ManagerNavigation logout={this.logout}/>
                 }
             </div>

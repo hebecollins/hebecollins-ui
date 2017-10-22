@@ -11,6 +11,8 @@ export function redirectToHome() {
 }
 
 export function redirectByName(name) {
+    console.log("name  :"+name);
     const route = getRouteByName(name);
+console.log("route  :"+route);
     browserHistory.push(route);
 }

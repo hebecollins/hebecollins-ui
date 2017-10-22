@@ -19,6 +19,7 @@ class QuoteBox extends React.Component {
 
     componentWillMount() {
         this.setState({nickName: this.props.nickName});
+        console.log(this.state);
         this.props.getQuote()
             .then(res => {
                     this.setState({author: res.data.author, quote: res.data.quote})

@@ -47,11 +47,16 @@ export const ROUTES = [
     {
         ROUTE_NAME: 'PASSWORD_CHANGE',
         ROUTE:'/password/change',
-        PERMISSION:['client','trainer','manager']
+        PERMISSION:['client','trainer','manager','admin']
     },
     {
         ROUTE_NAME: 'ADD_TRAINER',
         ROUTE:'/add/trainer',
         PERMISSION:['manager']
+    },
+    {
+        ROUTE_NAME: 'ADD_QUOTES',
+        ROUTE:'/add/quotes',
+        PERMISSION:['admin']
     }
 ];

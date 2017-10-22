@@ -76,8 +76,15 @@ export function passwordResetRequest(data, params) {
         "password": data.password,
         "password_confirm": data.password_confirm
     };
+
+    const paramsToBePosted = {
+        "identifier":params.identifier,
+        "id":params.id
+    };
+
     return dispatch => {
-        return postForm(dataToBePosted, BACKEND_ROUTES.PASSWORD.RESET, params).then(res => {
+        console.log(BACKEND_ROUTES.PASSWORD.RESET);
+        return postForm(dataToBePosted, BACKEND_ROUTES.PASSWORD.RESET, paramsToBePosted ).then(res => {
                 redirectToHome();
                 dispatch(addFlashMessage({
                     type: 'success',

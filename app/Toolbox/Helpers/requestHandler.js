@@ -29,11 +29,15 @@ export function postJSON(data,route,params={}) {
 }
 
 export function postForm(data,route,params={}) {
+    const a= {
+        some:"some",
+        somem:"somelem"
+    };
     const authOptions = {
         method: 'POST',
         url: route,
         data: querystring.stringify(data),
-        params:params,
+        params:(params),
         headers: {
             'Content-Type': 'application/x-www-form-urlencoded'
         }

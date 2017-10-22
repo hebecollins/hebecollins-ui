@@ -5,21 +5,20 @@ import LoginAndSignup from "../../dumb/guest/LoginAndSignup";
 import {userSignUpRequest} from '../../../actions/guest/signUpActions'
 import {addFlashMessage} from '../../../actions/commons/flashMessages';
 import {loginRequest} from "../../../actions/commons/authActions"
-import TwoScreen from "../../dumb/commons/templates/TwoScreen";
+import {TwoScreen} from "../../dumb/commons/templates/TwoScreen";
 
 class Home extends React.Component {
-    constructor(props) {
-        super(props);
-    }
 
     render() {
+        console.log("guest home");
         const {userSignUpRequest, addFlashMessage, loginRequest} = this.props;
         return (
             <div className="content">
                 <TwoScreen>
-                    <Description key="desktopOnly"/>
+                    <Description key="desktopOnly" alignment="left"/>
                     <LoginAndSignup
                         key="mobileVisible"
+                        alignment="right"
                         loginRequest={loginRequest}
                         userSignUpRequest={userSignUpRequest}
                         addFlashMessage={addFlashMessage}/>

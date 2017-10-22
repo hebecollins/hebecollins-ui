@@ -87,3 +87,7 @@ blockquote:before {
     color: var(--light-orange);
     background-color: transparent;
 }
+
+.comment-box{
+    height: 150px!important;
+}

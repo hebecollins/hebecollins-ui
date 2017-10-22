@@ -122,3 +122,16 @@ export function validateChangedPassword(data) {
         isValid
     }
 }
+
+
+export function validateQuotes(data) {
+    const {author, quote} = data;
+    const {errors, isValid} = validate({
+        author: [author, 'isRequired'],
+        quote: [quote, 'isRequired'],
+    });
+    return {
+        errors,
+        isValid
+    }
+}

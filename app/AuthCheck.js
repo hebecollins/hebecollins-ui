@@ -9,6 +9,9 @@ import {redirectTo, redirectToHome} from "./Toolbox/Helpers/redirect";
  * @param Component it is the component which has been passed to check for permission
  * @return Component if allowed else error
  * */
+
+/*TODO(very important): Right now component is getting mounted after it is redirecting for a second, because render function shots anyway. So terminate the rendering just after it redirects
+*/
 export default function (Component) {
     class Permission extends React.Component {
         componentWillMount() {//gets called just once before first render
@@ -32,6 +35,8 @@ export default function (Component) {
             }
             else {
                 const userType = user.user_type;
+                console.log(route);
+                console.log(userType);
                 if (!getPermissionByRoute(route).includes(userType)) {
                     redirectTo('/'+userType);
                 }
@@ -40,7 +45,6 @@ export default function (Component) {
 
         componentWillUpdate(nextProps) {//gets called whenever render updates
             const route = this.props.location.pathname;
-           console.log("hello");
             if (!nextProps.isAuthenticated && route !== getRouteByName("GUEST_HOME")) {
                 redirectToHome();
             }

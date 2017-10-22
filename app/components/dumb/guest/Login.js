@@ -34,8 +34,6 @@ class LoginForm extends React.Component {
         return isValid;
     }
 
-
-
     onSubmit(e) {
         e.preventDefault();
         if (this.isValid()) {

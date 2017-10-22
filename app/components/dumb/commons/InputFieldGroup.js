@@ -46,6 +46,42 @@ TextField.defaultProps = {
     isIconNeeded: true
 };
 
+/**===========================================================================================
+ * It is a comment Box
+ * */
+export const CommentBox = ({field, value, disabled, label, error, type, onChange, iconClass,isIconNeeded}) => {
+    return (
+        <FieldFrame
+            iconClass={iconClass}
+            error={error}
+            isIconNeeded={isIconNeeded}
+        >
+            <textarea
+                value={value}
+                onChange={onChange}
+                name={field}
+                className="comment-box form-control"
+                placeholder={label}
+                disabled={disabled}
+            /></FieldFrame>
+    )
+};
+
+CommentBox.propTypes = {
+    field: React.PropTypes.string.isRequired,
+    value: React.PropTypes.string.isRequired,
+    label: React.PropTypes.string.isRequired,
+    error: React.PropTypes.string,
+    iconClass: React.PropTypes.string.isRequired,
+    isIconNeeded: React.PropTypes.bool,
+    onChange: React.PropTypes.func.isRequired
+};
+
+CommentBox.defaultProps = {
+    iconClass: "glyphicon glyphicon-user",
+    isIconNeeded: true
+};
+
 
 /**============================================================================================
  * It is a date picker component.

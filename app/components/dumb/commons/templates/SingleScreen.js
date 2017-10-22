@@ -8,7 +8,7 @@ class SingleScreen extends React.Component {
         return (
             <div className="row">
                 <div className="col-lg-offset-4 col-lg-4 col-md-offset-4 col-md-4 col-sm-offset-4 col-sm-4 col-xs-12">
-                    <div className="content-child-single-screen">
+                    <div className="white-box">
                         {this.props.children}
                     </div>
                 </div>

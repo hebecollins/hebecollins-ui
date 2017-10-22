@@ -1,5 +1,5 @@
 import React from 'react';
-import TextFieldGroup from '../../dumb/commons/InputFieldGroup'
+import {TextField} from '../../dumb/commons/InputFieldGroup'
 import {validatePassword} from "../../../Toolbox/Validation/helpers";
 import {connect} from 'react-redux';
 import {errorResponse} from "../../../Toolbox/Helpers/responseHandler";
@@ -43,6 +43,7 @@ class PasswordReset extends React.Component {
             const params = this.props.location.query;
             this.props.passwordResetRequest(this.state, params).catch(
                 (err) => {
+                    console.log(err);
                     const response = errorResponse(err);
                     this.setState({errors: response, isLoading: false})
                 }
@@ -60,7 +61,7 @@ class PasswordReset extends React.Component {
                         onSubmit={this.onSubmit}
                         instruction="Reset Your Password"
                         isLoading={isLoading}>
-                        <TextFieldGroup
+                        <TextField
                             field="password"
                             label="Password"
                             value={password}
@@ -69,7 +70,7 @@ class PasswordReset extends React.Component {
                             iconClass="fa fa-key"
                             type="password"
                         />
-                        <TextFieldGroup
+                        <TextField
                             field="password_confirm"
                             label="Confirm Password"
                             value={password_confirm}

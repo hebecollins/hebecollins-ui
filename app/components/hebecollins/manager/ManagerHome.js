@@ -6,6 +6,7 @@ import QuoteBox from "../../smart/commons/templates/QuoteBox";
 class ManagerHome extends React.Component {
 
     render() {
+        console.log("mnagerhome first");
         return (
             <div>
                 <QuoteBox>

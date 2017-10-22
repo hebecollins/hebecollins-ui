@@ -1,34 +1,58 @@
 import React from 'react';
 
-class TwoScreen extends React.Component {
-    constructor(props) {
-        super(props);
+/** This component splits the  screen into two parts. One part will be mobile & desktop visible, and the
+ *  other will be desktop only
+ *  @param monitorMode boolean=> If monitor mode is true, left side of the screen will be mobile visible
+ *                               ELSE right side will be mobile visible
+ *                               BY DEFAULT screen monitor mode is false
+ *  @param children => Children defined inside <TwoScreen></TwoScreen> tag.
+ *                      It is expected to receive 2 children with each having a 'key' as 'mobileVisible' or 'desktopOnly'
+ * */
+export const TwoScreen = ({children, monitorMode}) => {
 
-        this.getComponent = this.getComponent.bind(this)
-    }
-
-    getComponent(key) {
-        return this.props.children.filter((comp) => {
-            return comp.key === key;
+    const getComponent = (key) => {
+        return children.filter((component) => {
+            return component.key === key;
         });
-    }
+    };
 
-    render() {
-        return (
-            <div className="row">
-                <div className="col col-lg-6 col-md-6 col-sm-6 hidden-xs">
-                    <div className="content-child-two-screen">
-                        {this.getComponent('desktopOnly')}
+    return (
+        <div>
+            {monitorMode ?
+                <div className="row">
+                    <div className="col col-lg-6 col-md-6 col-sm-6 col-xs-12">
+                        <div className="content-child-two-screen">
+                            {getComponent('mobileVisible')}
+                        </div>
+                    </div>
+                    <div className="col col-lg-6 col-md-6 col-sm-6 hidden-xs">
+                        <div className="content-child-two-screen">
+                            {getComponent('desktopOnly')}
+                        </div>
+                    </div>
+
+                </div> :
+                <div className="row">
+                    <div className="col col-lg-6 col-md-6 col-sm-6 hidden-xs">
+                        <div className="content-child-two-screen">
+                            {getComponent('desktopOnly')}
+                        </div>
+                    </div>
+                    <div className="col col-lg-6 col-md-6 col-sm-6 col-xs-12">
+                        <div className="content-child-two-screen">
+                            {getComponent('mobileVisible')}
+                        </div>
                     </div>
                 </div>
-                <div className="col col-lg-6 col-md-6 col-sm-6 col-xs-12">
-                    <div className="content-child-two-screen">
-                        {this.getComponent('mobileVisible')}
-                    </div>
-                </div>
-            </div>
-        );
-    }
-}
+            }
+        </div>
+    );
+};
 
-export default TwoScreen;
+TwoScreen.propTypes = {
+    monitorMode: React.PropTypes.bool.isRequired
+};
+
+TwoScreen.defaultProps = {
+    monitorMode: false
+};

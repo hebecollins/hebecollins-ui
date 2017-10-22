@@ -1,3 +1,4 @@
+
 :root {
     --dark-orange: #ea3e0d;
     --light-orange: #e67817;
@@ -31,7 +32,7 @@
         padding: 10% 5% 15% 5%;
     }
 
-    .content-child-single-screen {
+    .white-box {
         background: rgba(204, 204, 204, 0.2);
         border-radius: 0;
         overflow: auto;
@@ -73,7 +74,7 @@
         padding: 30px 5% 30px 5%;
     }
 
-    .content-child-single-screen {
+    .white-box {
         background: rgba(204, 204, 204, 0.2);
         border-radius: 0;
         overflow: auto;
@@ -176,4 +177,12 @@
 .format-form {
     padding-left: 5%;
     padding-right: 5%;
+}
+
+.monitor{
+    height:100%!important;
+}
+
+.monitor-data-box{
+    color: white;
 }

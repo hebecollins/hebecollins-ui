@@ -17,6 +17,7 @@ import ManagerHome from './components/hebecollins/manager/ManagerHome'
 import Verify from "./components/hebecollins/guest/Verify";
 import PasswordChange from "./components/hebecollins/commons/PasswordChange";
 import AdminHome from "./components/hebecollins/admin/AdminHome";
+import AddQuotes from "./components/hebecollins/admin/AddQuotes";
 
 export default (
     <div className="something">
@@ -27,12 +28,16 @@ export default (
             <Route path={getRouteByName('MANAGER_HOME')} component={authCheck(ManagerHome)}/>
             <Route path={getRouteByName('ADMIN_HOME')} component={authCheck(AdminHome)}/>
 
+
             <Route path={getRouteByName('ACTIVATE_MANAGER')} component={authCheck(Activate)}/>
             <Route path={getRouteByName('VERIFY')} component={authCheck(Verify)}/>
             <Route path={getRouteByName('PASSWORD_RECOVER')} component={authCheck(PasswordRecover)}/>
             <Route path={getRouteByName('PASSWORD_RESET')} component={authCheck(PasswordReset)}/>
             <Route path={getRouteByName('PASSWORD_CHANGE')} component={authCheck(PasswordChange)}/>
+
             <Route path={getRouteByName('ADD_TRAINER')} component={authCheck(Monitor)}/>
+
+            <Route path={getRouteByName('ADD_QUOTES')} component={authCheck(AddQuotes)}/>
             <Route path='/*' component={NotFound}/>
         </Route>
     </div>
