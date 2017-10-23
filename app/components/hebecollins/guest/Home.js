@@ -2,15 +2,13 @@ import React from 'react';
 import {connect} from 'react-redux';
 import Description from "../../dumb/guest/Description";
 import LoginAndSignup from "../../dumb/guest/LoginAndSignup";
-import {userSignUpRequest} from '../../../actions/guest/signUpActions'
+import {registerManager} from '../../../actions/guest/signUpActions'
 import {addFlashMessage} from '../../../actions/commons/flashMessages';
 import {loginRequest} from "../../../actions/commons/authActions"
 import {TwoScreen} from "../../dumb/commons/templates/TwoScreen";
 
 class Home extends React.Component {
-
     render() {
-        console.log("guest home");
         const {userSignUpRequest, addFlashMessage, loginRequest} = this.props;
         return (
             <div className="content">
@@ -34,4 +32,4 @@ Home.propTypes = {
     loginRequest: React.PropTypes.func.isRequired
 };
 
-export default connect(null, {userSignUpRequest, addFlashMessage, loginRequest})(Home);
+export default connect(null, {userSignUpRequest: registerManager, addFlashMessage, loginRequest})(Home);

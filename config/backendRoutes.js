@@ -14,6 +14,9 @@ export const BACKEND_ROUTES = {
         CLIENT:"activate/client",
         TRAINER:"activate/trainer"
     },
-    ADD_TRAINERS: "/add-trainers",
+    ADD:{
+        TRAINER: "/add/trainers",
+        CLIENT: "/add/client",
+    },
     QUOTE:"/quote"
 };

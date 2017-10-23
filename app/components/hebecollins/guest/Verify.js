@@ -98,7 +98,6 @@ function mapStateToProps(state) {
     return {
         userId: state.verificationData.userId
     }
-
 }
 
 export default connect(mapStateToProps, {sendOTP, resendOTP})(Verify);
