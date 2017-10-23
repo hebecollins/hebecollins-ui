@@ -3,6 +3,7 @@ import {redirectByName, redirectTo} from '../../Toolbox/Helpers/redirect';
 import {STORE_VERIFICATION_DATA} from "../types";
 import {BACKEND_ROUTES} from "../../../config/backendRoutes";
 import {addFlashMessage} from "../commons/flashMessages";
+import {store} from "../../index"
 
 export function sendOTP(data, userId) {
     const dataToBeSent = {
@@ -61,20 +62,23 @@ export function registerManager(data) {
 }
 
 /** Registering a trainer doesn't require a redirect, as the manager might want to add multiple
- *  clients, so needs to stay on the same page after response has received
+ *  trainers, so needs to stay on the same page after response has received
  * @param data => it is the pure state passed out of which only given fields are sent to the server
+ * @param gymId => It is passed by the component based on the current selected gym
  * */
-export function registerTrainer(data) {
-    return register(data, BACKEND_ROUTES.ADD.TRAINER)
+export function registerTrainer(data, gymId) {
+    const route = `/${gymId}${BACKEND_ROUTES.ADD.TRAINER}`;
+    return register(data, route)
 }
 
 /** Registering a client doesn't require a redirect, as the trainer might want to add multiple
  *  clients, so needs to stay on the same page after response has received
  * @param data => it is the pure state passed out of which only given fields are sent to the server
- * */
-export function registerClient(data) {
-    return register(data, BACKEND_ROUTES.ADD.CLIENT)
-}
+ * @param gymId => It is passed by the component based on the current selected gym
+ */
+export function registerClient(data, gymId) {
+    const route = `/${gymId}${BACKEND_ROUTES.ADD.CLIENT}`;
+    return register(data, route)}
 
 /**It is used by methods which does not require any redirection after getting reponse from
  * the server.
@@ -90,7 +94,7 @@ function register(data, route) {
         "country_code": data.country_code
     };
     return postJSON(dataToBeSent, route).then(res => {
-        dispatch(addFlashMessage({
+        store.dispatch(addFlashMessage({
             type: 'success',
             text: res.data.msg
         }));

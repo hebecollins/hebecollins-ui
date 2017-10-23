@@ -4,6 +4,7 @@ import {AddUser} from "../../dumb/commons/AddUser";
 import {validateUserRegistrationFields} from "../../../Toolbox/Validation/helpers";
 import {errorResponse} from "../../../Toolbox/Helpers/responseHandler";
 import {registerTrainer} from "../../../actions/guest/signUpActions";
+import {connect} from "react-redux"
 
 class AddTrainer extends React.Component {
     constructor(props) {
@@ -27,6 +28,18 @@ class AddTrainer extends React.Component {
         this.setState({[e.target.name]: e.target.value});
     }
 
+    reset() {
+        this.setState({
+            nick_name: '',
+            email: '',
+            mobile: '',
+            country_code: '',
+            isMobileValid: '',
+            errors: {},
+            isLoading: false
+        });
+    }
+
     isValid() {
         const {errors, isValid} = validateUserRegistrationFields(this.state);
         if (!isValid) {
@@ -44,12 +57,15 @@ class AddTrainer extends React.Component {
         e.preventDefault();
         if (this.isValid()) {
             this.setState({errors: {}, isLoading: true});//setting state to empty
-            registerTrainer(this.state).catch(
+            registerTrainer(this.state, this.props.gymId).then(
+                (res) => {
+                        this.reset();//resetting the state so that it gets ready to take  another input
+                },
                 (err) => {
                     const response = errorResponse(err);
                     this.setState({errors: response, isLoading: false})
                 }
-            )
+            );
         }
     }
 
@@ -75,4 +91,11 @@ class AddTrainer extends React.Component {
     }
 }
 
-export default AddTrainer;
+function mapStateToProps(state){
+    return{
+        //TODO: change gymId from gymList to selected gym
+        gymId:state.auth.user.gym_list[0].gym_id
+    }
+}
+
+export default connect(mapStateToProps)(AddTrainer);

@@ -52,7 +52,12 @@ export const ROUTES = [
     {
         ROUTE_NAME: 'ADD_TRAINER',
         ROUTE:'/add/trainer',
-        PERMISSION:['manager','guest']
+        PERMISSION:['manager']
+    },
+    {
+        ROUTE_NAME: 'ACTIVATE_TRAINER',
+        ROUTE:'/activate/trainer',
+        PERMISSION:['guest']
     },
     {
         ROUTE_NAME: 'ADD_QUOTES',

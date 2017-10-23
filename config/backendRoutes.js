@@ -15,8 +15,8 @@ export const BACKEND_ROUTES = {
         TRAINER:"activate/trainer"
     },
     ADD:{
-        TRAINER: "/add/trainers",
-        CLIENT: "/add/client",
+        TRAINER: "/add/trainer",// :gymId/add/trainers
+        CLIENT: "/add/client",// :gymId/add/client
     },
     QUOTE:"/quote"
 };
