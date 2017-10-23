@@ -49,8 +49,12 @@ function getValidationForProperty(value, property) {
         const functionWithArgument = property.replace(')', ',' + '\'' + value + '\'' + ')');
         return eval(functionWithArgument);
     }
+    console.log(`${property}('${value}')`);
+    console.log(property + '(' + '\'' + value + '\'' + ')');
     //coverts it into eval('property(value)') which is equivalent of calling property function
-    return eval(property + '(' + '\'' + value + '\'' + ')');
+    // return eval(property + '(' + '\'' + value + '\'' + ')');
+    return eval(`${property}('${value}')`);
+
 }
 
 function isRequired(value) {

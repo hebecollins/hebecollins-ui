@@ -10,6 +10,7 @@ require('../Toolbox/css/contentBox.css');
 require('../Toolbox/css/images.css');
 require('../Toolbox/css/dateTime.css');
 require('../Toolbox/css/font-awesome.min.css');
+require('../Toolbox/css/animation.css');
 
 
 class App extends React.Component {

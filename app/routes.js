@@ -18,6 +18,7 @@ import Verify from "./components/hebecollins/guest/Verify";
 import PasswordChange from "./components/hebecollins/commons/PasswordChange";
 import AdminHome from "./components/hebecollins/admin/AdminHome";
 import AddQuotes from "./components/hebecollins/admin/AddQuotes";
+import AddTrainer from "./components/hebecollins/manager/AddTrainer";
 
 export default (
     <div className="something">
@@ -35,7 +36,7 @@ export default (
             <Route path={getRouteByName('PASSWORD_RESET')} component={authCheck(PasswordReset)}/>
             <Route path={getRouteByName('PASSWORD_CHANGE')} component={authCheck(PasswordChange)}/>
 
-            <Route path={getRouteByName('ADD_TRAINER')} component={authCheck(Monitor)}/>
+            <Route path={getRouteByName('ADD_TRAINER')} component={authCheck(AddTrainer)}/>
 
             <Route path={getRouteByName('ADD_QUOTES')} component={authCheck(AddQuotes)}/>
             <Route path='/*' component={NotFound}/>
