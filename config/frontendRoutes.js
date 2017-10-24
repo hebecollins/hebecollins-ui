@@ -70,10 +70,14 @@ export const ROUTES = [
         ROUTE:'/activate/client',
         PERMISSION:['guest']
     },
-
+    {
+        ROUTE_NAME: 'ADD_WORKOUT',
+        ROUTE:'/add/workout',
+        PERMISSION:['guest']
+    },
     {
         ROUTE_NAME: 'ADD_QUOTES',
         ROUTE:'/add/quotes',
-        PERMISSION:['admin','guest']
+        PERMISSION:['admin']
     }
 ];

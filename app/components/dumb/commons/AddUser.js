@@ -1,5 +1,5 @@
 import React from 'react';
-import {TextField, MobileNumber} from './InputFieldGroup';
+import {TextField, MobileNumber} from './inputField/InputFieldWithIcon';
 
 export const AddUser=(props)=>{
 

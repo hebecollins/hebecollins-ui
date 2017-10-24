@@ -1,5 +1,5 @@
 import React from 'react';
-import {TextField} from './InputFieldGroup';
+import {TextField} from './inputField/InputFieldWithIcon';
 
 /** Fields :    *Street Address(Optional)    *Locality
  *              *District                    *Pin

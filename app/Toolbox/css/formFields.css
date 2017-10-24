@@ -93,3 +93,14 @@ option{
     border-width: 0;
 }
 
+.in-line.form-control{
+    width: 60px;
+    background-color: transparent;
+    margin: 10px;
+    color: white;
+    padding:10px;
+    display: initial;
+}
+.no-margin{
+    margin: 0!important;
+}

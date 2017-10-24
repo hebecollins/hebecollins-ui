@@ -1,7 +1,7 @@
 import React from 'react';
 import {TwoScreen} from "../../dumb/commons/templates/TwoScreen";
 import {FormatForm} from "../../dumb/commons/templates/FormatForm";
-import {CommentBox, TextField} from "../../dumb/commons/InputFieldGroup";
+import {CommentBox, TextField} from "../../dumb/commons/inputField/InputFieldWithIcon";
 import {postQuotesToReduxStore,postQuotesToServer} from "../../../actions/commons/quote"
 import {connect} from 'react-redux'
 import {validateQuotes} from "../../../Toolbox/Validation/helpers"

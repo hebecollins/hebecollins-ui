@@ -4,11 +4,11 @@ import DateTime from 'react-datetime';
 
 //mobile no. files
 import IntlTelInput from 'react-intl-tel-input';
-import 'file?name=libphonenumber.js!../../../../node_modules/react-intl-tel-input/dist/libphonenumber.js';
-import './../../../../node_modules/react-intl-tel-input/dist/main.css';
+import 'file?name=libphonenumber.js!../../../../../node_modules/react-intl-tel-input/dist/libphonenumber.js';
+import './../../../../../node_modules/react-intl-tel-input/dist/main.css';
 
 
-/** It is an input text field component
+/** It is an input text field component with icon as add-on
  * */
 export const TextField = ({field, value, disabled, label, error, type, onChange, iconClass,isIconNeeded}) => {
     return (
@@ -216,7 +216,7 @@ Select.defaultProps = {
 
 
 /**============================================================================================
- * Provides frame for every input field in this file
+ * Provides frame for every input field in this file with add-on as icon
  *  Roles:
  *      * validation error at the bottom of input field
  *      * IF(isIconNeeded) icon display at the left of input field
@@ -252,3 +252,4 @@ FieldFrame.propTypes = {
 FieldFrame.defaultProps = {
     isIconNeeded: true
 };
+

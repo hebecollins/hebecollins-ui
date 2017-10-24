@@ -1,5 +1,5 @@
 import React from 'react';
-import {TextField} from '../../dumb/commons/InputFieldGroup'
+import {TextField} from '../../dumb/commons/inputField/InputFieldWithIcon'
 import {validatePersonalDetails, validateGymDetails} from "../../../Toolbox/Validation/helpers";
 import {connect} from 'react-redux';
 import {Address} from '../../dumb/commons/Address';

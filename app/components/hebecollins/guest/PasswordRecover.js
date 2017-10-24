@@ -1,5 +1,5 @@
 import React from 'react';
-import {MobileNumber, Select, TextField} from '../../dumb/commons/InputFieldGroup'
+import {MobileNumber, Select, TextField} from '../../dumb/commons/inputField/InputFieldWithIcon'
 import {validateEmailOrMobile} from "../../../Toolbox/Validation/helpers";
 import {connect} from 'react-redux';
 import {errorResponse} from "../../../Toolbox/Helpers/responseHandler";
