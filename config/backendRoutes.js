@@ -11,8 +11,8 @@ export const BACKEND_ROUTES = {
     RESEND_OTP: "/resend/otp",
     ACTIVATE: {
         MANAGER: "/activate/manager",
-        CLIENT:"activate/client",
-        TRAINER:"activate/trainer"
+        CLIENT:"/activate/client",
+        TRAINER:"/activate/trainer"
     },
     ADD:{
         TRAINER: "/add/trainer",// :gymId/add/trainers

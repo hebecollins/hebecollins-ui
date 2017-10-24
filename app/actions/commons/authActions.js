@@ -15,6 +15,7 @@ export function setCurrentUser(user) {
 export function logoutRequest() {
     return dispatch => {
         return get(BACKEND_ROUTES.LOGOUT).then(res => {
+            console.log("inside logout request");
                 localStorage.removeItem('user');
                 setAuthToken(false);
                 dispatch(addFlashMessage({
@@ -41,10 +42,19 @@ export function loginRequest(data) {
     return dispatch => {
         return postForm(dataToBePosted, BACKEND_ROUTES.LOGIN).then(res => {
                 const user = res.data.data;
+                console.log("login request");
+                console.log(res.data.data);
                 localStorage.setItem('user', JSON.stringify(user));
-                setAuthToken(user.token);
+            console.log("after localStorage");
+
+            setAuthToken(user.token);
+            console.log("after settoken");
+
                 dispatch(setCurrentUser(user));
+            console.log("after setcurrentuser");
                 redirectTo('/' + user.user_type);
+                console.log("after redirect");
+
             }
         );
     }

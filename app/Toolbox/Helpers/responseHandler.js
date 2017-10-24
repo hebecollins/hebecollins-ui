@@ -18,6 +18,8 @@ export function errorResponse(err) {
      * */
     if (typeof err.response === 'undefined') {
         if (store.getState().auth.isAuthenticated === true) {
+            console.log("errorResponse");
+            console.log(err);
             localStorage.removeItem('user');
             setAuthToken(false);
             store.dispatch(setCurrentUser({}));

@@ -6,7 +6,6 @@ import NotFound from "./components/hebecollins/commons/NotFound"
 import Activate from './components/hebecollins/manager/Activate';
 import PasswordRecover from './components/hebecollins/guest/PasswordRecover'
 import PasswordReset from './components/hebecollins/commons/PasswordReset'
-import Monitor from './components/smart/commons/Monitor';
 import authCheck from './AuthCheck';
 
 import App from './components/App';
@@ -20,16 +19,17 @@ import AdminHome from "./components/hebecollins/admin/AdminHome";
 import AddQuotes from "./components/hebecollins/admin/AddQuotes";
 import AddTrainer from "./components/hebecollins/manager/AddTrainer";
 import ActivateTrainer from "./components/hebecollins/trainer/ActivateTrainer";
+import AddClient from "./components/hebecollins/trainer/AddClient";
+import ActivateClient from "./components/hebecollins/client/ActivateClient";
 
 export default (
     <div className="something">
         <Route path="/" component={App}>
             <IndexRoute component={authCheck(GuestHome)}/>
-            <Route path={getRouteByName('CLIENT_HOME')} component={authCheck(ClientHome)}/>
-            <Route path={getRouteByName('TRAINER_HOME')} component={authCheck(TrainerHome)}/>
             <Route path={getRouteByName('MANAGER_HOME')} component={authCheck(ManagerHome)}/>
+            <Route path={getRouteByName('TRAINER_HOME')} component={authCheck(TrainerHome)}/>
+            <Route path={getRouteByName('CLIENT_HOME')} component={authCheck(ClientHome)}/>
             <Route path={getRouteByName('ADMIN_HOME')} component={authCheck(AdminHome)}/>
-
 
             <Route path={getRouteByName('ACTIVATE_MANAGER')} component={authCheck(Activate)}/>
             <Route path={getRouteByName('VERIFY')} component={authCheck(Verify)}/>
@@ -38,11 +38,12 @@ export default (
             <Route path={getRouteByName('PASSWORD_CHANGE')} component={authCheck(PasswordChange)}/>
 
             <Route path={getRouteByName('ADD_TRAINER')} component={authCheck(AddTrainer)}/>
+            <Route path={getRouteByName('ADD_CLIENT')} component={authCheck(AddClient)}/>
             <Route path={getRouteByName('ACTIVATE_TRAINER')} component={authCheck(ActivateTrainer)}/>
+            <Route path={getRouteByName('ACTIVATE_CLIENT')} component={authCheck(ActivateClient)}/>
 
             <Route path={getRouteByName('ADD_QUOTES')} component={authCheck(AddQuotes)}/>
             <Route path='/*' component={NotFound}/>
         </Route>
     </div>
-
 )

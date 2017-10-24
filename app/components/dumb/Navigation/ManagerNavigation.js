@@ -9,6 +9,11 @@ export const ManagerNavigation = ({logout}) => {
             <li>
                 <NavLink to={getRouteByName("MANAGER_HOME")} onlyActiveOnIndex>Home</NavLink>
             </li>
+            <li>
+                <NavLink to={getRouteByName("ADD_TRAINER")} onlyActiveOnIndex>Add Trainer</NavLink>
+            </li>
+
+
             <li className="dropdown">
                 <a href="#" className="dropdown-toggle" data-toggle="dropdown">GYM<b className="caret"></b></a>
                 <ul className="dropdown-menu">

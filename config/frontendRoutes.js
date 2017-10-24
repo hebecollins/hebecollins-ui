@@ -6,12 +6,12 @@ export const ROUTES = [
     },
     {
         ROUTE_NAME: 'CLIENT_HOME',
-        ROUTE:'client',
+        ROUTE:'/client',
         PERMISSION:['client']
     },
     {
         ROUTE_NAME: 'TRAINER_HOME',
-        ROUTE:'trainer',
+        ROUTE:'/trainer',
         PERMISSION:['trainer']
     },
     {
@@ -55,10 +55,22 @@ export const ROUTES = [
         PERMISSION:['manager']
     },
     {
+        ROUTE_NAME: 'ADD_CLIENT',
+        ROUTE:'/add/client',
+        PERMISSION:['trainer']
+    },
+    {
         ROUTE_NAME: 'ACTIVATE_TRAINER',
         ROUTE:'/activate/trainer',
         PERMISSION:['guest']
     },
+
+    {
+        ROUTE_NAME: 'ACTIVATE_CLIENT',
+        ROUTE:'/activate/client',
+        PERMISSION:['guest']
+    },
+
     {
         ROUTE_NAME: 'ADD_QUOTES',
         ROUTE:'/add/quotes',

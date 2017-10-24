@@ -3,12 +3,12 @@ import SingleScreen from "../../dumb/commons/templates/SingleScreen";
 import {AddUser} from "../../dumb/commons/AddUser";
 import {validateUserRegistrationFields} from "../../../Toolbox/Validation/helpers";
 import {errorResponse} from "../../../Toolbox/Helpers/responseHandler";
-import {registerTrainer} from "../../../actions/guest/signUpActions";
+import {registerClient} from "../../../actions/guest/signUpActions";
 import {connect} from "react-redux"
 import isEmpty from 'lodash/isEmpty';
 
 
-class AddTrainer extends React.Component {
+class AddClient extends React.Component {
     constructor(props) {
         super(props);
         this.state = {
@@ -67,7 +67,7 @@ class AddTrainer extends React.Component {
                 //TODO: change it to select from selected gym by the manager
                 const gymId = user.gym_list[0].gym_id;
 
-                registerTrainer(this.state, gymId).then(
+                registerClient(this.state, gymId).then(
                     (res) => {
                         this.reset();//resetting the state so that it gets ready to take  another input
                     },
@@ -84,7 +84,7 @@ class AddTrainer extends React.Component {
         return (
             <div className="content">
                 <SingleScreen>
-                    <p className="white-center">Add trainer to your gym</p>
+                    <p className="white-center">Add client under your supervision</p>
                     <AddUser
                         onChange={this.onChange}
                         handleMobileNo={this.handleMobileNo}
@@ -108,4 +108,4 @@ function mapStateToProps(state) {
     }
 }
 
-export default connect(mapStateToProps)(AddTrainer);
+export default connect(mapStateToProps)(AddClient);
