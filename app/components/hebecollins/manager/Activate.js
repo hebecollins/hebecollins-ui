@@ -2,8 +2,8 @@ import React from 'react';
 import {TextField} from '../../dumb/commons/inputField/InputFieldWithIcon'
 import {validatePersonalDetails, validateGymDetails} from "../../../Toolbox/Validation/helpers";
 import {connect} from 'react-redux';
-import {Address} from '../../dumb/commons/Address';
-import {UserDetails} from '../../dumb/commons/PersonalDetails';
+import {Address} from '../../dumb/commons/inputFieldGroup/Address';
+import {UserDetails} from '../../dumb/commons/inputFieldGroup/PersonalDetails';
 import {errorResponse} from "../../../Toolbox/Helpers/responseHandler";
 import {FormatForm} from "../../dumb/commons/templates/FormatForm"
 import {activateManagerRequest} from "../../../actions/manager/activate"

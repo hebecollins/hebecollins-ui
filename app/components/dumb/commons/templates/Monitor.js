@@ -9,10 +9,12 @@ export const Monitor = ({data}) => {
     const items = reverseList.map((item) => {
         const KEY1 = Object.keys(item)[1];
         const KEY2 = Object.keys(item)[2];
-        return (<li key={item.id} className="monitor-data-box">
-            {KEY1} : {item[KEY1]}<br/>
-            {KEY2} : {item[KEY2]}<br/><br/>
-        </li>);
+        return (
+            <li key={item.id} className="monitor-data-box">
+                {KEY1} : {item[KEY1]}<br/>
+                {KEY2} : {item[KEY2]}<br/><br/>
+            </li>
+        );
     });
     return (
         <div className="monitor white-box">

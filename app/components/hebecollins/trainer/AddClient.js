@@ -1,6 +1,6 @@
 import React from 'react';
 import SingleScreen from "../../dumb/commons/templates/SingleScreen";
-import {AddUser} from "../../dumb/commons/AddUser";
+import {AddUser} from "../../dumb/commons/inputFieldGroup/AddUser";
 import {validateUserRegistrationFields} from "../../../Toolbox/Validation/helpers";
 import {errorResponse} from "../../../Toolbox/Helpers/responseHandler";
 import {registerClient} from "../../../actions/guest/signUpActions";

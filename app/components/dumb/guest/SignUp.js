@@ -1,6 +1,6 @@
 import React from 'react';
 import {validateUserRegistrationFields} from "../../../Toolbox/Validation/helpers";
-import {AddUser} from '../commons/AddUser';
+import {AddUser} from '../commons/inputFieldGroup/AddUser';
 import {errorResponse} from "../../../Toolbox/Helpers/responseHandler";
 
 class SignUpForm extends React.Component {

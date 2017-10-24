@@ -1,5 +1,5 @@
 import React from 'react';
-import {TextField, Date, Select} from './inputField/InputFieldWithIcon'
+import {TextField, Date, Select} from '../inputField/InputFieldWithIcon'
 
 /**Fields:  *First Name      *Middle Name(Optional)     *Last Name
  *          *Date of Birth   *Gender

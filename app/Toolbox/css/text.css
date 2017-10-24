@@ -91,3 +91,10 @@ blockquote:before {
 .comment-box{
     height: 150px!important;
 }
+
+.badge{
+    padding:10px 12px 10px 12px;
+    font-size: large;
+    margin: 10px 0 10px 0;
+    background-color: var(--dark-orange);
+}

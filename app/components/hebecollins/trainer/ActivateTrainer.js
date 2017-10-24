@@ -1,7 +1,7 @@
 import React from 'react';
 import {validatePersonalDetails, validateGymDetails} from "../../../Toolbox/Validation/helpers";
 import {connect} from 'react-redux';
-import {UserDetails} from '../../dumb/commons/PersonalDetails';
+import {UserDetails} from '../../dumb/commons/inputFieldGroup/PersonalDetails';
 import {errorResponse} from "../../../Toolbox/Helpers/responseHandler";
 import {FormatForm} from "../../dumb/commons/templates/FormatForm"
 import SingleScreen from "./../../dumb/commons/templates/SingleScreen";
