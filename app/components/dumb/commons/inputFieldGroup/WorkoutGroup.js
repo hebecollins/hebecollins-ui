@@ -1,12 +1,13 @@
 import React from 'react'
 import Workout from "../../../dumb/commons/inputFieldGroup/Workout";
 
+//represents one day's workout
 class WorkoutGroup extends React.Component {
     constructor(props) {
         super(props);
         this.state = {
             isLoading: "",
-            exercise_count:2,
+            exercise_count:1,
             day:[]
         };
 
@@ -20,8 +21,8 @@ class WorkoutGroup extends React.Component {
     }
 
     onUpdate(){
-        // console.log(this.state.day);
-        this.props.week[this.props.dayOfWeek] = this.state.day
+        console.log(this.state.day);
+        // this.props.week[this.props.dayOfWeek] = this.state.day
     }
 
     render() {
@@ -37,11 +38,13 @@ class WorkoutGroup extends React.Component {
 
         return (
             <div>
-                {/*<SingleScreen>*/}
                     <div className="white-center">Enter the workout schedule</div>
                     {getExerciseForm()}
-                    <button onClick={this.incrementCount}>Add More</button>
-                {/*</SingleScreen>*/}
+
+                    <div className='pager'>
+                    <button onClick={this.incrementCount} className="btn-hebecollins-black">
+                        Add More</button>
+                    </div>
             </div>
         )
     }
