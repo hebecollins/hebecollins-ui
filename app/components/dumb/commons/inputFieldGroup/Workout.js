@@ -1,6 +1,9 @@
 import React from 'react'
 import {Select2, TextField2} from "../inputField/InputFieldWithText";
 import Reps from "./Reps";
+import {validateExercise} from "../../../../Toolbox/Validation/helpers";
+import classnames from 'classnames'
+
 
 //represents one exercise form
 class Workout extends React.Component {
@@ -8,10 +11,10 @@ class Workout extends React.Component {
         super(props);
         this.state = {
             exercise_name: "",
-            sets: 0,
+            sets: "",
             reps:{},
             rest: "",
-            error: "",
+            errors: "",
             isLoading: false
         };
 
@@ -22,9 +25,9 @@ class Workout extends React.Component {
 
     onChange(e) {
         this.setState({[e.target.name]: e.target.value});
-        this.props.day[this.props.id] = this.state;
+        // this.props.day[this.props.id] = this.state;
 
-        this.props.update();
+        // this.props.update();
     }
 
 
@@ -40,8 +43,23 @@ class Workout extends React.Component {
         console.log(this.state.reps);
      }
 
+    isValid() {
+        const {errors, isValid} = validateExercise(this.state);
+        if (!isValid) {
+            console.log(errors);
+            this.setState({errors});
+        }
+        return isValid;
+    }
+
+    onSubmit(e){
+        if(!this.isValid()){
+            console.log(this.state);
+        }
+     }
+
     render() {
-        const {exercise_name, sets, reps,rest, comment, error, isLoading} = this.state;
+        const {exercise_name, sets, reps,rest, comment, errors, isLoading} = this.state;
         const handleSets = (sets) => {
             let a = [];
             for (let i = 1; i <= sets; i++) {
@@ -61,11 +79,13 @@ class Workout extends React.Component {
         };
 
         return (
-            <div>
+
+            <div className="content">
                 <TextField2
                     field="exercise_name"
                     value={exercise_name}
                     label="Exercise Name"
+                    error={errors.exercise_name}
                     onChange={this.onChange}
                 />
                 <Select2
@@ -73,7 +93,7 @@ class Workout extends React.Component {
                     onChange={this.onSetChange}
                     field="sets"
                     label="Sets"
-                    error={error}>
+                    error={errors.sets}>
                     <option value={1}>1</option>
                     <option value={2}>2</option>
                     <option value={3}>3</option>
@@ -82,24 +102,30 @@ class Workout extends React.Component {
                     <option value={6}>6</option>
                 </Select2>
 
+                <div className={classnames('form-group', {'has-error': errors.reps})}>
                 {handleSets(sets)}
+                    {errors.reps && <span className="help-block">{errors.reps}</span>}
+                </div>
+
 
                 <TextField2
                     field="rest"
                     value={rest}
                     label="Rest (in sec)"
                     type="number"
+                    error={errors.rest}
                     onChange={this.onChange}
                 />
+                <button className="btn-hebecollins-black" onClick={this.onSubmit.bind(this)}>Submit</button>
             </div>
         )
     }
-};
+}
 
-Workout.propTypes={
-    id:React.PropTypes.number.isRequired,
-    day:React.PropTypes.array.isRequired,
-    update: React.PropTypes.func.isRequired,
-};
+// Workout.propTypes={
+//     id:React.PropTypes.number.isRequired,
+//     day:React.PropTypes.array.isRequired,
+//     update: React.PropTypes.func.isRequired,
+// };
 
 export default Workout;

@@ -77,23 +77,25 @@ export function validateUserRegistrationFields(data) {
 }
 
 export function validateEmailOrMobile(data) {
-    const {email,mobile,isMobileValid,target} = data;
-    if(target === "mobile"){
+    const {email, mobile, isMobileValid, target} = data;
+    if (target === "mobile") {
         const {errors, isValid} = validate({
             mobile: [mobile, 'isRequired', `isMobile('${isMobileValid}')`],
         });
         return {
             errors,
             isValid
-        }}
-    if(target === "email"){
+        }
+    }
+    if (target === "email") {
         const {errors, isValid} = validate({
             email: [email, 'isRequired', 'isEmail', 'max(30)'],
         });
         return {
             errors,
             isValid
-        } }
+        }
+    }
 }
 
 export function validatePassword(data) {
@@ -114,8 +116,8 @@ export function validateChangedPassword(data) {
     const {old_password, new_password, confirm_new_password} = data;
     const {errors, isValid} = validate({
         old_password: [old_password, 'isRequired'],
-        new_password: [new_password, 'isRequired', 'min(6)', 'max(25)',`shouldNotMatch('${old_password}')`],
-        confirm_new_password: [confirm_new_password, 'isRequired',`passwordMatch('${new_password}')`],
+        new_password: [new_password, 'isRequired', 'min(6)', 'max(25)', `shouldNotMatch('${old_password}')`],
+        confirm_new_password: [confirm_new_password, 'isRequired', `passwordMatch('${new_password}')`],
     });
     return {
         errors,
@@ -129,6 +131,23 @@ export function validateQuotes(data) {
     const {errors, isValid} = validate({
         author: [author, 'isRequired'],
         quote: [quote, 'isRequired'],
+    });
+    return {
+        errors,
+        isValid
+    }
+}
+
+export function validateExercise(data) {
+    const {exercise_name, sets, reps, rest} = data;
+
+    /*If setsObject length is not equal to no. of sets, because reps is defined as {set1:rep1, set2:rep2}*/
+    const setsObjectLength = Object.keys(reps).length;
+    const {errors, isValid} = validate({
+        exercise_name: [exercise_name, 'isRequired'],
+        sets: [sets, 'isRequired'],
+        reps: [setsObjectLength, `isValidRepObjectLength('${sets}')`],
+        rest: [rest, 'isRequired'],
     });
     return {
         errors,

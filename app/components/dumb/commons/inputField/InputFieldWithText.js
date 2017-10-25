@@ -4,6 +4,7 @@ import classnames from 'classnames';
 /** It is an input text field component with text as add-on
  * */
 export const TextField2 = ({field, value, disabled, label, error, type, onChange, iconClass, isIconNeeded}) => {
+    console.log("error"+error);
     return (
         <FieldFrameWithTextAddOn
             label={label}
@@ -55,7 +56,7 @@ export const Select2 = (props) => {
                 className="select form-control"
                 onChange={onChange}
                 name={field}>
-                <option className="select-placeholder" disabled="disabled" selected="selected">0</option>
+                <option className="select-placeholder" disabled="disabled" selected="selected"> </option>
                 {props.children}
             </select>
         </FieldFrameWithTextAddOn>

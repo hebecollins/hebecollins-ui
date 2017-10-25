@@ -13,9 +13,9 @@ import {exceededMaxLength, message, notEnoughLength} from '../Helpers/messages';
  *  @return {object,boolean}=>{(key,error),true/false}. IF there error field is empty, isValid will be true ELSE false
  *  */
 export function validate(array) {
-    const errors={};
+    const errors = {};
     Object.keys(array).forEach(function (field) {
-        const value = array[field][0]+'';
+        const value = array[field][0] + '';
 
         //adding '' after array[field][0] will make it a string. npm Validator only validates string
         array[field].shift();
@@ -49,8 +49,8 @@ function getValidationForProperty(value, property) {
         const functionWithArgument = property.replace(')', ',' + '\'' + value + '\'' + ')');
         return eval(functionWithArgument);
     }
-    console.log(`${property}('${value}')`);
-    console.log(property + '(' + '\'' + value + '\'' + ')');
+    // console.log(`${property}('${value}')`);
+    // console.log(property + '(' + '\'' + value + '\'' + ')');
     //coverts it into eval('property(value)') which is equivalent of calling property function
     // return eval(property + '(' + '\'' + value + '\'' + ')');
     return eval(`${property}('${value}')`);
@@ -62,8 +62,9 @@ function isRequired(value) {
         return message.required;
     }
 }
+
 function max(maxLength, value) {
-    if (!Validator.isLength(value,0,maxLength)) {
+    if (!Validator.isLength(value, 0, maxLength)) {
         return exceededMaxLength(maxLength);
     }
 }
@@ -81,7 +82,7 @@ function isEmail(value) {
 }
 
 function isAlpha(value) {
-    if(!Validator.isNull(value)){
+    if (!Validator.isNull(value)) {
         if (!Validator.isAlpha(value)) {
             return message.notAlpha;
         }
@@ -89,22 +90,22 @@ function isAlpha(value) {
 }
 
 function isNumber(value) {
-    if(!Validator.isNull(value)){
+    if (!Validator.isNull(value)) {
         if (!Validator.isInt(value)) {
             return message.notNumber;
         }
     }
 }
 
-function passwordMatch(password,passwordConfirm) {
-    if (!Validator.equals(password,passwordConfirm)) {
+function passwordMatch(password, passwordConfirm) {
+    if (!Validator.equals(password, passwordConfirm)) {
         return message.passwordNotMatch;
     }
 }
 
 
-function shouldNotMatch(oldPassword,newPassword) {
-    if (Validator.equals(oldPassword,newPassword)) {
+function shouldNotMatch(oldPassword, newPassword) {
+    if (Validator.equals(oldPassword, newPassword)) {
         return message.passwordIsSame;
     }
 }
@@ -119,8 +120,16 @@ function isDate(value) {
  * @param value => Not required but it is better to just write it in the function rather than recreating a logic
  * @return string => message
  * */
-function isMobile(isMobileValid,value ) {
+function isMobile(isMobileValid, value) {
     if (isMobileValid !== 'true') {
         return message.invalidMobile;
+    }
+}
+
+function isValidRepObjectLength(sets, RepObjectLength) {
+    if (!isEmpty(sets)) {
+        if (!Validator.equals(RepObjectLength, sets)) {
+            return message.required;
+        }
     }
 }
