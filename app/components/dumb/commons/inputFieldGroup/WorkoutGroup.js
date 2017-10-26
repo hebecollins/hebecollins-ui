@@ -1,22 +1,24 @@
 import React from 'react'
 import Workout from "../../../dumb/commons/inputFieldGroup/Workout";
+import {validateExercise} from "../../../../Toolbox/Validation/helpers";
 
 //represents one day's workout
 class WorkoutGroup extends React.Component {
     constructor(props) {
         super(props);
         this.state = {
-            exercises:[{
-                exercise_name:"",
-                sets:"",
-                reps:"",
-                rest:""
+            exercises: [{
+                exercise_name: "",
+                sets: "",
+                reps: "",
+                rest: ""
             }],
             isLoading: "",
             isSubmit: false,
             exercise_count: 1,
             key: '',
-            day: []
+            day: [],
+            isValid: true
         };
 
         this.onUpdate = this.onUpdate.bind(this);
@@ -33,11 +35,36 @@ class WorkoutGroup extends React.Component {
         // this.props.week[this.props.dayOfWeek] = this.state.day
     }
 
-    onNext(){
-        this.setState({isSubmit:true});
-        console.log(this.state.day);
+    onNext() {
+        let temp = [...this.state.day];
+        let valid = true;//just temporarily
+        temp.map(state => {
+                let {errors, isValid} = validateExercise(state);
+                state.errors = errors;
+                if (!isValid) {
+                    valid = false;
+                }
+            }
+        );
+        //this.state.day is also a reference to <workout/> states, so changing anything here will change things there also
+        /**call for validation for states that belongs to workout component*/
+        this.setState({day: temp});
 
-        //call for validation for states that belongs to workout component
+        /**if valid, write it to redux and empty all the states*/
+        if (valid) {
+            let temp = [...this.state.day];
+            let valid = true;//just temporarily
+            temp.map(state => {
+                    state.exercise_name = "";
+                    state.errors = "";
+                    state.sets = "";
+                    state.reps = {};
+                    state.rest = "";
+                }
+            );
+            console.log("valid");
+            this.setState({day: temp});
+        }
         //day=>exercise no. ,
         //dispatch to redux
         //update dates and clear all the states
@@ -48,7 +75,7 @@ class WorkoutGroup extends React.Component {
         const getExerciseForm = () => {
             let exerciseForm = [];
             for (let i = 0; i < exercise_count; i++) {
-                exerciseForm.push(<div key={i}><span className="badge">{i+1}</span>
+                exerciseForm.push(<div key={i}><span className="badge">{i + 1}</span>
                     <Workout
                         day={this.state.day}
                         id={i} update={this.onUpdate}

@@ -22,7 +22,6 @@ class Workout extends React.Component {
 
     onChange(e) {
         this.setState({[e.target.name]: e.target.value});
-        // this.props.update();
     }
 
 
@@ -56,9 +55,8 @@ class Workout extends React.Component {
 
     render() {
         //appending to the day[] array
+        //mutable copy
         this.props.day[this.props.id] = this.state;
-
-
         const {exercise_name, sets, reps,rest, comment, errors, isLoading} = this.state;
         const handleSets = (sets) => {
             let a = [];
@@ -73,7 +71,8 @@ class Workout extends React.Component {
                     Reps
                 </span>
                     <div className="no-margin pager">
-                        {a}</div>
+                        {a}
+                    </div>
                 </div>
             ) : <div> </div>}</div>;
         };
