@@ -42,7 +42,8 @@ class AddWorkout extends React.Component {
 
                     <h1 className="white-center">{dayName[dayOfWeek(index)]}</h1>
 
-                    <WorkoutGroup week={week} dayOfWeek={dayName[dayOfWeek(index)]}/>
+                    <WorkoutGroup
+                        previousDay={dayName[dayOfWeek(index - 1)]} dayOfWeek={dayName[dayOfWeek(index)]}/>
 
                     <div className="pager">
                         <button onClick={this.onPrevious}

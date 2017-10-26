@@ -1,7 +1,8 @@
 import React from 'react'
 import isEmpty from 'lodash/isEmpty'
 
-//represents one rep box
+/** Represents one rep box.
+ */
 class Reps extends React.Component {
     constructor(props) {
         super(props);
@@ -18,31 +19,25 @@ class Reps extends React.Component {
 
     render() {
         const {rep} = this.state;
+
+
+        /** If reps array is empty, it senses that there is no need for 'reps' field on the UI anymore,
+         * So it sets value as empty string which gets reflected on the UI
+         */
+        const value = isEmpty(this.props.reps) ?"":rep;
+
         return (
-            <div>{ isEmpty(this.props.reps)?
             <input
                 key={this.props.id}
                 type="number"
                 name="rep"
-                value={""}
-                max={300} min={1}
+                value={value}
+                max={300}
+                min={1}
                 onChange={this.onChange}
                 className="in-line form-control"
                 placeholder={`set ${this.props.id}`}
-            />:
-                <input
-                    key={this.props.id}
-                    type="number"
-                    name="rep"
-                    value={rep}
-                    max={300} min={1}
-                    onChange={this.onChange}
-                    className="in-line form-control"
-                    placeholder={`set ${this.props.id}`}
-                />
-
-            }</div>
-
+            />
         );
     }
 }

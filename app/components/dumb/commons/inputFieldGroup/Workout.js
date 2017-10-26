@@ -1,8 +1,8 @@
 import React from 'react'
 import {Select2, TextField2} from "../inputField/InputFieldWithText";
 import Reps from "./Reps";
-import {validateExercise} from "../../../../Toolbox/Validation/helpers";
 import classnames from 'classnames'
+import {deepClone, deepCloneObject} from "../../../../Toolbox/Helpers/clone";
 
 //represents one exercise form
 class Workout extends React.Component {
@@ -20,14 +20,17 @@ class Workout extends React.Component {
         this.onSetChange = this.onSetChange.bind(this);
     }
 
+
     onChange(e) {
         this.setState({[e.target.name]: e.target.value});
     }
 
 
+    /**Sets 'reps' as empty whenever there is a change in value of 'sets' so that there won't be any
+     * unnecessary values staying in  'reps' boxes in the UI. And then calls onChange
+     * */
     onSetChange(e){
         this.setState({reps:{}});
-        //to avoid being taking the older state, in case of number of input changes
         this.onChange(e);
     }
 
@@ -35,29 +38,19 @@ class Workout extends React.Component {
      * */
     handleReps(value,id){
        this.state.reps[`set${id}`]= value;
-        console.log(this.state.reps);
      }
 
-    isValid() {
-        const {errors, isValid} = validateExercise(this.state);
-        if (!isValid) {
-            console.log(errors);
-            this.setState({errors});
-        }
-        return isValid;
-    }
-
-    onSubmit(){
-        if(!this.isValid()){
-            console.log(this.state);
-        }
-     }
 
     render() {
         //appending to the day[] array
         //mutable copy
-        this.props.day[this.props.id] = this.state;
+        console.log("**************before******************");
+        console.log(this.props.day);
+        this.props.day[this.props.id] = deepCloneObject(this.state);
+        console.log("**************dom******************");
+        console.log(this.props.day);
         const {exercise_name, sets, reps,rest, comment, errors, isLoading} = this.state;
+
         const handleSets = (sets) => {
             let a = [];
             for (let i = 1; i <= sets; i++) {
@@ -65,6 +58,7 @@ class Workout extends React.Component {
                     <Reps key={i} id={i} reps={reps} handleReps={this.handleReps.bind(this)}/>
                 );
             }
+
             return <div>{sets ? (
                 <div className="input-group">
                 <span className="input-group-addon">
@@ -113,7 +107,6 @@ class Workout extends React.Component {
                     error={errors.rest}
                     onChange={this.onChange}
                 />
-                <button className="btn-hebecollins-black" onClick={this.onSubmit.bind(this)}>Submit</button>
             </div>
         )
     }
@@ -122,7 +115,6 @@ class Workout extends React.Component {
 Workout.propTypes={
     id:React.PropTypes.number.isRequired,
     day:React.PropTypes.array.isRequired,
-    update: React.PropTypes.func.isRequired,
 };
 
 export default Workout;

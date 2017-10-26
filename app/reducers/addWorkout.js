@@ -1,23 +1,18 @@
 import {ADD_WORKOUT} from "../actions/types";
 
 const initialState = {
-    sun:[],
-    tue:[],
-    wed:[],
-    thu:[],
-    fri:[],
-    sat:[]
+    workout:{}
 };
 
-export default addWorkout=(state= initialState,action={})=> {
+export default (state= initialState,action={})=> {
     switch (action.type) {
         case ADD_WORKOUT: {
-            return [...state,
-                {
-                    sun:action.sun
-                }
-            ]
+            return {
+                workout:Object.assign(state.workout,action.workout)
+            }
         }
-            break;
+
+        default:
+            return state;
     }
 }

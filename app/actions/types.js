@@ -8,3 +8,4 @@ export const ADD_CLIENTS = 'ADD_CLIENTS';
 export const STORE_VERIFICATION_DATA = 'STORE_VERIFICATION_DATA';
 export const ADD_QUOTES = 'ADD_QUOTES';
 export const CLEAR_QUOTES = 'CLEAR_QUOTES';
+export const ADD_WORKOUT = 'ADD_WORKOUT';
