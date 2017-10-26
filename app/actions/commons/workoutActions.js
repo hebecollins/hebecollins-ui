@@ -1,23 +1,25 @@
 import {ADD_WORKOUT} from "../types";
+import {deepCloneArray} from "../../Toolbox/Helpers/clone";
 
-export function addWorkoutToRedux(dayWorkout, dayName){
-    // console.log("=======================================");
-    // console.log(dayName);
-    // console.log(dayWorkout);
-    // console.log("=======================================");
-    const copyDayWorkout = [...dayWorkout];//creating a copy to avoid mutation
+export function addWorkoutToRedux(dayWorkout, dayName) {
+    const relevantData = deepCloneArray(dayWorkout).map((state) => {
+        delete state.errors
+        return state
+    });//creating a copy to avoid mutation
+
     const dataToBeStored = {
-            [dayName]:copyDayWorkout
+        [dayName]: relevantData
     };
 
     return dispatch => {
-         dispatch(addWorkout(dataToBeStored));
+        dispatch(addWorkout(dataToBeStored));
+        return true;
     }
 }
 
-export function addWorkout(workout){
+export function addWorkout(workout) {
     return {
         type: ADD_WORKOUT,
-        workout:workout
+        workout: workout
     }
 }

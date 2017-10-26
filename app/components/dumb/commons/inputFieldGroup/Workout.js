@@ -2,7 +2,6 @@ import React from 'react'
 import {Select2, TextField2} from "../inputField/InputFieldWithText";
 import Reps from "./Reps";
 import classnames from 'classnames'
-import {deepClone, deepCloneObject} from "../../../../Toolbox/Helpers/clone";
 
 //represents one exercise form
 class Workout extends React.Component {
@@ -13,8 +12,7 @@ class Workout extends React.Component {
             sets: "",
             reps:{},
             rest: "",
-            errors: "",
-            isLoading: false
+            errors: ""
         };
         this.onChange = this.onChange.bind(this);
         this.onSetChange = this.onSetChange.bind(this);
@@ -44,12 +42,8 @@ class Workout extends React.Component {
     render() {
         //appending to the day[] array
         //mutable copy
-        console.log("**************before******************");
-        console.log(this.props.day);
-        this.props.day[this.props.id] = deepCloneObject(this.state);
-        console.log("**************dom******************");
-        console.log(this.props.day);
-        const {exercise_name, sets, reps,rest, comment, errors, isLoading} = this.state;
+        this.props.day[this.props.id] = this.state;
+        const {exercise_name, sets, reps,rest, errors} = this.state;
 
         const handleSets = (sets) => {
             let a = [];
