@@ -23,6 +23,7 @@ import AddClient from "./components/hebecollins/trainer/AddClient";
 import ActivateClient from "./components/hebecollins/client/ActivateClient";
 import AddWorkout from "./components/hebecollins/trainer/AddWorkout";
 import Workout from "./components/dumb/commons/inputFieldGroup/Workout";
+import WorkoutGroup from "./components/dumb/commons/inputFieldGroup/WorkoutGroup";
 
 export default (
     <div className="something">
@@ -45,7 +46,7 @@ export default (
             <Route path={getRouteByName('ACTIVATE_CLIENT')} component={authCheck(ActivateClient)}/>
 
             <Route path={getRouteByName('ADD_QUOTES')} component={authCheck(AddQuotes)}/>
-            <Route path={getRouteByName('ADD_WORKOUT')} component={authCheck(Workout)}/>
+            <Route path={getRouteByName('ADD_WORKOUT')} component={authCheck(WorkoutGroup)}/>
             <Route path='/*' component={NotFound}/>
         </Route>
     </div>

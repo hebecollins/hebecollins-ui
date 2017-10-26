@@ -4,7 +4,6 @@ import classnames from 'classnames';
 /** It is an input text field component with text as add-on
  * */
 export const TextField2 = ({field, value, disabled, label, error, type, onChange, iconClass, isIconNeeded}) => {
-    console.log("error"+error);
     return (
         <FieldFrameWithTextAddOn
             label={label}
