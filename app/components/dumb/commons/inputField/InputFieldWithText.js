@@ -55,7 +55,7 @@ export const Select2 = (props) => {
                 className="select form-control"
                 onChange={onChange}
                 name={field}>
-                <option className="select-placeholder" disabled="disabled" selected="selected"> </option>
+                <option className="select-placeholder" disabled="disabled" selected> </option>
                 {props.children}
             </select>
         </FieldFrameWithTextAddOn>

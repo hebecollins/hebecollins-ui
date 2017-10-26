@@ -18,11 +18,9 @@ class Workout extends React.Component {
         this.onSetChange = this.onSetChange.bind(this);
     }
 
-
     onChange(e) {
         this.setState({[e.target.name]: e.target.value});
     }
-
 
     /**Sets 'reps' as empty whenever there is a change in value of 'sets' so that there won't be any
      * unnecessary values staying in  'reps' boxes in the UI. And then calls onChange
@@ -38,10 +36,8 @@ class Workout extends React.Component {
        this.state.reps[`set${id}`]= value;
      }
 
-
     render() {
         //appending to the day[] array
-        //mutable copy
         this.props.day[this.props.id] = this.state;
         const {exercise_name, sets, reps,rest, errors} = this.state;
 
@@ -74,19 +70,14 @@ class Workout extends React.Component {
                     error={errors.exercise_name}
                     onChange={this.onChange}
                 />
-                <Select2
-                    value={sets}
-                    onChange={this.onSetChange}
+                <TextField2
                     field="sets"
+                    value={sets}
                     label="Sets"
-                    error={errors.sets}>
-                    <option value={1}>1</option>
-                    <option value={2}>2</option>
-                    <option value={3}>3</option>
-                    <option value={4}>4</option>
-                    <option value={5}>5</option>
-                    <option value={6}>6</option>
-                </Select2>
+                    type="number"
+                    error={errors.sets}
+                    onChange={this.onSetChange}
+                />
 
                 <div className={classnames('form-group', {'has-error': errors.reps})}>
                     {handleSets(sets)}

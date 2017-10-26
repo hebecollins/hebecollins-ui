@@ -46,7 +46,7 @@ export default (
             <Route path={getRouteByName('ACTIVATE_CLIENT')} component={authCheck(ActivateClient)}/>
 
             <Route path={getRouteByName('ADD_QUOTES')} component={authCheck(AddQuotes)}/>
-            <Route path={getRouteByName('ADD_WORKOUT')} component={authCheck(WorkoutGroup)}/>
+            <Route path={getRouteByName('ADD_WORKOUT')} component={authCheck(AddWorkout)}/>
             <Route path='/*' component={NotFound}/>
         </Route>
     </div>

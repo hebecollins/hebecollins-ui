@@ -1,5 +1,5 @@
 import {ADD_WORKOUT} from "../types";
-import {deepCloneArray} from "../../Toolbox/Helpers/clone";
+import {deepCloneArray} from "../../Toolbox/Helpers/extra";
 
 export function addWorkoutToRedux(dayWorkout, dayName) {
     const relevantData = deepCloneArray(dayWorkout).map((state) => {

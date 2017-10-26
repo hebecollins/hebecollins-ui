@@ -3,6 +3,7 @@ import Workout from "../../../dumb/commons/inputFieldGroup/Workout"
 import {validateExercise} from "../../../../Toolbox/Validation/helpers"
 import {addWorkoutToRedux} from "../../../../actions/commons/workoutActions"
 import {connect} from 'react-redux'
+import {dayOfWeek, deepCloneArray} from "../../../../Toolbox/Helpers/extra";
 
 //represents one day's workout
 class WorkoutGroup extends React.Component {
@@ -12,21 +13,18 @@ class WorkoutGroup extends React.Component {
             isLoading: false,
             exercise_count: 1,
             dayWorkout: [], //for storing workout
-            isValid: true,
-            dayName: ["sun", "mon", "tue", "wed", "thu", "fri", "sat"],
-            index: 0
-
+            index: 0//it is the starting day number. For eg. 0 for sunday, 1 for monday
         };
+
         this.incrementCount = this.incrementCount.bind(this);
         this.onDayChange = this.onDayChange.bind(this);
     }
-
 
     incrementCount() {
         this.setState({exercise_count: this.state.exercise_count + 1})
     }
 
-    onDayChange(e) {
+    isValid() {
         let temp = this.state.dayWorkout;
         let valid = true;//just temporarily
         temp.map((state) => {
@@ -35,45 +33,81 @@ class WorkoutGroup extends React.Component {
                 if (!isValid) {
                     valid = false;
                 }
-                return state;
             }
         );
 
-
-        /**call for validation for states that belongs to workout component*/
+        /**call for validation for states that belongs to workout component
+         * Setting state will populate the error states in workout component if there is any error*/
         this.setState({dayWorkout: temp});
 
+        return valid;
+    }
 
-        /**if valid, format it, write to redux and empty all the states*/
-        if (valid) {
-            const isStored =
-                this.props.addWorkoutToRedux(this.state.dayWorkout, this.state.dayName[dayOfWeek(this.state.index)]);
+    /**if data is valid, It writes to redux and empty all the states*/
+    onDayChange(e) {
 
-            if (isStored) {
-                const newState = this.state.dayWorkout.map(state => {
-                        state.exercise_name = "";
-                        state.errors = "";
-                        state.sets = "";
-                        state.reps = {};
-                        state.rest = "";
-                        return state;
-                    }
-                );
-
-                    this.setState({dayWorkout: newState, exercise_count: 1});
+        if (this.isValid()) {
+            const isSuccess =
+                this.props.addWorkoutToRedux(this.state.dayWorkout, dayOfWeek(this.state.index));
+            const followup = (e.target.name === "next") ? ( this.state.index + 1 ) : (this.state.index - 1);
+            if (isSuccess) {//to make change in state wait until action is successful
+                //to make states in workout component as empty
+                if (!this.checkStore(followup)) {
+                    this.state.dayWorkout.map(state => {
+                            state.exercise_name = "";
+                            state.errors = "";
+                            state.sets = "";
+                            state.reps = {};
+                            state.rest = "";
+                            return state;
+                        }
+                    );
+                    this.setState({dayWorkout: [], exercise_count: 1});
+                }
             }
-
-            if (e.target.name === "next") {
-                this.setState({index: this.state.index + 1})
-            } else {
-                this.setState({index: this.state.index - 1})
-            }
-
+            this.setState({index: followup})
         }
     }
 
+    checkStore(followup) {
+        if (Object.keys(this.props.workout).includes(dayOfWeek(followup))) {
+            console.log("inside if");
+            let workout = this.props.workout[dayOfWeek(followup)];
+            let temp = deepCloneArray(workout);
+            let t = temp.map(state => {
+                    state['error'] = {};
+                    return state
+                }
+            );
+
+            this.state.dayWorkout.map(state => {
+                    state.exercise_name = "";
+                    state.errors = "";
+                    state.sets = "";
+                    state.reps = {};
+                    state.rest = "";
+                    return state;
+                }
+            );
+            this.state.dayWorkout = [];
+            // console.log(workout);
+            this.setState({ dayWorkout:t, exercise_count: workout.length}, () => {
+                console.log(workout);
+                console.log(t);
+                console.log(this.state.dayWorkout)
+            });
+            // console.log(t);
+            console.log(dayOfWeek(followup));
+            // console.log(this.props.workout);
+            return true
+        } else {
+            return false
+        }
+
+    }
+
     render() {
-        const {dayName, index, exercise_count} = this.state;
+        const {index, exercise_count} = this.state;
         const getExerciseForm = () => {
             let exerciseForm = [];
             for (let i = 0; i < exercise_count; i++) {
@@ -89,11 +123,10 @@ class WorkoutGroup extends React.Component {
         };
 
         return (
-            <div className="content">
+            <div>
                 <div className="white-center">Enter the workout schedule</div>
-
+                <h1 className="white-center">{dayOfWeek(index)}</h1>
                 {getExerciseForm()}
-
                 <div className='pager'>
                     <button onClick={this.incrementCount} className="btn-hebecollins-black">
                         Add More
@@ -102,12 +135,13 @@ class WorkoutGroup extends React.Component {
                 <div className="pager">
                     <button onClick={this.onDayChange}
                             name="back"
-                            className="btn-hebecollins-black">{dayName[dayOfWeek(index - 1)]}
+                            className="btn-hebecollins-black">{dayOfWeek(index - 1)}
                     </button>
                     <button onClick={this.onDayChange}
                             name="next"
-                            className="btn-hebecollins-black">{dayName[dayOfWeek(index + 1)]}
+                            className="btn-hebecollins-black">{dayOfWeek(index + 1)}
                     </button>
+                    <h1 className="white-center">{dayOfWeek(index)}</h1>
                 </div>
             </div>
         )
@@ -115,14 +149,8 @@ class WorkoutGroup extends React.Component {
 }
 
 WorkoutGroup.propTypes = {
-    addWorkoutToRedux: React.PropTypes.func.isRequired
+    addWorkoutToRedux: React.PropTypes.func.isRequired,
+    workout: React.PropTypes.object.isRequired,
 };
 
-const dayOfWeek = (i) => {
-    if (i % 7 < 0)
-        return 7 + i % 7;
-    else
-        return i % 7;
-};
-
-export default connect(null, {addWorkoutToRedux})(WorkoutGroup);
+export default WorkoutGroup;
