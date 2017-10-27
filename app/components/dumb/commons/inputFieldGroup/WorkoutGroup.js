@@ -5,64 +5,89 @@ import {addWorkoutToRedux} from "../../../../actions/commons/workoutActions"
 import {connect} from 'react-redux'
 import {dayOfWeek, deepCloneArray} from "../../../../Toolbox/Helpers/extra";
 
-//represents one day's workout
+/**It represents one day's workout
+ * Working: It has got two main states, 'dayWorkoutToBeStored' and 'dayWorkoutToBeDisplayed'.(these two must be passed as props)
+ *          dayWorkoutToBeStored (incoming) => it is the received data which is meant to be stored
+ *          dayWorkoutToBeDisplayed (outgoing) => it is the sent data which is meant to be displayed
+ * */
 class WorkoutGroup extends React.Component {
     constructor(props) {
         super(props);
         this.state = {
             isLoading: false,
             exercise_count: 1,
-            dayWorkout: [], //for storing workout
-            index: 0//it is the starting day number. For eg. 0 for sunday, 1 for monday
+            dayWorkoutToBeStored: [], //received from workout component
+            dayWorkoutToBeDisplayed: [], //sent to workout component
+            index: 0 //it is the starting day number. For eg. 0 for sunday, 1 for monday
         };
 
         this.incrementCount = this.incrementCount.bind(this);
         this.onDayChange = this.onDayChange.bind(this);
+        this.resetWorkoutState = this.resetWorkoutState.bind(this);
     }
 
     incrementCount() {
         this.setState({exercise_count: this.state.exercise_count + 1})
     }
 
+    /** Clone dayWorkoutToBeStored -> validate and append errors to the clone -> sets dayWorkoutToBeStored as the clone
+     *  @return bool => true if valid else false
+      */
     isValid() {
-        let temp = this.state.dayWorkout;
-        let valid = true;//just temporarily
-        temp.map((state) => {
+
+        let temp = deepCloneArray(this.state.dayWorkoutToBeStored);
+        console.log("this.state.dayWorkoutToBeStored");
+        console.log(this.state.dayWorkoutToBeStored);
+        console.log("temp");
+        console.log(temp);
+        let valid = true;
+            temp.map((state) => {
                 let {errors, isValid} = validateExercise(state);
                 state.errors = errors;
                 if (!isValid) {
                     valid = false;
                 }
+                return state
             }
         );
 
-        /**call for validation for states that belongs to workout component
-         * Setting state will populate the error states in workout component if there is any error*/
-        this.setState({dayWorkout: temp});
-
+        this.setState({dayWorkoutToBeDisplayed: temp});
         return valid;
     }
+
+
+    resetWorkoutState() {
+        let temp = []
+        for (let i = 0; i < this.state.exercise_count; i++) {
+            temp[i] = {
+                exercise_name: "",
+                sets: "",
+                reps: {},
+                rest: "",
+                errors: ""
+            }
+        }
+        return temp;
+    }
+
 
     /**if data is valid, It writes to redux and empty all the states*/
     onDayChange(e) {
 
+        const followup = (e.target.name === "next") ? ( this.state.index + 1 ) : (this.state.index - 1);
         if (this.isValid()) {
+            console.log("onDayChage")
+            console.log(this.state.dayWorkoutToBeDisplayed);
             const isSuccess =
-                this.props.addWorkoutToRedux(this.state.dayWorkout, dayOfWeek(this.state.index));
-            const followup = (e.target.name === "next") ? ( this.state.index + 1 ) : (this.state.index - 1);
+                this.props.addWorkoutToRedux(this.state.dayWorkoutToBeStored, dayOfWeek(this.state.index));
+
             if (isSuccess) {//to make change in state wait until action is successful
                 //to make states in workout component as empty
+                //it is basically the return part from workout
                 if (!this.checkStore(followup)) {
-                    this.state.dayWorkout.map(state => {
-                            state.exercise_name = "";
-                            state.errors = "";
-                            state.sets = "";
-                            state.reps = {};
-                            state.rest = "";
-                            return state;
-                        }
-                    );
-                    this.setState({dayWorkout: [], exercise_count: 1});
+                    this.setState({dayWorkoutToBeDisplayed: this.resetWorkoutState(), exercise_count: 1});
+                    console.log("***************");
+                    console.log(this.state.dayWorkoutToBeStored)
                 }
             }
             this.setState({index: followup})
@@ -75,26 +100,15 @@ class WorkoutGroup extends React.Component {
             let workout = this.props.workout[dayOfWeek(followup)];
             let temp = deepCloneArray(workout);
             let t = temp.map(state => {
-                    state['error'] = {};
+                    state['errors'] = "";
                     return state
                 }
             );
-
-            this.state.dayWorkout.map(state => {
-                    state.exercise_name = "";
-                    state.errors = "";
-                    state.sets = "";
-                    state.reps = {};
-                    state.rest = "";
-                    return state;
-                }
-            );
-            this.state.dayWorkout = [];
             // console.log(workout);
-            this.setState({ dayWorkout:t, exercise_count: workout.length}, () => {
+            this.setState({dayWorkoutToBeDisplayed: t, exercise_count: workout.length}, () => {
                 console.log(workout);
                 console.log(t);
-                console.log(this.state.dayWorkout)
+                console.log(this.state.dayWorkoutToBeStored)
             });
             // console.log(t);
             console.log(dayOfWeek(followup));
@@ -107,16 +121,23 @@ class WorkoutGroup extends React.Component {
     }
 
     render() {
-        const {index, exercise_count} = this.state;
+        const {index, exercise_count, dayWorkoutToBeDisplayed, dayWorkoutToBeStored} = this.state;
+        console.log("dayWorkoutToBeStored");
+        console.log(dayWorkoutToBeStored);
+        console.log("dayWorkoutToBeDisplayed");
+        console.log(dayWorkoutToBeDisplayed);
         const getExerciseForm = () => {
             let exerciseForm = [];
             for (let i = 0; i < exercise_count; i++) {
                 exerciseForm.push(
                     <div key={i}><span className="badge">{i + 1}</span>
+
                         <Workout
-                            day={this.state.dayWorkout}
+                            dataToBeStored={dayWorkoutToBeStored}
                             id={i}
+                            dataToBeDisplayed={dayWorkoutToBeDisplayed}
                         />
+
                     </div>)
             }
             return exerciseForm;

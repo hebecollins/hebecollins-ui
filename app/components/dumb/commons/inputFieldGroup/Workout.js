@@ -1,9 +1,16 @@
 import React from 'react'
-import {Select2, TextField2} from "../inputField/InputFieldWithText";
+import {TextField2} from "../inputField/InputFieldWithText";
 import Reps from "./Reps";
 import classnames from 'classnames'
+import {deepCloneObject} from "../../../../Toolbox/Helpers/extra";
+import isEmpty from 'lodash/isEmpty'
 
-//represents one exercise form
+/** Represents one workout form.
+ *  Working: It need two props to work i.e 'dataToBeDisplayed' and 'dataToBeStored'.
+ *          When localMode is true, it uses its own state to populate input fields and gives that data to 'dataToBeStored'
+ *          When localMode is false, it checks for 'dataToBeDisplayed' and populates its states with the data in it.
+  */
+
 class Workout extends React.Component {
     constructor(props) {
         super(props);
@@ -12,13 +19,15 @@ class Workout extends React.Component {
             sets: "",
             reps:{},
             rest: "",
-            errors: ""
+            errors: "",
         };
         this.onChange = this.onChange.bind(this);
         this.onSetChange = this.onSetChange.bind(this);
     }
 
+
     onChange(e) {
+        this.props.dataToBeDisplayed[this.props.id]={};
         this.setState({[e.target.name]: e.target.value});
     }
 
@@ -36,9 +45,25 @@ class Workout extends React.Component {
        this.state.reps[`set${id}`]= value;
      }
 
+
     render() {
-        //appending to the day[] array
-        this.props.day[this.props.id] = this.state;
+        const {dataToBeStored, dataToBeDisplayed,id} = this.props;
+
+        console.log("dataToBeDisplayed in workout");
+        console.log(dataToBeDisplayed[id]);
+        console.log(isEmpty(dataToBeDisplayed[id]));
+
+        if(isEmpty(dataToBeDisplayed[id])){
+            //sending data
+            dataToBeStored[id] = deepCloneObject(this.state);
+        }
+        else{
+            //receiving data
+            this.state = deepCloneObject(dataToBeDisplayed[id])
+        }
+
+        console.log("this.state")
+        console.log(this.state)
         const {exercise_name, sets, reps,rest, errors} = this.state;
 
         const handleSets = (sets) => {
@@ -99,7 +124,8 @@ class Workout extends React.Component {
 
 Workout.propTypes={
     id:React.PropTypes.number.isRequired,
-    day:React.PropTypes.array.isRequired,
+    dataToBeStored:React.PropTypes.array.isRequired,
+    dataToBeDisplayed:React.PropTypes.array.isRequired,
 };
 
 export default Workout;
