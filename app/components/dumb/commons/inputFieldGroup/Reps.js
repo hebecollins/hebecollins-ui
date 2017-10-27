@@ -7,7 +7,7 @@ class Reps extends React.Component {
     constructor(props) {
         super(props);
         this.state = {
-           reps:0
+           rep:""
         };
         this.onChange = this.onChange.bind(this);
     }
@@ -18,8 +18,11 @@ class Reps extends React.Component {
     }
 
     render() {
-        const {rep} = this.state;
 
+        if(!isEmpty(this.props.reps[`set${this.props.id+1}`])){
+            this.state.rep= this.props.reps[`set${this.props.id+1}`]
+        }
+        const {rep} = this.state;
 
         /** If reps array is empty, it senses that there is no need for 'reps' field on the UI anymore,
          * So it sets value as empty string which gets reflected on the UI
@@ -36,7 +39,7 @@ class Reps extends React.Component {
                 min={1}
                 onChange={this.onChange}
                 className="in-line form-control"
-                placeholder={`set ${this.props.id}`}
+                placeholder={`set ${this.props.id+1}`}
             />
         );
     }

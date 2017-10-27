@@ -42,35 +42,41 @@ class Workout extends React.Component {
     /**Updates reps object with set no. and no. of reps
      * */
     handleReps(value,id){
-       this.state.reps[`set${id}`]= value;
+        this.props.dataToBeDisplayed[this.props.id]={};
+        let temp= deepCloneObject(this.state.reps);
+        temp[`set${id+1}`]=value;
+        this.setState({reps:temp})
      }
 
 
     render() {
         const {dataToBeStored, dataToBeDisplayed,id} = this.props;
 
-        console.log("dataToBeDisplayed in workout");
-        console.log(dataToBeDisplayed[id]);
-        console.log(isEmpty(dataToBeDisplayed[id]));
+        // console.log("dataToBeDisplayed in workout");
+        // console.log(dataToBeDisplayed[id]);
+        // console.log(isEmpty(dataToBeDisplayed[id]));
 
-        if(isEmpty(dataToBeDisplayed[id])){
+        if(!isEmpty(dataToBeDisplayed[id])){
             //sending data
-            dataToBeStored[id] = deepCloneObject(this.state);
-        }
-        else{
-            //receiving data
             this.state = deepCloneObject(dataToBeDisplayed[id])
         }
 
-        console.log("this.state")
+        dataToBeStored[id] = deepCloneObject(this.state);
+
+        // console.log("this.state")
         console.log(this.state)
         const {exercise_name, sets, reps,rest, errors} = this.state;
 
+
+
         const handleSets = (sets) => {
             let a = [];
-            for (let i = 1; i <= sets; i++) {
+            for (let i = 0; i < sets; i++) {
                 a.push(
-                    <Reps key={i} id={i} reps={reps} handleReps={this.handleReps.bind(this)}/>
+                    <Reps key={i} id={i}
+                          reps={reps}
+                          handleReps={this.handleReps.bind(this)}
+                    />
                 );
             }
 

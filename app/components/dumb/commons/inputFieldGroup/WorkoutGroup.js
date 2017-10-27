@@ -76,7 +76,6 @@ class WorkoutGroup extends React.Component {
 
         const followup = (e.target.name === "next") ? ( this.state.index + 1 ) : (this.state.index - 1);
         if (this.isValid()) {
-            console.log("onDayChage")
             console.log(this.state.dayWorkoutToBeDisplayed);
             const isSuccess =
                 this.props.addWorkoutToRedux(this.state.dayWorkoutToBeStored, dayOfWeek(this.state.index));
@@ -84,8 +83,9 @@ class WorkoutGroup extends React.Component {
             if (isSuccess) {//to make change in state wait until action is successful
                 //to make states in workout component as empty
                 //it is basically the return part from workout
+                const defaultState = this.resetWorkoutState();
                 if (!this.checkStore(followup)) {
-                    this.setState({dayWorkoutToBeDisplayed: this.resetWorkoutState(), exercise_count: 1});
+                    this.setState({dayWorkoutToBeDisplayed: defaultState,dayWorkoutToBeStored:[], exercise_count: 1});
                     console.log("***************");
                     console.log(this.state.dayWorkoutToBeStored)
                 }
@@ -104,15 +104,7 @@ class WorkoutGroup extends React.Component {
                     return state
                 }
             );
-            // console.log(workout);
-            this.setState({dayWorkoutToBeDisplayed: t, exercise_count: workout.length}, () => {
-                console.log(workout);
-                console.log(t);
-                console.log(this.state.dayWorkoutToBeStored)
-            });
-            // console.log(t);
-            console.log(dayOfWeek(followup));
-            // console.log(this.props.workout);
+            this.setState({dayWorkoutToBeDisplayed: t,dayWorkoutToBeStored:[], exercise_count: workout.length});
             return true
         } else {
             return false
@@ -122,10 +114,6 @@ class WorkoutGroup extends React.Component {
 
     render() {
         const {index, exercise_count, dayWorkoutToBeDisplayed, dayWorkoutToBeStored} = this.state;
-        console.log("dayWorkoutToBeStored");
-        console.log(dayWorkoutToBeStored);
-        console.log("dayWorkoutToBeDisplayed");
-        console.log(dayWorkoutToBeDisplayed);
         const getExerciseForm = () => {
             let exerciseForm = [];
             for (let i = 0; i < exercise_count; i++) {
