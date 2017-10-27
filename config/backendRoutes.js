@@ -18,5 +18,8 @@ export const BACKEND_ROUTES = {
         TRAINER: "/add/trainer",// :gymId/add/trainers
         CLIENT: "/add/client",// :gymId/add/client
     },
+    WORKOUT:{
+      ASSIGN:"/workout/assign"//:gymId/workout/assign/:clientId
+    },
     QUOTE:"/quote"
 };

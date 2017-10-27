@@ -9,8 +9,6 @@ export function getRouteByName(name){
  * @return array => array of userTypes for which given route is supposed to be allowed
  * */
 export function getPermissionByRoute(route){
-    console.log('route uis ger');
-    console.log(route);
     const lastCharacterOfRoute = route[route.length -1];
     if(route.length !==1 &&lastCharacterOfRoute === '/'){
         /*** Need to convert route/ into route  ***/

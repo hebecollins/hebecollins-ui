@@ -1,7 +1,7 @@
 import React from 'react'
 import SingleScreen from "../../dumb/commons/templates/SingleScreen";
 import WorkoutGroup from "../../dumb/commons/inputFieldGroup/WorkoutGroup";
-import {addWorkoutToRedux} from "../../../actions/commons/workoutActions"
+import {addWorkoutToRedux,addWorkoutToServer} from "../../../actions/commons/workoutActions"
 import {connect} from 'react-redux'
 
 class AddWorkout extends React.Component {
@@ -15,24 +15,32 @@ class AddWorkout extends React.Component {
     }
 
     onSubmit() {
+
     }
 
     render() {
-        const {addWorkoutToRedux, workout}=this.props;
+        const {addWorkoutToRedux,user, workout, addWorkoutToServer}=this.props;
         return (
             <div className="content">
                 <SingleScreen>
-                <WorkoutGroup addWorkoutToRedux={addWorkoutToRedux} workout={workout}/>
+                <WorkoutGroup
+                    addWorkoutToRedux={addWorkoutToRedux}
+                    workout={workout}
+                    user={user}
+                    addWorkoutToServer={addWorkoutToServer}/>
                 </SingleScreen>
             </div>
         )
     }
 }
 
+
+//TODO:INTEGRATING choose gym
 function mapStateToProps(state) {
     return {
-        workout: state.workout.workout
+        workout: state.workout.workout,
+        user:state.auth.user
     }
 }
 
-export default connect(mapStateToProps, {addWorkoutToRedux})(AddWorkout)
+export default connect(mapStateToProps, {addWorkoutToRedux,addWorkoutToServer})(AddWorkout)

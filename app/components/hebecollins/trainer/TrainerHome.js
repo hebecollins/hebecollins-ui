@@ -15,7 +15,11 @@ class TrainerHome extends React.Component {
                         </button>
                     </li>
                     <li>
-                        <button className="btn-hebecollins-black">Add Workout</button>
+                        <button
+                            className="btn-hebecollins-black"
+                            onClick={() => redirectByName("ADD_WORKOUT")}
+                        >Add Workout
+                        </button>
                     </li>
                 </QuoteBox>
             </div>

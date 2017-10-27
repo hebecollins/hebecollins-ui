@@ -1,9 +1,8 @@
 import React from 'react'
 import Workout from "../../../dumb/commons/inputFieldGroup/Workout"
 import {validateExercise} from "../../../../Toolbox/Validation/helpers"
-import {addWorkoutToRedux} from "../../../../actions/commons/workoutActions"
-import {connect} from 'react-redux'
 import {dayOfWeek, deepCloneArray} from "../../../../Toolbox/Helpers/extra";
+import isEmpty from 'lodash/isEmpty'
 
 /**It represents one day's workout
  * Working: It has got two main states, 'dayWorkoutToBeStored' and 'dayWorkoutToBeDisplayed'.(these two must be passed as props)
@@ -24,6 +23,7 @@ class WorkoutGroup extends React.Component {
         this.incrementCount = this.incrementCount.bind(this);
         this.onDayChange = this.onDayChange.bind(this);
         this.resetWorkoutState = this.resetWorkoutState.bind(this);
+        this.onSubmit = this.onSubmit.bind(this);
     }
 
     incrementCount() {
@@ -36,10 +36,6 @@ class WorkoutGroup extends React.Component {
     isValid() {
 
         let temp = deepCloneArray(this.state.dayWorkoutToBeStored);
-        console.log("this.state.dayWorkoutToBeStored");
-        console.log(this.state.dayWorkoutToBeStored);
-        console.log("temp");
-        console.log(temp);
         let valid = true;
             temp.map((state) => {
                 let {errors, isValid} = validateExercise(state);
@@ -55,6 +51,23 @@ class WorkoutGroup extends React.Component {
         return valid;
     }
 
+
+    onSubmit(){
+        console.log("here")
+        const {addWorkoutToRedux,addWorkoutToServer,user,workout}=this.props
+        if (this.isValid()) {
+            const isSuccess =
+                addWorkoutToRedux(this.state.dayWorkoutToBeStored, dayOfWeek(this.state.index));
+            console.log(isSuccess);
+            if (isSuccess) {
+                if(!isEmpty(user)){
+                    const gymId = user.gym_list[0].gym_id;
+                    const clientId="something";
+                    addWorkoutToServer(workout,gymId,clientId);
+                }
+            }
+        }
+    }
 
     resetWorkoutState() {
         let temp = []
@@ -152,6 +165,7 @@ class WorkoutGroup extends React.Component {
                     </button>
                     <h1 className="white-center">{dayOfWeek(index)}</h1>
                 </div>
+                <button className="btn-hebecollins-black" onClick={this.onSubmit}>Submit</button>
             </div>
         )
     }
@@ -160,6 +174,8 @@ class WorkoutGroup extends React.Component {
 WorkoutGroup.propTypes = {
     addWorkoutToRedux: React.PropTypes.func.isRequired,
     workout: React.PropTypes.object.isRequired,
+    user: React.PropTypes.object.isRequired,
+    addWorkoutToServer: React.PropTypes.func.isRequired,
 };
 
 export default WorkoutGroup;

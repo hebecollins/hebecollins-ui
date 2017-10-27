@@ -73,7 +73,7 @@ export const ROUTES = [
     {
         ROUTE_NAME: 'ADD_WORKOUT',
         ROUTE:'/add/workout',
-        PERMISSION:['guest']
+        PERMISSION:['guest','trainer','client']
     },
     {
         ROUTE_NAME: 'ADD_QUOTES',
