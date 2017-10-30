@@ -147,7 +147,7 @@ class WorkoutGroup extends React.Component {
         return (
             <div>
                 <div className="white-center">Enter the workout schedule</div>
-                <h1 className="white-center">{dayOfWeek(index)}</h1>
+                <h1 className="white-center">{dayOfWeek(index,true)}</h1>
                 {getExerciseForm()}
                 <div className='pager'>
                     <button onClick={this.incrementCount} className="btn-hebecollins-black">
@@ -163,7 +163,7 @@ class WorkoutGroup extends React.Component {
                             name="next"
                             className="btn-hebecollins-black">{dayOfWeek(index + 1)}
                     </button>
-                    <h1 className="white-center">{dayOfWeek(index)}</h1>
+                    <h1 className="white-center">{dayOfWeek(index,true)}</h1>
                 </div>
                 <button className="btn-hebecollins-black" onClick={this.onSubmit}>Submit</button>
             </div>

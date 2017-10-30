@@ -64,7 +64,6 @@ export const ROUTES = [
         ROUTE:'/activate/trainer',
         PERMISSION:['guest']
     },
-
     {
         ROUTE_NAME: 'ACTIVATE_CLIENT',
         ROUTE:'/activate/client',
@@ -73,11 +72,21 @@ export const ROUTES = [
     {
         ROUTE_NAME: 'ADD_WORKOUT',
         ROUTE:'/add/workout',
-        PERMISSION:['guest','trainer','client']
+        PERMISSION:['trainer']
     },
     {
         ROUTE_NAME: 'ADD_QUOTES',
         ROUTE:'/add/quotes',
         PERMISSION:['admin']
+    },
+    {
+        ROUTE_NAME: 'CLIENT_LIST',
+        ROUTE:'/clients',
+        PERMISSION:['manager','trainer','guest']
+    },
+    {
+        ROUTE_NAME: 'TRAINER_LIST',
+        ROUTE:'/trainers',
+        PERMISSION:['manager','trainer']
     }
 ];
