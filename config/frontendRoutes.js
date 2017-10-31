@@ -1,4 +1,5 @@
 export const ROUTES = [
+    //home
     {
         ROUTE_NAME: 'GUEST_HOME',
         ROUTE:'/',
@@ -24,9 +25,22 @@ export const ROUTES = [
         ROUTE:'/admin',
         PERMISSION:['admin']
     },
+
+
+    //activate
     {
         ROUTE_NAME: 'ACTIVATE_MANAGER',
         ROUTE:'/activate/manager',
+        PERMISSION:['guest']
+    },
+    {
+        ROUTE_NAME: 'ACTIVATE_TRAINER',
+        ROUTE:'/activate/trainer',
+        PERMISSION:['guest']
+    },
+    {
+        ROUTE_NAME: 'ACTIVATE_CLIENT',
+        ROUTE:'/activate/client',
         PERMISSION:['guest']
     },
     {
@@ -34,6 +48,10 @@ export const ROUTES = [
         ROUTE:'/verify',
         PERMISSION:['guest']
     },
+
+
+
+    //password
     {
         ROUTE_NAME: 'PASSWORD_RECOVER',
         ROUTE:'/password/recover',
@@ -49,6 +67,9 @@ export const ROUTES = [
         ROUTE:'/password/change',
         PERMISSION:['client','trainer','manager','admin']
     },
+
+
+    //add
     {
         ROUTE_NAME: 'ADD_TRAINER',
         ROUTE:'/add/trainer',
@@ -60,16 +81,6 @@ export const ROUTES = [
         PERMISSION:['trainer']
     },
     {
-        ROUTE_NAME: 'ACTIVATE_TRAINER',
-        ROUTE:'/activate/trainer',
-        PERMISSION:['guest']
-    },
-    {
-        ROUTE_NAME: 'ACTIVATE_CLIENT',
-        ROUTE:'/activate/client',
-        PERMISSION:['guest']
-    },
-    {
         ROUTE_NAME: 'ADD_WORKOUT',
         ROUTE:'/add/workout',
         PERMISSION:['trainer']
@@ -79,6 +90,9 @@ export const ROUTES = [
         ROUTE:'/add/quotes',
         PERMISSION:['admin']
     },
+
+
+    //user list
     {
         ROUTE_NAME: 'CLIENT_LIST',
         ROUTE:'/clients',

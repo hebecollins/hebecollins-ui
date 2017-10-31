@@ -1,9 +1,9 @@
 import React from 'react';
-import SingleScreen from "../../dumb/commons/templates/SingleScreen";
-import {AddUser} from "../../dumb/commons/inputFieldGroup/AddUser";
+import SingleScreen from "../../others/frames/SingleScreen";
+import {AddUser} from "../../others/inputFieldGroup/AddUser";
 import {validateUserRegistrationFields} from "../../../Toolbox/Validation/helpers";
 import {errorResponse} from "../../../Toolbox/Helpers/responseHandler";
-import {registerClient} from "../../../actions/guest/signUpActions";
+import {registerClient} from "../../../actions/registerActions";
 import {connect} from "react-redux"
 import isEmpty from 'lodash/isEmpty';
 

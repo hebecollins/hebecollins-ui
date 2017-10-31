@@ -1,7 +1,7 @@
 import React from 'react';
-import Navigation from './smart/commons/Navigation'
-import FlashMessageList from './smart/commons/FlashMessageList';
-import Footer from "./dumb/commons/templates/Footer";
+import Navigation from './others/navigation/Navigation'
+import FlashMessageList from './others/flashMessage/FlashMessageList';
+import Footer from "./others/frames/Footer";
 
 require('../Toolbox/css/alerts.css');
 require('../Toolbox/css/text.css');

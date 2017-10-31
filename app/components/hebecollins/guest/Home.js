@@ -1,11 +1,11 @@
 import React from 'react';
 import {connect} from 'react-redux';
-import Description from "../../dumb/guest/Description";
-import LoginAndSignup from "../../dumb/guest/LoginAndSignup";
-import {registerManager} from '../../../actions/guest/signUpActions'
-import {addFlashMessage} from '../../../actions/commons/flashMessages';
-import {loginRequest} from "../../../actions/commons/authActions"
-import {TwoScreen} from "../../dumb/commons/templates/TwoScreen";
+import Description from "../../others/frames/Description";
+import LoginAndSignup from "../../others/frames/LoginAndSignup";
+import {registerManager} from '../../../actions/registerActions'
+import {addFlashMessage} from '../../../actions/flashMessageActions';
+import {loginRequest} from "../../../actions/authActions"
+import {TwoScreen} from "../../others/frames/TwoScreen";
 
 class Home extends React.Component {
     render() {

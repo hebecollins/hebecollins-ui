@@ -1,6 +1,6 @@
 import React from 'react';
 import {connect} from 'react-redux';
-import {addFlashMessage} from "./actions/commons/flashMessages"
+import {addFlashMessage} from "./actions/flashMessageActions"
 import {getPermissionByRoute, getRouteByName} from "./Toolbox/Helpers/routeHandler"
 import {redirectTo, redirectToHome} from "./Toolbox/Helpers/redirect";
 

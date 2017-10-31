@@ -1,11 +1,11 @@
 import React from 'react';
-import {TextField} from '../../dumb/commons/inputField/InputFieldWithIcon'
+import {TextField} from '../../others/inputField/InputFieldWithIcon'
 import {validateOTP} from "../../../Toolbox/Validation/helpers";
 import {connect} from 'react-redux';
 import {errorResponse} from "../../../Toolbox/Helpers/responseHandler";
-import {FormatForm} from "../../dumb/commons/templates/FormatForm"
-import {sendOTP,resendOTP} from "../../../actions/guest/signUpActions"
-import SingleScreen from "../../dumb/commons/templates/SingleScreen";
+import {FormatForm} from "../../others/frames/FormatForm"
+import {sendOTP,resendOTP} from "../../../actions/registerActions"
+import SingleScreen from "../../others/frames/SingleScreen";
 
 class Verify extends React.Component {
 

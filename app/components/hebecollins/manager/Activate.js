@@ -1,13 +1,13 @@
 import React from 'react';
-import {TextField} from '../../dumb/commons/inputField/InputFieldWithIcon'
+import {TextField} from '../../others/inputField/InputFieldWithIcon'
 import {validatePersonalDetails, validateGymDetails} from "../../../Toolbox/Validation/helpers";
 import {connect} from 'react-redux';
-import {Address} from '../../dumb/commons/inputFieldGroup/Address';
-import {UserDetails} from '../../dumb/commons/inputFieldGroup/PersonalDetails';
+import {Address} from '../../others/inputFieldGroup/Address';
+import {UserDetails} from '../../others/inputFieldGroup/PersonalDetails';
 import {errorResponse} from "../../../Toolbox/Helpers/responseHandler";
-import {FormatForm} from "../../dumb/commons/templates/FormatForm"
-import {activateManagerRequest} from "../../../actions/manager/activate"
-import SingleScreen from "./../../dumb/commons/templates/SingleScreen";
+import {FormatForm} from "../../others/frames/FormatForm"
+import {activateManagerRequest} from "../../../actions/activateActions"
+import SingleScreen from "../../others/frames/SingleScreen";
 
 class Activate extends React.Component {
     constructor(props) {

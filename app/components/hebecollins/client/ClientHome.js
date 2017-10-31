@@ -1,5 +1,5 @@
 import React from 'react';
-import QuoteBox from "../../smart/commons/templates/QuoteBox";
+import QuoteBox from "../../others/frames/QuoteBox";
 
 class ClientHome extends React.Component {
     render() {

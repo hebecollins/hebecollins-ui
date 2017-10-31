@@ -1,11 +1,11 @@
 import React from 'react';
-import {MobileNumber, Select, TextField} from '../../dumb/commons/inputField/InputFieldWithIcon'
+import {MobileNumber, Select, TextField} from '../../others/inputField/InputFieldWithIcon'
 import {validateEmailOrMobile} from "../../../Toolbox/Validation/helpers";
 import {connect} from 'react-redux';
 import {errorResponse} from "../../../Toolbox/Helpers/responseHandler";
-import {passwordRecoverRequest} from "../../../actions/commons/authActions"
-import {FormatForm} from "../../dumb/commons/templates/FormatForm"
-import SingleScreen from "../../dumb/commons/templates/SingleScreen";
+import {passwordRecoverRequest} from "../../../actions/authActions"
+import {FormatForm} from "../../others/frames/FormatForm"
+import SingleScreen from "../../others/frames/SingleScreen";
 
 class PasswordRecover extends React.Component {
 

@@ -1,11 +1,11 @@
 import React from 'react';
-import {TextField} from '../../dumb/commons/inputField/InputFieldWithIcon'
+import {TextField} from '../../others/inputField/InputFieldWithIcon'
 import {validateChangedPassword} from "../../../Toolbox/Validation/helpers";
 import {connect} from 'react-redux';
 import {errorResponse} from "../../../Toolbox/Helpers/responseHandler";
-import {FormatForm} from "../../dumb/commons/templates/FormatForm";
-import {passwordChangeRequest} from "../../../actions/commons/authActions"
-import SingleScreen from "../../dumb/commons/templates/SingleScreen";
+import {FormatForm} from "../../others/frames/FormatForm";
+import {passwordChangeRequest} from "../../../actions/authActions"
+import SingleScreen from "../../others/frames/SingleScreen";
 
 class PasswordChange extends React.Component {
 

@@ -1,5 +1,5 @@
 import React from 'react';
-import QuoteBox from "../../smart/commons/templates/QuoteBox";
+import QuoteBox from "../../others/frames/QuoteBox";
 import {redirectByName} from "../../../Toolbox/Helpers/redirect";
 
 class AdminHome extends React.Component {

@@ -1,5 +1,5 @@
 import React from 'react';
-import QuoteBox from "../../smart/commons/templates/QuoteBox";
+import QuoteBox from "../../others/frames/QuoteBox";
 import {redirectByName} from "../../../Toolbox/Helpers/redirect";
 
 class TrainerHome extends React.Component {
@@ -17,8 +17,8 @@ class TrainerHome extends React.Component {
                     <li>
                         <button
                             className="btn-hebecollins-black"
-                            onClick={() => redirectByName("ADD_WORKOUT")}
-                        >Add Workout
+                            onClick={() => redirectByName("CLIENT_LIST")}
+                        >Client list
                         </button>
                     </li>
                 </QuoteBox>

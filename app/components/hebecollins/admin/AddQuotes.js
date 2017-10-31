@@ -1,11 +1,11 @@
 import React from 'react';
-import {TwoScreen} from "../../dumb/commons/templates/TwoScreen";
-import {FormatForm} from "../../dumb/commons/templates/FormatForm";
-import {CommentBox, TextField} from "../../dumb/commons/inputField/InputFieldWithIcon";
-import {postQuotesToReduxStore,postQuotesToServer} from "../../../actions/commons/quote"
+import {TwoScreen} from "../../others/frames/TwoScreen";
+import {FormatForm} from "../../others/frames/FormatForm";
+import {CommentBox, TextField} from "../../others/inputField/InputFieldWithIcon";
+import {postQuotesToReduxStore,postQuotesToServer} from "../../../actions/quoteActions"
 import {connect} from 'react-redux'
 import {validateQuotes} from "../../../Toolbox/Validation/helpers"
-import {Monitor} from "./../../dumb/commons/templates/Monitor"
+import {Monitor} from "../../others/frames/Monitor"
 
 class AddQuotes extends React.Component {
 

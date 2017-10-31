@@ -1,11 +1,11 @@
 import React from 'react';
 import {validatePersonalDetails, validateGymDetails} from "../../../Toolbox/Validation/helpers";
 import {connect} from 'react-redux';
-import {UserDetails} from '../../dumb/commons/inputFieldGroup/PersonalDetails';
+import {UserDetails} from '../../others/inputFieldGroup/PersonalDetails';
 import {errorResponse} from "../../../Toolbox/Helpers/responseHandler";
-import {FormatForm} from "../../dumb/commons/templates/FormatForm"
-import SingleScreen from "./../../dumb/commons/templates/SingleScreen";
-import {activateTrainer} from "../../../actions/manager/activate"
+import {FormatForm} from "../../others/frames/FormatForm"
+import SingleScreen from "../../others/frames/SingleScreen";
+import {activateTrainer} from "../../../actions/activateActions"
 
 class ActivateTrainer extends React.Component {
     constructor(props) {

@@ -1,7 +1,7 @@
 import React from 'react'
-import SingleScreen from "../../dumb/commons/templates/SingleScreen";
-import WorkoutGroup from "../../dumb/commons/inputFieldGroup/WorkoutGroup";
-import {addWorkoutToRedux,addWorkoutToServer} from "../../../actions/commons/workoutActions"
+import SingleScreen from "../../others/frames/SingleScreen";
+import WorkoutGroup from "../../others/inputFieldGroup/WorkoutGroup";
+import {addWorkoutToRedux,addWorkoutToServer} from "../../../actions/workoutActions"
 import {connect} from 'react-redux'
 
 class AddWorkout extends React.Component {
