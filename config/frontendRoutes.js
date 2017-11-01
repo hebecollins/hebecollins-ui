@@ -96,7 +96,7 @@ export const ROUTES = [
     {
         ROUTE_NAME: 'CLIENT_LIST',
         ROUTE:'/clients',
-        PERMISSION:['manager','trainer','guest']
+        PERMISSION:['manager','trainer']
     },
     {
         ROUTE_NAME: 'TRAINER_LIST',

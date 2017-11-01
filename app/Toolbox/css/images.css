@@ -27,3 +27,10 @@ img {
     padding: 3px;
 }
 
+.list-thumbnail{
+    border-radius: 50%;
+    max-width:70px;
+    max-height:70px;
+    display:inline-block;
+    border:2px solid var(--light-orange);
+}

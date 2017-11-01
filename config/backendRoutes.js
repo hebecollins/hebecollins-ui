@@ -18,6 +18,20 @@ export const BACKEND_ROUTES = {
         TRAINER: "/add/trainer",// :gymId/add/trainers
         CLIENT: "/add/client",// :gymId/add/client
     },
+
+    LIST:{
+       CLIENT:{
+           TRAINER_LIST:""
+       },
+        TRAINER:{
+           CLIENT_LIST:"/trainer/clients"//:gymId/trainer/clients
+        },
+        MANAGER:{
+           CLIENT_LIST:"",
+           TRAINER_LIST:""
+        }
+    },
+
     WORKOUT:{
       ASSIGN:"/workout/assign"//:gymId/workout/assign/:clientId
     },

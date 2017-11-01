@@ -98,3 +98,26 @@ blockquote:before {
     margin: 10px 0 10px 0;
     background-color: var(--dark-orange);
 }
+
+.list-individual-name{
+    margin: 0;
+    font-weight: bold;
+}
+
+.list-individual-joining-date{
+    margin: 0;
+    color: white;
+    font-size: medium;
+}
+
+.list-individual-workout-date{
+    margin: 0;
+    color: white;
+    font-size: medium;
+}
+
+.list-header{
+    text-transform: uppercase;
+    font-size: large;
+    color: var(--light-orange);
+}

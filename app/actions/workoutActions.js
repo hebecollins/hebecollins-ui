@@ -5,7 +5,7 @@ import {BACKEND_ROUTES} from "../../config/backendRoutes";
 
 export function addWorkoutToRedux(dayWorkout, dayName) {
     const relevantData = deepCloneArray(dayWorkout).map((state) => {
-        delete state.errors
+        delete state.errors;
         return state
     });//creating a copy to avoid mutation
 
