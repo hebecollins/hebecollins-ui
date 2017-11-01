@@ -9,7 +9,8 @@ class ClientList extends React.Component {
     constructor(props) {
         super(props);
         this.state = {
-            clients: []
+            clients: [],
+            index:0
         }
     }
 
@@ -19,7 +20,7 @@ class ClientList extends React.Component {
         clientListForTrainer(gymId).then(
             (res) => {
                 this.setState({
-                    clients: res.data.clients
+                    clients: res.data.clients,
                 });
             }
         ).catch(err => {
@@ -30,32 +31,52 @@ class ClientList extends React.Component {
         )
     }
 
+    onClick(index) {
+        this.setState({index:index})
+    }
+
     render() {
-        const {clients} = this.state;
+        const {clients,index} = this.state;
         console.log(clients);
-//should be a box with input as img base64
         return (
             <div className="content">
-                <div className="round-edged-box">
-                    <p className="list-header">Client List</p>
+                <div className="row">
+                    <div className="col col-lg-5 col-md-5 col-sm-5 col-xs-12 round-edged-box">
+                        <p className="list-header">Client List</p>
+                        {!isEmpty(clients)
+                            ?
+                            clients.map((client, key) =>
+                                <ListElement
+                                    key={key}
+                                    index={key}
+                                    nick_name={client.nick_name}
+                                    first_name={client.first_name}
+                                    middle_name={client.middle_name}
+                                    last_name={client.last_name}
+                                    img_thumb={client.img_thumb}
+                                    joining_date={client.joining_date}
+                                    workout_update_date={client.workout_update_date}
+                                    onClick={this.onClick.bind(this)}
+                                />
+                            )
+                            : <p></p>
+                        }
+                    </div>
+                <div className="col-lg-7 col-md-7 col-sm-7 hidden-xs round-edged-box">
                     {!isEmpty(clients)
                         ?
-                        clients.map((client, index) =>
-                        <ListElement
-                            key={index}
-                            nick_name={client.nick_name}
-                            first_name={client.first_name}
-                            middle_name={client.middle_name}
-                            last_name={client.last_name}
-                            img_thumb={client.img_thumb}
-                            joining_date={client.joining_date}
-                            workout_update_date={client.workout_update_date}
-                        />
-                        )
-                        : <p> </p>
+                        <div>
+                            <p className="list-monitor-name">
+                                {clients[index].first_name + " " + clients[index].middle_name
+                                + " " + clients[index].last_name}
+                                {` (${clients[index].nick_name})`}</p>
+                        </div>
+                        : <p></p>
                     }
                 </div>
             </div>
+            </div>
+
         )
     }
 }

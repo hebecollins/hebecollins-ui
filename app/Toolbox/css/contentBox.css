@@ -172,12 +172,22 @@
     overflow: auto;
     padding: 20px 5% 40px 5%;
 }
+
 .list-individual-data{
     min-height:40px;
     padding: 10px 0 10px 0;
     display: flex;
     border-bottom: 1px solid #2f3030;
 }
+.list-individual-data:active {
+    background-color: var(--light-orange);
+}
+
+.list-individual-data:hover{
+    text-decoration: none;
+}
+
+
 .list-individual-info{
     display: inline-block;
     color: black;

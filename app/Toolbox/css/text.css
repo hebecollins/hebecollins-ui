@@ -121,3 +121,10 @@ blockquote:before {
     font-size: large;
     color: var(--light-orange);
 }
+
+.list-monitor-name{
+    margin: 0;
+    font-weight: bold;
+    font-size: xx-large;
+    color:black;
+}
