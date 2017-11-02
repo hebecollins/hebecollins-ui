@@ -43,8 +43,21 @@ export const deepCloneObject = (input) => {
 export const getFormattedDate = (date) => {
     const monthNames = ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"];
     let parts = date.split('-');
-    const month = monthNames[parts[1]-1];
+    const month = monthNames[parts[1] - 1];
     const year = parts[0];
     const day = parts[2];
     return `${day} ${month}, ${year}`;
+};
+
+export const getGenderFromGenderCode = (gender) => {
+    switch (gender) {
+        case "m":
+            return "Male";
+        case "f":
+            return "Female";
+        case "o":
+            return "Others";
+        default:
+            return "undefined"
+    }
 };

@@ -120,10 +120,13 @@ blockquote:before {
     text-transform: uppercase;
     font-size: large;
     color: var(--light-orange);
+    text-align: center;
+    font-family: Arial;
+    font-weight: bold;
 }
 
 .list-monitor-header{
-    margin: 0;
+    margin-bottom: 20px;
     font-weight: bold;
     font-size: xx-large;
     color:black;
@@ -134,4 +137,8 @@ blockquote:before {
     font-weight: bold;
     font-size: large;
     color:white;
+}
+
+p{
+    margin-bottom: 5px;
 }

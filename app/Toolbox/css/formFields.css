@@ -68,6 +68,7 @@ option{
 .btn-hebecollins-orange{
     background-color: var(--dark-orange);;
     color: black;
+    bottom: 0;
     font-size: medium;
     font-family:"Comic Sans MS";
     padding:5px 10px 5px 10px;
