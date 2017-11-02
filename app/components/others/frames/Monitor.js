@@ -1,7 +1,7 @@
 import React from 'react';
 
 //Fade is an animation class
-import {Fade} from "../animation/Animation";
+import {Fade} from "../extra/Animation";
 
 export const Monitor = ({data}) => {
     /*Data gets mutated when we just use data.reverse, so we are creating its copy first and than reversing it*/

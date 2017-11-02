@@ -122,9 +122,16 @@ blockquote:before {
     color: var(--light-orange);
 }
 
-.list-monitor-name{
+.list-monitor-header{
     margin: 0;
     font-weight: bold;
     font-size: xx-large;
     color:black;
+}
+
+.list-monitor-elements{
+    padding: 20px 0 10px 0;
+    font-weight: bold;
+    font-size: large;
+    color:white;
 }

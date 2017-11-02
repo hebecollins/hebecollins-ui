@@ -11,20 +11,20 @@ import $ from 'jquery'
  *                                    0 -> sun, 1 -> mon, 2 -> tue, 3 -> wed
  *                                    4 -> thu, 5 -> fri, 6->sat
  */
-export const dayOfWeek = (i, fullName=false,startDayNumber=0) => {
-    const weekDays=["sun","mon","tue","wed","thu","fri","sat"];
-    const weekDaysFullName=["Sunday","Monday","Tuesday","Wednesday","Thursday","Friday","Saturday"];
+export const dayOfWeek = (i, fullName = false, startDayNumber = 0) => {
+    const weekDays = ["sun", "mon", "tue", "wed", "thu", "fri", "sat"];
+    const weekDaysFullName = ["Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"];
     if (i % 7 < 0)
-        return fullName?weekDaysFullName[7 + i % 7 + startDayNumber]:weekDays[7 + i % 7 + startDayNumber];
+        return fullName ? weekDaysFullName[7 + i % 7 + startDayNumber] : weekDays[7 + i % 7 + startDayNumber];
     else
-        return fullName?weekDaysFullName[i % 7 + startDayNumber]:weekDays[i % 7 + startDayNumber]
+        return fullName ? weekDaysFullName[i % 7 + startDayNumber] : weekDays[i % 7 + startDayNumber]
 };
 
 /**This methods gives reference-free clone to avoid immutability.
  * @param input => any javascript object, array, objectArray
  * @return array => immutable clone of the given input
  * */
-export const deepCloneArray=(input)=>{
+export const deepCloneArray = (input) => {
     return $.extend(true, [], input);
 };
 
@@ -32,6 +32,19 @@ export const deepCloneArray=(input)=>{
  * @param input => any javascript object, array, objectArray
  * @return object => immutable clone of the given input
  * */
-export const deepCloneObject=(input)=>{
+export const deepCloneObject = (input) => {
     return $.extend(true, {}, input);
+};
+
+/**This method takes date in 'yyyy-mm-dd' format and convert it into 'dd monthName, yyyy' format
+ * @param date => String in format 'yyyy-mm-dd'
+ * @return String => in format 'dd monthName, yyyy'
+ */
+export const getFormattedDate = (date) => {
+    const monthNames = ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"];
+    let parts = date.split('-');
+    const month = monthNames[parts[1]-1];
+    const year = parts[0];
+    const day = parts[2];
+    return `${day} ${month}, ${year}`;
 };

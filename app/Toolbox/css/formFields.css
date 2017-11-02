@@ -65,6 +65,17 @@ option{
     border: 0;
 }
 
+.btn-hebecollins-orange{
+    background-color: var(--dark-orange);;
+    color: black;
+    font-size: medium;
+    font-family:"Comic Sans MS";
+    padding:5px 10px 5px 10px;
+    margin:8px;
+    border: 0;
+    font-weight:bold;
+}
+
 .form-control{
     background-color:transparent;
     color: white;

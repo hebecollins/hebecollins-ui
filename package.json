@@ -44,6 +44,7 @@
     "querystring": "^0.2.0",
     "react": "^15.1.0",
     "react-addons-css-transition-group": "^15.6.2",
+    "react-custom-scrollbars": "^4.2.1",
     "react-datetime": "^2.10.3",
     "react-dom": "^15.1.0",
     "react-intl-tel-input": "^4.2.0",

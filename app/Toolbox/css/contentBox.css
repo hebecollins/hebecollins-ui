@@ -3,6 +3,7 @@
     --dark-orange: #ea3e0d;
     --light-orange: #e67817;
     --dark-grey: #1e1e1e;
+    --light-gray:#454a4e
 }
 
 #app {
@@ -22,8 +23,8 @@
         width: 100%;
     }
 
-    .layer{
-        background: rgba(0,0,0,.6);
+    .layer {
+        background: rgba(0, 0, 0, .6);
     }
 
     .login-signup {
@@ -40,12 +41,11 @@
         margin: 0 20px 0 20px;
     }
 
-
     /*home page*/
-    .quote-box{
-        background: rgba(230,120,23,.6);
-        padding-left: 10px!important;
-        padding-right: 10px!important;
+    .quote-box {
+        background: rgba(230, 120, 23, .6);
+        padding-left: 10px !important;
+        padding-right: 10px !important;
     }
 }
 
@@ -64,8 +64,8 @@
         background-attachment: fixed;
     }
 
-    .layer{
-        background: rgba(0,0,0,.6);
+    .layer {
+        background: rgba(0, 0, 0, .6);
     }
 
     .login-signup {
@@ -82,8 +82,8 @@
     }
 
     /*home page*/
-    .quote-box{
-        background: rgba(230,120,23,.6);
+    .quote-box {
+        background: rgba(230, 120, 23, .6);
         min-height: 500px;
     }
 }
@@ -157,40 +157,87 @@
     padding-right: 5%;
 }
 
-.monitor{
-    height:100%!important;
+.monitor {
+    height: 100% !important;
 }
 
-.monitor-data-box{
+.monitor-data-box {
     color: white;
 }
 
-.round-edged-box{
+.round-edged-box {
     background: rgba(204, 204, 204, 0.4);
-    margin:0 30px 0 30px;
+    margin: 0 30px 0 30px;
     border-radius: 20px;
     overflow: auto;
-    padding: 20px 5% 40px 5%;
+    padding: 20px 3% 40px 3%;
+    display: inline-block;
 }
 
-.list-individual-data{
-    min-height:40px;
+/*======================================================================================*/
+/*list-individual-data is one entry in user-list. Each entry represents a link*/
+/*======================================================================================*/
+.list-individual-data {
+    min-height: 40px;
     padding: 10px 0 10px 0;
     display: flex;
-    border-bottom: 1px solid #2f3030;
-}
-.list-individual-data:active {
-    background-color: var(--light-orange);
+    border-bottom: 1px solid var(--light-gray);
+    margin-right: 20px;
 }
 
-.list-individual-data:hover{
+.list-individual-data:hover {
     text-decoration: none;
 }
 
+.list-individual-data-clicked {
+    background-color: var(--light-gray);
+    margin-right: 20px;
+}
 
-.list-individual-info{
+
+.list-dropdown-mobile-visible{
+    background-color: var(--light-gray);
+    margin-right: 20px;
+}
+
+@media (min-width: 768px) {
+
+    .list-dropdown-mobile-visible{
+        display: none;
+    }
+}
+
+
+/*======================================================================================*/
+/*list-individual-info represents the text part of list-individual-data*/
+/*======================================================================================*/
+.list-individual-info {
     display: inline-block;
     color: black;
     font-size: large;
     padding-left: 10px;
+}
+
+
+/*======================================================================================*/
+/*represents scroll-bar*/
+/*======================================================================================*/
+.scrollbar-track-vertical {
+    position: absolute;
+    width: 10px;
+    right: 2px;
+    bottom: 2px;
+    top: 2px;
+    border-radius: 3px;
+    background-color: var(--light-gray);
+}
+
+.scrollbar-thumb-vertical {
+    position: relative;
+    display: block;
+    /*width: 100px;*/
+    /*height: 100px;*/
+    cursor: pointer;
+    border-radius: inherit;
+    background-color: var(--light-orange);
 }
