@@ -11,7 +11,9 @@ export const message={
 
     //non-validation errors
     "badConnection":"Unable to connect",
-    "errorAtServer":"Some error occurred at the server"
+    "errorAtServer":"Some error occurred at the server",
+    "notEntered":"NOT ENTERED",//if a field is empty this will be displayed instead of empty text
+    "notAssigned":"NOT ASSIGNED"//if a workout is not assigned, this will be displayed instead of empty field
 };
 
 export function exceededMaxLength(length) {

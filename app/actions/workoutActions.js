@@ -1,7 +1,7 @@
-import {ADD_WORKOUT} from "./types";
 import {deepCloneArray} from "../Toolbox/Helpers/extra";
 import {postJSON} from "../Toolbox/Helpers/requestHandler";
 import {BACKEND_ROUTES} from "../../config/backendRoutes";
+import {addWorkout} from "./actionStore";
 
 export function addWorkoutToRedux(dayWorkout, dayName) {
     const relevantData = deepCloneArray(dayWorkout).map((state) => {
@@ -24,17 +24,10 @@ export function addWorkoutToServer(workout,gymId,clientId) {
     const route = `/${gymId}${BACKEND_ROUTES.WORKOUT.ASSIGN}/${clientId}`;
     const dataToBeSent = {
         "workout":workout
-    }
+    };
     return dispatch => {
         postJSON(dataToBeSent,route).then(res=>{
             console.log(res);
         });
-    }
-}
-
-export function addWorkout(workout) {
-    return {
-        type: ADD_WORKOUT,
-        workout: workout
     }
 }

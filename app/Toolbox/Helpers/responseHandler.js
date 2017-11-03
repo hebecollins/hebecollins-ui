@@ -1,7 +1,6 @@
-import {addFlashMessage} from "../../actions/flashMessageActions"
+import {addFlashMessage,setCurrentUser} from "../../actions/actionStore"
 import {message} from "./messages";
 import {store} from '../../index'
-import {setCurrentUser} from "../../actions/authActions";
 import {redirectToHome} from "./redirect";
 import setAuthToken from "../Auth/SetAuthToken";
 

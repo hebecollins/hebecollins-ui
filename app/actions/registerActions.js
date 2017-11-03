@@ -1,9 +1,9 @@
 import {postForm, postJSON} from '../Toolbox/Helpers/requestHandler';
 import {redirectByName} from '../Toolbox/Helpers/redirect';
-import {STORE_VERIFICATION_DATA} from "./types";
 import {BACKEND_ROUTES} from "../../config/backendRoutes";
-import {addFlashMessage} from "./flashMessageActions";
+import {addFlashMessage} from "./actionStore";
 import {store} from "../index"
+import {storeVerificationData} from "./actionStore";
 
 /*contains all the actions that are involved in registering a user which includes manager registration
   addition of clients and trainers
@@ -107,14 +107,4 @@ function register(data, route) {
             text: res.data.msg
         }));
     })
-}
-
-/** It stores userId in redux store so that with each request(verify and activate), userId
- *  can be sent for the server to detect which user has to be registered
- * */
-function storeVerificationData(userId) {
-    return {
-        type: STORE_VERIFICATION_DATA,
-        userId: userId
-    }
 }

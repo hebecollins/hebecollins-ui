@@ -3,7 +3,7 @@ import {connect} from 'react-redux';
 import Description from "../../others/frames/Description";
 import LoginAndSignup from "../../others/frames/LoginAndSignup";
 import {registerManager} from '../../../actions/registerActions'
-import {addFlashMessage} from '../../../actions/flashMessageActions';
+import {addFlashMessage} from '../../../actions/actionStore';
 import {loginRequest} from "../../../actions/authActions"
 import {TwoScreen} from "../../others/frames/TwoScreen";
 

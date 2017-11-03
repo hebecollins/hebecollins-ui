@@ -35,5 +35,7 @@ export const BACKEND_ROUTES = {
     WORKOUT:{
       ASSIGN:"/workout/assign"//:gymId/workout/assign/:clientId
     },
-    QUOTE:"/quote"
+
+    QUOTE:"/quote",
+    REMARKS:"/remarks"//:gymId/remarks/:selectedUserId
 };

@@ -1,9 +1,9 @@
 import {BACKEND_ROUTES} from "../../config/backendRoutes"
 import {get, postJSON} from "../Toolbox/Helpers/requestHandler"
-import {ADD_QUOTES, CLEAR_QUOTES} from "./types";
 import {store} from "../index"
 import {redirectToHome} from "../Toolbox/Helpers/redirect";
-import {addFlashMessage} from "./flashMessageActions";
+import {addFlashMessage, clearQuotes} from "./actionStore";
+import {addQuote} from "./actionStore";
 
 /** gets quote from the server
  */
@@ -15,11 +15,7 @@ export function getQuote() {
  */
 export function postQuotesToReduxStore(data) {
     return dispatch => {
-        dispatch({
-            type: ADD_QUOTES,
-            author: data.author,
-            quote: data.quote
-        });
+        dispatch(addQuote(data.author, data.quote));
     }
 }
 
@@ -35,7 +31,7 @@ export function postQuotesToServer() {
 
     return dispatch => {
         return postJSON(dataToBeSent, BACKEND_ROUTES.QUOTE).then(res => {
-                dispatch({type: CLEAR_QUOTES});
+                dispatch(clearQuotes);
                 dispatch(addFlashMessage({
                     type:"success",
                     text:res.data.msg

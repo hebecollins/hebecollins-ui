@@ -1,8 +1,7 @@
 import {ADD_WORKOUT, ADD_WORKOUT_FOR} from "../actions/types";
 
 const initialState = {
-    workout:{},
-    clientId:""
+    workout:{}
 };
 
 export default (state= initialState,action={})=> {
@@ -11,13 +10,6 @@ export default (state= initialState,action={})=> {
             return {
                 workout:Object.assign(state.workout,action.workout),
                 clientId:state.clientId
-            }
-        }
-
-        case ADD_WORKOUT_FOR: {
-            return {
-                workout:state.workout,
-                clientId:action.clientId
             }
         }
 

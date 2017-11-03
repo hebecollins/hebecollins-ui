@@ -183,6 +183,7 @@
     display: flex;
     border-bottom: 1px solid var(--light-gray);
     margin-right: 20px;
+    cursor: pointer!important;
 }
 
 .list-individual-data:hover {
@@ -227,6 +228,7 @@
     display: inline-block;
     padding: 0 0 60px 15px;
     position: relative;
+    width: 65%;
 }
 
 .list-monitor-left-box{
@@ -234,6 +236,7 @@
     padding: 0 15px 60px 0;
     border-right: 2px solid var(--light-gray);
     position: relative;
+    width: 35%;
 }
 
 .list-monitor-elements{
@@ -258,8 +261,6 @@
 .scrollbar-thumb-vertical {
     position: relative;
     display: block;
-    /*width: 100px;*/
-    /*height: 100px;*/
     cursor: pointer;
     border-radius: inherit;
     background-color: var(--light-orange);
@@ -276,6 +277,7 @@
     color: white;
     font-weight: normal;
     margin: 0;
+    font-size: medium;
 }
 
 .value{
@@ -283,4 +285,5 @@
     font-weight: normal;
     padding-left: 5px;
     margin: 0;
+    font-size: medium;
 }

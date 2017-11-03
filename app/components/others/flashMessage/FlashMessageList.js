@@ -1,7 +1,7 @@
 import React from 'react';
 import {connect} from 'react-redux';
 import FlashMessage from './FlashMessage';
-import {deleteFlashMessage} from '../../../actions/flashMessageActions';
+import {deleteFlashMessage} from '../../../actions/actionStore';
 
 class FlashMessageList extends React.Component {
     render() {

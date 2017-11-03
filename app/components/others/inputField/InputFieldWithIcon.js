@@ -49,7 +49,7 @@ TextField.defaultProps = {
 /**===========================================================================================
  * It is a comment Box
  * */
-export const CommentBox = ({field, value, disabled, label, error, type, onChange, iconClass,isIconNeeded}) => {
+export const CommentBox = ({field, value, disabled, label, error, onChange, iconClass,isIconNeeded}) => {
     return (
         <FieldFrame
             iconClass={iconClass}
@@ -60,7 +60,7 @@ export const CommentBox = ({field, value, disabled, label, error, type, onChange
                 value={value}
                 onChange={onChange}
                 name={field}
-                className="comment-box form-control"
+                className="form-control"
                 placeholder={label}
                 disabled={disabled}
             /></FieldFrame>

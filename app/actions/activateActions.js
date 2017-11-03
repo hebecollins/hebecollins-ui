@@ -1,8 +1,8 @@
 import {postJSON} from '../Toolbox/Helpers/requestHandler';
 import {redirectTo, redirectToHome} from "../Toolbox/Helpers/redirect";
-import {STORE_VERIFICATION_DATA} from "./types"
-import {addFlashMessage} from "./flashMessageActions"
+import {addFlashMessage} from "./actionStore"
 import {BACKEND_ROUTES} from "../../config/backendRoutes";
+import {deleteVerificationData} from "./actionStore";
 
 
 /**(OTP activation)
@@ -117,16 +117,5 @@ export function activateClient(data, params) {
                 text: res.data.msg
             }));
         });
-    }
-}
-
-/**Activation data consist of userId, which is stored in redux store. Once account has been activated
- * it should be deleted.
- * this method is called just to do that
- */
-function deleteVerificationData() {
-    return {
-        type: STORE_VERIFICATION_DATA,
-        userId: ""
     }
 }

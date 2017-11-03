@@ -88,10 +88,6 @@ blockquote:before {
     background-color: transparent;
 }
 
-.comment-box{
-    height: 150px!important;
-}
-
 .badge{
     padding:10px 12px 10px 12px;
     font-size: large;
@@ -141,4 +137,12 @@ blockquote:before {
 
 p{
     margin-bottom: 5px;
+}
+
+.edit-icon-link:hover{
+    color: var(--dark-orange);
+}
+.edit-icon-link{
+    color: white;
+    cursor: pointer;
 }
