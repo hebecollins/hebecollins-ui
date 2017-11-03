@@ -94,13 +94,13 @@ export const ROUTES = [
 
     //user list
     {
-        ROUTE_NAME: 'CLIENT_LIST',
-        ROUTE:'/clients',
-        PERMISSION:['manager','trainer']
+        ROUTE_NAME: 'CLIENT_LIST_FOR_TRAINER',
+        ROUTE:'/trainer/clients',
+        PERMISSION:['trainer']
     },
     {
-        ROUTE_NAME: 'TRAINER_LIST',
-        ROUTE:'/trainers',
-        PERMISSION:['manager','trainer']
+        ROUTE_NAME: 'CLIENT_LIST_FOR_MANAGER',
+        ROUTE:'/manager/clients',
+        PERMISSION:['manager']
     }
 ];

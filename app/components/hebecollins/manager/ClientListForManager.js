@@ -1,25 +1,20 @@
 import React from 'react'
-import {
-    addSelectedUserToRedux, clientListForTrainer, postRemark,
-    postRemarkToServer
-} from "../../../actions/userListActions"
+import {addSelectedUserToRedux, clientListForManager, postRemarkToServer} from "../../../actions/userListActions"
 import {connect} from "react-redux"
 import {errorResponse} from "../../../Toolbox/Helpers/responseHandler"
 import isEmpty from 'lodash/isEmpty'
 import {ListElement} from "../../others/frames/ListElement"
 import Scrollable from "../../others/extra/Scrollable";
 import {deepCloneArray, getFormattedDate, getGenderFromGenderCode} from "../../../Toolbox/Helpers/extra";
-import {Fade, Slide} from "../../others/extra/Animation";
 import {redirectByName} from "../../../Toolbox/Helpers/redirect";
 import {message} from "../../../Toolbox/Helpers/messages";
-import {CommentBox, TextField} from "../../others/inputField/InputFieldWithIcon";
 import {FieldValue} from "../../others/display/DisplayText";
-import {ButtonBlack, ButtonOrange} from "../../others/display/Buttons";
+import {ButtonOrange} from "../../others/display/Buttons";
 import {UserMonitor} from "../../others/frames/UserMonitor";
 import {Remarks} from "../../others/display/Remarks";
 import {addFlashMessage} from "../../../actions/actionStore";
 
-class ClientList extends React.Component {
+class ClientListForManager extends React.Component {
     constructor(props) {
         super(props);
         this.state = {
@@ -30,9 +25,6 @@ class ClientList extends React.Component {
             isLoading: false,//when edit remark button is pressed this turns true, when it is submitted it turns fasle
             remarks: ""
         };
-        this.addWorkout = this.addWorkout.bind(this);
-        this.viewProfile = this.viewProfile.bind(this);
-        this.viewWorkout = this.viewWorkout.bind(this);
         this.editRemarks = this.editRemarks.bind(this);
         this.remarkSubmitted = this.remarkSubmitted.bind(this);
         this.onChange = this.onChange.bind(this);
@@ -42,22 +34,18 @@ class ClientList extends React.Component {
      * redux and local storage.
      */
     componentWillMount() {
-        const {user} = this.props;
-        const gymId = user.gym_list[0].gym_id;
-
-        clientListForTrainer(gymId).then(
+        const {selectedGym} = this.props;
+        clientListForManager(selectedGym.gym_id).then(
             (res) => {
                 const clients = res.data.clients;
-                this.setState({
-                    clients: clients,
-                });
+                this.setState({clients: clients,});
+
+                console.log(clients);
+                //adds first user in the list to redux
                 const clientCloned = deepCloneArray(clients[this.state.index]);
-                this.props.addSelectedUserToRedux(clientCloned.client_id, "client",clientCloned.nick_name);
+                this.props.addSelectedUserToRedux(clientCloned.client_id, "client", clientCloned.nick_name);
             }
-        ).catch(err => {
-                errorResponse(err)
-            }
-        )
+        ).catch(err => errorResponse(err))
     }
 
 
@@ -66,17 +54,13 @@ class ClientList extends React.Component {
      */
     onClick(index) {
         const clientCloned = deepCloneArray(this.state.clients[index]);
-        this.props.addSelectedUserToRedux(clientCloned.client_id, "client",clientCloned.nick_name);
+        this.props.addSelectedUserToRedux(clientCloned.client_id, "client", clientCloned.nick_name);
         const isClicked = [];
         isClicked[index] = true;
         this.setState({index: index, isClicked: deepCloneArray(isClicked)})
     }
 
-    addWorkout(clientId) {
-
-    }
-
-    viewWorkout() {
+    viewTrainerProfile() {
 
     }
 
@@ -84,58 +68,54 @@ class ClientList extends React.Component {
 
     }
 
-    editRemarks() {//it should give an html form which should replace the txt in remark
+    editRemarks() {//it is called when 'edit' button is clicked
         this.setState({isEditingRemarks: true, isLoading: false});
     }
-
-    remarkSubmitted(index) {
-        const {selectedUser,user} = this.props;
-
-        const gymId = user.gym_list[0].gym_id;
-
-        this.setState({isLoading: true});
-
-        postRemarkToServer(this.state.remarks, selectedUser.user_id , gymId).then(
-            (res)=>{
-                let tempClients = deepCloneArray(this.state.clients);
-                tempClients[index].remarks = this.state.remarks;
-                this.setState({isEditingRemarks: false, clients: tempClients});
-            }
-        ).catch((err)=>{
-            addFlashMessage({
-                type:"error",
-                text:err.response.data.msg
-            })
-        });
-
-    }
-
 
     onChange(e) {
         this.setState({remarks: e.target.value})
     }
 
+    /**When a remark is submitted, it sends remark to server and if it gets a success response
+     * it copies that remark into client[] array. So, basically it is not fetching the updated
+     * remark from the server but assuming that if server is sending a 'success', it means
+     * remark has been updated.
+     * @param index => integer, index of array client
+     * */
+    remarkSubmitted(index) {
+        const {selectedUser, selectedGym} = this.props;
+        this.setState({isLoading: true});
+
+        postRemarkToServer(this.state.remarks, selectedUser.user_id, selectedGym.gym_id).then(
+            (res) => {
+                let tempClients = deepCloneArray(this.state.clients);
+                tempClients[index].remarks = this.state.remarks;
+                this.setState({isEditingRemarks: false, clients: tempClients});
+            }
+        ).catch((err) => {
+            addFlashMessage({
+                type: "error",
+                text: err.response.data.msg
+            })
+        });
+    }
 
     render() {
         const {clients, index, isClicked, isEditingRemarks, remarks, isLoading} = this.state;
 
         const viewProfileButton =
             <ButtonOrange
-                onClick={() => this.viewProfile(clients[index].client_id)}
+                onClick={() => this.viewProfile}
                 disabled={isLoading}
                 label={"View Profile"}/>;
 
-        const addWorkoutButton =
+        //redirects towards addWorkout page
+        const viewTrainerProfileButton =
             <ButtonOrange
-                onClick={() => this.addWorkout(clients[index].client_id)}
+                onClick={() => this.viewTrainerProfile}
                 disabled={isLoading}
-                label={"Add Workout"}/>;
+                label={"View Trainer's Profile"}/>;
 
-        const viewWorkoutButton =
-            <ButtonOrange
-                onClick={() => this.viewWorkout(clients[index].client_id)}
-                disabled={isLoading}
-                label={"View Workout"}/>;
 
         return (
             <div className="content">
@@ -158,15 +138,9 @@ class ClientList extends React.Component {
                                         onClick={this.onClick.bind(this)}>
 
                                         <FieldValue
-                                            field={"Goal"}
-                                            value={client.primary_goal ? client.primary_goal : message.notEntered}
+                                            field={"Joined On"}
+                                            value={getFormattedDate(client.joining_date)}
                                             noMargin={true}/>
-
-                                        <FieldValue
-                                            field={"Workout Updated On"}
-                                            value={client.workout_update_date ? getFormattedDate(client.workout_update_date) : message.notAssigned}
-                                            noMargin={true}/>
-
 
                                     </ListElement>
 
@@ -175,8 +149,7 @@ class ClientList extends React.Component {
                                         {isClicked[key] ?
                                             <div className="list-dropdown-mobile-visible">
                                                 {viewProfileButton}
-                                                {addWorkoutButton}
-                                                {viewWorkoutButton}
+                                                {viewTrainerProfileButton}
                                             </div> :
                                             <div/>
                                         }
@@ -216,8 +189,8 @@ class ClientList extends React.Component {
                                     />
 
                                     <FieldValue
-                                        field={"Joined On"}
-                                        value={`${getFormattedDate(clients[index].joining_date)}`}
+                                        field={"Goal"}
+                                        value={clients[index].primary_goal ? clients[index].primary_goal : message.notEntered}
                                     />
 
                                     <div className="bottom-of-div pager">
@@ -228,9 +201,9 @@ class ClientList extends React.Component {
                                 {/*right side of list-monitor box*/}
                                 <div className="list-monitor-right-box">
                                     <FieldValue
-                                        field={"Goal Description"}
-                                        value={clients[index].goal_description ?
-                                            ` ${clients[index].goal_description}` : message.notEntered}
+                                        field={"Current Trainer"}
+                                        value={clients[index].current_trainer ?
+                                            ` ${clients[index].current_trainer}` : message.notEntered}
                                     />
 
                                     {/*remark or remark form , depends on the current state*/}
@@ -245,8 +218,7 @@ class ClientList extends React.Component {
                                     />
 
                                     <div className="bottom-of-div pager">
-                                        {addWorkoutButton}
-                                        {viewWorkoutButton}
+                                        {viewTrainerProfileButton}
                                     </div>
                                 </div>
                             </UserMonitor> : <div/>
@@ -260,9 +232,9 @@ class ClientList extends React.Component {
 
 function mapStateToProps(state) {
     return {
-        user: state.auth.user,
+        selectedGym: state.selectedGym,
         selectedUser: state.selectedUser
     }
 }
 
-export default connect(mapStateToProps,{addSelectedUserToRedux})(ClientList);
+export default connect(mapStateToProps, {addSelectedUserToRedux})(ClientListForManager);

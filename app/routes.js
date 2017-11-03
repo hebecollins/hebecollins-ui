@@ -22,9 +22,8 @@ import ActivateTrainer from "./components/hebecollins/trainer/ActivateTrainer";
 import AddClient from "./components/hebecollins/trainer/AddClient";
 import ActivateClient from "./components/hebecollins/client/ActivateClient";
 import AddWorkout from "./components/hebecollins/trainer/AddWorkout";
-import Workout from "./components/others/inputFieldGroup/Workout";
-import WorkoutGroup from "./components/others/inputFieldGroup/WorkoutGroup";
-import ClientList from "./components/hebecollins/trainer/ClientList";
+import ClientListForTrainer from "./components/hebecollins/trainer/ClientListForTrainer";
+import ClientListForManager from "./components/hebecollins/manager/ClientListForManager";
 
 export default (
     <div className="something">
@@ -54,8 +53,8 @@ export default (
             <Route path={getRouteByName('ADD_WORKOUT')} component={authCheck(AddWorkout)}/>
 
             {/*user list*/}
-            <Route path={getRouteByName('CLIENT_LIST')} component={authCheck(ClientList)}/>
-            {/*<Route path={getRouteByName('TRAINER_LIST')} component={authCheck(trainer)}/>*/}
+            <Route path={getRouteByName('CLIENT_LIST_FOR_TRAINER')} component={authCheck(ClientListForTrainer)}/>
+            <Route path={getRouteByName('CLIENT_LIST_FOR_MANAGER')} component={authCheck(ClientListForManager)}/>
 
             {/*not found*/}
             <Route path='/*' component={NotFound}/>

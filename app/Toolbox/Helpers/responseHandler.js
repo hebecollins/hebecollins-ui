@@ -1,4 +1,4 @@
-import {addFlashMessage,setCurrentUser} from "../../actions/actionStore"
+import {addFlashMessage, logout} from "../../actions/actionStore"
 import {message} from "./messages";
 import {store} from '../../index'
 import {redirectToHome} from "./redirect";
@@ -17,11 +17,9 @@ export function errorResponse(err) {
      * */
     if (typeof err.response === 'undefined') {
         if (store.getState().auth.isAuthenticated === true) {
-            console.log("errorResponse");
-            console.log(err);
-            localStorage.removeItem('user');
+            localStorage.clear();
             setAuthToken(false);
-            store.dispatch(setCurrentUser({}));
+            store.dispatch(logout());
             redirectToHome();
             return null;
         }

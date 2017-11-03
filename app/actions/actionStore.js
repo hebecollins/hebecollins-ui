@@ -1,8 +1,9 @@
 import {
-    ADD_FLASH_MESSAGE, CLEAR_QUOTES, DELETE_FLASH_MESSAGE, DELETE_SELECTED_USER, SELECTED_USER,
-    SET_CURRENT_USER
+    ADD_FLASH_MESSAGE, CLEAR_QUOTES, DELETE_FLASH_MESSAGE, DELETE_SELECTED_GYM, DELETE_SELECTED_USER, LOGOUT,
+    SELECTED_GYM
 } from './types'
-import {STORE_VERIFICATION_DATA,ADD_QUOTE,ADD_WORKOUT} from "./types";
+import {STORE_VERIFICATION_DATA,ADD_QUOTE,ADD_WORKOUT,SET_CURRENT_USER, SELECTED_USER} from "./types";
+
 
 /** adds flash message to redux store
  * @param message => object {type, text}. type can be 'error' or 'success'
@@ -28,27 +29,29 @@ export function deleteFlashMessage(id) {
 /**Stores logged in user's information to redux
  * @param user => object {nick_name, token, token_expire,user_id, user_type, gym_list}
  */
-export function setCurrentUser(user) {
+export const setCurrentUser=(user)=> {
     return {
         type: SET_CURRENT_USER,
         user
     };
-}
+};
+
+export const logout=()=> {
+    return {
+        type: LOGOUT,
+    };
+};
 
 /** stores selected user's information to redux store
  *  NOTE: Current user should not be confused with selected user.
  *        Current user is logged in user.
  *        selected user is the user whose information current user is trying to access**
- * @param userId => userId of selected user
- * @param nickName => nickName of selected user
- * @param userType => userType('manager','trainer','client','admin') of selected user
+ * @param selectedUser=> object {user_id, user_type, nickName}
  */
-export const saveSelectedUser = (userId, userType, nickName) => {
+export const saveSelectedUser = (selectedUser) => {
     return {
         type: SELECTED_USER,
-        userId: userId,
-        userType: userType,
-        nickName: nickName,
+        selectedUser:selectedUser
     }
 };
 
@@ -57,6 +60,25 @@ export const saveSelectedUser = (userId, userType, nickName) => {
 export const deleteSelectedUser = () => {
     return {
         type: DELETE_SELECTED_USER,
+    }
+};
+
+/**Saves gym details in redux store
+ * @param selectedGym => object {gym_id, gym_name, locality}
+ */
+export const saveSelectedGym = (selectedGym) => {
+    return {
+        type: SELECTED_GYM,
+        selectedGym:selectedGym
+    }
+};
+
+
+/**deletes gym details in redux store
+ */
+export const deleteSeletedGym = ( ) => {
+    return {
+        type: DELETE_SELECTED_GYM,
     }
 };
 
@@ -102,12 +124,11 @@ export const clearQuotes = () => {
 };
 
 /**adds workout to redux
- * @param workout => object {day=>[workouts]}
+ * @param workout => object {day:[workouts]}
  */
 export const addWorkout=(workout)=> {
     return {
         type: ADD_WORKOUT,
         workout: workout
     }
-}
-
+};

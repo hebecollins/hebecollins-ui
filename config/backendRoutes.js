@@ -27,7 +27,7 @@ export const BACKEND_ROUTES = {
            CLIENT_LIST:"/trainer/clients"//:gymId/trainer/clients
         },
         MANAGER:{
-           CLIENT_LIST:"",
+           CLIENT_LIST:"/manager/clients",//:gymId/trainer/clients
            TRAINER_LIST:""
         }
     },

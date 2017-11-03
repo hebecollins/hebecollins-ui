@@ -1,30 +1,19 @@
 import {postForm, get} from '../Toolbox/Helpers/requestHandler';
 import setAuthToken from '../Toolbox/Auth/SetAuthToken'
-import {addFlashMessage, setCurrentUser} from "./actionStore";
+import {addFlashMessage, logout, saveSelectedGym, setCurrentUser} from "./actionStore";
 import {redirectTo, redirectToHome} from '../Toolbox/Helpers/redirect'
 import {BACKEND_ROUTES} from "../../config/backendRoutes";
+import isEmpty from 'lodash/isEmpty'
 
-
-export function logoutRequest() {
-    return dispatch => {
-        return get(BACKEND_ROUTES.LOGOUT).then(res => {
-                console.log("inside logout request");
-                localStorage.removeItem('user');
-                setAuthToken(false);
-                dispatch(addFlashMessage({
-                    type: 'success',
-                    text: res.data.msg
-                }));
-                dispatch(setCurrentUser({}));
-            }
-        ).catch(err => {
-                dispatch(setCurrentUser({}));
-                redirectToHome();
-            }
-        )
-    }
-}
-
+/** sends login details to the server. If response comes as success, it stores current user's
+ * details in redux store and in local storage. Also if response contains a field 'gym_list',
+ * it takes the first element of that array and store that as default selectedGym in both redux
+ * store as well as local storage. After all this, it redirects to user's home page
+ *
+ * @param data => object{identifier, password, remember}
+ *                  identifier is email/mobile
+ *                  remember is boolean, true if 'remember me' box is checked else false
+ */
 export function loginRequest(data) {
     const dataToBePosted = {
         "identifier": data.identifier,
@@ -35,14 +24,42 @@ export function loginRequest(data) {
     return dispatch => {
         return postForm(dataToBePosted, BACKEND_ROUTES.LOGIN).then(res => {
                 const user = res.data.data;
+
+                //storing current user's info for sending subsequent requests
                 localStorage.setItem('user', JSON.stringify(user));
                 setAuthToken(user.token);
                 dispatch(setCurrentUser(user));
+
+                //selecting a default gym for a non-admin account
+                //TODO: make selection of default gym customisable
+                if (!isEmpty(user.gym_list)) {
+                    dispatch(setDefaultGym(user.gym_list[0]));
+                }
                 redirectTo('/' + user.user_type);
             }
         );
     }
 }
+
+/** sends a logout request to the server. If a success response comes, it deletes all the data
+ * stored in localStorage and redux
+ */
+export function logoutRequest() {
+    return dispatch => {
+        return get(BACKEND_ROUTES.LOGOUT).then(res => {
+                // localStorage.removeItem('user');
+                localStorage.clear();
+                setAuthToken(false);
+                dispatch(logout());
+            }
+        ).catch(err => {
+                dispatch(logout());
+                redirectToHome();
+            }
+        )
+    }
+}
+
 
 export function passwordRecoverRequest(data) {
     const dataToBePosted = {
@@ -89,7 +106,6 @@ export function passwordResetRequest(data, params) {
     }
 }
 
-
 export function passwordChangeRequest(data) {
     const dataToBePosted = {
         "old_password": data.old_password,
@@ -107,3 +123,18 @@ export function passwordChangeRequest(data) {
         );
     }
 }
+
+/** sets default gym in redux store as well as local storage
+ * @param gymDetails => object {gym_id, gym_name, locality}
+ */
+export const setDefaultGym = (gymDetails) => {
+    const {gym_id, gym_name, locality} = gymDetails
+    const defaultGym = {
+        "gym_id": gym_id,
+        "gym_name": gym_name,
+        "locality": locality,
+    };
+    localStorage.setItem('selectedGym', JSON.stringify(defaultGym));
+    return dispatch =>
+        dispatch(saveSelectedGym(defaultGym))
+};

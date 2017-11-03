@@ -7,7 +7,7 @@ import thunk from 'redux-thunk';
 import {createStore, applyMiddleware, compose} from 'redux';
 import rootReducer from './rootReducer';
 import setAuthToken from "./Toolbox/Auth/SetAuthToken";
-import {setCurrentUser} from "./actions/actionStore";
+import {saveSelectedGym, saveSelectedUser, setCurrentUser} from "./actions/actionStore";
 
 const store = createStore(
     // (state = {})=> state,//empty reducer
@@ -18,10 +18,23 @@ const store = createStore(
     )
 );
 
+/*copies currentUser details from local storage to redux store*/
 if (localStorage.user) {
     const user = JSON.parse(localStorage.user);
     setAuthToken(user.token);
     store.dispatch(setCurrentUser(user))
+}
+
+/*copies selectedGym details from local storage to redux store*/
+if (localStorage.selectedGym) {
+    const gym = JSON.parse(localStorage.selectedGym);
+    store.dispatch(saveSelectedGym(gym))
+}
+
+/*copies selectedUser details from local storage to redux store*/
+if (localStorage.selectedUser) {
+    const selectedUser= JSON.parse(localStorage.selectedUser);
+    store.dispatch(saveSelectedUser(selectedUser))
 }
 
 

@@ -17,7 +17,7 @@ class TrainerHome extends React.Component {
                     <li>
                         <button
                             className="btn-hebecollins-black"
-                            onClick={() => redirectByName("CLIENT_LIST")}
+                            onClick={() => redirectByName("CLIENT_LIST_FOR_TRAINER")}
                         >Client list
                         </button>
                     </li>
