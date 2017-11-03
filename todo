@@ -1,0 +1,2 @@
+* priority 1: make a remark edit box
+* priority low: make open in new tab feature work by taking localStorage data and copying it to redux
