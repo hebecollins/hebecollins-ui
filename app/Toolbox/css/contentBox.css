@@ -10,6 +10,11 @@
     background-color: black;
 }
 
+/*html, body{*/
+    /*min-height: 100% !important;*/
+    /*height: 100%;*/
+/*}*/
+
 @media (max-width: 768px) {
     #page {
         background-image: url("http://dev.hebecollins.com/images/guest_home_mobile.jpg");

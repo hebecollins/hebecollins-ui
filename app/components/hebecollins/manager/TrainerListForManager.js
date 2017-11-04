@@ -14,13 +14,13 @@ import {UserMonitor} from "../../others/frames/userList/UserMonitor";
 import {Remarks} from "../../others/display/Remarks";
 import {addFlashMessage} from "../../../actions/actionStore";
 
-class ClientListForManager extends React.Component {
+class TrainerListForManager extends React.Component {
     constructor(props) {
         super(props);
         this.state = {
-            clients: [],//it is the list of client information sent from the server
-            index: 0,//index of the client []
-            isClicked: [true],//if a tab in client list is clicked
+            trainers: [],//it is the list of trainer information sent from the server
+            index: 0,//index of the trainers []
+            isClicked: [true],//if a tab in trainer list is clicked
             isEditingRemarks: false,//if the person is editing this
             isLoading: false,//when edit remark button is pressed this turns true, when it is submitted it turns fasle
             remarks: ""
@@ -30,31 +30,31 @@ class ClientListForManager extends React.Component {
         this.onChange = this.onChange.bind(this);
     }
 
-    /** It sends clientList request to the server and stores the first client from that response in
+    /** It sends trainer List request to the server and stores the first trainer from that response in
      * redux and local storage.
      */
     componentWillMount() {
         const {selectedGym} = this.props;
-        clientListForManager(selectedGym.gym_id).then(
+        trainerListForManager(selectedGym.gym_id).then(//will pass this as props
             (res) => {
-                const clients = res.data.clients;
-                this.setState({clients: clients,});
+                const trainers = res.data.trainers;
+                this.setState({trainers: trainers,});
 
-                console.log(clients);
+                console.log(trainers);
                 //adds first user in the list to redux
-                const clientCloned = deepCloneArray(clients[this.state.index]);
-                this.props.addSelectedUserToRedux(clientCloned.client_id, "client", clientCloned.nick_name);
+                const trainerCloned = deepCloneArray(trainers[this.state.index]);
+                this.props.addSelectedUserToRedux(trainerCloned.trainer_id, "trainer", trainerCloned.nick_name);
             }
         ).catch(err => errorResponse(err))
     }
 
 
     /** It gets triggered when a user is selected from the list
-     * @param index => index of the user from the client[] array
+     * @param index => index of the user from the trainers[] array
      */
     onClick(index) {
-        const clientCloned = deepCloneArray(this.state.clients[index]);
-        this.props.addSelectedUserToRedux(clientCloned.client_id, "client", clientCloned.nick_name);
+        const trainerCloned = deepCloneArray(this.state.trainers[index]);
+        this.props.addSelectedUserToRedux(trainerCloned.trainer_id, "trainer", trainerCloned.nick_name);
         const isClicked = [];
         isClicked[index] = true;
         this.setState({index: index, isClicked: deepCloneArray(isClicked)})
@@ -77,10 +77,10 @@ class ClientListForManager extends React.Component {
     }
 
     /**When a remark is submitted, it sends remark to server and if it gets a success response
-     * it copies that remark into client[] array. So, basically it is not fetching the updated
+     * it copies that remark into trainers[] array. So, basically it is not fetching the updated
      * remark from the server but assuming that if server is sending a 'success', it means
      * remark has been updated.
-     * @param index => integer, index of array client
+     * @param index => integer, index of array trainers
      * */
     remarkSubmitted(index) {
         const {selectedUser, selectedGym} = this.props;
@@ -88,9 +88,9 @@ class ClientListForManager extends React.Component {
 
         postRemarkToServer(this.state.remarks, selectedUser.user_id, selectedGym.gym_id).then(
             (res) => {
-                let tempClients = deepCloneArray(this.state.clients);
-                tempClients[index].remarks = this.state.remarks;
-                this.setState({isEditingRemarks: false, clients: tempClients});
+                let tempTrainers = deepCloneArray(this.state.trainers);
+                tempTrainers[index].remarks = this.state.remarks;
+                this.setState({isEditingRemarks: false, trainers: tempTrainers});
             }
         ).catch((err) => {
             addFlashMessage({
@@ -101,7 +101,7 @@ class ClientListForManager extends React.Component {
     }
 
     render() {
-        const {clients, index, isClicked, isEditingRemarks, remarks, isLoading} = this.state;
+        const {trainers, index, isClicked, isEditingRemarks, remarks, isLoading} = this.state;
 
         const viewProfileButton =
             <ButtonOrange
@@ -109,23 +109,29 @@ class ClientListForManager extends React.Component {
                 disabled={isLoading}
                 label={"View Profile"}/>;
 
-        //redirects towards addWorkout page
-        const viewTrainerProfileButton =
+        const viewReviewButton =
             <ButtonOrange
-                onClick={() => this.viewTrainerProfile}
+                onClick={() => this.viewReview}
                 disabled={isLoading}
-                label={"View Trainer's Profile"}/>;
+                label={"View Reviews"}/>;
+
+        //redirects towards addWorkout page
+        const giveReviewButton =
+            <ButtonOrange
+                onClick={() => this.giveReview}
+                disabled={isLoading}
+                label={"Give Review"}/>;
 
 
         return (
             <div className="content">
                 <div className="row">
 
-                    {/*left side of clientList page*/}
+                    {/*left side of trainerList page*/}
                     <div className="col col-lg-5 col-md-5 col-sm-5 col-xs-12 round-edged-box">
-                        <p className="list-header">Client List</p>
+                        <p className="list-header">Trainer List</p>
                         <Scrollable>
-                            {!isEmpty(clients) ? clients.map((client, key) =>
+                            {!isEmpty(trainers) ? trainers.map((trainer, key) =>
                                 <div key={key}>
                                     <ListElement
                                         index={key}
@@ -155,7 +161,8 @@ class ClientListForManager extends React.Component {
                                         }
                                     </div>
 
-                                </div>) : <p/>
+                                </div>
+                            ) : <p/>
                             }
                         </Scrollable>
                     </div>
@@ -237,4 +244,4 @@ function mapStateToProps(state) {
     }
 }
 
-export default connect(mapStateToProps, {addSelectedUserToRedux})(ClientListForManager);
+export default connect(mapStateToProps, {addSelectedUserToRedux})(TrainerListForManager);

@@ -26,6 +26,13 @@ export const ROUTES = [
         PERMISSION:['admin']
     },
 
+    //no records found
+    {
+        ROUTE_NAME: 'NO_RECORDS_FOUND',
+        ROUTE:'/404',
+        PERMISSION:['manager','trainer','client']
+    },
+
 
     //activate
     {
@@ -102,5 +109,18 @@ export const ROUTES = [
         ROUTE_NAME: 'CLIENT_LIST_FOR_MANAGER',
         ROUTE:'/manager/clients',
         PERMISSION:['manager']
+    },
+
+    //view(temporary)
+    {
+        ROUTE_NAME: 'CLIENT_PROFILE',
+        ROUTE:'/client/profile',
+        PERMISSION:['manager','client','trainer']
+    },
+    {
+        ROUTE_NAME: 'VIEW_WORKOUT',
+        ROUTE:'/view/workout',
+        PERMISSION:['manager','client','trainer']
     }
+
 ];

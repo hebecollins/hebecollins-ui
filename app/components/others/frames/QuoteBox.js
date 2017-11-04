@@ -2,6 +2,7 @@ import React from 'react'
 import {getQuote} from "../../../actions/quoteActions"
 import {errorResponse} from "../../../Toolbox/Helpers/responseHandler"
 import {connect} from 'react-redux';
+import {Loading} from "../extra/Loading"
 
 /** It is frame for putting quotes on the home page. It has been made a smart component only
  *  because it will be used exactly without any modification & fields here will be common
@@ -30,8 +31,7 @@ class QuoteBox extends React.Component {
 
     render() {
         const {nickName, quote, author} = this.state;
-        return (
-            <div className="quote-box content">
+        return quote? <div className="quote-box content">
                 <div className="row">
                     <div className="col col-lg-offset-2 col-lg-8  col-md-offset-2 col-md-8 col-sm-offset-1 col-sm-10">
                         <h1 className="all-caps">Hello, {nickName}</h1>
@@ -43,8 +43,8 @@ class QuoteBox extends React.Component {
                         </ul>
                     </div>
                 </div>
-            </div>
-        )
+            </div> : <Loading/>
+
     }
 }
 

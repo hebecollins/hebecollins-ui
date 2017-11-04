@@ -3,16 +3,16 @@ import {addSelectedUserToRedux, clientListForTrainer, postRemarkToServer} from "
 import {connect} from "react-redux"
 import {errorResponse} from "../../../Toolbox/Helpers/responseHandler"
 import isEmpty from 'lodash/isEmpty'
-import {ListElement} from "../../others/frames/ListElement"
+import {ListElement} from "../../others/frames/userList/ListElement"
 import Scrollable from "../../others/extra/Scrollable";
 import {deepCloneArray, getFormattedDate, getGenderFromGenderCode} from "../../../Toolbox/Helpers/extra";
 import {redirectByName} from "../../../Toolbox/Helpers/redirect";
 import {message} from "../../../Toolbox/Helpers/messages";
 import {FieldValue} from "../../others/display/DisplayText";
 import {ButtonOrange} from "../../others/display/Buttons";
-import {UserMonitor} from "../../others/frames/UserMonitor";
+import {UserMonitor} from "../../others/frames/userList/UserMonitor";
 import {Remarks} from "../../others/display/Remarks";
-import {addFlashMessage} from "../../../actions/actionStore";
+import {Loading} from "../../others/extra/Loading"
 
 class ClientListForTrainer extends React.Component {
     constructor(props) {
@@ -23,7 +23,8 @@ class ClientListForTrainer extends React.Component {
             isClicked: [true],//if a tab in client list is clicked
             isEditingRemarks: false,//if the person is editing this
             isLoading: false,//when edit remark button is pressed this turns true, when it is submitted it turns fasle
-            remarks: ""
+            remarks: "",
+            responseRecieved:false//whether array returned from server is empty
         };
         this.editRemarks = this.editRemarks.bind(this);
         this.remarkSubmitted = this.remarkSubmitted.bind(this);
@@ -38,13 +39,16 @@ class ClientListForTrainer extends React.Component {
         clientListForTrainer(selectedGym.gym_id).then(
             (res) => {
                 const clients = res.data.clients;
-                this.setState({clients: clients,});
-
+                this.setState({clients: clients, responseRecieved:true});
                 //adds first user in the list to redux
                 const clientCloned = deepCloneArray(clients[this.state.index]);
                 this.props.addSelectedUserToRedux(clientCloned.client_id, "client", clientCloned.nick_name);
             }
-        ).catch(err => errorResponse(err))
+        ).catch(err =>
+        {
+            this.setState({responseRecieved:true});
+            redirectByName("NO_RECORDS_FOUND")
+        })
     }
 
 
@@ -57,14 +61,6 @@ class ClientListForTrainer extends React.Component {
         const isClicked = [];
         isClicked[index] = true;
         this.setState({index: index, isClicked: deepCloneArray(isClicked)})
-    }
-
-    viewWorkout() {
-
-    }
-
-    viewProfile() {
-
     }
 
     editRemarks() {//it is called when 'edit' button is clicked
@@ -91,154 +87,162 @@ class ClientListForTrainer extends React.Component {
                 tempClients[index].remarks = this.state.remarks;
                 this.setState({isEditingRemarks: false, clients: tempClients});
             }
-        ).catch((err) => {
-            addFlashMessage({
-                type: "error",
-                text: err.response.data.msg
-            })
-        });
+        ).catch((err) => errorResponse(err));
     }
 
     render() {
-        const {clients, index, isClicked, isEditingRemarks, remarks, isLoading} = this.state;
-
         const viewProfileButton =
             <ButtonOrange
-                onClick={() => this.viewProfile}
-                disabled={isLoading}
+                onClick={() => redirectByName('CLIENT_PROFILE')}
+                disabled={this.state.isLoading}
                 label={"View Profile"}/>;
+
 
         //redirects towards addWorkout page
         const addWorkoutButton =
             <ButtonOrange
                 onClick={() => redirectByName('ADD_WORKOUT')}
-                disabled={isLoading}
+                disabled={this.state.isLoading}
                 label={"Add Workout"}/>;
+
 
         const viewWorkoutButton =
             <ButtonOrange
-                onClick={() => this.viewWorkout}
-                disabled={isLoading}
+                onClick={() => redirectByName('VIEW_WORKOUT')}
+                disabled={this.state.isLoading}
                 label={"View Workout"}/>;
 
-        return (
+
+        //it is the client list
+        const listBox = (clients) => {
+            return (
+                <Scrollable>
+                    {clients.map((client, key) => {
+                            const {
+                                nick_name, first_name, middle_name, last_name, img_thumb,
+                                primary_goal, workout_update_date
+                            } = client;
+                            return <div key={key}>
+                                <ListElement
+                                    index={key}
+                                    isClicked={this.state.isClicked}
+                                    nick_name={nick_name}
+                                    first_name={first_name}
+                                    middle_name={middle_name}
+                                    last_name={last_name}
+                                    img_thumb={img_thumb}
+                                    onClick={this.onClick.bind(this)}>
+
+                                    {/*data inside the list element box*/}
+                                    <div key="all-visible">
+                                        <FieldValue
+                                            field={"Goal"}
+                                            value={primary_goal ? primary_goal : message.notEntered}
+                                            noMargin={true}/>
+
+                                        <FieldValue
+                                            field={"Workout Updated On"}
+                                            value={workout_update_date ? getFormattedDate(workout_update_date) : message.notAssigned}
+                                            noMargin={true}/>
+                                    </div>
+
+                                    {/*box that shows up only when an element is clicked and that too on small screens*/}
+                                    <div key="mobile-visible">
+                                        {viewProfileButton}
+                                        {addWorkoutButton}
+                                        {viewWorkoutButton}
+                                    </div>
+                                </ListElement>
+                            </div>
+                        }
+                    )}</Scrollable>
+            )
+        };
+
+        //it is the description of client on the right side of the screen
+        const monitorBox = (client) => {
+            const {nick_name, first_name, middle_name, last_name} = client;
+            return (
+                <UserMonitor
+                    firstName={first_name}
+                    middleName={middle_name}
+                    lastName={last_name}
+                    nickName={nick_name}>
+
+                    {/*left side of list-monitor box*/}
+                    {monitorSubBoxLeft(client)}
+
+                    {/*right side of list-monitor box*/}
+                    {monitorSubBoxRight(client)}
+
+                </UserMonitor>
+            )
+        };
+
+        const monitorSubBoxLeft = (client) => {
+            const {batch, age, gender, joining_date} = client;
+            return (
+                <div className="list-monitor-left-box">
+
+                    <FieldValue field={"Batch"} value={batch}/>
+                    <FieldValue field={"Age"} value={age}/>
+                    <FieldValue field={"Gender"} value={getGenderFromGenderCode(gender)}/>
+                    <FieldValue field={"Joined On"} value={getFormattedDate(joining_date)}/>
+
+                    <div className="bottom-of-div pager">{viewProfileButton}</div>
+                </div>
+            )
+        };
+
+        const monitorSubBoxRight = (client) => {
+            const {goal_description, remarks} = client;
+            return (
+                <div className="list-monitor-right-box">
+                    <FieldValue
+                        field={"Goal Description"}
+                        value={goal_description ? goal_description : message.notEntered}/>
+
+                    {/*remark or remark form , depends on the current state*/}
+                    <Remarks
+                        value={remarks ? remarks : message.notEntered}
+                        remarks={this.state.remarks}
+                        isEditing={this.state.isEditingRemarks}
+                        isLoading={this.state.isLoading}
+                        editRemarks={this.editRemarks}
+                        onChange={this.onChange}
+                        onSubmit={() => this.remarkSubmitted(this.state.index)}/>
+
+                    <div className="bottom-of-div pager">
+                        {addWorkoutButton}
+                        {viewWorkoutButton}
+                    </div>
+                </div>
+            )
+        };
+
+        return this.state.responseRecieved ?
             <div className="content">
                 <div className="row">
 
                     {/*left side of clientList page*/}
                     <div className="col col-lg-5 col-md-5 col-sm-5 col-xs-12 round-edged-box">
                         <p className="list-header">Client List</p>
-                        <Scrollable>
-                            {!isEmpty(clients) ? clients.map((client, key) =>
-                                <div key={key}>
-                                    <ListElement
-                                        index={key}
-                                        isClicked={isClicked}
-                                        nick_name={client.nick_name}
-                                        first_name={client.first_name}
-                                        middle_name={client.middle_name}
-                                        last_name={client.last_name}
-                                        img_thumb={client.img_thumb}
-                                        onClick={this.onClick.bind(this)}>
-
-                                        <FieldValue
-                                            field={"Goal"}
-                                            value={client.primary_goal ? client.primary_goal : message.notEntered}
-                                            noMargin={true}/>
-
-                                        <FieldValue
-                                            field={"Workout Updated On"}
-                                            value={client.workout_update_date ? getFormattedDate(client.workout_update_date) : message.notAssigned}
-                                            noMargin={true}/>
-
-
-                                    </ListElement>
-
-                                    {/*mobile visible and desktop hidden dropdown*/}
-                                    <div>
-                                        {isClicked[key] ?
-                                            <div className="list-dropdown-mobile-visible">
-                                                {viewProfileButton}
-                                                {addWorkoutButton}
-                                                {viewWorkoutButton}
-                                            </div> :
-                                            <div/>
-                                        }
-                                    </div>
-
-                                </div>) : <p/>
-                            }
-                        </Scrollable>
+                        {!isEmpty(this.state.clients) ?
+                            <div>
+                                {listBox(this.state.clients)}
+                            </div> : <div/>}
                     </div>
 
                     {/*right side of the clientList page. It is mobile hidden*/}
                     <div className="col-lg-7 col-md-7 col-sm-7 hidden-xs round-edged-box">
-                        {!isEmpty(clients)
-                            ?
-                            <UserMonitor
-                                firstName={clients[index].first_name}
-                                middleName={clients[index].middle_name}
-                                lastName={clients[index].last_name}
-                                nickName={clients[index].nick_name}
-                            >
-
-                                {/*left side of list-monitor box*/}
-                                <div className="list-monitor-left-box">
-                                    <FieldValue
-                                        field={"Batch"}
-                                        value={` ${clients[index].batch}`}
-                                    />
-
-                                    <FieldValue
-                                        field={"Age"}
-                                        value={` ${clients[index].age}`}
-                                    />
-
-                                    <FieldValue
-                                        field={"Gender"}
-                                        value={`${getGenderFromGenderCode(clients[index].gender)}`}
-                                    />
-
-                                    <FieldValue
-                                        field={"Joined On"}
-                                        value={`${getFormattedDate(clients[index].joining_date)}`}
-                                    />
-
-                                    <div className="bottom-of-div pager">
-                                        {viewProfileButton}
-                                    </div>
-                                </div>
-
-                                {/*right side of list-monitor box*/}
-                                <div className="list-monitor-right-box">
-                                    <FieldValue
-                                        field={"Goal Description"}
-                                        value={clients[index].goal_description ?
-                                            ` ${clients[index].goal_description}` : message.notEntered}
-                                    />
-
-                                    {/*remark or remark form , depends on the current state*/}
-                                    <Remarks
-                                        value={clients[index].remarks ? clients[index].remarks : message.notEntered}
-                                        remarks={remarks}
-                                        isEditing={isEditingRemarks}
-                                        isLoading={isLoading}
-                                        editRemarks={this.editRemarks}
-                                        onChange={this.onChange}
-                                        onSubmit={() => this.remarkSubmitted(index)}
-                                    />
-
-                                    <div className="bottom-of-div pager">
-                                        {addWorkoutButton}
-                                        {viewWorkoutButton}
-                                    </div>
-                                </div>
-                            </UserMonitor> : <div/>
-                        }
+                        {!isEmpty(this.state.clients) ?
+                            <div>
+                                {monitorBox(this.state.clients[this.state.index])}
+                            </div> : <div/>}
                     </div>
                 </div>
-            </div>
-        )
+            </div>: <Loading/>
+
     }
 }
 
