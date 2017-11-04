@@ -24,7 +24,7 @@ class ClientListForTrainer extends React.Component {
             isEditingRemarks: false,//if the person is editing this
             isLoading: false,//when edit remark button is pressed this turns true, when it is submitted it turns fasle
             remarks: "",
-            responseRecieved:false//whether array returned from server is empty
+            responseRecieved: false//whether array returned from server is empty
         };
         this.editRemarks = this.editRemarks.bind(this);
         this.remarkSubmitted = this.remarkSubmitted.bind(this);
@@ -39,16 +39,12 @@ class ClientListForTrainer extends React.Component {
         clientListForTrainer(selectedGym.gym_id).then(
             (res) => {
                 const clients = res.data.clients;
-                this.setState({clients: clients, responseRecieved:true});
+                this.setState({clients: clients, responseRecieved: true});
                 //adds first user in the list to redux
                 const clientCloned = deepCloneArray(clients[this.state.index]);
                 this.props.addSelectedUserToRedux(clientCloned.client_id, "client", clientCloned.nick_name);
             }
-        ).catch(err =>
-        {
-            this.setState({responseRecieved:true});
-            redirectByName("NO_RECORDS_FOUND")
-        })
+        ).catch(err => redirectByName("NO_RECORDS_FOUND"))
     }
 
 
@@ -126,11 +122,11 @@ class ClientListForTrainer extends React.Component {
                                 <ListElement
                                     index={key}
                                     isClicked={this.state.isClicked}
-                                    nick_name={nick_name}
-                                    first_name={first_name}
-                                    middle_name={middle_name}
-                                    last_name={last_name}
-                                    img_thumb={img_thumb}
+                                    nickName={nick_name}
+                                    firstName={first_name}
+                                    middleName={middle_name}
+                                    lastName={last_name}
+                                    imgThumb={img_thumb}
                                     onClick={this.onClick.bind(this)}>
 
                                     {/*data inside the list element box*/}
@@ -182,7 +178,7 @@ class ClientListForTrainer extends React.Component {
         const monitorSubBoxLeft = (client) => {
             const {batch, age, gender, joining_date} = client;
             return (
-                <div className="list-monitor-left-box">
+                <div key="left-box">
 
                     <FieldValue field={"Batch"} value={batch}/>
                     <FieldValue field={"Age"} value={age}/>
@@ -197,7 +193,7 @@ class ClientListForTrainer extends React.Component {
         const monitorSubBoxRight = (client) => {
             const {goal_description, remarks} = client;
             return (
-                <div className="list-monitor-right-box">
+                <div key="right-box">
                     <FieldValue
                         field={"Goal Description"}
                         value={goal_description ? goal_description : message.notEntered}/>
@@ -227,21 +223,15 @@ class ClientListForTrainer extends React.Component {
                     {/*left side of clientList page*/}
                     <div className="col col-lg-5 col-md-5 col-sm-5 col-xs-12 round-edged-box">
                         <p className="list-header">Client List</p>
-                        {!isEmpty(this.state.clients) ?
-                            <div>
-                                {listBox(this.state.clients)}
-                            </div> : <div/>}
+                        {listBox(this.state.clients)}
                     </div>
 
                     {/*right side of the clientList page. It is mobile hidden*/}
                     <div className="col-lg-7 col-md-7 col-sm-7 hidden-xs round-edged-box">
-                        {!isEmpty(this.state.clients) ?
-                            <div>
-                                {monitorBox(this.state.clients[this.state.index])}
-                            </div> : <div/>}
+                        {monitorBox(this.state.clients[this.state.index])}
                     </div>
                 </div>
-            </div>: <Loading/>
+            </div> : <Loading/>
 
     }
 }

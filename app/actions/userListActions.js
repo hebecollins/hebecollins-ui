@@ -16,6 +16,13 @@ export const clientListForManager = (gymId) => {
     return get(route)
 };
 
+/** trainerList for manager
+ */
+export const trainerListForManager = (gymId) => {
+    const route = `/${gymId}${BACKEND_ROUTES.LIST.MANAGER.TRAINER_LIST}`;
+    return get(route)
+};
+
 
 /** posting remark to server
  */
