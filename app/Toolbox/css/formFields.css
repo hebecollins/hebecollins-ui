@@ -77,6 +77,24 @@ option{
     font-weight:bold;
 }
 
+.btn-hebecollins-orange:disabled{
+    opacity: 0;
+}
+
+.btn-hebecollins-orange:hover{
+    border: 1px solid black;
+    margin: 2px;
+}
+
+.btn-hebecollins-black:disabled{
+    opacity: 0;
+}
+
+.btn-hebecollins-black:hover{
+    border: 1px solid black;
+    margin: 7px;
+}
+
 .form-control{
     background-color:transparent;
     color: white;

@@ -88,8 +88,13 @@ export const ROUTES = [
         PERMISSION:['trainer']
     },
     {
-        ROUTE_NAME: 'ADD_WORKOUT',
-        ROUTE:'/add/workout',
+        ROUTE_NAME: 'ASSIGN_WORKOUT',
+        ROUTE:'/assign/workout',
+        PERMISSION:['trainer']
+    },
+    {
+        ROUTE_NAME: 'CREATE_WORKOUT',
+        ROUTE:'/create/workout',
         PERMISSION:['trainer']
     },
     {

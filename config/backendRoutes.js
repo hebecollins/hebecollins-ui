@@ -33,7 +33,8 @@ export const BACKEND_ROUTES = {
     },
 
     WORKOUT:{
-      ASSIGN:"/workout/assign"//:gymId/workout/assign/:clientId
+      ASSIGN:"/workout/assign",//:gymId/workout/assign/:clientId
+      CREATE:"/workout/create"//:gymId/workout/create
     },
 
     QUOTE:"/quote",

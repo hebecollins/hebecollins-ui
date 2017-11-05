@@ -4,6 +4,7 @@ import {validateExercise} from "../../../Toolbox/Validation/helpers"
 import {dayOfWeek, deepCloneArray} from "../../../Toolbox/Helpers/extra";
 import isEmpty from 'lodash/isEmpty'
 import {Fade, Slide} from "../extra/Animation";
+import {errorResponse} from "../../../Toolbox/Helpers/responseHandler";
 
 /**It represents one day's workout
  * Working: It has got two main states, 'dayWorkoutToBeStored' and 'dayWorkoutToBeDisplayed'.(these two must be passed as props)
@@ -18,21 +19,50 @@ class WorkoutGroup extends React.Component {
             exercise_count: 2,
             dayWorkoutToBeStored: [], //received from workout component
             dayWorkoutToBeDisplayed: [], //sent to workout component
-            index: 0 //it is the starting day number. For eg. 0 for sunday, 1 for monday
+            index: 0, //it is the starting day number. For eg. 0 for sunday, 1 for monday
         };
 
         this.incrementCount = this.incrementCount.bind(this);
         this.onDayChange = this.onDayChange.bind(this);
         this.resetWorkoutState = this.resetWorkoutState.bind(this);
-        this.onSubmit = this.onSubmit.bind(this);
-        this.onCut= this.onCut.bind(this);
+        this.onCut = this.onCut.bind(this);
+        this.markAsRestDay = this.markAsRestDay.bind(this);
+        this.addedToStore = this.addedToStore.bind(this);
+    }
+
+
+    componentDidMount() {
+        this.props.onRef(this)
+    }
+
+    componentWillUnmount() {
+        this.props.onRef(undefined)
     }
 
     incrementCount() {
         this.setState({exercise_count: this.state.exercise_count + 1})
     }
 
-    onCut(i){}
+    /** when a cut icon is pressed, it remove that index of the array from dayWorkoutToBeStored,
+     * and sets that to dayWorkoutToBeDisplayed, which in change gets reflected on the UI
+     * @param i => index of the array dayWorkoutToBeStored
+     */
+    onCut(i) {
+        let temp = deepCloneArray(this.state.dayWorkoutToBeStored);
+        temp.splice(i, 1);
+
+        //dayWorkoutToBeStored can be set equal to temp also but it doesn't matter as if it gets
+        // equal to the workout(component) state again.
+        this.setState({
+            dayWorkoutToBeStored: [],
+            dayWorkoutToBeDisplayed: temp,
+            exercise_count: this.state.exercise_count - 1
+        })
+    }
+
+    markAsRestDay() {
+        this.setState({exercise_count: 0, dayWorkoutToBeStored: []})
+    }
 
     /** Clone dayWorkoutToBeStored -> validate and append errors to the clone -> sets dayWorkoutToBeStored as the clone
      *  @return bool => true if valid else false
@@ -55,18 +85,13 @@ class WorkoutGroup extends React.Component {
         return valid;
     }
 
-
-    onSubmit() {
-        const {addWorkoutToRedux, addWorkoutToServer, gymId, workout} = this.props
+    addedToStore() {
+        const {addWorkoutToRedux} = this.props;
         if (this.isValid()) {
-            const isSuccess =
-                addWorkoutToRedux(this.state.dayWorkoutToBeStored, dayOfWeek(this.state.index));
-            console.log(isSuccess);
-            if (isSuccess) {
-                const clientId = "something";
-                addWorkoutToServer(workout, gymId, clientId);
-            }
+            addWorkoutToRedux(this.state.dayWorkoutToBeStored, dayOfWeek(this.state.index));
+            return true
         }
+        return false
     }
 
     resetWorkoutState() {
@@ -87,29 +112,20 @@ class WorkoutGroup extends React.Component {
     /**if data is valid, It writes to redux and empty all the states*/
     onDayChange(e) {
 
-        const followup = (e.target.name === "next") ? ( this.state.index + 1 ) : (this.state.index - 1);
-        if (this.isValid()) {
-            console.log(this.state.dayWorkoutToBeDisplayed);
-            const isSuccess =
-                this.props.addWorkoutToRedux(this.state.dayWorkoutToBeStored, dayOfWeek(this.state.index));
-
-            if (isSuccess) {//to make change in state wait until action is successful
-                //to make states in workout component as empty
-                //it is basically the return part from workout
-                const defaultState = this.resetWorkoutState();
-                if (!this.checkStore(followup)) {
-                    this.setState({dayWorkoutToBeDisplayed: defaultState, dayWorkoutToBeStored: [], exercise_count: 2});
-                    console.log(this.state.dayWorkoutToBeStored)
-                }
+        const newDayIndex = (e.target.name === "next") ? ( this.state.index + 1 ) : (this.state.index - 1);
+        if (this.addedToStore()) {
+            const defaultState = this.resetWorkoutState();
+            if (!this.checkStore(newDayIndex)) {
+                this.setState({dayWorkoutToBeDisplayed: defaultState, dayWorkoutToBeStored: [], exercise_count: 2});
+                console.log(this.state.dayWorkoutToBeStored)
             }
-            this.setState({index: followup})
+            this.setState({index: newDayIndex})
         }
     }
 
-    checkStore(followup) {
-        if (Object.keys(this.props.workout).includes(dayOfWeek(followup))) {
-            console.log("inside if");
-            let workout = this.props.workout[dayOfWeek(followup)];
+    checkStore(newDayIndex) {
+        if (Object.keys(this.props.workout).includes(dayOfWeek(newDayIndex))) {
+            let workout = this.props.workout[dayOfWeek(newDayIndex)];
             let temp = deepCloneArray(workout);
             let t = temp.map(state => {
                     state['errors'] = "";
@@ -132,16 +148,15 @@ class WorkoutGroup extends React.Component {
             for (let i = 0; i < exercise_count; i++) {
                 exerciseForm.push(
                     <div className="exercise-control" key={i}>
-                        <span className="badge">{i}</span>
+                        <span className="badge">{i + 1}</span>
                         <div className="exercise-details">
-                            <button className="close" onClick={()=>this.onCut(exerciseForm,i)}>
+                            <button className="close" onClick={() => this.onCut(i)}>
                                 <span>&times;</span>
                             </button>
                             <Workout
                                 dataToBeStored={dayWorkoutToBeStored}
                                 id={i}
-                                dataToBeDisplayed={dayWorkoutToBeDisplayed}
-                            />
+                                dataToBeDisplayed={dayWorkoutToBeDisplayed}/>
                         </div>
                     </div>
                 )
@@ -168,31 +183,42 @@ class WorkoutGroup extends React.Component {
         return (
             <div>
                 {daySet()}
-                <div className="workout-group">
-                    <Slide>
-                        {getExerciseForm()}
-                    </Slide>
-                </div>
-                <div className='pager'>
-                    <button onClick={this.incrementCount} className="btn-hebecollins-orange">
-                        <span className="glyphicon glyphicon-plus"/>
-                        Add More
-                    </button>
-                </div>
+                {this.state.exercise_count ?
+                    <div>
+                        <div className="workout-group">
+                            {/*<Slide>*/}
+                            {getExerciseForm()}
+                            {/*</Slide>*/}
+                        </div>
+                        <div className='pager'>
+                            <button onClick={this.incrementCount} className="btn-hebecollins-orange">
+                                <span className="glyphicon glyphicon-plus"/>
+                                Add More
+                            </button>
+                            <button onClick={this.markAsRestDay} className="btn-hebecollins-orange">
+                                Rest Day
+                            </button>
+                        </div>
+                    </div>
+                    :
+                    <div>
+                        <div className="white-center">IT IS A REST DAY!</div>
+                        <div className='pager'>
+                            <button onClick={this.incrementCount} className="btn-hebecollins-orange">
+                                Changed Your Mind ?
+                            </button>
+                        </div>
+                    </div>}
                 {daySet()}
-                <div className='pager'>
-                    <button className="btn-hebecollins-orange" onClick={this.onSubmit}>Submit</button>
-                </div>
             </div>
         )
     }
 }
 
 WorkoutGroup.propTypes = {
+    onRef: React.PropTypes.func.isRequired,
     addWorkoutToRedux: React.PropTypes.func.isRequired,
     workout: React.PropTypes.object.isRequired,
-    gymId: React.PropTypes.string.isRequired,
-    addWorkoutToServer: React.PropTypes.func.isRequired,
 };
 
 export default WorkoutGroup;

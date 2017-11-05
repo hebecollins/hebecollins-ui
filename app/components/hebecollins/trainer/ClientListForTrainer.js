@@ -97,9 +97,9 @@ class ClientListForTrainer extends React.Component {
         //redirects towards addWorkout page
         const addWorkoutButton =
             <ButtonOrange
-                onClick={() => redirectByName('ADD_WORKOUT')}
+                onClick={() => redirectByName('ASSIGN_WORKOUT')}
                 disabled={this.state.isLoading}
-                label={"Add Workout"}/>;
+                label={"Assign Workout"}/>;
 
 
         const viewWorkoutButton =
