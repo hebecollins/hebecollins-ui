@@ -3,6 +3,7 @@ import Workout from "./Workout"
 import {validateExercise} from "../../../Toolbox/Validation/helpers"
 import {dayOfWeek, deepCloneArray} from "../../../Toolbox/Helpers/extra";
 import isEmpty from 'lodash/isEmpty'
+import {Fade, Slide} from "../extra/Animation";
 
 /**It represents one day's workout
  * Working: It has got two main states, 'dayWorkoutToBeStored' and 'dayWorkoutToBeDisplayed'.(these two must be passed as props)
@@ -14,7 +15,7 @@ class WorkoutGroup extends React.Component {
         super(props);
         this.state = {
             isLoading: false,
-            exercise_count: 1,
+            exercise_count: 2,
             dayWorkoutToBeStored: [], //received from workout component
             dayWorkoutToBeDisplayed: [], //sent to workout component
             index: 0 //it is the starting day number. For eg. 0 for sunday, 1 for monday
@@ -24,20 +25,23 @@ class WorkoutGroup extends React.Component {
         this.onDayChange = this.onDayChange.bind(this);
         this.resetWorkoutState = this.resetWorkoutState.bind(this);
         this.onSubmit = this.onSubmit.bind(this);
+        this.onCut= this.onCut.bind(this);
     }
 
     incrementCount() {
         this.setState({exercise_count: this.state.exercise_count + 1})
     }
 
+    onCut(i){}
+
     /** Clone dayWorkoutToBeStored -> validate and append errors to the clone -> sets dayWorkoutToBeStored as the clone
      *  @return bool => true if valid else false
-      */
+     */
     isValid() {
 
         let temp = deepCloneArray(this.state.dayWorkoutToBeStored);
         let valid = true;
-            temp.map((state) => {
+        temp.map((state) => {
                 let {errors, isValid} = validateExercise(state);
                 state.errors = errors;
                 if (!isValid) {
@@ -52,25 +56,21 @@ class WorkoutGroup extends React.Component {
     }
 
 
-    onSubmit(){
-        console.log("here")
-        const {addWorkoutToRedux,addWorkoutToServer,user,workout}=this.props
+    onSubmit() {
+        const {addWorkoutToRedux, addWorkoutToServer, gymId, workout} = this.props
         if (this.isValid()) {
             const isSuccess =
                 addWorkoutToRedux(this.state.dayWorkoutToBeStored, dayOfWeek(this.state.index));
             console.log(isSuccess);
             if (isSuccess) {
-                if(!isEmpty(user)){
-                    const gymId = user.gym_list[0].gym_id;
-                    const clientId="something";
-                    addWorkoutToServer(workout,gymId,clientId);
-                }
+                const clientId = "something";
+                addWorkoutToServer(workout, gymId, clientId);
             }
         }
     }
 
     resetWorkoutState() {
-        let temp = []
+        let temp = [];
         for (let i = 0; i < this.state.exercise_count; i++) {
             temp[i] = {
                 exercise_name: "",
@@ -98,8 +98,7 @@ class WorkoutGroup extends React.Component {
                 //it is basically the return part from workout
                 const defaultState = this.resetWorkoutState();
                 if (!this.checkStore(followup)) {
-                    this.setState({dayWorkoutToBeDisplayed: defaultState,dayWorkoutToBeStored:[], exercise_count: 1});
-                    console.log("***************");
+                    this.setState({dayWorkoutToBeDisplayed: defaultState, dayWorkoutToBeStored: [], exercise_count: 2});
                     console.log(this.state.dayWorkoutToBeStored)
                 }
             }
@@ -117,7 +116,7 @@ class WorkoutGroup extends React.Component {
                     return state
                 }
             );
-            this.setState({dayWorkoutToBeDisplayed: t,dayWorkoutToBeStored:[], exercise_count: workout.length});
+            this.setState({dayWorkoutToBeDisplayed: t, dayWorkoutToBeStored: [], exercise_count: workout.length});
             return true
         } else {
             return false
@@ -126,46 +125,64 @@ class WorkoutGroup extends React.Component {
     }
 
     render() {
+
         const {index, exercise_count, dayWorkoutToBeDisplayed, dayWorkoutToBeStored} = this.state;
         const getExerciseForm = () => {
             let exerciseForm = [];
             for (let i = 0; i < exercise_count; i++) {
                 exerciseForm.push(
-                    <div key={i}><span className="badge">{i + 1}</span>
-
-                        <Workout
-                            dataToBeStored={dayWorkoutToBeStored}
-                            id={i}
-                            dataToBeDisplayed={dayWorkoutToBeDisplayed}
-                        />
-
-                    </div>)
+                    <div className="exercise-control" key={i}>
+                        <span className="badge">{i}</span>
+                        <div className="exercise-details">
+                            <button className="close" onClick={()=>this.onCut(exerciseForm,i)}>
+                                <span>&times;</span>
+                            </button>
+                            <Workout
+                                dataToBeStored={dayWorkoutToBeStored}
+                                id={i}
+                                dataToBeDisplayed={dayWorkoutToBeDisplayed}
+                            />
+                        </div>
+                    </div>
+                )
             }
             return exerciseForm;
         };
 
+        const daySet = () => (
+            <div className="pager">
+                <hr/>
+                <a onClick={this.onDayChange} name="back" className="day-link pull-left">
+                    <span className="glyphicon glyphicon-triangle-left"/>
+                    {dayOfWeek(index - 1, true)}
+                </a>
+
+                <label className="day">{dayOfWeek(index, true)}</label>
+
+                <a onClick={this.onDayChange} name="next" className="day-link pull-right">
+                    {dayOfWeek(index + 1, true)}
+                    <span className="glyphicon glyphicon-triangle-right"/></a>
+                <hr/>
+            </div>);
+
         return (
             <div>
-                <div className="white-center">Enter the workout schedule</div>
-                <h1 className="white-center">{dayOfWeek(index,true)}</h1>
-                {getExerciseForm()}
+                {daySet()}
+                <div className="workout-group">
+                    <Slide>
+                        {getExerciseForm()}
+                    </Slide>
+                </div>
                 <div className='pager'>
-                    <button onClick={this.incrementCount} className="btn-hebecollins-black">
+                    <button onClick={this.incrementCount} className="btn-hebecollins-orange">
+                        <span className="glyphicon glyphicon-plus"/>
                         Add More
                     </button>
                 </div>
-                <div className="pager">
-                    <button onClick={this.onDayChange}
-                            name="back"
-                            className="btn-hebecollins-black">{dayOfWeek(index - 1)}
-                    </button>
-                    <button onClick={this.onDayChange}
-                            name="next"
-                            className="btn-hebecollins-black">{dayOfWeek(index + 1)}
-                    </button>
-                    <h1 className="white-center">{dayOfWeek(index,true)}</h1>
+                {daySet()}
+                <div className='pager'>
+                    <button className="btn-hebecollins-orange" onClick={this.onSubmit}>Submit</button>
                 </div>
-                <button className="btn-hebecollins-black" onClick={this.onSubmit}>Submit</button>
             </div>
         )
     }
@@ -174,7 +191,7 @@ class WorkoutGroup extends React.Component {
 WorkoutGroup.propTypes = {
     addWorkoutToRedux: React.PropTypes.func.isRequired,
     workout: React.PropTypes.object.isRequired,
-    user: React.PropTypes.object.isRequired,
+    gymId: React.PropTypes.string.isRequired,
     addWorkoutToServer: React.PropTypes.func.isRequired,
 };
 

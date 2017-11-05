@@ -39,11 +39,11 @@
     }
 
     .white-box {
-        background: rgba(204, 204, 204, 0.2);
+        background: rgba(204, 204, 204, 0.4);
         border-radius: 0;
         overflow: auto;
         padding: 30px 5% 50px 5%;
-        margin: 0 20px 0 20px;
+        margin: 0 10px 0 10px;
     }
 
     /*home page*/
@@ -52,6 +52,11 @@
         padding-left: 10px !important;
         padding-right: 10px !important;
     }
+
+    .single-screen-2{
+        margin:0;
+    }
+
 }
 
 @media (min-width: 768px) {
@@ -80,7 +85,7 @@
     }
 
     .white-box {
-        background: rgba(204, 204, 204, 0.2);
+        background: rgba(204, 204, 204, 0.4);
         border-radius: 0;
         overflow: auto;
         padding: 30px 5% 40px 5%;
@@ -91,6 +96,11 @@
         background: rgba(230, 120, 23, .6);
         min-height: 500px;
     }
+
+    .single-screen-2{
+        margin:0 5% 0 5%;
+    }
+
 }
 
 .description {
@@ -252,7 +262,7 @@
 
 /*======================================================================================*/
 /*represents scroll-bar*/
-/*======================================================================================*/
+/*========================================START===========================================*/
 .scrollbar-track-vertical {
     position: absolute;
     width: 10px;
@@ -270,6 +280,7 @@
     border-radius: inherit;
     background-color: var(--light-orange);
 }
+/*======================================END================================================*/
 
 .bottom-of-div{
     bottom: 0;
@@ -292,3 +303,36 @@
     margin: 0;
     font-size: medium;
 }
+
+
+/*======================================================================================*/
+/*workout*/
+/*========================================START===========================================*/
+.exercise-details{
+    margin:0 0 0 2%;
+    padding:1% 5% 3% 5%;
+    background-color: #1e1e1e;
+    border-radius: 20px;
+    width: 100%;
+}
+@media (max-width: 768px) {
+    .exercise-control{
+        width:100%;
+    }}
+@media (min-width: 768px) {
+    .exercise-control {
+        width: 50%;
+    }
+}
+
+.exercise-control {
+    display: flex;
+    padding: 10px;
+    float: left;
+}
+
+.workout-group{
+    display: inline-block;
+    width: 100%;
+}
+/*======================================END================================================*/

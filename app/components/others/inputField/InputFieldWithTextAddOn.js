@@ -83,7 +83,7 @@ const FieldFrameWithTextAddOn = (props) => {
     return (
         <div className={classnames('form-group', {'has-error': error})}>
             <div className="input-group">
-                <span className="text-field input-group-addon">
+                <span className="input-group-addon">
                     {label}
                 </span>
                 {props.children}</div>

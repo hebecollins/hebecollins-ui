@@ -1,3 +1,6 @@
 * priority 1: make gymId store as a seperate entry and make it open for user to change it
 
 * priority low: make open in new tab feature work by taking localStorage data and copying it to redux
+
+* priority low: let trainers and managers categorize their client. There should be a separate button
+                in it to see by category.

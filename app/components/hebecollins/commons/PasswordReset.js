@@ -1,5 +1,5 @@
 import React from 'react';
-import {TextField} from '../../others/inputField/InputFieldWithIcon'
+import {TextField} from '../../others/inputField/InputFieldWithIconAddOn'
 import {validatePassword} from "../../../Toolbox/Validation/helpers";
 import {connect} from 'react-redux';
 import {errorResponse} from "../../../Toolbox/Helpers/responseHandler";

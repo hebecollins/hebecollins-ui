@@ -1,5 +1,5 @@
 import React from 'react'
-import {CommentBox} from "../inputField/InputFieldWithIcon";
+import {CommentBox} from "../inputField/InputFieldWithIconAddOn";
 
 /** Displays current remark with 'edit' option. Once edit button is clicked, it hides the text and throws
  * a textArea with 'Done'(Submit) button.

@@ -1,5 +1,5 @@
 import React from 'react';
-import {TextField} from '../inputField/InputFieldWithIcon'
+import {TextField} from '../inputField/InputFieldWithIconAddOn'
 import {validateLogin} from "../../../Toolbox/Validation/helpers";
 import {errorResponse} from "../../../Toolbox/Helpers/responseHandler";
 import {getRouteByName} from "../../../Toolbox/Helpers/routeHandler";

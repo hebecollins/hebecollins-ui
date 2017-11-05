@@ -92,9 +92,13 @@ blockquote:before {
     padding:10px 12px 10px 12px;
     font-size: large;
     margin: 10px 0 10px 0;
+    height: max-content;
     background-color: var(--dark-orange);
 }
 
+/*==========================================================================================*/
+/*used for listing user's information in a list in features like clientList, trainerList*/
+/*=======================================START===============================================*/
 .list-individual-name{
     margin: 0;
     font-weight: bold;
@@ -145,4 +149,61 @@ p{
 .edit-icon-link{
     color: white;
     cursor: pointer;
+}
+/*=======================================END==============================================*/
+
+
+
+/*========================================================================================*/
+/*used in addWorkout feature*/
+/*======================================START=============================================*/
+.black{
+    color:black;
+    font-size: medium;
+}
+
+.day-link{
+    color: black;
+    cursor: pointer;
+    text-transform: uppercase;
+    font-size: medium;
+}
+
+.day-link:hover{
+    text-decoration: none;
+    color: white;
+    text-transform: uppercase;
+    font-size: medium;
+}
+
+.day-link:visited{
+    text-decoration: none;
+    color: black;
+    text-transform: uppercase;
+    font-size: medium;
+}
+
+.day{
+    color: white;
+    text-transform: uppercase;
+    font-size: large;
+    font-weight: bold;
+    margin: 0;
+}
+
+hr{
+    display: block;
+    border-color: var(--light-gray);
+    margin: 10px 0 10px 0;
+}
+
+/*========================================END==============================================*/
+
+.text-field{
+    background-color: var(--dark-orange) !important;
+}
+
+.close{
+    opacity:0.4;
+    margin-bottom:10px;
 }
