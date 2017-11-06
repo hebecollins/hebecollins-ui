@@ -5,6 +5,7 @@ import {connect} from 'react-redux'
 import SingleScreen2 from "../../others/frames/SingleScreen2";
 import {errorResponse} from "../../../Toolbox/Helpers/responseHandler";
 import {redirectByName} from "../../../Toolbox/Helpers/redirect";
+import {scrollToError} from "../../../Toolbox/Helpers/extra";
 
 class AssignWorkout extends React.Component {
     constructor(props) {
@@ -17,6 +18,7 @@ class AssignWorkout extends React.Component {
     }
 
     onSubmit() {
+        scrollToError();
         const {addAssignedWorkoutToServer, selectedUser, gymId, workout} = this.props;
         const clientId = selectedUser.user_id;
         if (this.child.addedToStore()) {
@@ -37,7 +39,7 @@ class AssignWorkout extends React.Component {
                     <div className="white-center">
                         Workout schedule for <label className="list-monitor-header">{selectedUser.nick_name}</label>
                     </div>
-                    <a onClick={() => redirectByName("CREATE_WORKOUT")} className="edit-icon-link pull-right">Use saved
+                    <a onClick={() => redirectByName("SAVED_WORKOUT_LIST")} className="edit-icon-link pull-right">Use saved
                         workouts instead ?</a>
                     <WorkoutGroup
                         onRef={ref => (this.child = ref)}

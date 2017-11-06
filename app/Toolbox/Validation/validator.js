@@ -89,6 +89,14 @@ function isAlpha(value) {
     }
 }
 
+function isAlphanumeric(value) {
+    if (!Validator.isNull(value)) {
+        if (!Validator.isAlphanumeric(value)) {
+            return message.notAlphanumeric;
+        }
+    }
+}
+
 function isNumber(value) {
     if (!Validator.isNull(value)) {
         if (!Validator.isInt(value)) {

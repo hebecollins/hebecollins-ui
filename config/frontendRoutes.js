@@ -104,7 +104,7 @@ export const ROUTES = [
     },
 
 
-    //user list
+    // list
     {
         ROUTE_NAME: 'CLIENT_LIST_FOR_TRAINER',
         ROUTE:'/trainer/clients',
@@ -114,6 +114,11 @@ export const ROUTES = [
         ROUTE_NAME: 'CLIENT_LIST_FOR_MANAGER',
         ROUTE:'/manager/clients',
         PERMISSION:['manager']
+    },
+    {
+        ROUTE_NAME: 'SAVED_WORKOUT_LIST',
+        ROUTE:'/trainer/workout/list',
+        PERMISSION:['trainer']
     },
 
     //view(temporary)

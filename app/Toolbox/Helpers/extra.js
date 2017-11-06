@@ -1,4 +1,5 @@
 import $ from 'jquery'
+import isEmpty from 'lodash/isEmpty'
 
 /**Takes any integer, positive or negative and returns its distance in weekday if 0 was sunday
  * For eg. If startDayNumber = 0, then 1 will be mon, 6 will be sat, -8 will be sat
@@ -60,4 +61,17 @@ export const getGenderFromGenderCode = (gender) => {
         default:
             return "undefined"
     }
+};
+
+/**Waits for 100 milliseconds for the DOM to get updated. After that it reads first "help-block"(of the page)
+ * , which contains errors, and scroll to it
+ * */
+export const scrollToError = () => {
+    setTimeout(function () {
+        const elements = document.getElementsByClassName("help-block");
+        const firstElement = elements[0];
+        if (firstElement) {
+            window.scrollTo(0, firstElement.offsetTop - 100);
+        }
+    }, 100);
 };

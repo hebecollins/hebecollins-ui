@@ -138,6 +138,17 @@ export function validateQuotes(data) {
     }
 }
 
+export function validateLabel(data) {
+    const {label} = data;
+    const {errors, isValid} = validate({
+        label: [label, 'isRequired','isAlphanumeric'],
+    });
+    return {
+        errors,
+        isValid
+    }
+}
+
 export function validateExercise(data) {
     const {exercise_name, sets, reps, rest} = data;
 
@@ -154,3 +165,4 @@ export function validateExercise(data) {
         isValid
     }
 }
+

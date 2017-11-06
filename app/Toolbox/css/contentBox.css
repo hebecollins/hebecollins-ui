@@ -318,21 +318,39 @@
 @media (max-width: 768px) {
     .exercise-control{
         width:100%;
-    }}
+        padding: 10px 0 10px 0;
+    }
+
+    .workout-schedule-label {
+        width: 100%;
+    }
+}
+
 @media (min-width: 768px) {
     .exercise-control {
+        width: 50%;
+        padding: 10px;
+    }
+
+    .workout-schedule-label {
         width: 50%;
     }
 }
 
 .exercise-control {
     display: flex;
-    padding: 10px;
     float: left;
 }
 
 .workout-group{
     display: inline-block;
     width: 100%;
+}
+
+
+.workout-schedule-label{
+    margin-top: 30px;
+    font-size: medium;
+    color: var(--dark-grey);
 }
 /*======================================END================================================*/

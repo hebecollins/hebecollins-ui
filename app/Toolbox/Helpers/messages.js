@@ -4,6 +4,7 @@ export const message={
     "invalidEmail": "Invalid email",
     "invalidMobile":"Invalid mobile number",
     "notAlpha":"Input should only consist of alphabets",
+    "notAlphanumeric":"Input should only consist of alphabets and numbers",
     "passwordNotMatch":"Password doesn't match",
     "invalidDate":"Not a valid date",
     "notNumber":"Input should only consist of numbers",

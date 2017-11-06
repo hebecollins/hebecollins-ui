@@ -98,7 +98,7 @@ option{
 .form-control{
     background-color:transparent;
     color: white;
-    height:45px;
+    height:40px;
     font-size:16px;
 }
 .form-control[disabled], fieldset[disabled] .form-control {

@@ -1,54 +1,75 @@
 import React from 'react'
-import SingleScreen from "../../others/frames/SingleScreen";
 import WorkoutGroup from "../../others/inputFieldGroup/WorkoutGroup";
 import {addWorkoutToRedux, addCreatedWorkoutToServer} from "../../../actions/workoutActions"
 import {connect} from 'react-redux'
 import SingleScreen2 from "../../others/frames/SingleScreen2";
 import {errorResponse} from "../../../Toolbox/Helpers/responseHandler";
 import {TextField} from "../../others/inputField/InputFieldWithIconAddOn";
-import {TextField2} from "../../others/inputField/InputFieldWithTextAddOn";
+import {validateLabel} from "../../../Toolbox/Validation/helpers";
+import {scrollToError} from "../../../Toolbox/Helpers/extra";
 
 class CreateWorkoutSchedule extends React.Component {
     constructor(props) {
         super(props);
         this.state = {
             isLoading: false,
-            label:""
+            label: '',
+            errors: ''
         };
-        this.onSubmit= this.onSubmit.bind(this);
+        this.onSubmit = this.onSubmit.bind(this);
+        this.onChange = this.onChange.bind(this);
     }
 
-    onChange(e){
-        this.setState({[e.target.name]:e.target.value});
+    onChange(e) {
+        this.setState({[e.target.name]: e.target.value});
+    }
+
+    isValid() {
+        const {errors, isValid} = validateLabel(this.state);
+        if (!isValid) {
+            this.setState({errors});
+        }
+        return isValid;
     }
 
     onSubmit() {
-        this.setState({isLoading:true});
-        const {addCreatedWorkoutToServer, gymId, workout} = this.props;
-        if(this.child.addedToStore()){
-            addCreatedWorkoutToServer(workout, gymId, this.state.label).catch(
-                err => {
-                    errorResponse(err);
-                    this.setState({isLoading:false});
-                }
-            );
+        scrollToError();
+        if (this.isValid()) {
+            this.setState({errors: {}});
+            const {addCreatedWorkoutToServer, gymId, workout} = this.props;
+            if (this.child.addedToStore()) {
+                this.setState({isLoading: true});
+                addCreatedWorkoutToServer(workout, gymId, this.state.label).catch(
+                    err => {
+                        errorResponse(err);
+                        const response = errorResponse(err);
+                        if (response !== null) {
+                            this.setState({errors: response, isLoading: false})
+                        }
+                    }
+                );
+            }
         }
     };
 
     render() {
-        const { workout, addWorkoutToRedux } = this.props;
+        const {workout, addWorkoutToRedux} = this.props;
         return (
             <div className="content">
                 <SingleScreen2>
                     <div className="white-center">
                         Create A Workout Schedule
                     </div>
-                    <TextField
-                        field="workoutName"
-                        value={this.state.label}
-                        label="Name for your workout"
-                        isIconNeeded={false}
-                        onChange={this.onChange}/>
+                    <div className="workout-schedule-label">
+                        <label>Put a label on your workout:</label>
+                        <TextField
+                            field="label"
+                            value={this.state.label}
+                            label="Name for your workout"
+                            error={this.state.errors.label}
+                            isIconNeeded={false}
+                            onChange={this.onChange}/>
+                    </div>
                     <WorkoutGroup
                         onRef={ref => (this.child = ref)}
                         addWorkoutToRedux={addWorkoutToRedux}
@@ -58,7 +79,8 @@ class CreateWorkoutSchedule extends React.Component {
                         <button
                             className="btn-hebecollins-orange"
                             onClick={this.onSubmit}
-                            disabled={this.state.isLoading}>Submit</button>
+                            disabled={this.state.isLoading}>Submit
+                        </button>
                     </div>
                 </SingleScreen2>
 

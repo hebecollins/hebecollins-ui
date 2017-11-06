@@ -1,7 +1,7 @@
 import React from 'react'
 import Workout from "./Workout"
 import {validateExercise} from "../../../Toolbox/Validation/helpers"
-import {dayOfWeek, deepCloneArray} from "../../../Toolbox/Helpers/extra";
+import {dayOfWeek, deepCloneArray, scrollToError} from "../../../Toolbox/Helpers/extra";
 import isEmpty from 'lodash/isEmpty'
 import {Fade, Slide} from "../extra/Animation";
 import {errorResponse} from "../../../Toolbox/Helpers/responseHandler";
@@ -112,6 +112,7 @@ class WorkoutGroup extends React.Component {
     /**if data is valid, It writes to redux and empty all the states*/
     onDayChange(e) {
 
+        scrollToError();
         const newDayIndex = (e.target.name === "next") ? ( this.state.index + 1 ) : (this.state.index - 1);
         if (this.addedToStore()) {
             const defaultState = this.resetWorkoutState();
