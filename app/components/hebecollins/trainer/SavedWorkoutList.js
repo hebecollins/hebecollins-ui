@@ -5,12 +5,15 @@ import {ButtonOrange} from "../../others/display/Buttons";
 import SingleScreen2 from "../../others/frames/SingleScreen2";
 import {Loading} from "../../others/extra/Loading";
 import isEmpty from 'lodash/isEmpty'
+import {redirectByName} from "../../../Toolbox/Helpers/redirect";
+import {errorResponse} from "../../../Toolbox/Helpers/responseHandler";
 
 class SavedWorkoutList extends React.Component {
     constructor(props) {
         super(props);
         this.state = {
-            workoutList: []
+            workoutList: [],
+            hasServerResponded:false
         };
 
         this.onUse = this.onUse.bind(this);
@@ -22,23 +25,30 @@ class SavedWorkoutList extends React.Component {
         getSavedWorkoutList(this.props.gymId).then(
             (res) => {
                 const labels = res.data.labels;
-                this.setState({workoutList: labels});
+                if(isEmpty(labels)){
+                    redirectByName("NO_RECORDS_FOUND")
+                }else{
+                    this.setState({workoutList: labels,hasServerResponded:true});
+                }
             }
         )
     }
 
+    /** gets workout from the server with same labelId, stores it in redux and then redirects
+     * to assignWorkout page
+     * @param labelId => Id corresponding to selected label
+     */
     onUse(labelId){
         const {getSavedWorkoutByLabel,gymId} = this.props;
         getSavedWorkoutByLabel(gymId,labelId).then(
             (res)=>{
-                // const workout = res.data
-                // console.log(res.data)
+                redirectByName("ASSIGN_WORKOUT")
             }
-        )
+        ).catch(err => errorResponse(err))
     }
 
     onView(id){
-
+        redirectByName("VIEW_WORKOUT")
     }
 
     render() {
@@ -66,13 +76,14 @@ class SavedWorkoutList extends React.Component {
             }
         );
 
-        return !isEmpty(this.state.workoutList)?
+        return this.state.hasServerResponded?
             <div className="content">
                 <SingleScreen2>
                     <h1 className="white-center">Saved Workout List</h1>
                     {labelList}
                 </SingleScreen2>
-            </div>:<Loading/>
+            </div>:
+            <Loading/>
 
     }
 }

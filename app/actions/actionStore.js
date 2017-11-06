@@ -1,5 +1,6 @@
 import {
-    ADD_FLASH_MESSAGE, CLEAR_QUOTES, DELETE_FLASH_MESSAGE, DELETE_SELECTED_GYM, DELETE_SELECTED_USER, LOGOUT,
+    ADD_FLASH_MESSAGE, CLEAR_QUOTES, CLEAR_WORKOUT, DELETE_FLASH_MESSAGE, DELETE_SELECTED_GYM, DELETE_SELECTED_USER,
+    LOGOUT,
     SELECTED_GYM
 } from './types'
 import {STORE_VERIFICATION_DATA,ADD_QUOTE,ADD_WORKOUT,SET_CURRENT_USER, SELECTED_USER} from "./types";
@@ -130,5 +131,11 @@ export const addWorkout=(workout)=> {
     return {
         type: ADD_WORKOUT,
         workout: workout
+    }
+};
+
+export const clearWorkout=()=>{
+    return {
+        type: CLEAR_WORKOUT
     }
 };

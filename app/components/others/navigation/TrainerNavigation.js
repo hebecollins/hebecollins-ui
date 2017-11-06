@@ -12,6 +12,9 @@ export const TrainerNavigation =({logout})=>{
                 <li>
                     <NavLink to={getRouteByName("ADD_CLIENT")} onlyActiveOnIndex>Add Client</NavLink>
                 </li>
+                <li>
+                    <NavLink to={getRouteByName("CREATE_WORKOUT")} onlyActiveOnIndex>Create Workout</NavLink>
+                </li>
 
                 {/*<li><a href="#">Profile</a></li>*/}
                 {/*<li><a href="#">Clients</a></li>*/}

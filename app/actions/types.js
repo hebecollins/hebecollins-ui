@@ -11,6 +11,7 @@ export const ADD_QUOTE = 'ADD_QUOTE';
 export const CLEAR_QUOTES = 'CLEAR_QUOTES';
 
 export const ADD_WORKOUT = 'ADD_WORKOUT';
+export const CLEAR_WORKOUT = 'CLEAR_WORKOUT';
 
 export const SELECTED_USER = 'SELECTED_USER';
 export const DELETE_SELECTED_USER = 'DELETE_SELECTED_USER';

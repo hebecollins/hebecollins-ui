@@ -39,6 +39,10 @@ class WorkoutGroup extends React.Component {
         this.props.onRef(undefined)
     }
 
+    componentWillMount(){
+        this.checkStore(this.state.index);
+    }
+
     incrementCount() {
         this.setState({exercise_count: this.state.exercise_count + 1})
     }

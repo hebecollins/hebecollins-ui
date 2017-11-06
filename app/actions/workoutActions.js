@@ -1,7 +1,7 @@
 import {deepCloneArray} from "../Toolbox/Helpers/extra";
 import {get, postJSON} from "../Toolbox/Helpers/requestHandler";
 import {BACKEND_ROUTES} from "../../config/backendRoutes";
-import {addFlashMessage, addWorkout, deleteSelectedUser} from "./actionStore";
+import {addFlashMessage, addWorkout, clearWorkout, deleteSelectedUser} from "./actionStore";
 import {redirectByName} from "../Toolbox/Helpers/redirect";
 
 export function addWorkoutToRedux(dayWorkout, dayName) {
@@ -33,6 +33,7 @@ export function addAssignedWorkoutToServer(workout, gymId, clientId) {
                 text: res.data.msg
             }));
             dispatch(deleteSelectedUser());
+            dispatch(clearWorkout());
             redirectByName("CLIENT_LIST_FOR_TRAINER")
         });
     }
@@ -50,6 +51,7 @@ export function addCreatedWorkoutToServer(workout, gymId, label) {
                 type: "success",
                 text: res.data.msg
             }));
+            dispatch(clearWorkout());
             redirectByName("CLIENT_LIST_FOR_TRAINER")
         });
     }

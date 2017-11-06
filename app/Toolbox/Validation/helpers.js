@@ -141,7 +141,7 @@ export function validateQuotes(data) {
 export function validateLabel(data) {
     const {label} = data;
     const {errors, isValid} = validate({
-        label: [label, 'isRequired','isAlphanumeric'],
+        label: [label, 'isRequired'],
     });
     return {
         errors,
