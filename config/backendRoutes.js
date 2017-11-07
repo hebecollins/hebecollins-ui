@@ -40,5 +40,7 @@ export const BACKEND_ROUTES = {
     },
 
     QUOTE: "/quote",
+    EXERCISE_LIST: "/exercise/gif/pending",// meant for admin
+    POST_EXERCISE_GIF: "/exercise/gif",// meant for admin
     REMARKS: "/remarks"//:gymId/remarks/:selectedUserId
 };

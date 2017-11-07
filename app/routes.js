@@ -29,6 +29,7 @@ import ClientProfile from "./components/hebecollins/client/ClientProfile";
 import ViewWorkout from "./components/hebecollins/commons/ViewWorkout";
 import CreateWorkoutSchedule from "./components/hebecollins/trainer/CreateWorkoutSchedule";
 import SavedWorkoutList from "./components/hebecollins/trainer/SavedWorkoutList";
+import AddGIF from "./components/hebecollins/admin/AddGIF";
 
 export default (
     <div className="something">
@@ -55,6 +56,7 @@ export default (
             <Route path={getRouteByName('ADD_TRAINER')} component={authCheck(AddTrainer)}/>
             <Route path={getRouteByName('ADD_CLIENT')} component={authCheck(AddClient)}/>
             <Route path={getRouteByName('ADD_QUOTES')} component={authCheck(AddQuotes)}/>
+            <Route path={getRouteByName('ADD_GIF')} component={authCheck(AddGIF)}/>
             <Route path={getRouteByName('ASSIGN_WORKOUT')} component={authCheck(AssignWorkout)}/>
             <Route path={getRouteByName('CREATE_WORKOUT')} component={authCheck(CreateWorkoutSchedule)}/>
 

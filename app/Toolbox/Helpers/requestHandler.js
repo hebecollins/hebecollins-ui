@@ -29,10 +29,6 @@ export function postJSON(data,route,params={}) {
 }
 
 export function postForm(data,route,params={}) {
-    const a= {
-        some:"some",
-        somem:"somelem"
-    };
     const authOptions = {
         method: 'POST',
         url: route,
@@ -41,10 +37,30 @@ export function postForm(data,route,params={}) {
         headers: {
             'Content-Type': 'application/x-www-form-urlencoded'
         }
+    };
 
+    return axios(authOptions);
+}
+
+
+/**Sends media content.
+ * */
+export function postMedia(data,route,params={}) {
+    let formData = new FormData();
+
+    Object.keys(data).map((key)=> {
+        formData.append(key, data[key]);
+    });
+
+    const authOptions = {
+        method: 'POST',
+        url: route,
+        data: formData,
+        params:(params)
     };
     return axios(authOptions);
 }
+
 
 export function get(route) {
     const authOptions = {

@@ -102,6 +102,11 @@ export const ROUTES = [
         ROUTE:'/add/quotes',
         PERMISSION:['admin']
     },
+    {
+        ROUTE_NAME: 'ADD_GIF',
+        ROUTE:'/add/gif',
+        PERMISSION:['admin']
+    },
 
 
     // list

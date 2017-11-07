@@ -13,6 +13,11 @@ class AdminHome extends React.Component {
                             onClick={() => redirectByName("ADD_QUOTES")}>
                             Add Quotes
                         </button>
+                        <button
+                            className="btn-hebecollins-black"
+                            onClick={() => redirectByName("ADD_GIF")}>
+                            Add GIF
+                        </button>
                     </li>
                 </QuoteBox>
             </div>
