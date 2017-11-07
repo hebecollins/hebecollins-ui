@@ -1,4 +1,5 @@
 import {ADD_WORKOUT, ADD_WORKOUT_FOR, CLEAR_WORKOUT} from "../actions/types";
+import {deepCloneObject} from "../Toolbox/Helpers/extra";
 
 const initialState = {
     workout: {}
@@ -7,8 +8,9 @@ const initialState = {
 export default (state = initialState, action = {}) => {
     switch (action.type) {
         case ADD_WORKOUT: {
+            const temp = deepCloneObject(state.workout);
             return {
-                workout: Object.assign(state.workout, action.workout)
+                workout: Object.assign(temp, action.workout)
             }
         }
 

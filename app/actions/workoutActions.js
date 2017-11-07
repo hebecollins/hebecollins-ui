@@ -67,6 +67,7 @@ export function getSavedWorkoutByLabel(gymId, labelId) {
 
     return dispatch => {
         return get(route).then(res => {
+            console.log(res.data.workout);
             dispatch(addWorkout(res.data.workout));
         })
     }
