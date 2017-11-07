@@ -45,6 +45,7 @@ class CreateWorkoutSchedule extends React.Component {
                         const response = errorResponse(err);
                         if (response !== null) {
                             this.setState({errors: response, isLoading: false})
+                            scrollToError();
                         }
                     }
                 );

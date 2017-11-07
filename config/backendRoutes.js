@@ -36,7 +36,8 @@ export const BACKEND_ROUTES = {
         ASSIGN: "/workout/assign",//:gymId/workout/assign/:clientId
         CREATE: "/workout/create",//:gymId/workout/create
         WORKOUT_LIST: "/trainer/workout/list",//:gymId/trainer/workout/list
-        GET_WORKOUT_BY_LABEL: "/trainer/workout"//:gymId/trainer/workout/:labelId
+        GET_WORKOUT_BY_LABEL: "/trainer/workout",//:gymId/trainer/workout/:labelId
+        DELETE_WORKOUT_BY_LABEL: "/trainer/workout/delete"//:gymId/trainer/workout/:labelId
     },
 
     QUOTE: "/quote",

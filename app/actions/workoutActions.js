@@ -52,7 +52,7 @@ export function addCreatedWorkoutToServer(workout, gymId, label) {
                 text: res.data.msg
             }));
             dispatch(clearWorkout());
-            redirectByName("CLIENT_LIST_FOR_TRAINER")
+            redirectByName("SAVED_WORKOUT_LIST")
         });
     }
 }
@@ -62,9 +62,13 @@ export function getSavedWorkoutList(gymId) {
     return get(route)
 }
 
-export function getSavedWorkoutByLabel(gymId, labelId) {
-    const route = `/${gymId}${BACKEND_ROUTES.WORKOUT.GET_WORKOUT_BY_LABEL}/${labelId}`;
+export function deleteSavedWorkoutFromServer(labelId) {
+    const route = `${BACKEND_ROUTES.WORKOUT.DELETE_WORKOUT_BY_LABEL}/${labelId}`;
+    return get(route)
+}
 
+export function getSavedWorkoutByLabel(labelId) {
+    const route = `${BACKEND_ROUTES.WORKOUT.GET_WORKOUT_BY_LABEL}/${labelId}`;
     return dispatch => {
         return get(route).then(res => {
             console.log(res.data.workout);

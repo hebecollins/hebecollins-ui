@@ -1,12 +1,18 @@
 import React from 'react'
 import {connect} from 'react-redux'
-import {getSavedWorkoutByLabel, getSavedWorkoutList} from "../../../actions/workoutActions";
+import {
+    deleteSavedWorkoutFromServer, getSavedWorkoutByLabel,
+    getSavedWorkoutList
+} from "../../../actions/workoutActions";
 import {ButtonOrange} from "../../others/display/Buttons";
 import SingleScreen2 from "../../others/frames/SingleScreen2";
 import {Loading} from "../../others/extra/Loading";
 import isEmpty from 'lodash/isEmpty'
 import {redirectByName} from "../../../Toolbox/Helpers/redirect";
 import {errorResponse} from "../../../Toolbox/Helpers/responseHandler";
+import {addFlashMessage} from "../../../actions/actionStore";
+import {deepCloneArray, deepCloneObject} from "../../../Toolbox/Helpers/extra";
+import {Fade, Slide} from "../../others/extra/Animation";
 
 class SavedWorkoutList extends React.Component {
     constructor(props) {
@@ -18,6 +24,7 @@ class SavedWorkoutList extends React.Component {
 
         this.onUse = this.onUse.bind(this);
         this.onView = this.onView.bind(this);
+        this.onDelete = this.onDelete.bind(this);
     }
 
 
@@ -39,8 +46,8 @@ class SavedWorkoutList extends React.Component {
      * @param labelId => Id corresponding to selected label
      */
     onUse(labelId){
-        const {getSavedWorkoutByLabel,gymId} = this.props;
-        getSavedWorkoutByLabel(gymId,labelId).then(
+        const {getSavedWorkoutByLabel} = this.props;
+        getSavedWorkoutByLabel(labelId).then(
             (res)=>{
                 redirectByName("ASSIGN_WORKOUT")
             }
@@ -51,10 +58,19 @@ class SavedWorkoutList extends React.Component {
         redirectByName("VIEW_WORKOUT")
     }
 
+    onDelete(labelId,index){
+        deleteSavedWorkoutFromServer(labelId).then(res=>{
+            let tempList = deepCloneArray(this.state.workoutList);
+            tempList.splice(index,1);
+            console.log(tempList);
+            this.setState({workoutList:tempList});
+        })
+    }
+
     render() {
         const {workoutList} = this.state;
 
-        const labelList = workoutList.map((label) => {
+        const labelList = workoutList.map((label,index) => {
                 return (
                     <div key={label.id}>
                         <div className="list-individual-info">
@@ -66,10 +82,13 @@ class SavedWorkoutList extends React.Component {
                         <div className="pull-right">
                             <ButtonOrange
                                 onClick={()=>this.onUse(label.id)}
-                                label={"use"}/>
+                                label={"Use"}/>
                             <ButtonOrange
                                 onClick={()=>this.onView(label.id)}
-                                label={"view"}/>
+                                label={"View"}/>
+                            <ButtonOrange
+                                onClick={()=>this.onDelete(label.id,index)}
+                                label={"Delete"}/>
                         </div>
                     </div>
                 );
@@ -80,7 +99,7 @@ class SavedWorkoutList extends React.Component {
             <div className="content">
                 <SingleScreen2>
                     <h1 className="white-center">Saved Workout List</h1>
-                    {labelList}
+                    <Fade>{labelList}</Fade>
                 </SingleScreen2>
             </div>:
             <Loading/>
