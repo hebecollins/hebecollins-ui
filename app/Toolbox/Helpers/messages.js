@@ -24,3 +24,11 @@ export function exceededMaxLength(length) {
 export function notEnoughLength(length) {
     return "length should be at least "+length+" characters";
 }
+
+export function moreThanMaxValue(value) {
+    return `value more than ${value} is not allowed`;
+}
+
+export function lessThanMinValue(value) {
+    return `value less than ${value} is not allowed`;
+}

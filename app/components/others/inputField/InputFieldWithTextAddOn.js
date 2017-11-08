@@ -1,5 +1,6 @@
 import React from 'react';
 import classnames from 'classnames';
+import {scrollToError} from "../../../Toolbox/Helpers/extra";
 
 /** It is an input text field component with text as add-on
  * */
@@ -80,6 +81,11 @@ Select2.propTypes = {
 
 const FieldFrameWithTextAddOn = (props) => {
     const {error, label} = props;
+
+    //asynchronous action which scrolls to the error block
+    if(error){
+        scrollToError();
+    }
     return (
         <div className={classnames('form-group', {'has-error': error})}>
             <div className="input-group">

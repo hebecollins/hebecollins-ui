@@ -2,7 +2,7 @@ import React from 'react'
 import {TextField2} from "../inputField/InputFieldWithTextAddOn";
 import Reps from "./Reps";
 import classnames from 'classnames'
-import {deepCloneObject} from "../../../Toolbox/Helpers/extra";
+import {deepCloneObject, scrollToError} from "../../../Toolbox/Helpers/extra";
 import isEmpty from 'lodash/isEmpty'
 import {TextField} from "../inputField/InputFieldWithIconAddOn";
 
@@ -26,7 +26,6 @@ class Workout extends React.Component {
         this.onSetChange = this.onSetChange.bind(this);
     }
 
-
     onChange(e) {
         this.props.dataToBeDisplayed[this.props.id] = {};
         this.setState({[e.target.name]: e.target.value});
@@ -40,6 +39,14 @@ class Workout extends React.Component {
         this.onChange(e);
     }
 
+    /*in field reps we have used 'has-error' class, so it is needed to be scrolled to that if error
+    is displayed on the DOM*/
+    componentDidUpdate(){
+        if(this.state.errors.reps){
+            scrollToError();
+        }
+    }
+
     /**Updates reps object with set no. and no. of reps
      * */
     handleReps(value, id) {
@@ -48,7 +55,6 @@ class Workout extends React.Component {
         temp[`set${id + 1}`] = value;
         this.setState({reps: temp})
     }
-
 
     render() {
         const {dataToBeStored, dataToBeDisplayed, id} = this.props;

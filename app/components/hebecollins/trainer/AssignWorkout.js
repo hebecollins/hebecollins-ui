@@ -1,11 +1,10 @@
 import React from 'react'
 import WorkoutGroup from "../../others/inputFieldGroup/WorkoutGroup";
-import {addWorkoutToRedux, addAssignedWorkoutToServer} from "../../../actions/workoutActions"
+import {addWorkoutToRedux, addAssignedWorkoutToServer, clearWorkoutFromRedux} from "../../../actions/workoutActions"
 import {connect} from 'react-redux'
 import SingleScreen2 from "../../others/frames/SingleScreen2";
 import {errorResponse} from "../../../Toolbox/Helpers/responseHandler";
 import {redirectByName} from "../../../Toolbox/Helpers/redirect";
-import {scrollToError} from "../../../Toolbox/Helpers/extra";
 
 class AssignWorkout extends React.Component {
     constructor(props) {
@@ -18,18 +17,27 @@ class AssignWorkout extends React.Component {
     }
 
     onSubmit() {
-        scrollToError();
-        const {addAssignedWorkoutToServer, selectedUser, gymId, workout} = this.props;
-        const clientId = selectedUser.user_id;
+        const self = this;
         if (this.child.addedToStore()) {
-            addAssignedWorkoutToServer(workout, gymId, clientId).catch(
-                err => {
-                    errorResponse(err);
-                    this.setState({isLoading: false});
-                }
-            );
+
+            //setTimeout holds the execution of below method for sometime so that redux updates can be reflected here
+            setTimeout(() => {
+                const {addAssignedWorkoutToServer, selectedUser, gymId, workout} = self.props;
+                const clientId = selectedUser.user_id;
+                addAssignedWorkoutToServer(workout, gymId, clientId).catch(
+                    err => {
+                        errorResponse(err);
+                        this.setState({isLoading: false});
+                    }
+                )
+            }, 100)
         }
     };
+
+    //delete workout from redux once component is unmounted
+    componentWillUnmount() {
+        this.props.clearWorkoutFromRedux();
+    }
 
     render() {
         const {workout, selectedUser, addWorkoutToRedux} = this.props;
@@ -39,7 +47,8 @@ class AssignWorkout extends React.Component {
                     <div className="white-center">
                         Workout schedule for <label className="list-monitor-header">{selectedUser.nick_name}</label>
                     </div>
-                    <a onClick={() => redirectByName("SAVED_WORKOUT_LIST")} className="edit-icon-link pull-right">Use saved
+                    <a onClick={() => redirectByName("SAVED_WORKOUT_LIST")} className="edit-icon-link pull-right">Use
+                        saved
                         workouts instead ?</a>
                     <WorkoutGroup
                         onRef={ref => (this.child = ref)}
@@ -67,4 +76,8 @@ function mapStateToProps(state) {
     }
 }
 
-export default connect(mapStateToProps, {addWorkoutToRedux, addAssignedWorkoutToServer})(AssignWorkout)
+export default connect(mapStateToProps, {
+    addWorkoutToRedux,
+    clearWorkoutFromRedux,
+    addAssignedWorkoutToServer
+})(AssignWorkout)

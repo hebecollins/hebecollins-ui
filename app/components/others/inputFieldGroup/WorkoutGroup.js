@@ -1,10 +1,7 @@
 import React from 'react'
 import Workout from "./Workout"
 import {validateExercise} from "../../../Toolbox/Validation/helpers"
-import {dayOfWeek, deepCloneArray, scrollToError} from "../../../Toolbox/Helpers/extra";
-import isEmpty from 'lodash/isEmpty'
-import {Fade, Slide} from "../extra/Animation";
-import {errorResponse} from "../../../Toolbox/Helpers/responseHandler";
+import {dayOfWeek, deepCloneArray} from "../../../Toolbox/Helpers/extra";
 
 /**It represents one day's workout
  * Working: It has got two main states, 'dayWorkoutToBeStored' and 'dayWorkoutToBeDisplayed'.(these two must be passed as props)
@@ -39,7 +36,7 @@ class WorkoutGroup extends React.Component {
         this.props.onRef(undefined)
     }
 
-    componentWillMount(){
+    componentWillMount() {
         this.checkStore(this.state.index);
     }
 
@@ -93,6 +90,8 @@ class WorkoutGroup extends React.Component {
         const {addWorkoutToRedux} = this.props;
         if (this.isValid()) {
             addWorkoutToRedux(this.state.dayWorkoutToBeStored, dayOfWeek(this.state.index));
+            console.log("addedToStore");
+            console.log(this.state.dayWorkoutToBeStored);
             return true
         }
         return false
@@ -115,8 +114,6 @@ class WorkoutGroup extends React.Component {
 
     /**if data is valid, It writes to redux and empty all the states*/
     onDayChange(e) {
-
-        scrollToError();
         const newDayIndex = (e.target.name === "next") ? ( this.state.index + 1 ) : (this.state.index - 1);
         if (this.addedToStore()) {
             const defaultState = this.resetWorkoutState();
@@ -146,7 +143,6 @@ class WorkoutGroup extends React.Component {
     }
 
     render() {
-
         const {index, exercise_count, dayWorkoutToBeDisplayed, dayWorkoutToBeStored} = this.state;
         const getExerciseForm = () => {
             let exerciseForm = [];
@@ -191,9 +187,7 @@ class WorkoutGroup extends React.Component {
                 {this.state.exercise_count ?
                     <div>
                         <div className="workout-group">
-                            {/*<Slide>*/}
-                            {getExerciseForm()}
-                            {/*</Slide>*/}
+                                {getExerciseForm()}
                         </div>
                         <div className='pager'>
                             <button onClick={this.incrementCount} className="btn-hebecollins-orange">

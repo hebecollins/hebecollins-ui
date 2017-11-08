@@ -1,12 +1,11 @@
 import React from 'react'
 import WorkoutGroup from "../../others/inputFieldGroup/WorkoutGroup";
-import {addWorkoutToRedux, addCreatedWorkoutToServer} from "../../../actions/workoutActions"
+import {addWorkoutToRedux, addCreatedWorkoutToServer, clearWorkoutFromRedux} from "../../../actions/workoutActions"
 import {connect} from 'react-redux'
 import SingleScreen2 from "../../others/frames/SingleScreen2";
 import {errorResponse} from "../../../Toolbox/Helpers/responseHandler";
 import {TextField} from "../../others/inputField/InputFieldWithIconAddOn";
 import {validateLabel} from "../../../Toolbox/Validation/helpers";
-import {scrollToError} from "../../../Toolbox/Helpers/extra";
 
 class CreateWorkoutSchedule extends React.Component {
     constructor(props) {
@@ -32,23 +31,31 @@ class CreateWorkoutSchedule extends React.Component {
         return isValid;
     }
 
+    //to clear workout as soon as component is unmounted
+    componentWillUnmount() {
+        this.props.clearWorkoutFromRedux();
+    }
+
     onSubmit() {
-        scrollToError();
         if (this.isValid()) {
             this.setState({errors: {}});
-            const {addCreatedWorkoutToServer, gymId, workout} = this.props;
             if (this.child.addedToStore()) {
                 this.setState({isLoading: true});
-                addCreatedWorkoutToServer(workout, gymId, this.state.label).catch(
-                    err => {
-                        errorResponse(err);
-                        const response = errorResponse(err);
-                        if (response !== null) {
-                            this.setState({errors: response, isLoading: false})
-                            scrollToError();
+                const self = this;
+
+                //setTimeout holds the execution of below method for sometime so that redux updates can be reflected here
+                setTimeout(() => {
+                    const {addCreatedWorkoutToServer, gymId, workout} = self.props;
+                    addCreatedWorkoutToServer(workout, gymId, this.state.label).catch(
+                        err => {
+                            errorResponse(err);
+                            const response = errorResponse(err);
+                            if (response !== null) {
+                                this.setState({errors: response, isLoading: false})
+                            }
                         }
-                    }
-                );
+                    )
+                }, 100)
             }
         }
     };
@@ -97,4 +104,8 @@ function mapStateToProps(state) {
     }
 }
 
-export default connect(mapStateToProps, {addWorkoutToRedux, addCreatedWorkoutToServer})(CreateWorkoutSchedule)
+export default connect(mapStateToProps, {
+    addWorkoutToRedux,
+    addCreatedWorkoutToServer,
+    clearWorkoutFromRedux
+})(CreateWorkoutSchedule)

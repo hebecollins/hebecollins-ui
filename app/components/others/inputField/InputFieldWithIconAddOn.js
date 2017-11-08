@@ -6,6 +6,7 @@ import DateTime from 'react-datetime';
 import IntlTelInput from 'react-intl-tel-input';
 import 'file?name=libphonenumber.js!../../../../node_modules/react-intl-tel-input/dist/libphonenumber.js';
 import './../../../../node_modules/react-intl-tel-input/dist/main.css';
+import {scrollToError} from "../../../Toolbox/Helpers/extra";
 
 
 /** It is an input text field component with icon as add-on
@@ -225,6 +226,12 @@ Select.defaultProps = {
 
 const FieldFrame = (props) => {
     const {error, iconClass} = props;
+
+    //asynchronous action which scrolls to the error block
+    if(error){
+        scrollToError();
+    }
+
     return (
         <div>{props.isIconNeeded ?
             <div className={classnames('form-group', {'has-error': error})}>

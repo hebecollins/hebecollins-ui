@@ -1,6 +1,6 @@
 import Validator from 'validator';
 import isEmpty from 'lodash/isEmpty';
-import {exceededMaxLength, message, notEnoughLength} from '../Helpers/messages';
+import {exceededMaxLength, lessThanMinValue, message, moreThanMaxValue, notEnoughLength} from '../Helpers/messages';
 
 /** Validate takes array of field, value and property and validate values against the properties
  *  =================================================================================
@@ -101,6 +101,31 @@ function isNumber(value) {
     if (!Validator.isNull(value)) {
         if (!Validator.isInt(value)) {
             return message.notNumber;
+        }
+    }
+}
+
+/** validates integer. (minimum value by default is -1000000)
+ * @param maxVal => maximum value allowed for value
+ * @param value => input value
+ */
+function maxValue(maxVal,value) {
+    if (!Validator.isNull(value)) {
+        if (!value < `${maxVal}`) {
+            return moreThanMaxValue(maxVal);
+        }
+    }
+}
+
+/** validates integer.(maximum value by default is 1000000)
+ * @param minVal => minimum value allowed for value
+ * @param value => input value
+ */
+function minValue(minVal,value) {
+    const stringValue = `${value}`;
+    if (!Validator.isNull(stringValue)) {
+        if (!(value > `${minVal}`)) {
+            return lessThanMinValue(minVal);
         }
     }
 }

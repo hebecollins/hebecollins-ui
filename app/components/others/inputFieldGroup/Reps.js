@@ -1,5 +1,6 @@
 import React from 'react'
 import isEmpty from 'lodash/isEmpty'
+import {scrollToError} from "../../../Toolbox/Helpers/extra";
 
 /** Represents one rep box.
  */

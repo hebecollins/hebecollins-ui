@@ -1,6 +1,6 @@
 import {get, postJSON} from "../Toolbox/Helpers/requestHandler";
 import {BACKEND_ROUTES} from "../../config/backendRoutes";
-import {saveSelectedUser} from "./actionStore";
+import {deleteSelectedUser, saveSelectedUser} from "./actionStore";
 
 /** clientList for trainer
  */
@@ -46,4 +46,10 @@ export const addSelectedUserToRedux=(userId,userType,nickName)=>{
         localStorage.setItem('selectedUser', JSON.stringify(selectedUser));
         return dispatch(saveSelectedUser(selectedUser))
     }
+};
+
+export const deleteSelectedUserFromRedux = ()=>{
+  return dispatch=>{
+   dispatch(deleteSelectedUser());
+  }
 };

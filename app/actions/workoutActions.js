@@ -33,7 +33,6 @@ export function addAssignedWorkoutToServer(workout, gymId, clientId) {
                 text: res.data.msg
             }));
             dispatch(deleteSelectedUser());
-            dispatch(clearWorkout());
             redirectByName("CLIENT_LIST_FOR_TRAINER")
         });
     }
@@ -51,9 +50,14 @@ export function addCreatedWorkoutToServer(workout, gymId, label) {
                 type: "success",
                 text: res.data.msg
             }));
-            dispatch(clearWorkout());
             redirectByName("SAVED_WORKOUT_LIST")
         });
+    }
+}
+
+export function clearWorkoutFromRedux() {
+    return dispatch=>{
+        dispatch(clearWorkout());
     }
 }
 

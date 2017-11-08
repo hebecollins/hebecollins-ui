@@ -1,4 +1,5 @@
 import React from 'react';
+import {scrollToAlert} from "../../../Toolbox/Helpers/extra";
 
 /**mounts a component and then deletes it after 10 seconds
  * */
@@ -13,6 +14,7 @@ class FlashMessage extends React.Component {
     }
 
     componentDidMount() {
+        scrollToAlert();//scrolls to alert bar so as to be visible in the frame
         let self = this;
         setTimeout(function () {
             self.onClick();

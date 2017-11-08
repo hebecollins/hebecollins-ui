@@ -67,11 +67,24 @@ export const getGenderFromGenderCode = (gender) => {
  * , which contains errors, and scroll to it
  * */
 export const scrollToError = () => {
-    setTimeout(function () {
-        const elements = document.getElementsByClassName("help-block");
-        const firstElement = elements[0];
-        if (firstElement) {
-            window.scrollTo(0, firstElement.offsetTop - 100);
+    setTimeout(()=>{
+        const elementError = document.getElementsByClassName("help-block");
+        const firstElementError = elementError[0];
+        if (firstElementError) {
+            window.scrollTo(0, firstElementError.offsetTop - 100);
+        }
+    }, 100);
+};
+
+/**Waits for 100 milliseconds for the DOM to get updated. After that it reads first "alert"(of the page)
+ * , which contains alert, and scroll to it
+ * */
+export const scrollToAlert = () => {
+    setTimeout(()=> {
+        const elementAlert = document.getElementsByClassName("alert");
+        const firstElementAlert = elementAlert[0];
+        if(firstElementAlert){
+            window.scrollTo(0, firstElementAlert.offsetTop - 100);
         }
     }, 100);
 };
