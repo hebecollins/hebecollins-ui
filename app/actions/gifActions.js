@@ -3,7 +3,7 @@ import {get,postMedia} from "../Toolbox/Helpers/requestHandler";
 import {BACKEND_ROUTES} from "../../config/backendRoutes";
 
 export const getExerciseListForGif = ()=>{
-    return get(BACKEND_ROUTES.EXERCISE_LIST)
+    return get(BACKEND_ROUTES.ADMIN.EXERCISE_LIST)
 };
 
 export const postGifForExercise = (gif,exerciseName)=>{
@@ -13,5 +13,5 @@ export const postGifForExercise = (gif,exerciseName)=>{
         exercise_name:exerciseName
     };
 
-    return postMedia(dataToBePosted,BACKEND_ROUTES.POST_EXERCISE_GIF)
+    return postMedia(dataToBePosted,BACKEND_ROUTES.ADMIN.POST_EXERCISE_GIF)
 };

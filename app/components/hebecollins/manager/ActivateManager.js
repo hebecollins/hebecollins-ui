@@ -9,7 +9,7 @@ import {FormatForm} from "../../others/frames/FormatForm"
 import {activateManagerRequest} from "../../../actions/activateActions"
 import SingleScreen from "../../others/frames/SingleScreen";
 
-class Activate extends React.Component {
+class ActivateManager extends React.Component {
     constructor(props) {
         super(props);
         this.state = {
@@ -163,7 +163,7 @@ class Activate extends React.Component {
     }
 }
 
-Activate.propTypes = {
+ActivateManager.propTypes = {
     activateManagerRequest: React.PropTypes.func.isRequired,
 };
 
@@ -173,4 +173,4 @@ function mapStateToProps(state) {
     }
 }
 
-export default connect(mapStateToProps, {activateManagerRequest})(Activate);
+export default connect(mapStateToProps, {activateManagerRequest})(ActivateManager);

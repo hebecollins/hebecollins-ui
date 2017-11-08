@@ -5,21 +5,21 @@ import {saveSelectedUser} from "./actionStore";
 /** clientList for trainer
  */
 export const clientListForTrainer = (gymId) => {
-    const route = `/${gymId}${BACKEND_ROUTES.LIST.TRAINER.CLIENT_LIST}`;
+    const route = `/${gymId}${BACKEND_ROUTES.TRAINER.CLIENT_LIST}`;
     return get(route)
 };
 
 /** clientList for manager
  */
 export const clientListForManager = (gymId) => {
-    const route = `/${gymId}${BACKEND_ROUTES.LIST.MANAGER.CLIENT_LIST}`;
+    const route = `/${gymId}${BACKEND_ROUTES.MANAGER.CLIENT_LIST}`;
     return get(route)
 };
 
 /** trainerList for manager
  */
 export const trainerListForManager = (gymId) => {
-    const route = `/${gymId}${BACKEND_ROUTES.LIST.MANAGER.TRAINER_LIST}`;
+    const route = `/${gymId}${BACKEND_ROUTES.MANAGER.TRAINER_LIST}`;
     return get(route)
 };
 
@@ -30,7 +30,7 @@ export const postRemarkToServer = (remarks, userId,gymId) => {
     const dataToBePosted = {
         "remarks":remarks
     };
-    const route = `/${gymId}${BACKEND_ROUTES.REMARKS}/${userId}`;
+    const route = `/${gymId}${BACKEND_ROUTES.COMMONS.REMARKS}/${userId}`;
     return postJSON(dataToBePosted, route)
 };
 

@@ -22,7 +22,7 @@ export function loginRequest(data) {
     };
 
     return dispatch => {
-        return postForm(dataToBePosted, BACKEND_ROUTES.LOGIN).then(res => {
+        return postForm(dataToBePosted, BACKEND_ROUTES.AUTHENTICATION.LOGIN).then(res => {
                 const user = res.data.data;
 
                 //storing current user's info for sending subsequent requests
@@ -46,8 +46,7 @@ export function loginRequest(data) {
  */
 export function logoutRequest() {
     return dispatch => {
-        return get(BACKEND_ROUTES.LOGOUT).then(res => {
-                // localStorage.removeItem('user');
+        return get(BACKEND_ROUTES.AUTHENTICATION.LOGOUT).then(res => {
                 localStorage.clear();
                 setAuthToken(false);
                 dispatch(logout());
@@ -70,7 +69,7 @@ export function passwordRecoverRequest(data) {
     };
 
     return dispatch => {
-        return postForm(dataToBePosted, BACKEND_ROUTES.PASSWORD.RECOVER).then(res => {
+        return postForm(dataToBePosted, BACKEND_ROUTES.AUTHENTICATION.PASSWORD.RECOVER).then(res => {
                 redirectTo('/');
                 dispatch(addFlashMessage({
                     type: 'success',
@@ -94,8 +93,7 @@ export function passwordResetRequest(data, params) {
     };
 
     return dispatch => {
-        console.log(BACKEND_ROUTES.PASSWORD.RESET);
-        return postForm(dataToBePosted, BACKEND_ROUTES.PASSWORD.RESET, paramsToBePosted).then(res => {
+        return postForm(dataToBePosted, BACKEND_ROUTES.AUTHENTICATION.PASSWORD.RESET, paramsToBePosted).then(res => {
                 redirectToHome();
                 dispatch(addFlashMessage({
                     type: 'success',
@@ -113,7 +111,7 @@ export function passwordChangeRequest(data) {
         "confirm_new_password": data.confirm_new_password
     };
     return dispatch => {
-        return postForm(dataToBePosted, BACKEND_ROUTES.PASSWORD.CHANGE).then(res => {
+        return postForm(dataToBePosted, BACKEND_ROUTES.AUTHENTICATION.PASSWORD.CHANGE).then(res => {
                 redirectTo('/');
                 dispatch(addFlashMessage({
                     type: 'success',
@@ -128,7 +126,7 @@ export function passwordChangeRequest(data) {
  * @param gymDetails => object {gym_id, gym_name, locality}
  */
 export const setDefaultGym = (gymDetails) => {
-    const {gym_id, gym_name, locality} = gymDetails
+    const {gym_id, gym_name, locality} = gymDetails;
     const defaultGym = {
         "gym_id": gym_id,
         "gym_name": gym_name,

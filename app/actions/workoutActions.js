@@ -22,7 +22,7 @@ export function addWorkoutToRedux(dayWorkout, dayName) {
 
 
 export function addAssignedWorkoutToServer(workout, gymId, clientId) {
-    const route = `/${gymId}${BACKEND_ROUTES.WORKOUT.ASSIGN}/${clientId}`;
+    const route = `/${gymId}${BACKEND_ROUTES.TRAINER.WORKOUT.ASSIGN}/${clientId}`;
     const dataToBeSent = {
         "workout": workout
     };
@@ -40,7 +40,7 @@ export function addAssignedWorkoutToServer(workout, gymId, clientId) {
 }
 
 export function addCreatedWorkoutToServer(workout, gymId, label) {
-    const route = `/${gymId}${BACKEND_ROUTES.WORKOUT.CREATE}`;
+    const route = `/${gymId}${BACKEND_ROUTES.TRAINER.WORKOUT.CREATE}`;
     const dataToBeSent = {
         "label": label,
         "workout": workout
@@ -58,17 +58,17 @@ export function addCreatedWorkoutToServer(workout, gymId, label) {
 }
 
 export function getSavedWorkoutList(gymId) {
-    const route = `/${gymId}${BACKEND_ROUTES.WORKOUT.WORKOUT_LIST}`;
+    const route = `/${gymId}${BACKEND_ROUTES.TRAINER.WORKOUT.LIST}`;
     return get(route)
 }
 
 export function deleteSavedWorkoutFromServer(labelId) {
-    const route = `${BACKEND_ROUTES.WORKOUT.DELETE_WORKOUT_BY_LABEL}/${labelId}`;
+    const route = `${BACKEND_ROUTES.TRAINER.WORKOUT.DELETE_BY_LABEL}/${labelId}`;
     return get(route)
 }
 
 export function getSavedWorkoutByLabel(labelId) {
-    const route = `${BACKEND_ROUTES.WORKOUT.GET_WORKOUT_BY_LABEL}/${labelId}`;
+    const route = `${BACKEND_ROUTES.TRAINER.WORKOUT.GET_BY_LABEL}/${labelId}`;
     return dispatch => {
         return get(route).then(res => {
             console.log(res.data.workout);

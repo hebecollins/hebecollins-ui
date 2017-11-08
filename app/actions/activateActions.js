@@ -7,7 +7,7 @@ import {deleteVerificationData} from "./actionStore";
 
 /**(OTP activation)
  * sends an activation request for a manager after formatting the data in acceptable format
- * @param data => it is state of class Activate, which has all the user input including some unnecessary fields
+ * @param data => it is state of class ActivateManager, which has all the user input including some unnecessary fields
  *                  like isLoading and errors which is removed by this method before sending it to the
  *                  server
  * @param userId => It is sent back by the server at the time of registering, and it is stored in
@@ -36,7 +36,7 @@ export function activateManagerRequest(data, userId) {
     };
 
     return dispatch => {
-        return postJSON(dataToBeSent, BACKEND_ROUTES.ACTIVATE.MANAGER, param).then(res => {
+        return postJSON(dataToBeSent, BACKEND_ROUTES.MANAGER.ACTIVATE, param).then(res => {
             redirectTo('/');
             dispatch(addFlashMessage({
                 type: 'success',
@@ -74,7 +74,7 @@ export function activateTrainer(data, params) {
     };
 
     return dispatch => {
-        return postJSON(dataToBeSent, BACKEND_ROUTES.ACTIVATE.TRAINER, paramsToBePosted).then(res => {
+        return postJSON(dataToBeSent, BACKEND_ROUTES.TRAINER.ACTIVATE, paramsToBePosted).then(res => {
             redirectToHome();
             dispatch(addFlashMessage({
                 type: 'success',
@@ -110,7 +110,7 @@ export function activateClient(data, params) {
     };
 
     return dispatch => {
-        return postJSON(dataToBeSent, BACKEND_ROUTES.ACTIVATE.CLIENT, paramsToBePosted).then(res => {
+        return postJSON(dataToBeSent, BACKEND_ROUTES.CLIENT.ACTIVATE, paramsToBePosted).then(res => {
             redirectToHome();
             dispatch(addFlashMessage({
                 type: 'success',

@@ -8,7 +8,7 @@ import {addQuote} from "./actionStore";
 /** gets quote from the server
  */
 export function getQuote() {
-        return get(BACKEND_ROUTES.QUOTE)
+        return get(BACKEND_ROUTES.COMMONS.QUOTE)
 }
 
 /**post quotes to redux store without pushing it to server
@@ -30,7 +30,7 @@ export function postQuotesToServer() {
     });
 
     return dispatch => {
-        return postJSON(dataToBeSent, BACKEND_ROUTES.QUOTE).then(res => {
+        return postJSON(dataToBeSent, BACKEND_ROUTES.ADMIN.ADD_QUOTE).then(res => {
                 dispatch(clearQuotes);
                 dispatch(addFlashMessage({
                     type:"success",

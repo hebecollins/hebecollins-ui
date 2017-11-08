@@ -18,7 +18,7 @@ export function sendOTP(data, userId) {
         "user_id": userId
     };
     return dispatch => {
-        return postForm(dataToBeSent, BACKEND_ROUTES.VERIFY).then(res => {
+        return postForm(dataToBeSent, BACKEND_ROUTES.AUTHENTICATION.VERIFY).then(res => {
             redirectByName('ACTIVATE_MANAGER');
             dispatch(addFlashMessage({
                 type: 'success',
@@ -35,7 +35,7 @@ export function resendOTP(userId) {
         "user_id": userId
     };
     return dispatch => {
-        return postForm(dataToBeSent, BACKEND_ROUTES.RESEND_OTP).then(res => {
+        return postForm(dataToBeSent, BACKEND_ROUTES.AUTHENTICATION.RESEND_OTP).then(res => {
             dispatch(addFlashMessage({
                 type: 'success',
                 text: res.data.msg
@@ -58,7 +58,7 @@ export function registerManager(data) {
         "country_code": data.country_code
     };
     return dispatch => {
-        return postJSON(dataToBeSent, BACKEND_ROUTES.SIGNUP).then(res => {
+        return postJSON(dataToBeSent, BACKEND_ROUTES.AUTHENTICATION.SIGNUP).then(res => {
             dispatch(storeVerificationData(res.data.data.user_id));
             redirectByName('VERIFY');
             dispatch(addFlashMessage({
@@ -75,7 +75,7 @@ export function registerManager(data) {
  * @param gymId => It is passed by the component based on the current selected gym
  * */
 export function registerTrainer(data, gymId) {
-    const route = `/${gymId}${BACKEND_ROUTES.ADD.TRAINER}`;
+    const route = `/${gymId}${BACKEND_ROUTES.MANAGER.ADD_TRAINER}`;
     return register(data, route)
 }
 
@@ -85,8 +85,9 @@ export function registerTrainer(data, gymId) {
  * @param gymId => It is passed by the component based on the current selected gym
  */
 export function registerClient(data, gymId) {
-    const route = `/${gymId}${BACKEND_ROUTES.ADD.CLIENT}`;
+    const route = `/${gymId}${BACKEND_ROUTES.TRAINER.ADD_CLIENT}`;
     return register(data, route)}
+
 
 /**It is used by methods which does not require any redirection after getting reponse from
  * the server.
