@@ -49,6 +49,7 @@ export function logoutRequest() {
         return get(BACKEND_ROUTES.AUTHENTICATION.LOGOUT).then(res => {
                 localStorage.clear();
                 setAuthToken(false);
+                setCurrentUser({});
                 dispatch(logout());
             }
         ).catch(err => {

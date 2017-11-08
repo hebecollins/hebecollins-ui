@@ -7,10 +7,12 @@ export  function redirectTo(route) {
 }
 
 export function redirectToHome() {
-    browserHistory.push(getRouteByName('GUEST_HOME'));
+console.log("redirecting to home");
+    browserHistory.push(getRouteByName('HOME'));
 }
 
 export function redirectByName(name) {
+    console.log("redirectByName");
     console.log("name  :"+name);
     const route = getRouteByName(name);
 console.log("route  :"+route);

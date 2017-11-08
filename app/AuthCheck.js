@@ -5,7 +5,7 @@ import {getPermissionByRoute, getRouteByName} from "./Toolbox/Helpers/routeHandl
 import {redirectTo, redirectToHome} from "./Toolbox/Helpers/redirect";
 
 /**This method checks if user is allowed to access a certain route or not based on user type/
- * user types are: ["authentication","client","trainer","manager","admin"]
+ * user types are: ["guest","client","trainer","manager","admin"]
  * @param Component it is the component which has been passed to check for permission
  * @return Component if allowed else error
  * */
@@ -15,9 +15,10 @@ import {redirectTo, redirectToHome} from "./Toolbox/Helpers/redirect";
 export default function (Component) {
     class Permission extends React.Component {
         componentWillMount() {//gets called just once before first render
+            console.log("hello");
             const route = this.props.location.pathname;
             const {isAuthenticated, user} = this.props;
-            /** if(notAutheticated AND requires authentication){
+            /** if(notAutheticated AND requires guest){
             *           redirectTo to login page with error message asking to log in
             *   }
              *  if(authenticated but his userType is not allowed){
@@ -25,7 +26,7 @@ export default function (Component) {
              *  }
              * */
             if (!isAuthenticated) {
-                if (!getPermissionByRoute(route).includes('authentication')) {
+                if (!getPermissionByRoute(route).includes('guest')) {
                     this.props.addFlashMessage({
                         type: 'error',
                         text: 'You need to login to access this page'

@@ -30,7 +30,7 @@ import ViewWorkout from "./components/hebecollins/commons/ViewWorkout";
 import CreateWorkoutSchedule from "./components/hebecollins/trainer/CreateWorkoutSchedule";
 import SavedWorkoutList from "./components/hebecollins/trainer/SavedWorkoutList";
 import AddGIF from "./components/hebecollins/admin/AddGIF";
-import GetWorkout from "./components/hebecollins/client/GetWorkout";
+import GetCurrentWorkout from "./components/hebecollins/client/GetCurrentWorkout";
 
 export default (
     <Route path="/" component={App}>
@@ -65,20 +65,22 @@ export default (
         {/*client*/}
         <Route path={getRouteByName('CLIENT_HOME')} component={authCheck(ClientHome)}/>
         <Route path={getRouteByName('ACTIVATE_CLIENT')} component={authCheck(ActivateClient)}/>
-        <Route path={getRouteByName('GET_WORKOUT_FOR_TODAY')} component={authCheck(GetWorkout)}/>
+        <Route path={getRouteByName('GET_WORKOUT_FOR_TODAY')} component={authCheck(GetCurrentWorkout)}/>
 
 
         {/*commons*/}
         <Route path={getRouteByName('CLIENT_PROFILE')} component={authCheck(ClientProfile)}/>
         <Route path={getRouteByName('VIEW_WORKOUT')} component={authCheck(ViewWorkout)}/>
         <Route path={getRouteByName('NO_RECORDS_FOUND')} component={authCheck(NoRecordsFound)}/>
-        <Route path='/*' component={NotFound}/>
 
 
         {/*admin*/}
         <Route path={getRouteByName('ADMIN_HOME')} component={authCheck(AdminHome)}/>
         <Route path={getRouteByName('ADD_QUOTES')} component={authCheck(AddQuotes)}/>
         <Route path={getRouteByName('ADD_GIF')} component={authCheck(AddGIF)}/>
+
+
+        <Route path='/*' component={NotFound}/>
 
     </Route>
 )

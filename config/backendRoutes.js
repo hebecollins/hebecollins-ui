@@ -43,7 +43,9 @@ export const BACKEND_ROUTES = {
     //client routes
     CLIENT:{
         ACTIVATE: "/activate/client",
-
+        WORKOUT:{
+            CURRENT:"/client/workout",// :gymId/"/client/workout
+        }
     },
 
 

@@ -8,7 +8,7 @@ class NoRecordsFound extends React.Component {
                 <div className="page-container">
                     <h1 className="white-center">NO RECORDS FOUND</h1>
                     <h1 className="white-center">
-                        <a href={getRouteByName('GUEST_HOME')}>Click here </a>
+                        <a href={getRouteByName('HOME')}>Click here </a>
                         to return to home page</h1>
                 </div>
             </div>

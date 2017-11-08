@@ -1,19 +1,19 @@
 export const ROUTES = [
 
     //home page while logged out
-    {ROUTE_NAME: 'HOME', ROUTE: '/', PERMISSION: ['authentication']},
+    {ROUTE_NAME: 'HOME', ROUTE: '/', PERMISSION: ['guest']},
 
 
     //authentication
-    {ROUTE_NAME: 'VERIFY', ROUTE: '/verify', PERMISSION: ['authentication']},
-    {ROUTE_NAME: 'PASSWORD_RECOVER', ROUTE: '/password/recover', PERMISSION: ['authentication']},
-    {ROUTE_NAME: 'PASSWORD_RESET', ROUTE: '/password/reset', PERMISSION: ['authentication']},
+    {ROUTE_NAME: 'VERIFY', ROUTE: '/verify', PERMISSION: ['guest']},
+    {ROUTE_NAME: 'PASSWORD_RECOVER', ROUTE: '/password/recover', PERMISSION: ['guest']},
+    {ROUTE_NAME: 'PASSWORD_RESET', ROUTE: '/password/reset', PERMISSION: ['guest']},
     {ROUTE_NAME: 'PASSWORD_CHANGE', ROUTE: '/password/change', PERMISSION: ['client', 'trainer', 'manager', 'admin']},
 
 
     //manager
     {ROUTE_NAME: 'MANAGER_HOME', ROUTE: '/manager', PERMISSION: ['manager']},
-    {ROUTE_NAME: 'ACTIVATE_MANAGER', ROUTE: '/activate/manager', PERMISSION: ['authentication']},
+    {ROUTE_NAME: 'ACTIVATE_MANAGER', ROUTE: '/activate/manager', PERMISSION: ['guest']},
     {ROUTE_NAME: 'ADD_TRAINER', ROUTE: '/add/trainer', PERMISSION: ['manager']},
     {ROUTE_NAME: 'CLIENT_LIST_FOR_MANAGER', ROUTE: '/manager/clients', PERMISSION: ['manager']},
 
@@ -22,14 +22,14 @@ export const ROUTES = [
     {ROUTE_NAME: 'ADD_CLIENT', ROUTE: '/add/client', PERMISSION: ['trainer']},
     {ROUTE_NAME: 'ASSIGN_WORKOUT', ROUTE: '/assign/workout', PERMISSION: ['trainer']},
     {ROUTE_NAME: 'CREATE_WORKOUT', ROUTE: '/create/workout', PERMISSION: ['trainer']},
-    {ROUTE_NAME: 'ACTIVATE_TRAINER', ROUTE: '/activate/trainer', PERMISSION: ['authentication']},
+    {ROUTE_NAME: 'ACTIVATE_TRAINER', ROUTE: '/activate/trainer', PERMISSION: ['guest']},
     {ROUTE_NAME: 'CLIENT_LIST_FOR_TRAINER', ROUTE: '/trainer/clients', PERMISSION: ['trainer']},
     {ROUTE_NAME: 'SAVED_WORKOUT_LIST', ROUTE: '/trainer/workout/list', PERMISSION: ['trainer']},
 
 
     //client
     {ROUTE_NAME: 'CLIENT_HOME', ROUTE: '/client', PERMISSION: ['client']},
-    {ROUTE_NAME: 'ACTIVATE_CLIENT', ROUTE: '/activate/client', PERMISSION: ['authentication']},
+    {ROUTE_NAME: 'ACTIVATE_CLIENT', ROUTE: '/activate/client', PERMISSION: ['guest']},
     {ROUTE_NAME: 'GET_WORKOUT_FOR_TODAY',ROUTE: '/client/workout', PERMISSION: ['client']},
 
 
@@ -43,6 +43,5 @@ export const ROUTES = [
     {ROUTE_NAME: 'ADMIN_HOME', ROUTE: '/admin', PERMISSION: ['admin']},
     {ROUTE_NAME: 'ADD_QUOTES', ROUTE: '/add/quotes', PERMISSION: ['admin']},
     {ROUTE_NAME: 'ADD_GIF', ROUTE: '/add/gif', PERMISSION: ['admin']},
-
 
 ];

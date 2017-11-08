@@ -76,3 +76,12 @@ export function getSavedWorkoutByLabel(labelId) {
         })
     }
 }
+
+export function getCurrentWorkout(gymId) {
+
+    const route = `/${gymId}${BACKEND_ROUTES.CLIENT.WORKOUT.CURRENT}`;
+    console.log(route);
+        return get(route).then(res => {
+            console.log(res.data.workout);
+        })
+}

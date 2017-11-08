@@ -4,6 +4,7 @@ import {redirectByName} from "../../../Toolbox/Helpers/redirect";
 
 class TrainerHome extends React.Component {
     render() {
+        console.log("trainer home");
         return (
             <div>
                 <QuoteBox>

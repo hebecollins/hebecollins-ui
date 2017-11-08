@@ -7,16 +7,12 @@ export const GuestNavigation = () => {
     const guestLinks = (
         <ul className="nav navbar-nav navbar-right">
             <li>
-                <NavLink to={getRouteByName("GUEST_HOME")} onlyActiveOnIndex>Home</NavLink>
+                <NavLink to={getRouteByName("HOME")} onlyActiveOnIndex>Home</NavLink>
             </li>
 
             <li>
                 <NavLink to={getRouteByName("VERIFY")} onlyActiveOnIndex>About Us</NavLink>
             </li>
-
-            {/*<li>*/}
-            {/*<Link to="#" activeClassName="active" onlyActiveOnIndex>Contact Us</Link>*/}
-            {/*</li>*/}
         </ul>
     );
 
