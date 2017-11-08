@@ -2,14 +2,15 @@ import React from 'react'
 import {getCurrentWorkout} from "../../../actions/workoutActions";
 import {connect} from 'react-redux'
 
+
 class GetCurrentWorkout extends React.Component{
     constructor(props){
         super(props)
     }
 
     componentWillMount(){
-        const {gymId}= this.props;
-       getCurrentWorkout(gymId)
+        // const {gymId}= this.props;
+       // getCurrentWorkout(gymId)
     }
 
     render(){

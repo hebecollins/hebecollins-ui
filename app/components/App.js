@@ -11,6 +11,7 @@ require('../Toolbox/css/images.css');
 require('../Toolbox/css/dateTime.css');
 require('../Toolbox/css/font-awesome.min.css');
 require('../Toolbox/css/animation.css');
+require('../Toolbox/css/autosuggestion.css');
 
 
 class App extends React.Component {
