@@ -5,6 +5,7 @@ import classnames from 'classnames'
 import {deepCloneObject, scrollToError} from "../../../Toolbox/Helpers/extra";
 import isEmpty from 'lodash/isEmpty'
 import {TextField} from "../inputField/InputFieldWithIconAddOn";
+import Autosuggestion from "../extra/Autosuggestion";
 
 /** Represents one workout form.
  *  Working: It need two props to work i.e 'dataToBeDisplayed' and 'dataToBeStored'.
@@ -24,11 +25,19 @@ class Workout extends React.Component {
         };
         this.onChange = this.onChange.bind(this);
         this.onSetChange = this.onSetChange.bind(this);
+        this.onExerciseChange= this.onExerciseChange.bind(this);
     }
 
     onChange(e) {
         this.props.dataToBeDisplayed[this.props.id] = {};
         this.setState({[e.target.name]: e.target.value});
+    }
+
+    onExerciseChange(e, {newValue}){
+        this.props.dataToBeDisplayed[this.props.id] = {};
+        this.setState({
+            exercise_name: newValue
+        });
     }
 
     /**Sets 'reps' as empty whenever there is a change in value of 'sets' so that there won't be any
@@ -39,13 +48,6 @@ class Workout extends React.Component {
         this.onChange(e);
     }
 
-    /*in field reps we have used 'has-error' class, so it is needed to be scrolled to that if error
-    is displayed on the DOM*/
-    componentDidUpdate(){
-        if(this.state.errors.reps){
-            scrollToError();
-        }
-    }
 
     /**Updates reps object with set no. and no. of reps
      * */
@@ -57,7 +59,7 @@ class Workout extends React.Component {
     }
 
     render() {
-        const {dataToBeStored, dataToBeDisplayed, id} = this.props;
+        const {dataToBeStored, dataToBeDisplayed, id, exerciseSuggestionList} = this.props;
 
         if (!isEmpty(dataToBeDisplayed[id])) {
             //sending data
@@ -94,14 +96,28 @@ class Workout extends React.Component {
 
         return (
                 <div>
-                    <TextField
-                        field="exercise_name"
-                        value={exercise_name}
-                        isIconNeeded={false}
-                        label="Exercise Name"
-                        error={errors.exercise_name}
-                        onChange={this.onChange}
-                    />
+
+
+                    <div className={classnames('form-group', {'has-error': errors.exercise_name})}>
+                        <Autosuggestion
+                            suggestionList={exerciseSuggestionList}
+                            label="Exercise Name"
+                            onChange={this.onExerciseChange}
+                            value={exercise_name}
+                        />
+                        {errors.exercise_name && <span className="help-block">{errors.exercise_name}</span>}
+                    </div>
+
+
+
+                    {/*<TextField*/}
+                        {/*field="exercise_name"*/}
+                        {/*value={exercise_name}*/}
+                        {/*isIconNeeded={false}*/}
+                        {/*label="Exercise Name"*/}
+                        {/*error={errors.exercise_name}*/}
+                        {/*onChange={this.onChange}*/}
+                    {/*/>*/}
 
                     <TextField
                         field="sets"
@@ -136,6 +152,9 @@ Workout.propTypes = {
     id: React.PropTypes.number.isRequired,
     dataToBeStored: React.PropTypes.array.isRequired,
     dataToBeDisplayed: React.PropTypes.array.isRequired,
+    exerciseSuggestionList:React.PropTypes.array.isRequired
 };
+
+
 
 export default Workout;

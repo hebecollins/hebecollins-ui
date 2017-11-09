@@ -5,6 +5,7 @@ import {connect} from 'react-redux'
 import SingleScreen2 from "../../others/frames/SingleScreen2";
 import {errorResponse} from "../../../Toolbox/Helpers/responseHandler";
 import {redirectByName} from "../../../Toolbox/Helpers/redirect";
+import {scrollToError} from "../../../Toolbox/Helpers/extra";
 
 class AssignWorkout extends React.Component {
     constructor(props) {
@@ -17,6 +18,8 @@ class AssignWorkout extends React.Component {
     }
 
     onSubmit() {
+        //its an async action which scrolls to error blocks if there is any on the page
+        scrollToError();
         const self = this;
         if (this.child.addedToStore()) {
 

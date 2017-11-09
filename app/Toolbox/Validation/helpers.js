@@ -155,7 +155,7 @@ export function validateExercise(data) {
     /*If setsObject length is not equal to no. of sets, because reps is defined as {set1:rep1, set2:rep2}*/
     const setsObjectLength = Object.keys(reps).length;
     const {errors, isValid} = validate({
-        exercise_name: [exercise_name, 'isRequired','isAlpha'],
+        exercise_name: [exercise_name, 'isRequired'],
         sets: [sets, 'isRequired','isNumber','maxValue(20)','minValue(1)'],
         reps: [setsObjectLength, `isValidRepObjectLength('${sets}')`],
         rest: [rest, 'isRequired','isNumber','minValue(0)'],

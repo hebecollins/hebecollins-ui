@@ -1,9 +1,14 @@
 import {deepCloneArray} from "../Toolbox/Helpers/extra";
 import {get, postJSON} from "../Toolbox/Helpers/requestHandler";
 import {BACKEND_ROUTES} from "../../config/backendRoutes";
-import {addFlashMessage, addWorkout, clearWorkout, deleteSelectedUser} from "./actionStore";
+import {addFlashMessage, addWorkout, clearWorkout, deleteSelectedUser, storeExerciseList} from "./actionStore";
 import {redirectByName} from "../Toolbox/Helpers/redirect";
 
+
+/**Appends day workout to workout in redux store so that it can be readily available
+ * @param dayWorkout => workout of the day
+ * @param dayName => day name : sun, mon, tue, wed, thu,fri, sat
+ * */
 export function addWorkoutToRedux(dayWorkout, dayName) {
     const relevantData = deepCloneArray(dayWorkout).map((state) => {
         delete state.errors;
@@ -21,6 +26,11 @@ export function addWorkoutToRedux(dayWorkout, dayName) {
 }
 
 
+/**Assigns workout to selected client on the server
+ * @param workout => workout array
+ * @param gymId => gymId of selected gym
+ * @param clientId=> userId of selected client
+ * */
 export function addAssignedWorkoutToServer(workout, gymId, clientId) {
     const route = `/${gymId}${BACKEND_ROUTES.TRAINER.WORKOUT.ASSIGN}/${clientId}`;
     const dataToBeSent = {
@@ -38,6 +48,12 @@ export function addAssignedWorkoutToServer(workout, gymId, clientId) {
     }
 }
 
+
+/**Adds workout created by trainer to the server with label as a tag
+ * @param workout => workout array
+ * @param gymId => gymId of selected gym
+ * @param label=> label corresponds to the given workout
+ * */
 export function addCreatedWorkoutToServer(workout, gymId, label) {
     const route = `/${gymId}${BACKEND_ROUTES.TRAINER.WORKOUT.CREATE}`;
     const dataToBeSent = {
@@ -55,22 +71,10 @@ export function addCreatedWorkoutToServer(workout, gymId, label) {
     }
 }
 
-export function clearWorkoutFromRedux() {
-    return dispatch=>{
-        dispatch(clearWorkout());
-    }
-}
 
-export function getSavedWorkoutList(gymId) {
-    const route = `/${gymId}${BACKEND_ROUTES.TRAINER.WORKOUT.LIST}`;
-    return get(route)
-}
-
-export function deleteSavedWorkoutFromServer(labelId) {
-    const route = `${BACKEND_ROUTES.TRAINER.WORKOUT.DELETE_BY_LABEL}/${labelId}`;
-    return get(route)
-}
-
+/**Gets saved Workout for a trainer by label
+ * @param labelId => id corresponds to a particular label
+ * */
 export function getSavedWorkoutByLabel(labelId) {
     const route = `${BACKEND_ROUTES.TRAINER.WORKOUT.GET_BY_LABEL}/${labelId}`;
     return dispatch => {
@@ -81,11 +85,52 @@ export function getSavedWorkoutByLabel(labelId) {
     }
 }
 
+
+/**Gets latest workout for a client as client is logged in
+ * @param gymId=> gymId of selected gym
+ * */
 export function getCurrentWorkout(gymId) {
 
     const route = `/${gymId}${BACKEND_ROUTES.CLIENT.WORKOUT.CURRENT}`;
     console.log(route);
-        return get(route).then(res => {
-            console.log(res.data.workout);
+    return get(route).then(res => {
+        console.log(res.data.workout);
+    })
+}
+
+
+/**clears workout data from redux
+ * */
+export function clearWorkoutFromRedux() {
+    return dispatch => {
+        dispatch(clearWorkout());
+    }
+}
+
+/**gets saved workout list for a trainer in a particular gym from the server
+ * @param gymId => gymId from selectedGym
+ * */
+export function getSavedWorkoutList(gymId) {
+    const route = `/${gymId}${BACKEND_ROUTES.TRAINER.WORKOUT.LIST}`;
+    return get(route)
+}
+
+
+/**Deletes saved workout data from the server by label
+ * @param labelId => id corresponds to selected label
+ * */
+export function deleteSavedWorkoutFromServer(labelId) {
+    const route = `${BACKEND_ROUTES.TRAINER.WORKOUT.DELETE_BY_LABEL}/${labelId}`;
+    return get(route)
+}
+
+
+/**Gets exercise list from the server and store it in redux
+ * */
+export function getExerciseListToRedux() {
+    return dispatch => {
+        return get(BACKEND_ROUTES.COMMONS.SUGGESTION.EXERCISES).then(res => {
+            dispatch(storeExerciseList(res.data.exercises));
         })
+    }
 }

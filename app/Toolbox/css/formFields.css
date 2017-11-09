@@ -108,13 +108,7 @@ option{
 .form-control[disabled], .form-control[readonly], fieldset[disabled] .form-control {
     background-color: transparent;
 }
-.form-group{
-    /*margin-top: 25px;*/
-}
 
-.help-block{
-    /*position: absolute;*/
-}
 
 .btn-next{
     border-radius:0 !important;

@@ -6,6 +6,7 @@ import SingleScreen2 from "../../others/frames/SingleScreen2";
 import {errorResponse} from "../../../Toolbox/Helpers/responseHandler";
 import {TextField} from "../../others/inputField/InputFieldWithIconAddOn";
 import {validateLabel} from "../../../Toolbox/Validation/helpers";
+import {scrollToError} from "../../../Toolbox/Helpers/extra";
 
 class CreateWorkoutSchedule extends React.Component {
     constructor(props) {
@@ -27,6 +28,7 @@ class CreateWorkoutSchedule extends React.Component {
         const {errors, isValid} = validateLabel(this.state);
         if (!isValid) {
             this.setState({errors});
+            scrollToError();
         }
         return isValid;
     }

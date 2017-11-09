@@ -66,7 +66,7 @@ export default (
         {/*client*/}
         <Route path={getRouteByName('CLIENT_HOME')} component={authCheck(ClientHome)}/>
         <Route path={getRouteByName('ACTIVATE_CLIENT')} component={authCheck(ActivateClient)}/>
-        <Route path={getRouteByName('GET_WORKOUT_FOR_TODAY')} component={authCheck(Autosuggestion)}/>
+        <Route path={getRouteByName('GET_WORKOUT_FOR_TODAY')} component={authCheck(GetCurrentWorkout)}/>
 
 
         {/*commons*/}

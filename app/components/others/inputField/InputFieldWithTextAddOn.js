@@ -81,11 +81,6 @@ Select2.propTypes = {
 
 const FieldFrameWithTextAddOn = (props) => {
     const {error, label} = props;
-
-    //asynchronous action which scrolls to the error block
-    if(error){
-        scrollToError();
-    }
     return (
         <div className={classnames('form-group', {'has-error': error})}>
             <div className="input-group">

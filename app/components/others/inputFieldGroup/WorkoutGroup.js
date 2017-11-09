@@ -1,7 +1,10 @@
 import React from 'react'
 import Workout from "./Workout"
 import {validateExercise} from "../../../Toolbox/Validation/helpers"
-import {dayOfWeek, deepCloneArray} from "../../../Toolbox/Helpers/extra";
+import {dayOfWeek, deepCloneArray, scrollToError} from "../../../Toolbox/Helpers/extra";
+import isEmpty from 'lodash/isEmpty'
+import {getExerciseListToRedux} from "../../../actions/workoutActions";
+import {connect}from 'react-redux'
 
 /**It represents one day's workout
  * Working: It has got two main states, 'dayWorkoutToBeStored' and 'dayWorkoutToBeDisplayed'.(these two must be passed as props)
@@ -37,8 +40,14 @@ class WorkoutGroup extends React.Component {
     }
 
     componentWillMount() {
+
         this.checkStore(this.state.index);
-    }
+        const {exercises, getExerciseListToRedux} = this.props;
+        //sends request only when exercises is empty in redux store
+        if (isEmpty(exercises)) {
+            console.log("exercises is empty");
+            getExerciseListToRedux();
+        }    }
 
     incrementCount() {
         this.setState({exercise_count: this.state.exercise_count + 1})
@@ -69,6 +78,9 @@ class WorkoutGroup extends React.Component {
      *  @return bool => true if valid else false
      */
     isValid() {
+
+        //if there is error on the page, it scrolls to the has-error block
+        scrollToError();
 
         let temp = deepCloneArray(this.state.dayWorkoutToBeStored);
         let valid = true;
@@ -157,7 +169,9 @@ class WorkoutGroup extends React.Component {
                             <Workout
                                 dataToBeStored={dayWorkoutToBeStored}
                                 id={i}
-                                dataToBeDisplayed={dayWorkoutToBeDisplayed}/>
+                                dataToBeDisplayed={dayWorkoutToBeDisplayed}
+                                exerciseSuggestionList={this.props.exercises}
+                            />
                         </div>
                     </div>
                 )
@@ -187,7 +201,7 @@ class WorkoutGroup extends React.Component {
                 {this.state.exercise_count ?
                     <div>
                         <div className="workout-group">
-                                {getExerciseForm()}
+                            {getExerciseForm()}
                         </div>
                         <div className='pager'>
                             <button onClick={this.incrementCount} className="btn-hebecollins-orange">
@@ -220,4 +234,8 @@ WorkoutGroup.propTypes = {
     workout: React.PropTypes.object.isRequired,
 };
 
-export default WorkoutGroup;
+const mapStateToProps=(state)=> ({
+        exercises: state.exerciseList.exercises
+    });
+
+export default connect(mapStateToProps,{getExerciseListToRedux})(WorkoutGroup);

@@ -6,6 +6,7 @@ import quotes from "./reducers/quoteReducer"
 import workout from "./reducers/workoutReducer"
 import selectedUser from "./reducers/selectedUserReducer"
 import selectedGym from "./reducers/selectedGymReducer"
+import exerciseList from "./reducers/exerciseListReducer"
 import {LOGOUT} from "./actions/types";
 
 /** A reducer is basically something that takes action and state and gives back the new state
@@ -17,6 +18,7 @@ const appReducer = combineReducers({
     selectedUser,
     selectedGym,
     workout,
+    exerciseList,
     verificationData,
     quotes
 });

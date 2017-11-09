@@ -1,9 +1,9 @@
 import {
     ADD_FLASH_MESSAGE, CLEAR_QUOTES, CLEAR_WORKOUT, DELETE_FLASH_MESSAGE, DELETE_SELECTED_GYM, DELETE_SELECTED_USER,
     LOGOUT,
-    SELECTED_GYM
+    SELECTED_GYM, STORE_EXERCISE_LIST
 } from './types'
-import {STORE_VERIFICATION_DATA,ADD_QUOTE,ADD_WORKOUT,SET_CURRENT_USER, SELECTED_USER} from "./types";
+import {STORE_VERIFICATION_DATA, ADD_QUOTE, ADD_WORKOUT, SET_CURRENT_USER, SELECTED_USER} from "./types";
 
 
 /** adds flash message to redux store
@@ -30,14 +30,14 @@ export function deleteFlashMessage(id) {
 /**Stores logged in user's information to redux
  * @param user => object {nick_name, token, token_expire,user_id, user_type, gym_list}
  */
-export const setCurrentUser=(user)=> {
+export const setCurrentUser = (user) => {
     return {
         type: SET_CURRENT_USER,
         user
     };
 };
 
-export const logout=()=> {
+export const logout = () => {
     return {
         type: LOGOUT,
     };
@@ -52,7 +52,7 @@ export const logout=()=> {
 export const saveSelectedUser = (selectedUser) => {
     return {
         type: SELECTED_USER,
-        selectedUser:selectedUser
+        selectedUser: selectedUser
     }
 };
 
@@ -70,14 +70,14 @@ export const deleteSelectedUser = () => {
 export const saveSelectedGym = (selectedGym) => {
     return {
         type: SELECTED_GYM,
-        selectedGym:selectedGym
+        selectedGym: selectedGym
     }
 };
 
 
 /**deletes gym details in redux store
  */
-export const deleteSeletedGym = ( ) => {
+export const deleteSeletedGym = () => {
     return {
         type: DELETE_SELECTED_GYM,
     }
@@ -127,15 +127,24 @@ export const clearQuotes = () => {
 /**adds workout to redux
  * @param workout => object {day:[workouts]}
  */
-export const addWorkout=(workout)=> {
+export const addWorkout = (workout) => {
     return {
         type: ADD_WORKOUT,
         workout: workout
     }
 };
 
-export const clearWorkout=()=>{
+/**clears workout from redux
+ * */
+export const clearWorkout = () => {
     return {
         type: CLEAR_WORKOUT
+    }
+};
+
+export const storeExerciseList = (exercises) => {
+    return {
+        type: STORE_EXERCISE_LIST,
+        exercises: exercises
     }
 };

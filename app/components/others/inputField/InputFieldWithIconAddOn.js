@@ -226,12 +226,6 @@ Select.defaultProps = {
 
 const FieldFrame = (props) => {
     const {error, iconClass} = props;
-
-    //asynchronous action which scrolls to the error block
-    if(error){
-        scrollToError();
-    }
-
     return (
         <div>{props.isIconNeeded ?
             <div className={classnames('form-group', {'has-error': error})}>

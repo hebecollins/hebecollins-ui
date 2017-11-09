@@ -111,7 +111,7 @@ function isNumber(value) {
  */
 function maxValue(maxVal,value) {
     if (!Validator.isNull(value)) {
-        if (!value < `${maxVal}`) {
+        if (!(value <= maxVal)) {
             return moreThanMaxValue(maxVal);
         }
     }
@@ -124,7 +124,7 @@ function maxValue(maxVal,value) {
 function minValue(minVal,value) {
     const stringValue = `${value}`;
     if (!Validator.isNull(stringValue)) {
-        if (!(value > `${minVal}`)) {
+        if (!(value >= minVal)) {
             return lessThanMinValue(minVal);
         }
     }
