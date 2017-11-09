@@ -71,16 +71,17 @@ class AssignWorkout extends React.Component {
 }
 
 
-function mapStateToProps(state) {
-    return {
+const mapStateToProps=(state)=> ({
         workout: state.workout.workout,
         gymId: state.selectedGym.gym_id,
         selectedUser: state.selectedUser
-    }
-}
+});
 
-export default connect(mapStateToProps, {
+
+const mapDispatchToProps = {
     addWorkoutToRedux,
     clearWorkoutFromRedux,
     addAssignedWorkoutToServer
-})(AssignWorkout)
+};
+
+export default connect(mapStateToProps, mapDispatchToProps)(AssignWorkout)

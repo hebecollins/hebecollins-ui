@@ -106,8 +106,11 @@ function mapStateToProps(state) {
     }
 }
 
-export default connect(mapStateToProps, {
+const mapDispatchToProps = {
     addWorkoutToRedux,
-    addCreatedWorkoutToServer,
-    clearWorkoutFromRedux
-})(CreateWorkoutSchedule)
+    clearWorkoutFromRedux,
+    addCreatedWorkoutToServer
+};
+
+
+export default connect(mapStateToProps, mapDispatchToProps)(CreateWorkoutSchedule)

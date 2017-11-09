@@ -79,23 +79,24 @@ export function getSavedWorkoutByLabel(labelId) {
     const route = `${BACKEND_ROUTES.TRAINER.WORKOUT.GET_BY_LABEL}/${labelId}`;
     return dispatch => {
         return get(route).then(res => {
-            console.log(res.data.workout);
             dispatch(addWorkout(res.data.workout));
         })
     }
 }
 
 
-/**Gets latest workout for a client as client is logged in
+/**Gets latest workout for a client as client is logged in and stores it in redux
  * @param gymId=> gymId of selected gym
  * */
-export function getCurrentWorkout(gymId) {
+export function getCurrentWorkoutToRedux(gymId) {
 
     const route = `/${gymId}${BACKEND_ROUTES.CLIENT.WORKOUT.CURRENT}`;
-    console.log(route);
-    return get(route).then(res => {
-        console.log(res.data.workout);
-    })
+    return dispatch =>{
+        return get(route).then(res => {
+            dispatch(addWorkout(res.data.workout));
+        })
+    }
+
 }
 
 

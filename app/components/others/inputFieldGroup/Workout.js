@@ -108,17 +108,6 @@ class Workout extends React.Component {
                         {errors.exercise_name && <span className="help-block">{errors.exercise_name}</span>}
                     </div>
 
-
-
-                    {/*<TextField*/}
-                        {/*field="exercise_name"*/}
-                        {/*value={exercise_name}*/}
-                        {/*isIconNeeded={false}*/}
-                        {/*label="Exercise Name"*/}
-                        {/*error={errors.exercise_name}*/}
-                        {/*onChange={this.onChange}*/}
-                    {/*/>*/}
-
                     <TextField
                         field="sets"
                         value={sets}

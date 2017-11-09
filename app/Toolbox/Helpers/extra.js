@@ -21,6 +21,15 @@ export const dayOfWeek = (i, fullName = false, startDayNumber = 0) => {
         return fullName ? weekDaysFullName[i % 7 + startDayNumber] : weekDays[i % 7 + startDayNumber]
 };
 
+
+/**@return int => index of current day ([sun, mon, tue, wed, thu, fri, sat] => [0,1,2,3,4,5,6])
+ * */
+export const currentDayOfWeek = ()=> {
+    const d= new Date();
+    return d.getDay();
+};
+
+
 /**This methods gives reference-free clone to avoid immutability.
  * @param input => any javascript object, array, objectArray
  * @return array => immutable clone of the given input
