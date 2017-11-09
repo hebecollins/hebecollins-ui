@@ -161,7 +161,7 @@ class WorkoutGroup extends React.Component {
             for (let i = 0; i < exercise_count; i++) {
                 exerciseForm.push(
                     <div className="exercise-control" key={i}>
-                        <span className="badge">{i + 1}</span>
+                        <span className="badge exercise-badge">{i + 1}</span>
                         <div className="exercise-details">
                             <button className="close" onClick={() => this.onCut(i)}>
                                 <span>&times;</span>
