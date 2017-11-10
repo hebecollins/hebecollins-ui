@@ -4,7 +4,9 @@ import {connect} from 'react-redux'
 import {currentDayOfWeek, dayOfWeek, deepCloneArray} from "../../../Toolbox/Helpers/extra";
 import {errorResponse} from "../../../Toolbox/Helpers/responseHandler";
 import isEmpty from 'lodash/isEmpty'
-import {IconButtons} from "../../others/display/Buttons";
+import {Loading} from "../../others/extra/Loading"
+import {RenderExercise} from "../../others/display/RenderExercise";
+import {DaySet} from "../../others/frames/DaySet";
 
 class GetCurrentWorkout extends React.Component {
     constructor(props) {
@@ -14,12 +16,13 @@ class GetCurrentWorkout extends React.Component {
             index: 0,
             hasServerResponded: false,
             displayGif: false,
-            exerciseNameId:'',
-            exerciseName:'',
-            img:''
+            exerciseNameId: '',
+            exerciseName: '',
+            img: '',
         };
-        this.getWorkout = this.getWorkout.bind(this)
-        this.renderGif = this.renderGif.bind(this)
+        this.getWorkout = this.getWorkout.bind(this);
+        this.renderGif = this.renderGif.bind(this);
+        this.onDayChange = this.onDayChange.bind(this)
     }
 
     componentWillMount() {
@@ -46,26 +49,37 @@ class GetCurrentWorkout extends React.Component {
         }
     }
 
+    onDayChange(e) {
+        if (e === "next") {
+            this.setState({index: this.state.index + 1});
+        } else {
+            this.setState({index: this.state.index - 1});
+        }
+        this.getWorkout();
+    }
+
     getWorkout() {
         const workout = deepCloneArray(this.props.workout);
         const currentDay = dayOfWeek(this.state.index);
-        this.setState({dayWorkout: workout["wed"]})
+        this.setState({dayWorkout: workout[currentDay]})
     }
 
     renderGif(exerciseNameId, exerciseName) {
-         getExerciseGifFromServer("59b97c961b5cf").then(res=>
-             this.setState({
-                 displayGif: true,
-                 exerciseNameId:exerciseNameId,
-                 exerciseName:exerciseName,
-                 img:res.data
-             })
-         );
+        this.setState({hasServerResponded: false});
+        getExerciseGifFromServer(exerciseNameId).then(res =>
+            this.setState({
+                displayGif: true,
+                exerciseNameId: exerciseNameId,
+                exerciseName: exerciseName,
+                img: res.data,
+                hasServerResponded: true
+            })
+        );
     }
 
 
     render() {
-        const {dayWorkout} = this.state;
+        const {dayWorkout,index} = this.state;
 
         const gifContainer =
             <div id="pop-on-screen">
@@ -77,66 +91,34 @@ class GetCurrentWorkout extends React.Component {
 
 
         const renderWorkout = dayWorkout.map((exercise, i) => {
-            const {exercise_name_id, exercise_name, sets, reps, rest} = exercise;
-            return <div key={i} className="exercise-control">
-                <span className="badge exercise-badge">{i + 1}</span>
-                <div className="exercise-details flex">
-                    <div className="exercise-text">
-                        <div className="orange-header">{exercise_name}</div>
-                        <div className="exercise-body">
-                            <div>
-                                <div>
-                                    <label className="field">Sets :</label>
-                                    <label className="light-orange value">{sets}</label>
-                                </div>
-                                <div>
-                                    <label className="field">Reps :</label>
-                                    <label className="light-orange value">
-                                        {Object.keys(reps).map((key) => (
-                                            <label key={key} className="light-orange value">
-                                                {reps[key]}
-                                            </label>
-                                        ))}
-                                    </label>
-                                </div>
-                                <div>
-                                    <label className="field">Rest :</label>
-                                    <label className="light-orange value">{rest} seconds</label>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <div className="exercise-icons">
-                        <div className="exercise-icon">
-                            <img src={require('./../../../../images/machine_icon.png')}/>
-                        </div>
-                        <div className="bottom right">
-                            <button className="btn-icon"
-                                    onClick={() => this.renderGif(exercise_name_id, exercise_name)}>
-                                <span className="glyphicon glyphicon-facetime-video"/>
-                            </button>
-                        </div>
-                    </div>
-                </div>
-            </div>
+            return <RenderExercise
+                key={i}
+                exercise={exercise}
+                index={i}
+                renderGif={this.renderGif}
+            />
         });
 
         const renderRest = <div><h1 className="white-center">Today is you rest day</h1></div>
 
+
+        const daySet = () => (<DaySet onDayChange={this.onDayChange} dayIndex={index}/>)
+
         return (
-            <div className="quote-box content">
-                <h1 className="white-center">Today's Workout</h1>
+            this.state.hasServerResponded ? <div className="quote-box content">
                 <div className="horizontal-padding">
+                    {daySet()}
                     <div className="workout-group">
                         {/*if day's workout is empty then it will show as rest day*/}
                         {!isEmpty(dayWorkout) ? renderWorkout : renderRest}
                     </div>
+                    {daySet()}
                 </div>
-                <div>{this.state.displayGif ?
-                    gifContainer : <div/>}</div>
-            </div>
+                <div>
+                    {this.state.displayGif ? gifContainer : <div/>}
+                </div>
+            </div> : <Loading/>
         )
-
     }
 }
 

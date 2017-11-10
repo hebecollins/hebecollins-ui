@@ -1,6 +1,12 @@
-export const IMG_URL_OF={
-    GUEST_HOME:"http://dev.hebecollins.com/images/guest_home.jpg",
-    GUEST_HOME_MOBILE:"http://dev.hebecollins.com/images/guest_home_mobile.jpg",
-    LOGO_SHORT:"http://dev.hebecollins.com/images/HC_logo.png",
-    LOGO_EXTENDED:"http://dev.hebecollins.com/images/HC_logo_extended.jpg",
+import {MODE} from "../mode";
+
+/*has to change as server changes*/
+const baseUrl = MODE === "local"? "http://hebecollinsui": "http://dev.hebecollins.com";
+
+export const IMG_URL_OF = {
+    GUEST_HOME: `${baseUrl}/images/background/guest_home.jpg`,
+    GUEST_HOME_MOBILE: `${baseUrl}/images/background/guest_home_mobile.jpg`,
+    LOGO_SHORT: `${baseUrl}/images/logo/HC_logo.png`,
+    LOGO_EXTENDED: `${baseUrl}/images/logo/HC_logo_extended.jpg`,
+    EXERCISES: `${baseUrl}/images/exercise_icons`
 };

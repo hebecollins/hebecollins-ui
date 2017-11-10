@@ -4,7 +4,8 @@ import {validateExercise} from "../../../Toolbox/Validation/helpers"
 import {dayOfWeek, deepCloneArray, scrollToError} from "../../../Toolbox/Helpers/extra";
 import isEmpty from 'lodash/isEmpty'
 import {getExerciseListToRedux} from "../../../actions/workoutActions";
-import {connect}from 'react-redux'
+import {connect} from 'react-redux'
+import {DaySet} from "../frames/DaySet";
 
 /**It represents one day's workout
  * Working: It has got two main states, 'dayWorkoutToBeStored' and 'dayWorkoutToBeDisplayed'.(these two must be passed as props)
@@ -47,7 +48,8 @@ class WorkoutGroup extends React.Component {
         if (isEmpty(exercises)) {
             console.log("exercises is empty");
             getExerciseListToRedux();
-        }    }
+        }
+    }
 
     incrementCount() {
         this.setState({exercise_count: this.state.exercise_count + 1})
@@ -179,21 +181,7 @@ class WorkoutGroup extends React.Component {
             return exerciseForm;
         };
 
-        const daySet = () => (
-            <div className="pager">
-                <hr/>
-                <a onClick={this.onDayChange} name="back" className="day-link pull-left">
-                    <span className="glyphicon glyphicon-triangle-left"/>
-                    {dayOfWeek(index - 1, true)}
-                </a>
-
-                <label className="day">{dayOfWeek(index, true)}</label>
-
-                <a onClick={this.onDayChange} name="next" className="day-link pull-right">
-                    {dayOfWeek(index + 1, true)}
-                    <span className="glyphicon glyphicon-triangle-right"/></a>
-                <hr/>
-            </div>);
+        const daySet = () => (<DaySet onDayChange={this.onDayChange} dayIndex={index}/>);
 
         return (
             <div>
@@ -234,8 +222,8 @@ WorkoutGroup.propTypes = {
     workout: React.PropTypes.object.isRequired,
 };
 
-const mapStateToProps=(state)=> ({
-        exercises: state.exerciseList.exercises
-    });
+const mapStateToProps = (state) => ({
+    exercises: state.exerciseList.exercises
+});
 
-export default connect(mapStateToProps,{getExerciseListToRedux})(WorkoutGroup);
+export default connect(mapStateToProps, {getExerciseListToRedux})(WorkoutGroup);
