@@ -310,7 +310,7 @@
 /*========================================START===========================================*/
 .exercise-details{
     margin:0 0 0 2%;
-    padding:1% 5% 3% 5%;
+    padding:1% 5% 4% 5%;
     background-color: #1e1e1e;
     border-radius: 20px;
     width: 100%;
@@ -367,66 +367,3 @@
     max-height: 40px;
 }
 /*======================================END================================================*/
-
-
-
-/*========================================================================================*/
-/*used in getWorkout feature*/
-/*======================================START=============================================*/
-
-.orange-header{
-    color: var(--dark-orange);
-    font-size: x-large;
-    padding: 10px
-}
-
-.exercise-body{
-    margin-left: 10%;
-}
-
-.exercise-text{
-    width: 70%;
-}
-
-.exercise-icons{
-    width:30%;
-}
-
-
-@media (max-width: 768px) {
-    .video-icon{
-        margin-top: 40px!important;
-    }
-}
-
-@media (min-width: 768px) {
-    .video-icon{
-        margin-top: 30px!important;
-    }
-
-}
-.exercise-icon{
-    width: 80%;
-    float: right;
-    margin-top: 20px;
-}
-
-
-.flex{
-    display: flex;
-}
-
-.horizontal-padding{
-    padding-left: 3%;
-    padding-right: 3%;
-}
-
-.light-orange{
-    color: var(--light-orange)!important;
-    padding: 5px;
-}
-
-
-/*========================================END==============================================*/
-
-

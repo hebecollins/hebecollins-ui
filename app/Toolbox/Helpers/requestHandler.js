@@ -69,3 +69,18 @@ export function get(route) {
     };
     return axios(authOptions);
 }
+
+export function getMedia(route) {
+    const authOptions = {
+        method: 'GET',
+        url: route,
+        responseType: 'stream',
+        headers: {
+            'Accept': 'image/webp,image/apng,image/*,*/*;q=0.8',
+        },
+
+    };
+    return axios.get(route,{
+        responseType: 'blob'
+    });
+}

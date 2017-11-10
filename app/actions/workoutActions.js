@@ -1,5 +1,5 @@
 import {deepCloneArray} from "../Toolbox/Helpers/extra";
-import {get, postJSON} from "../Toolbox/Helpers/requestHandler";
+import {get, getMedia, postJSON} from "../Toolbox/Helpers/requestHandler";
 import {BACKEND_ROUTES} from "../../config/backendRoutes";
 import {addFlashMessage, addWorkout, clearWorkout, deleteSelectedUser, storeExerciseList} from "./actionStore";
 import {redirectByName} from "../Toolbox/Helpers/redirect";
@@ -134,4 +134,13 @@ export function getExerciseListToRedux() {
             dispatch(storeExerciseList(res.data.exercises));
         })
     }
+}
+
+
+/**Gets exercise GIF corresponding to id from the server
+ * @param id => exerciseId
+ * */
+export function getExerciseGifFromServer(id) {
+    const route = `${BACKEND_ROUTES.COMMONS.GET_EXERCISE_GIF}/${id}`;
+    return get(route)
 }

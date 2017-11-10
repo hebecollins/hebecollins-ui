@@ -53,6 +53,7 @@ export const BACKEND_ROUTES = {
     COMMONS:{
         REMARKS: "/remarks",//:gymId/remarks/:selectedUserId
         QUOTE: "/quote",
+        GET_EXERCISE_GIF:"/workout/gif",///workout/gif/:exerciseNameId
         SUGGESTION:{
             EXERCISES:"/suggestion/exercises"
         }

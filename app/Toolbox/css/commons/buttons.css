@@ -1,0 +1,69 @@
+
+/*button with just bootstrap icons for*/
+.btn-icon{
+    background-color: var(--dark-orange);
+    border: 1px solid transparent;
+    color: black;
+    font-family: "Comic Sans MS";
+    padding: 3px 10px 0 10px;
+    font-size: large;
+    border-radius: 6px;
+    height: 28px;
+}
+
+.btn-icon:hover{
+    border: 1px solid var(--light-orange) !important;
+}
+
+.btn-icon:active{
+    border: 1px solid var(--light-orange) !important;
+    opacity: 0.5;
+}
+
+.btn-icon:disabled{
+    opacity: 0.5;
+}
+
+
+/*button with text and orange background*/
+.btn-hebecollins-orange{
+    background-color: var(--dark-orange);;
+    color: black;
+    bottom: 0;
+    font-size: medium;
+    font-family:"Comic Sans MS";
+    padding:5px 10px 5px 10px;
+    margin:3px;
+    border: 0;
+    font-weight:bold;
+}
+
+.btn-hebecollins-orange:disabled{
+    opacity: 0;
+}
+
+.btn-hebecollins-orange:hover{
+    border: 1px solid black;
+    margin: 2px;
+}
+
+
+/*button with text and black background*/
+.btn-hebecollins-black{
+    background-color: var(--dark-grey);;
+    color: var(--dark-orange);
+    font-family:"Comic Sans MS";
+    padding:13px 22px 12px 22px;
+    margin:8px;
+    border-radius: 12px;
+    border: 0;
+}
+
+.btn-hebecollins-black:disabled{
+    opacity: 0;
+}
+
+.btn-hebecollins-black:hover{
+    border: 1px solid black;
+    margin: 7px;
+}

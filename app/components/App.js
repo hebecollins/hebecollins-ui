@@ -3,15 +3,18 @@ import Navigation from './others/navigation/Navigation'
 import FlashMessageList from './others/flashMessage/FlashMessageList';
 import Footer from "./others/frames/Footer";
 
-require('../Toolbox/css/alerts.css');
+require('../Toolbox/css/commons/alerts.css');
 require('../Toolbox/css/text.css');
 require('../Toolbox/css/formFields.css');
 require('../Toolbox/css/contentBox.css');
 require('../Toolbox/css/images.css');
 require('../Toolbox/css/dateTime.css');
 require('../Toolbox/css/font-awesome.min.css');
-require('../Toolbox/css/animation.css');
-require('../Toolbox/css/autosuggestion.css');
+require('../Toolbox/css/commons/animation.css');
+require('../Toolbox/css/commons/autosuggestion.css');
+require('../Toolbox/css/commons/buttons.css');
+require('../Toolbox/css/commons/positions.css');
+require('../Toolbox/css/client/getCurrentWorkout.css');
 
 
 class App extends React.Component {

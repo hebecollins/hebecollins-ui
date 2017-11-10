@@ -33,3 +33,22 @@ ButtonBlack.propTypes = {
 ButtonBlack.defaultProps={
     disabled:false
 };
+
+
+export const IconButtons=({onClick, disabled, label, children})=>{
+    return (
+
+        <button className="btn-icon">{children}</button>
+    )
+};
+
+
+IconButtons.propTypes = {
+    // onClick:React.PropTypes.func.isRequired,
+    // disabled:React.PropTypes.bool.isRequired,
+    // label:React.PropTypes.string.isRequired,
+};
+
+IconButtons.defaultProps={
+    // disabled:false
+};
