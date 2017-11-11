@@ -12,6 +12,12 @@ export const AdminNavigation = ({logout}) => {
             <li>
                 <NavLink to={getRouteByName("ADD_QUOTES")} onlyActiveOnIndex>Add Quotes</NavLink>
             </li>
+            <li>
+                <NavLink to={getRouteByName("ADD_GIF")} onlyActiveOnIndex>Add GIF</NavLink>
+            </li>
+            <li>
+                <NavLink to={getRouteByName("GIF_LIST")} onlyActiveOnIndex>GIF List</NavLink>
+            </li>
             <li className="dropdown">
                 <a href="/" className="dropdown-toggle" data-toggle="dropdown">Account<b className="caret"></b></a>
                 <ul className="dropdown-menu">

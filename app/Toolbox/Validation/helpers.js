@@ -166,3 +166,18 @@ export function validateExercise(data) {
     }
 }
 
+export function validateGifForm(data) {
+    const {exercise_name, muscle_group, gif} = data;
+
+    const {errors, isValid} = validate({
+        exercise_name: [exercise_name, 'isRequired'],
+        muscle_group: [muscle_group, 'isRequired'],
+        gif: [gif, 'isRequired'],
+    });
+
+    return {
+        errors,
+        isValid
+    }
+}
+

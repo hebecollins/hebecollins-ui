@@ -96,8 +96,6 @@ class Workout extends React.Component {
 
         return (
                 <div>
-
-
                     <div className={classnames('form-group', {'has-error': errors.exercise_name})}>
                         <Autosuggestion
                             suggestionList={exerciseSuggestionList}

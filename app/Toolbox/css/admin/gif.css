@@ -12,6 +12,22 @@
     color: white
 }
 
-.list-element{
-    padding: 12px;
+@media (min-width: 768px) {
+    .list-element{
+        padding: 12px;
+    }
+
+    .gif-form {
+        width:90%;
+        margin:auto;
+    }}
+
+@media (max-width: 768px) {
+    .list-element{
+        margin: 20px 0 50px 0;
+    }
+}
+
+.padding-top{
+    padding-top: 4%!important;
 }

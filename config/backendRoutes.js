@@ -66,5 +66,7 @@ export const BACKEND_ROUTES = {
         EXERCISES_WITHOUT_GIF: "/exercise/gif/pending",
         EXERCISES_WITH_GIF: "/exercise/gif/exist",
         POST_EXERCISE_GIF: "/exercise/gif",
+        LIST_CATEGORY: "/list/category",
+        ADD_CATEGORY: "/add/category",
     },
 };

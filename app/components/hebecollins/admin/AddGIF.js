@@ -1,22 +1,23 @@
 import React from 'react'
 import {Loading} from "../../others/extra/Loading";
 import {errorResponse} from "../../../Toolbox/Helpers/responseHandler";
-import {getExercisesWithoutGif, postGifForExercise} from "../../../actions/adminActions/gifActions";
+import {getCategoryList, getExercisesWithoutGif, postGifForExercise} from "../../../actions/adminActions/gifActions";
 import {deepCloneArray} from "../../../Toolbox/Helpers/extra";
 import {Select, TextField} from "../../others/inputField/InputFieldWithIconAddOn";
-import {ButtonOrange} from "../../others/display/Buttons";
-import {addFlashMessage} from "../../../actions/actionStore";
+import {ButtonOrange, UploadFile} from "../../others/display/Buttons";
 import {Fade} from "../../others/extra/Animation";
-
+import {connect} from 'react-redux'
 
 class AddGIF extends React.Component {
     constructor(props) {
         super(props);
         this.state = {
             exerciseList: [],
+            categoryList: [],
             hasServerResponded: false,
             gif: '',
-            muscleGroup: ''
+            muscle_group: '',
+            errors: ''
         };
 
         this.onUpload = this.onUpload.bind(this);
@@ -24,52 +25,50 @@ class AddGIF extends React.Component {
         this.onChange = this.onChange.bind(this);
     }
 
-
+    /**sends request for gif list, if success response comes, it sends another request for category list
+     * to get the muscle_group entries
+     */
     componentWillMount() {
         getExercisesWithoutGif().then(
             (res) => {
                 const exerciseList = res.data.exercise_list;
                 this.setState({exerciseList: exerciseList, hasServerResponded: true});
+                getCategoryList().then(res => {
+                    this.setState({categoryList: res.data})
+                })
             }
-        )
+        ).catch(err => errorResponse(err))
     }
 
     onChange(e) {
         this.setState({[e.target.name]: e.target.value});
     }
 
-    /** gets workout from the server with same labelId, stores it in redux and then redirects
-     * to assignWorkout page
-     * @param e => event
-     */
     onUpload(e) {
         const gif = e.target.files[0];//
         this.setState({gif: gif});
     }
+
 
     /**
      * @param exerciseName => exercise name
      * @param index => index of the current array element
      */
     onSubmit(exerciseName, index) {
-        postGifForExercise(this.state.gif, exerciseName, this.state.muscleGroup).then((res) => {
+        this.props.postGifForExercise(this.state.gif, exerciseName, this.state.muscle_group).then((res) => {
                 const newExerciseList = deepCloneArray(this.state.exerciseList);
                 newExerciseList.splice(index, 1);
                 this.setState({
                     exerciseList: newExerciseList,
                     gif: ''
                 });
-                addFlashMessage({
-                    type: "success",
-                    text: res.data.msg
-                })
             }
         ).catch(err => errorResponse(err))
-
     }
 
     render() {
-        const {exerciseList} = this.state;
+        const {exerciseList, categoryList} = this.state;
+
         const labelList = exerciseList.map((exercise, index) => {
                 const {exercise_name, id} = exercise;
                 return (
@@ -78,34 +77,26 @@ class AddGIF extends React.Component {
                         <div className="exercise-details">
                             <div className="orange-header">{exercise_name}</div>
 
-                            <div className="page">
-                                <Select
-                                    field="category"
-                                    value="category" label="select a category"
-                                    onChange={this.onChange}
-                                    isIconNeeded={false}
-                                >
-                                    <option value='chest'>Chest</option>
-                                    <option value='bicep'>Bicep</option>
-                                    <option value='tricep'>Tricep</option>
-                                    <option value='back'>Back</option>
-                                    <option value='legs'>Legs</option>
-                                    <option value='abs'>Abs</option>
-                                    <option value='shoulder'>Shoulder</option>
-                                </Select>
+                            <Select
+                                field="muscle_group"
+                                label="Select the target muscle group"
+                                isIconNeeded={false}
+                                onChange={this.onChange}
+                            >
+                                {/*adds categoryList elements into option*/}
+                                {
+                                    categoryList.map((category, index) => {
+                                        return <option key={index} value={category}>{category.toUpperCase()}</option>
+                                    })
+                                }
+                            </Select>
 
-                                <div className="upload-box flex">
-                                    <input className="upload"
-                                           type="file" id="gif"
-                                           onChange={(e) => this.onUpload(e)}
-                                    />
-                                </div>
-                                <ButtonOrange
-                                    onClick={() => this.onSubmit(exercise_name, index)}
-                                    disabled={false}
-                                    label="Upload"/>
+                           <UploadFile onUpload={this.onUpload}/>
 
-                            </div>
+                            <ButtonOrange
+                                onClick={() => this.onSubmit(exercise_name, index)}
+                                disabled={false}
+                                label="Upload"/>
                         </div>
                     </div>
                 );
@@ -120,9 +111,7 @@ class AddGIF extends React.Component {
                 </div>
             </div> :
             <Loading/>
-
     }
 }
 
-
-export default AddGIF;
+export default connect(null,{postGifForExercise})(AddGIF);

@@ -10,6 +10,7 @@ import setAuthToken from "../Auth/SetAuthToken";
  * @return object => empty object in case of non-validation errors OR error List in case of validation errors
  **/
 export function errorResponse(err) {
+    console.log(err);
 
     /** IF err does not have a response field(mostly happens because of issue from UI side)for eg. CORS error,
      *  it will delete the current user Data from local storage and redux store and then it will redirect to home page

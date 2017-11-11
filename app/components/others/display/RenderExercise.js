@@ -73,5 +73,5 @@ export const ExerciseGif = ({exerciseName, gif}) => {
 
 ExerciseGif.propTypes = {
     exerciseName: React.PropTypes.string.isRequired,
-    gif: React.PropTypes.string.isRequired,
+    gif: React.PropTypes.object.isRequired,
 };
