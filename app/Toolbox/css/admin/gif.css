@@ -1,0 +1,17 @@
+.inline-field{
+    width: 100%;
+    display: flex;
+}
+
+.upload-box{
+    border: 1px dotted white;
+    margin-bottom: 12px;
+}
+.upload{
+    padding: 10px;
+    color: white
+}
+
+.list-element{
+    padding: 12px;
+}

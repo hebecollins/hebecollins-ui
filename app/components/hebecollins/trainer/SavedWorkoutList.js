@@ -72,7 +72,7 @@ class SavedWorkoutList extends React.Component {
 
         const labelList = workoutList.map((label,index) => {
                 return (
-                    <div key={label.id}>
+                    <div key={label.id} className="list-element">
                         <div className="list-individual-info">
                             <label className="field">Name :</label>
                             <label className="value">{label.label}</label><br/>

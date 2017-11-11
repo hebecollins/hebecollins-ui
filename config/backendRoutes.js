@@ -63,7 +63,8 @@ export const BACKEND_ROUTES = {
     //admin routes
     ADMIN:{
         ADD_QUOTE: "/add/quote",
-        EXERCISE_LIST: "/exercise/gif/pending",
+        EXERCISES_WITHOUT_GIF: "/exercise/gif/pending",
+        EXERCISES_WITH_GIF: "/exercise/gif/exist",
         POST_EXERCISE_GIF: "/exercise/gif",
     },
 };

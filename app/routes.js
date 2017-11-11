@@ -32,6 +32,7 @@ import SavedWorkoutList from "./components/hebecollins/trainer/SavedWorkoutList"
 import AddGIF from "./components/hebecollins/admin/AddGIF";
 import GetCurrentWorkout from "./components/hebecollins/client/GetCurrentWorkout";
 import Autosuggestion from "./components/others/extra/Autosuggestion";
+import GifList from "./components/hebecollins/admin/GifList";
 
 export default (
     <Route path="/" component={App}>
@@ -79,6 +80,7 @@ export default (
         <Route path={getRouteByName('ADMIN_HOME')} component={authCheck(AdminHome)}/>
         <Route path={getRouteByName('ADD_QUOTES')} component={authCheck(AddQuotes)}/>
         <Route path={getRouteByName('ADD_GIF')} component={authCheck(AddGIF)}/>
+        <Route path={getRouteByName('GIF_LIST')} component={authCheck(GifList)}/>
 
 
         <Route path='/*' component={NotFound}/>

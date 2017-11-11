@@ -43,5 +43,6 @@ export const ROUTES = [
     {ROUTE_NAME: 'ADMIN_HOME', ROUTE: '/admin', PERMISSION: ['admin']},
     {ROUTE_NAME: 'ADD_QUOTES', ROUTE: '/add/quotes', PERMISSION: ['admin']},
     {ROUTE_NAME: 'ADD_GIF', ROUTE: '/add/gif', PERMISSION: ['admin']},
+    {ROUTE_NAME: 'GIF_LIST', ROUTE: '/list/gif', PERMISSION: ['admin']},
 
 ];

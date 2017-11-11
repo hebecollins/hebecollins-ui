@@ -15,6 +15,7 @@ require('../Toolbox/css/commons/autosuggestion.css');
 require('../Toolbox/css/commons/buttons.css');
 require('../Toolbox/css/commons/positions.css');
 require('../Toolbox/css/client/getCurrentWorkout.css');
+require('../Toolbox/css/admin/gif.css');
 
 
 class App extends React.Component {

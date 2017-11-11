@@ -4,7 +4,7 @@ import {IMG_URL_OF} from "../../../../config/imageUrl";
 /**@param exercise => single exercise object with fields {exercise_name_id, exercise_name, sets, reps, muscle_group}
  * @param i => index of exercise for numbering
  */
-export const RenderExercise = ({exercise,index, renderGif}) =>{
+export const RenderExercise = ({exercise, index, renderGif}) => {
     const {exercise_name_id, exercise_name, sets, reps, rest, muscle_group} = exercise;
     const muscleGroup = muscle_group ? muscle_group : "default";
     return (
@@ -56,4 +56,22 @@ RenderExercise.propTypes = {
     exercise: React.PropTypes.object.isRequired,
     index: React.PropTypes.number.isRequired,
     renderGif: React.PropTypes.func.isRequired,
+};
+
+
+export const ExerciseGif = ({exerciseName, gif}) => {
+    return (
+        <div id="pop-on-screen">
+            <div id="gif-container">
+                <div className="white-center">{exerciseName}</div>
+                <img id="gif" src={gif}/>
+            </div>
+        </div>
+    )
+
+};
+
+ExerciseGif.propTypes = {
+    exerciseName: React.PropTypes.string.isRequired,
+    gif: React.PropTypes.string.isRequired,
 };

@@ -25,16 +25,7 @@ export const ManagerNavigation = ({logout}) => {
                     <li><a href="#">power, ambala</a></li>
                 </ul>
             </li>
-            {/*<li className={classnames({'active': this.state.profile})}>*/}
-            {/*<a onClick={this.onClick}*/}
-            {/*name="profile">Profile</a></li>*/}
-            {/*<li className={classnames({'active': this.state.trainers})}>*/}
-            {/*<a onClick={this.onClick}*/}
-            {/*name="trainers">Trainers</a></li>*/}
             <li><a href="#">Upcoming Birthdays</a></li>
-            {/*<li><a href="#">Suggestion Box</a></li>*/}
-            {/*<li><a href="#">About Us</a></li>*/}
-            {/*<li><a href="#">Contact Us</a></li>*/}
             <li className="dropdown">
                 <a href="/" className="dropdown-toggle" data-toggle="dropdown">Account<b className="caret"></b></a>
                 <ul className="dropdown-menu">

@@ -5,7 +5,7 @@ import {currentDayOfWeek, dayOfWeek, deepCloneArray} from "../../../Toolbox/Help
 import {errorResponse} from "../../../Toolbox/Helpers/responseHandler";
 import isEmpty from 'lodash/isEmpty'
 import {Loading} from "../../others/extra/Loading"
-import {RenderExercise} from "../../others/display/RenderExercise";
+import {ExerciseGif, RenderExercise} from "../../others/display/RenderExercise";
 import {DaySet} from "../../others/frames/DaySet";
 
 class GetCurrentWorkout extends React.Component {
@@ -45,6 +45,7 @@ class GetCurrentWorkout extends React.Component {
                 });
                 this.setState({displayGif: false}
                 )
+
             });
         }
     }
@@ -63,7 +64,6 @@ class GetCurrentWorkout extends React.Component {
                 this.setState({dayWorkout: workout[currentDay]})
             }, 0
         )
-
     }
 
     renderGif(exerciseNameId, exerciseName) {
@@ -81,16 +81,9 @@ class GetCurrentWorkout extends React.Component {
 
 
     render() {
-        const {dayWorkout, index} = this.state;
+        const {dayWorkout, index, exerciseName, img} = this.state;
 
-        const gifContainer =
-            <div id="pop-on-screen">
-                <div id="gif-container">
-                    <div className="white-center">{this.state.exerciseName}</div>
-                    <img id="gif" src={this.state.img}/>
-                </div>
-            </div>;
-
+        const gifContainer = <ExerciseGif exerciseName={exerciseName} gif={img}/>
 
         const renderWorkout = dayWorkout.map((exercise, i) => {
             return <RenderExercise
