@@ -50,18 +50,20 @@ class GetCurrentWorkout extends React.Component {
     }
 
     onDayChange(e) {
-        if (e === "next") {
-            this.setState({index: this.state.index + 1});
-        } else {
-            this.setState({index: this.state.index - 1});
-        }
+        const newDayIndex = (e.target.name === "next") ? ( this.state.index + 1 ) : (this.state.index - 1);
+        this.setState({index: newDayIndex});
         this.getWorkout();
     }
 
     getWorkout() {
-        const workout = deepCloneArray(this.props.workout);
-        const currentDay = dayOfWeek(this.state.index);
-        this.setState({dayWorkout: workout[currentDay]})
+       //making it wait until previous state updates
+        setTimeout(() => {
+                const workout = deepCloneArray(this.props.workout);
+                const currentDay = dayOfWeek(this.state.index);
+                this.setState({dayWorkout: workout[currentDay]})
+            }, 0
+        )
+
     }
 
     renderGif(exerciseNameId, exerciseName) {
@@ -79,7 +81,7 @@ class GetCurrentWorkout extends React.Component {
 
 
     render() {
-        const {dayWorkout,index} = this.state;
+        const {dayWorkout, index} = this.state;
 
         const gifContainer =
             <div id="pop-on-screen">
