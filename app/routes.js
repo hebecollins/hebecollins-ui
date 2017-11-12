@@ -32,6 +32,8 @@ import AddGIF from "./components/hebecollins/admin/AddGIF";
 import GetCurrentWorkout from "./components/hebecollins/client/GetCurrentWorkout";
 import GifList from "./components/hebecollins/admin/GifList";
 import ViewWorkoutForSelectedClient from "./components/hebecollins/commons/ViewWorkoutForSelectedClient";
+import EditViewedWorkout from "./components/hebecollins/trainer/EditViewedWorkout";
+import ViewSavedWorkout from "./components/hebecollins/trainer/ViewSavedWorkout";
 
 export default (
     <Route path="/" component={App}>
@@ -57,10 +59,12 @@ export default (
         <Route path={getRouteByName('TRAINER_HOME')} component={authCheck(TrainerHome)}/>
         <Route path={getRouteByName('ACTIVATE_TRAINER')} component={authCheck(ActivateTrainer)}/>
         <Route path={getRouteByName('ADD_CLIENT')} component={authCheck(AddClient)}/>
+        <Route path={getRouteByName('CLIENT_LIST_FOR_TRAINER')} component={authCheck(ClientListForTrainer)}/>
         <Route path={getRouteByName('ASSIGN_WORKOUT')} component={authCheck(AssignWorkout)}/>
         <Route path={getRouteByName('CREATE_WORKOUT')} component={authCheck(CreateWorkoutSchedule)}/>
-        <Route path={getRouteByName('CLIENT_LIST_FOR_TRAINER')} component={authCheck(ClientListForTrainer)}/>
+        <Route path={getRouteByName('EDIT_VIEWED_WORKOUT')} component={authCheck(EditViewedWorkout)}/>
         <Route path={getRouteByName('SAVED_WORKOUT_LIST')} component={authCheck(SavedWorkoutList)}/>
+        <Route path={getRouteByName('VIEW_SAVED_WORKOUT')} component={authCheck(ViewSavedWorkout)}/>
 
 
         {/*client*/}
@@ -71,7 +75,8 @@ export default (
 
         {/*commons*/}
         <Route path={getRouteByName('CLIENT_PROFILE')} component={authCheck(ClientProfile)}/>
-        <Route path={getRouteByName('VIEW_WORKOUT_FOR_SELECTED_CLIENT')} component={authCheck(ViewWorkoutForSelectedClient)}/>
+        <Route path={getRouteByName('VIEW_WORKOUT_FOR_SELECTED_CLIENT')}
+               component={authCheck(ViewWorkoutForSelectedClient)}/>
         <Route path={getRouteByName('NO_RECORDS_FOUND')} component={authCheck(NoRecordsFound)}/>
 
 
@@ -80,7 +85,6 @@ export default (
         <Route path={getRouteByName('ADD_QUOTES')} component={authCheck(AddQuotes)}/>
         <Route path={getRouteByName('ADD_GIF')} component={authCheck(AddGIF)}/>
         <Route path={getRouteByName('GIF_LIST')} component={authCheck(GifList)}/>
-
 
         <Route path='/*' component={NotFound}/>
 

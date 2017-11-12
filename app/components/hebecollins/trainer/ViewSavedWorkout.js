@@ -1,13 +1,14 @@
 import React from 'react'
-import {getSelectedClientWorkoutToRedux} from "../../../actions/workoutActions";
+import {getSavedWorkoutByLabel, getSelectedClientWorkoutToRedux} from "../../../actions/workoutActions";
 import {connect} from 'react-redux'
 import {errorResponse} from "../../../Toolbox/Helpers/responseHandler";
 import {Loading} from "../../others/extra/Loading"
 import DisplayWorkout from "../../others/display/DisplayWorkout";
 import {clearWorkoutFromRedux} from "../../../actions/workoutActions"
 import {redirectByName} from "../../../Toolbox/Helpers/redirect";
+import isEmpty from 'lodash/isEmpty'
 
-class ViewWorkoutForSelectedClient extends React.Component {
+class ViewSavedWorkout extends React.Component {
     constructor(props) {
         super(props);
         this.state = {
@@ -17,9 +18,11 @@ class ViewWorkoutForSelectedClient extends React.Component {
     }
 
     componentWillMount() {
-        const {gymId, getSelectedClientWorkoutToRedux, selectedUser} = this.props;
-        const clientId = selectedUser.user_id;
-        getSelectedClientWorkoutToRedux(gymId, clientId).then((res) => {
+        const {selectedLabel, getSavedWorkoutByLabel} = this.props;
+        if(isEmpty(selectedLabel)){
+         return redirectByName("SAVED_WORKOUT_LIST")
+        }
+        getSavedWorkoutByLabel(selectedLabel.labelId).then((res) => {
             this.setState({hasServerResponded: true});
 
         }).catch(err => {
@@ -34,19 +37,19 @@ class ViewWorkoutForSelectedClient extends React.Component {
     }
 
     render() {
-        const {gymId, workout, selectedUser} = this.props;
+        const {gymId, workout, selectedLabel} = this.props;
         return (
             this.state.hasServerResponded ? <div className="quote-box content">
                 <div className="horizontal-padding">
-                <h1 className="white-center">
-                    Workout schedule for <label className="list-monitor-header">{selectedUser.nick_name}</label>
-                </h1>
+                    <h1 className="white-center">
+                        Tag : <label className="list-monitor-header">{selectedLabel.label}</label>
+                    </h1>
 
-                <a onClick={() => redirectByName("EDIT_VIEWED_WORKOUT")} className="top-right edit-icon-link">
-                    <h3><span className="glyphicon glyphicon-edit">edit</span></h3>
-                </a>
+                    <a onClick={() => redirectByName("EDIT_SAVED_WORKOUT")} className="top-right edit-icon-link">
+                        <h3><span className="glyphicon glyphicon-edit">edit</span></h3>
+                    </a>
 
-                <DisplayWorkout gymId={gymId} workout={workout} index={this.state.index}/>
+                    <DisplayWorkout gymId={gymId} workout={workout} index={this.state.index}/>
                 </div></div> : <Loading/>
         )
     }
@@ -54,10 +57,14 @@ class ViewWorkoutForSelectedClient extends React.Component {
 
 const mapStateToProps = (state) => ({
     gymId: state.selectedGym.gym_id,
-    selectedUser: state.selectedUser,
+    selectedLabel: state.selectedLabel,
     workout: state.workout.workout
 });
 
-const mapDispatchToProps = {getSelectedClientWorkoutToRedux, clearWorkoutFromRedux};
+const mapDispatchToProps = {
+    getSelectedClientWorkoutToRedux,
+    clearWorkoutFromRedux,
+    getSavedWorkoutByLabel
+};
 
-export default connect(mapStateToProps, mapDispatchToProps)(ViewWorkoutForSelectedClient);
+export default connect(mapStateToProps, mapDispatchToProps)(ViewSavedWorkout);

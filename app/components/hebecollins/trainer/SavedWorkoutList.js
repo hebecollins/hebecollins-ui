@@ -10,7 +10,7 @@ import {Loading} from "../../others/extra/Loading";
 import isEmpty from 'lodash/isEmpty'
 import {redirectByName} from "../../../Toolbox/Helpers/redirect";
 import {errorResponse} from "../../../Toolbox/Helpers/responseHandler";
-import {addFlashMessage} from "../../../actions/actionStore";
+import {addFlashMessage, saveSelectedLabel, saveSelectedUser} from "../../../actions/actionStore";
 import {deepCloneArray, deepCloneObject} from "../../../Toolbox/Helpers/extra";
 import {Fade, Slide} from "../../others/extra/Animation";
 
@@ -19,7 +19,7 @@ class SavedWorkoutList extends React.Component {
         super(props);
         this.state = {
             workoutList: [],
-            hasServerResponded:false
+            hasServerResponded: false
         };
 
         this.onUse = this.onUse.bind(this);
@@ -32,10 +32,10 @@ class SavedWorkoutList extends React.Component {
         getSavedWorkoutList(this.props.gymId).then(
             (res) => {
                 const labels = res.data.labels;
-                if(isEmpty(labels)){
+                if (isEmpty(labels)) {
                     redirectByName("NO_RECORDS_FOUND")
-                }else{
-                    this.setState({workoutList: labels,hasServerResponded:true});
+                } else {
+                    this.setState({workoutList: labels, hasServerResponded: true});
                 }
             }
         )
@@ -45,32 +45,33 @@ class SavedWorkoutList extends React.Component {
      * to assignWorkout page
      * @param labelId => Id corresponding to selected label
      */
-    onUse(labelId){
+    onUse(labelId) {
         const {getSavedWorkoutByLabel} = this.props;
         getSavedWorkoutByLabel(labelId).then(
-            (res)=>{
+            (res) => {
                 redirectByName("ASSIGN_WORKOUT")
             }
         ).catch(err => errorResponse(err))
     }
 
-    onView(id){
-        redirectByName("VIEW_WORKOUT")
+    onView(labelId, label) {
+        this.props.saveSelectedLabel(labelId,label);
+        redirectByName("VIEW_SAVED_WORKOUT")
     }
 
-    onDelete(labelId,index){
-        deleteSavedWorkoutFromServer(labelId).then(res=>{
+    onDelete(labelId, index) {
+        deleteSavedWorkoutFromServer(labelId).then(res => {
             let tempList = deepCloneArray(this.state.workoutList);
-            tempList.splice(index,1);
+            tempList.splice(index, 1);
             console.log(tempList);
-            this.setState({workoutList:tempList});
+            this.setState({workoutList: tempList});
         })
     }
 
     render() {
         const {workoutList} = this.state;
 
-        const labelList = workoutList.map((label,index) => {
+        const labelList = workoutList.map((label, index) => {
                 return (
                     <div key={label.id} className="list-element">
                         <div className="list-individual-info">
@@ -81,13 +82,13 @@ class SavedWorkoutList extends React.Component {
                         </div>
                         <div className="pull-right">
                             <ButtonOrange
-                                onClick={()=>this.onUse(label.id)}
+                                onClick={() => this.onUse(label.id)}
                                 label={"Use"}/>
                             <ButtonOrange
-                                onClick={()=>this.onView(label.id)}
+                                onClick={() => this.onView(label.id, label.label)}
                                 label={"View"}/>
                             <ButtonOrange
-                                onClick={()=>this.onDelete(label.id,index)}
+                                onClick={() => this.onDelete(label.id, index)}
                                 label={"Delete"}/>
                         </div>
                     </div>
@@ -95,13 +96,17 @@ class SavedWorkoutList extends React.Component {
             }
         );
 
-        return this.state.hasServerResponded?
+        return this.state.hasServerResponded ?
             <div className="content">
                 <SingleScreen2>
+                    <a onClick={() => redirectByName("CREATE_WORKOUT")} className="edit-icon-link pull-right">
+                        <span className="glyphicon glyphicon-plus"/> Add New
+                    </a>
                     <h1 className="white-center">Saved Workout List</h1>
+
                     <Fade>{labelList}</Fade>
                 </SingleScreen2>
-            </div>:
+            </div> :
             <Loading/>
 
     }
@@ -110,8 +115,8 @@ class SavedWorkoutList extends React.Component {
 function mapStateToProps(state) {
     return {
         selectedUser: state.selectedUser,
-        gymId: state.selectedGym.gym_id,
+        gymId: state.selectedGym.gym_id
     }
 }
 
-export default connect(mapStateToProps,{getSavedWorkoutByLabel})(SavedWorkoutList)
+export default connect(mapStateToProps, {getSavedWorkoutByLabel,saveSelectedLabel})(SavedWorkoutList)

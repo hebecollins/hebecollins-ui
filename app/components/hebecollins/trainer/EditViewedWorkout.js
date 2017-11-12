@@ -6,22 +6,30 @@ import SingleScreen2 from "../../others/frames/SingleScreen2";
 import {errorResponse} from "../../../Toolbox/Helpers/responseHandler";
 import {redirectByName} from "../../../Toolbox/Helpers/redirect";
 import {scrollToError} from "../../../Toolbox/Helpers/extra";
-import isEmpty from 'lodash/isEmpty'
+import {getSelectedClientWorkoutToRedux} from "../../../actions/workoutActions"
+import {Loading} from "../../others/extra/Loading"
 
-class AssignWorkout extends React.Component {
+class EditViewedWorkout extends React.Component {
     constructor(props) {
         super(props);
         this.state = {
             isLoading: false,
+            hasServerResponded:false
         };
 
         this.onSubmit = this.onSubmit.bind(this);
     }
 
-    componentWillMount(){
-        if(isEmpty(this.props.selectedUser)){
-            redirectByName("CLIENT_LIST_FOR_TRAINER")
-        }
+    componentWillMount() {
+        const {gymId, getSelectedClientWorkoutToRedux, selectedUser} = this.props;
+        const clientId = selectedUser.user_id;
+        getSelectedClientWorkoutToRedux(gymId, clientId).then((res) => {
+            this.setState({hasServerResponded: true});
+
+        }).catch(err => {
+            this.setState({hasServerResponded: true});
+            errorResponse(err)
+        })
     }
 
     onSubmit() {
@@ -52,14 +60,12 @@ class AssignWorkout extends React.Component {
     render() {
         const {workout, selectedUser, addWorkoutToRedux} = this.props;
         return (
-            <div className="content">
+            this.state.hasServerResponded?
+                <div className="content">
                 <SingleScreen2>
                     <div className="white-center">
-                        Workout schedule for <label className="list-monitor-header">{selectedUser.nick_name}</label>
+                        Editing Workout schedule for <label className="list-monitor-header">{selectedUser.nick_name}</label>
                     </div>
-                    <a onClick={() => redirectByName("SAVED_WORKOUT_LIST")} className="edit-icon-link pull-right">Use
-                        saved
-                        workouts instead ?</a>
                     <WorkoutGroup
                         onRef={ref => (this.child = ref)}
                         addWorkoutToRedux={addWorkoutToRedux}
@@ -71,24 +77,22 @@ class AssignWorkout extends React.Component {
                         </button>
                     </div>
                 </SingleScreen2>
-
-            </div>
+            </div>:<Loading/>
         )
     }
 }
 
-
 const mapStateToProps=(state)=> ({
-        workout: state.workout.workout,
-        gymId: state.selectedGym.gym_id,
-        selectedUser: state.selectedUser
+    workout: state.workout.workout,
+    gymId: state.selectedGym.gym_id,
+    selectedUser: state.selectedUser
 });
-
 
 const mapDispatchToProps = {
     addWorkoutToRedux,
     clearWorkoutFromRedux,
-    addAssignedWorkoutToServer
+    addAssignedWorkoutToServer,
+    getSelectedClientWorkoutToRedux
 };
 
-export default connect(mapStateToProps, mapDispatchToProps)(AssignWorkout)
+export default connect(mapStateToProps, mapDispatchToProps)(EditViewedWorkout)

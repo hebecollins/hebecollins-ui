@@ -1,7 +1,8 @@
 import {
-    ADD_FLASH_MESSAGE, CLEAR_QUOTES, CLEAR_WORKOUT, DELETE_FLASH_MESSAGE, DELETE_SELECTED_GYM, DELETE_SELECTED_USER,
+    ADD_FLASH_MESSAGE, CLEAR_QUOTES, CLEAR_WORKOUT, DELETE_FLASH_MESSAGE, DELETE_SELECTED_GYM, DELETE_SELECTED_LABEL,
+    DELETE_SELECTED_USER,
     LOGOUT,
-    SELECTED_GYM, STORE_EXERCISE_LIST
+    SELECTED_GYM, SELECTED_LABEL, STORE_EXERCISE_LIST
 } from './types'
 import {STORE_VERIFICATION_DATA, ADD_QUOTE, ADD_WORKOUT, SET_CURRENT_USER, SELECTED_USER} from "./types";
 
@@ -82,6 +83,28 @@ export const deleteSeletedGym = () => {
         type: DELETE_SELECTED_GYM,
     }
 };
+
+/** stores selected label information to redux store
+ * @param labelId => labelId
+ * @param label => selected label name
+ */
+export const saveSelectedLabel = (labelId, label) => {
+    return {
+        type: SELECTED_LABEL,
+        labelId: labelId,
+        label:label
+    }
+};
+
+
+/** deleted selected user's data
+ */
+export const deleteSelectedLabel = () => {
+    return {
+        type: DELETE_SELECTED_LABEL,
+    }
+};
+
 
 
 /** It stores userId in redux store so that with each request(verify and activate), userId

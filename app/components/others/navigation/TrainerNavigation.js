@@ -10,7 +10,10 @@ export const TrainerNavigation = ({logout}) => {
                 <NavLink to={getRouteByName("TRAINER_HOME")} onlyActiveOnIndex>Home</NavLink>
             </li>
             <li>
-                <NavLink to={getRouteByName("ADD_CLIENT")} onlyActiveOnIndex>Add Client</NavLink>
+                    <NavLink to={getRouteByName("ADD_CLIENT")} onlyActiveOnIndex>Add Client</NavLink>
+            </li>
+            <li>
+                    <NavLink to={getRouteByName("CLIENT_LIST_FOR_TRAINER")} onlyActiveOnIndex>Client List</NavLink>
             </li>
             <li>
                 <NavLink to={getRouteByName("CREATE_WORKOUT")} onlyActiveOnIndex>Create Workout</NavLink>
@@ -18,14 +21,6 @@ export const TrainerNavigation = ({logout}) => {
             <li>
                 <NavLink to={getRouteByName("SAVED_WORKOUT_LIST")} onlyActiveOnIndex>Workout List</NavLink>
             </li>
-
-            {/*<li><a href="#">Profile</a></li>*/}
-            {/*<li><a href="#">Clients</a></li>*/}
-            {/*<li><a href="#">Saved Workouts</a></li>*/}
-            {/*<li><a href="#">Upcoming Birthdays</a></li>*/}
-            {/*<li><a href="#">Suggestion Box</a></li>*/}
-            <li><a href="#">About Us</a></li>
-            <li><a href="#">Contact Us</a></li>
             <li><a href="#" onClick={logout}>Logout</a></li>
         </ul>
     );
