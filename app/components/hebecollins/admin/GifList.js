@@ -1,6 +1,6 @@
 import React from 'react'
 import {getExerciseGifFromServer} from "../../../actions/workoutActions";
-import {ButtonOrange, UploadFile} from "../../others/display/Buttons";
+import {ButtonOrange} from "../../others/display/Buttons";
 import SingleScreen2 from "../../others/frames/SingleScreen2";
 import {Loading} from "../../others/extra/Loading";
 import isEmpty from 'lodash/isEmpty'
@@ -10,73 +10,70 @@ import {deepCloneArray, scrollToError} from "../../../Toolbox/Helpers/extra";
 import {Fade} from "../../others/extra/Animation";
 import {getCategoryList, getExercisesWithGif, postGifForExercise} from "../../../actions/adminActions/gifActions";
 import {ExerciseGif} from "../../others/display/RenderExercise";
-import {Select, TextField} from "../../others/inputField/InputFieldWithIconAddOn";
+import {Select, TextField, UploadFile} from "../../others/inputField/InputFieldWithIconAddOn";
 import {validateGifForm} from "../../../Toolbox/Validation/helpers";
-import classnames from 'classnames'
-import {addFlashMessage} from "../../../actions/actionStore";
 import {connect} from 'react-redux'
 
 class GifList extends React.Component {
     constructor(props) {
         super(props);
         this.state = {
-            exerciseList: [],
-            categoryList: [],
+            exerciseList: [],//to list out exercises
+            categoryList: [],//to list out muscle groups that are available in database
             exercise_name: '',
             gif: {},
             muscle_group: '',
             hasServerResponded: false,
-            isEditing: [],
-            isAddingNew: false,
-            disableButton: false,
-            displayGif: false,
-            exerciseNameId: '',
-            errors: ''
+            isEditing: [],//array of boolean, it tells which of the given workouts are being edited
+            isAddingNew: false,// if a new entry has been adding
+            disableButton: false,//triggers button disabling if true
+            displayGif: false,//triggers gif display
+            exerciseNameId: '',//required for getting Gif from the server
+            errors: ''//errors in the input field
         };
 
+        //renders gif
         this.renderGif = this.renderGif.bind(this);
+
+        // turns isEditing state true
         this.onEdit = this.onEdit.bind(this);
+
+        //turns isAdding new as true
         this.addNew = this.addNew.bind(this);
+
+        //submits all the changes and send it to server
         this.onSubmit = this.onSubmit.bind(this);
+
+        //redundant
         this.onCancelAdd = this.onCancelAdd.bind(this);
+
+        //redundant
         this.onCancelEdit = this.onCancelEdit.bind(this);
+
+        //resets state to its initial value
         this.resetState = this.resetState.bind(this);
+
+        // updates the changes happening in input field
         this.onChange = this.onChange.bind(this);
+
+        //when any file gets uploaded
         this.onUpload = this.onUpload.bind(this);
     }
 
+    /*gets exercise list from the server and assign it to exerciseList state*/
     componentWillMount() {
-        getExercisesWithGif().then(
-            (res) => {
+        getExercisesWithGif().then((res) => {
                 const exerciseList = res.data.exercise_list;
-                if (isEmpty(exerciseList)) {
-                    redirectByName("NO_RECORDS_FOUND")
-                } else {
+
+                if (isEmpty(exerciseList)) redirectByName("NO_RECORDS_FOUND");
+                else {
                     this.setState({exerciseList: exerciseList, hasServerResponded: true});
+                    getCategoryList().then(res => {
+                        this.setState({categoryList: res.data})
+                    });//for muscle group dropdown
                 }
-                getCategoryList().then(res => {
-                    this.setState({categoryList: res.data})
-                });
             }
-        )
-        // .catch(err => errorResponse(err))
-    }
-
-    resetState() {
-        this.setState({
-            exercise_name: '',
-            gif: {},
-            muscle_group: '',
-            errors:'',
-            isEditing:false,
-            isAddingNew:false,
-            disableButton:false
-        })
-    }
-
-    onUpload(e) {
-        const gif = e.target.files[0];//
-        this.setState({gif: gif});
+        ).catch(err => errorResponse(err))
     }
 
 
@@ -85,26 +82,39 @@ class GifList extends React.Component {
             let el = document.getElementById('pop-on-screen');
             el.addEventListener('click', () => {
                 el.removeEventListener('click', () => {
-                });
-                this.setState({displayGif: false}
-                )
+                });//removes the active event listener on a click
+                this.setState({displayGif: false, disableButton: false})
             });
         }
     }
 
+
+    resetState() {
+        this.setState({
+            exercise_name: '', gif: {}, muscle_group: '', errors: '',
+            isEditing: false, isAddingNew: false, disableButton: false
+        })
+    }
+
+    onUpload(e) {
+        const gif = e.target.files[0];
+        this.setState({gif: gif});
+    }
+
+
     onChange(e) {
-        console.log(e.target.name);
-        console.log(e.target.value);
         this.setState({[e.target.name]: e.target.value})
     }
 
     addNew() {
+        this.resetState();
         this.setState({isAddingNew: true, disableButton: true});
     }
 
     isValid() {
         scrollToError();
-        const {errors, isValid} = validateGifForm(this.state)
+        console.log(this.state);
+        const {errors, isValid} = validateGifForm(this.state);
         if (!isValid) {
             this.setState({errors: errors})
         }
@@ -113,11 +123,12 @@ class GifList extends React.Component {
 
     onSubmit() {
         const {exercise_name, muscle_group, gif} = this.state;
+        console.log(this.state.errors);
         if (this.isValid()) {
-            this.props.postGifForExercise(gif, exercise_name, muscle_group).then(res=>{
+            this.props.postGifForExercise(gif, exercise_name, muscle_group).then(res => {
                     this.resetState();
                 }
-            ).catch(err=>errorResponse(err))
+            ).catch(err => errorResponse(err))
         }
     }
 
@@ -131,8 +142,9 @@ class GifList extends React.Component {
                     exerciseNameId: exerciseNameId,
                     exercise_name: exerciseName,
                     gif: res.data,
-                    hasServerResponded: true
-                })
+                    hasServerResponded: true,
+                    disableButton: true
+                });
             }
         ).catch(err => errorResponse(err))
     }
@@ -145,12 +157,10 @@ class GifList extends React.Component {
 
     onCancelAdd() {
         this.resetState();
-        this.setState({isAddingNew: false, disableButton: false})
     };
 
     onCancelEdit() {
         this.resetState();
-        this.setState({isEditing: false, disableButton: false})
     };
 
     render() {
@@ -174,15 +184,13 @@ class GifList extends React.Component {
                                 }
                             </Select>
 
-                            <UploadFile onUpload={this.onUpload}/>
-
+                            <UploadFile onUpload={this.onUpload} field="gif" error={errors.gif}/>
                             <ButtonOrange onClick={this.onSubmit} label="Update"/>
-                            <ButtonOrange onClick={this.onCancelEdit} label="Cancel"/>
+                            <ButtonOrange onClick={this.resetState} label="Cancel"/>
                         </div>
                     </div>
                 </div>
             </div>;
-
 
         const gifContainer = <ExerciseGif exerciseName={exercise_name} gif={gif}/>
 
@@ -204,10 +212,8 @@ class GifList extends React.Component {
                             }
                         </Select>
 
-                        <div className={classnames('form-group', {'has-error': errors.gif})}>
-                               <UploadFile onUpload={this.onUpload}/>
-                            {errors.gif && <span className="help-block">{errors.gif}</span>}
-                        </div>
+                        <UploadFile onUpload={this.onUpload} field="gif" error={errors.gif}/>
+
                         <ButtonOrange
                             onClick={this.onSubmit} label="Upload"/>
                         <ButtonOrange
@@ -215,6 +221,7 @@ class GifList extends React.Component {
                     </div>
                 </div>
             </div>;
+
 
         const GifList = exerciseList.map((exercise, index) => {
                 const {exercise_name, id, muscle_group} = exercise;
@@ -269,4 +276,4 @@ class GifList extends React.Component {
 }
 
 
-export default connect(null,{postGifForExercise})(GifList);
+export default connect(null, {postGifForExercise})(GifList);

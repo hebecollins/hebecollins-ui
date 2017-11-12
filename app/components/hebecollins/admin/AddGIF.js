@@ -3,11 +3,14 @@ import {Loading} from "../../others/extra/Loading";
 import {errorResponse} from "../../../Toolbox/Helpers/responseHandler";
 import {getCategoryList, getExercisesWithoutGif, postGifForExercise} from "../../../actions/adminActions/gifActions";
 import {deepCloneArray} from "../../../Toolbox/Helpers/extra";
-import {Select, TextField} from "../../others/inputField/InputFieldWithIconAddOn";
-import {ButtonOrange, UploadFile} from "../../others/display/Buttons";
+import {Select, UploadFile} from "../../others/inputField/InputFieldWithIconAddOn";
+import {ButtonOrange} from "../../others/display/Buttons";
 import {Fade} from "../../others/extra/Animation";
 import {connect} from 'react-redux'
+import {validateGifFormWithoutExercise} from "../../../Toolbox/Validation/helpers";
 
+
+//TODO: validation + make each card an individual state
 class AddGIF extends React.Component {
     constructor(props) {
         super(props);
@@ -49,18 +52,30 @@ class AddGIF extends React.Component {
         this.setState({gif: gif});
     }
 
+    isValid(index){
+        const {gif, muscle_group} = this.state;
+        const {errors,isValid} = validateGifFormWithoutExercise(gif[index], muscle_group[index])
+        if(!isValid){
+            let temp = deepCloneArray(this.state.errors);
+            temp[index] = errors;
+            this.setState({errors:temp})
+        }
+        return isValid
+    }
 
     /**
      * @param exerciseName => exercise name
      * @param index => index of the current array element
      */
     onSubmit(exerciseName, index) {
-        this.props.postGifForExercise(this.state.gif, exerciseName, this.state.muscle_group).then((res) => {
+        const {gif, muscle_group} = this.state;
+        this.props.postGifForExercise(gif, exerciseName, muscle_group).then((res) => {
                 const newExerciseList = deepCloneArray(this.state.exerciseList);
                 newExerciseList.splice(index, 1);
                 this.setState({
                     exerciseList: newExerciseList,
-                    gif: ''
+                    gif: '',
+                    muscle_group:[]
                 });
             }
         ).catch(err => errorResponse(err))
@@ -91,7 +106,7 @@ class AddGIF extends React.Component {
                                 }
                             </Select>
 
-                           <UploadFile onUpload={this.onUpload}/>
+                           <UploadFile onUpload={this.onUpload} field='gif'/>
 
                             <ButtonOrange
                                 onClick={() => this.onSubmit(exercise_name, index)}

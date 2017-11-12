@@ -11,7 +11,7 @@ import {scrollToError} from "../../../Toolbox/Helpers/extra";
 
 /** It is an input text field component with icon as add-on
  * */
-export const TextField = ({field, value, disabled, label, error, type, onChange, iconClass,isIconNeeded}) => {
+export const TextField = ({field, value, disabled, label, error, type, onChange, iconClass, isIconNeeded}) => {
     return (
         <FieldFrame
             iconClass={iconClass}
@@ -50,7 +50,7 @@ TextField.defaultProps = {
 /**===========================================================================================
  * It is a comment Box
  * */
-export const CommentBox = ({field, value, disabled, label, error, onChange, iconClass,isIconNeeded}) => {
+export const CommentBox = ({field, value, disabled, label, error, onChange, iconClass, isIconNeeded}) => {
     return (
         <FieldFrame
             iconClass={iconClass}
@@ -135,7 +135,7 @@ Date.defaultProps = {
 /**============================================================================================
  * */
 export const MobileNumber = (props) => {
-    const {field, value, iconClass, handleMobileNo, label, error,isIconNeeded} = props;
+    const {field, value, iconClass, handleMobileNo, label, error, isIconNeeded} = props;
     return (
         <FieldFrame
             iconClass={iconClass}
@@ -215,6 +215,32 @@ Select.defaultProps = {
     isIconNeeded: true
 };
 
+/**File upload input field
+ * */
+
+export const UploadFile = ({onUpload, field,error}) => {
+    return (
+        <FieldFrame
+            iconClass={''}
+            error={error}
+            isIconNeeded={false}
+        >
+            <div className="upload-box">
+                <input className="upload"
+                       type="file" id={field}
+                       onChange={(e) => onUpload(e)}
+                />
+            </div>
+        </FieldFrame>
+    )
+};
+
+UploadFile.propTypes = {
+    onUpload: React.PropTypes.func.isRequired,
+    field: React.PropTypes.string.isRequired,
+    error: React.PropTypes.string,
+};
+
 
 /**============================================================================================
  * Provides frame for every input field in this file with add-on as icon
@@ -237,7 +263,7 @@ const FieldFrame = (props) => {
                 {error && <span className="help-block">{error}</span>}
             </div> :
             <div className={classnames('form-group', {'has-error': error})}>
-                    {props.children}
+                {props.children}
                 {error && <span className="help-block">{error}</span>}
             </div>}
         </div>

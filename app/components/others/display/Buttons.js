@@ -53,17 +53,21 @@ IconButtons.defaultProps = {
     // disabled:false
 };
 
-
-export const UploadFile = ({onUpload}) => {
-    return (
-        <div className="upload-box">
-            <input className="upload"
-                   type="file" id="gif"
-                   onChange={(e) => onUpload(e)}
-            />
-        </div>)
-};
-
-UploadFile.propTypes={
-    onUpload:React.PropTypes.func.isRequired,
-};
+//
+// export const UploadFile = ({onUpload, error}) => {
+//     return (
+//         <div className={classnames('form-group', {'has-error': error})}>
+//             <div className="upload-box">
+//                 <input className="upload"
+//                        type="file" id="gif"
+//                        onChange={(e) => onUpload(e)}
+//                 />
+//             </div>
+//             {error.gif && <span className="help-block">{error}</span>}
+//         </div>
+//     )
+// };
+//
+// UploadFile.propTypes = {
+//     onUpload: React.PropTypes.func.isRequired,
+// };

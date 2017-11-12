@@ -156,9 +156,9 @@ export function validateExercise(data) {
     const setsObjectLength = Object.keys(reps).length;
     const {errors, isValid} = validate({
         exercise_name: [exercise_name, 'isRequired'],
-        sets: [sets, 'isRequired','isNumber','maxValue(20)','minValue(1)'],
+        sets: [sets, 'isRequired', 'isNumber', 'maxValue(20)', 'minValue(1)'],
         reps: [setsObjectLength, `isValidRepObjectLength('${sets}')`],
-        rest: [rest, 'isRequired','isNumber','minValue(0)'],
+        rest: [rest, 'isRequired', 'isNumber', 'minValue(0)'],
     });
     return {
         errors,
@@ -168,16 +168,26 @@ export function validateExercise(data) {
 
 export function validateGifForm(data) {
     const {exercise_name, muscle_group, gif} = data;
-
+    const gifToBeValidated = (gif.size) ? gif.size : '';
     const {errors, isValid} = validate({
         exercise_name: [exercise_name, 'isRequired'],
         muscle_group: [muscle_group, 'isRequired'],
-        gif: [gif, 'isRequired'],
+        gif: [gifToBeValidated, 'isRequired'],
     });
-
     return {
         errors,
         isValid
     }
 }
 
+export function validateGifFormWithoutExercise(gif, muscle_group) {
+    const gifToBeValidated = (gif.size) ? gif.size : '';
+    const {errors, isValid} = validate({
+        muscle_group: [muscle_group, 'isRequired'],
+        gif: [gifToBeValidated, 'isRequired'],
+    });
+    return {
+        errors,
+        isValid
+    }
+}
