@@ -104,7 +104,7 @@ class ClientListForTrainer extends React.Component {
 
         const viewWorkoutButton =
             <ButtonOrange
-                onClick={() => redirectByName('VIEW_WORKOUT')}
+                onClick={() => redirectByName('VIEW_WORKOUT_FOR_SELECTED_CLIENT')}
                 disabled={this.state.isLoading}
                 label={"View Workout"}/>;
 

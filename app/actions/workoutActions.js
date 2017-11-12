@@ -5,7 +5,8 @@ import {addFlashMessage, addWorkout, clearWorkout, deleteSelectedUser, storeExer
 import {redirectByName} from "../Toolbox/Helpers/redirect";
 
 
-/**Appends day workout to workout in redux store so that it can be readily available
+/**Used only by trainers
+ * Appends day workout to workout in redux store so that it can be readily available
  * @param dayWorkout => workout of the day
  * @param dayName => day name : sun, mon, tue, wed, thu,fri, sat
  * */
@@ -26,7 +27,8 @@ export function addWorkoutToRedux(dayWorkout, dayName) {
 }
 
 
-/**Assigns workout to selected client on the server
+/**Used only by trainers
+ * Assigns workout to selected client on the server
  * @param workout => workout array
  * @param gymId => gymId of selected gym
  * @param clientId=> userId of selected client
@@ -49,7 +51,8 @@ export function addAssignedWorkoutToServer(workout, gymId, clientId) {
 }
 
 
-/**Adds workout created by trainer to the server with label as a tag
+/**Used only by trainers
+ * Adds workout created by trainer to the server with label as a tag
  * @param workout => workout array
  * @param gymId => gymId of selected gym
  * @param label=> label corresponds to the given workout
@@ -72,7 +75,8 @@ export function addCreatedWorkoutToServer(workout, gymId, label) {
 }
 
 
-/**Gets saved Workout for a trainer by label
+/**Used only by trainers
+ * Gets saved Workout for a trainer by label
  * @param labelId => id corresponds to a particular label
  * */
 export function getSavedWorkoutByLabel(labelId) {
@@ -85,7 +89,8 @@ export function getSavedWorkoutByLabel(labelId) {
 }
 
 
-/**Gets latest workout for a client as client is logged in and stores it in redux
+/**Used only by clients
+ * Gets latest workout for a client as client is logged in and stores it in redux
  * @param gymId=> gymId of selected gym
  * */
 export function getCurrentWorkoutToRedux(gymId) {
@@ -94,11 +99,25 @@ export function getCurrentWorkoutToRedux(gymId) {
     return dispatch =>{
         return get(route).then(res => {
             dispatch(addWorkout(res.data.workout));
+
         })
     }
-
 }
 
+/**Used by trainers/managers
+ * Gets latest workout for a client as client is logged in and stores it in redux
+ * @param gymId=> gymId of selected gym
+ * @param clientId=> client of selected client
+ * */
+export function getSelectedClientWorkoutToRedux(gymId, clientId) {
+    const route = `/${gymId}${BACKEND_ROUTES.COMMONS.WORKOUT.GET_BY_ID}/${clientId}`;
+    return dispatch =>{
+        return get(route).then(res => {
+            console.log(res.data);
+            dispatch(addWorkout(res.data.workout));
+        })
+    }
+}
 
 /**clears workout data from redux
  * */

@@ -26,13 +26,12 @@ import ClientListForTrainer from "./components/hebecollins/trainer/ClientListFor
 import ClientListForManager from "./components/hebecollins/manager/ClientListForManager";
 import NoRecordsFound from "./components/hebecollins/commons/NoRecordsFound";
 import ClientProfile from "./components/hebecollins/commons/ClientProfile";
-import ViewWorkout from "./components/hebecollins/commons/ViewWorkout";
 import CreateWorkoutSchedule from "./components/hebecollins/trainer/CreateWorkoutSchedule";
 import SavedWorkoutList from "./components/hebecollins/trainer/SavedWorkoutList";
 import AddGIF from "./components/hebecollins/admin/AddGIF";
 import GetCurrentWorkout from "./components/hebecollins/client/GetCurrentWorkout";
-import Autosuggestion from "./components/others/extra/Autosuggestion";
 import GifList from "./components/hebecollins/admin/GifList";
+import ViewWorkoutForSelectedClient from "./components/hebecollins/commons/ViewWorkoutForSelectedClient";
 
 export default (
     <Route path="/" component={App}>
@@ -72,7 +71,7 @@ export default (
 
         {/*commons*/}
         <Route path={getRouteByName('CLIENT_PROFILE')} component={authCheck(ClientProfile)}/>
-        <Route path={getRouteByName('VIEW_WORKOUT')} component={authCheck(ViewWorkout)}/>
+        <Route path={getRouteByName('VIEW_WORKOUT_FOR_SELECTED_CLIENT')} component={authCheck(ViewWorkoutForSelectedClient)}/>
         <Route path={getRouteByName('NO_RECORDS_FOUND')} component={authCheck(NoRecordsFound)}/>
 
 

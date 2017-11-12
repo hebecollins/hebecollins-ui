@@ -1,4 +1,4 @@
-import {ADD_WORKOUT, ADD_WORKOUT_FOR, CLEAR_WORKOUT} from "../actions/types";
+import {ADD_WORKOUT, CLEAR_WORKOUT} from "../actions/types";
 import {deepCloneObject} from "../Toolbox/Helpers/extra";
 
 const initialState = {

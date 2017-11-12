@@ -36,7 +36,7 @@ export const ROUTES = [
     //commons
     {ROUTE_NAME: 'NO_RECORDS_FOUND', ROUTE: '/404', PERMISSION: ['manager', 'trainer', 'client']},
     {ROUTE_NAME: 'CLIENT_PROFILE', ROUTE: '/client/profile', PERMISSION: ['manager', 'client', 'trainer']},//temporary
-    {ROUTE_NAME: 'VIEW_WORKOUT', ROUTE: '/view/workout', PERMISSION: ['manager', 'client', 'trainer']},//temporary
+    {ROUTE_NAME: 'VIEW_WORKOUT_FOR_SELECTED_CLIENT', ROUTE: '/view/workout', PERMISSION: ['manager', 'client', 'trainer']},//temporary
 
 
     //admin

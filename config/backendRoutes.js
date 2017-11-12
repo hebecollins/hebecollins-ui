@@ -14,7 +14,6 @@ export const BACKEND_ROUTES = {
         RESEND_OTP: "/resend/otp",
     },
 
-
     //manager routes
     MANAGER:{
         ACTIVATE: "/activate/manager",
@@ -22,7 +21,6 @@ export const BACKEND_ROUTES = {
         CLIENT_LIST: "/manager/clients",//:gymId/trainer/clients
         TRAINER_LIST: "",//:gymId/trainer/clients
     },
-
 
     //trainer routes
     TRAINER:{
@@ -38,7 +36,6 @@ export const BACKEND_ROUTES = {
             DELETE_BY_LABEL: "/trainer/workout/delete"//:gymId/trainer/workout/:labelId
         },
     },
-
 
     //client routes
     CLIENT:{
@@ -56,6 +53,9 @@ export const BACKEND_ROUTES = {
         GET_EXERCISE_GIF:"/workout/gif",///workout/gif/:exerciseNameId
         SUGGESTION:{
             EXERCISES:"/suggestion/exercises"
+        },
+        WORKOUT:{
+            GET_BY_ID:"/workout" ///:gymId/workout/:clientId
         }
     },
 
