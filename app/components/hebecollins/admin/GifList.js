@@ -73,6 +73,7 @@ class GifList extends React.Component {
 
 
     resetState() {
+        this.componentWillMount();// to refresh the state it sends request to server... As this is admin panel, so it doesn't matter
         this.setState({
             exercise_name: '', gif: '', muscle_group: '', errors: '',
             isEditing: false, isAddingNew: false, disableButton: false
@@ -80,7 +81,6 @@ class GifList extends React.Component {
     }
 
     addNew() {
-        this.resetState();
         this.setState({isAddingNew: true, disableButton: true});
     }
 
@@ -118,7 +118,7 @@ class GifList extends React.Component {
                 header={exercise_name}
                 exerciseName={exercise_name}
                 editMode={true}
-                onCancel={this.resetState}
+                resetState={this.resetState}
                 postGif={postGifForExercise}
             />;
 
@@ -129,7 +129,7 @@ class GifList extends React.Component {
                 categoryList={categoryList}
                 header={"Adding New Exercise"}
                 editMode={false}
-                onCancel={this.resetState}
+                resetState={this.resetState}
                 postGif={postGifForExercise}
             />;
 

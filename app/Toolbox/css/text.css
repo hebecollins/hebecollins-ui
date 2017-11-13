@@ -209,3 +209,8 @@ hr{
     opacity:0.4;
     margin-bottom:10px;
 }
+
+.large-glyphicon{
+    font-size: xx-large;
+    margin: 0 5px 0 5px;
+}

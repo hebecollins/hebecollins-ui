@@ -48,7 +48,7 @@ class ExerciseAddForm extends React.Component {
         if (this.isValid()) {
             this.setState({errors: {}, isLoading: true});
             this.props.postGif(gif, exercise_name, muscle_group).then(res =>{
-                    this.props.onCancel();
+                    this.props.resetState();
             }
             )
                 .catch(err => {
@@ -101,7 +101,7 @@ class ExerciseAddForm extends React.Component {
                             disabled={false}
                             label="Upload"/>
                         <ButtonOrange
-                            onClick={this.props.onCancel}
+                            onClick={this.props.resetState}
                             disabled={false}
                             label="Cancel"/>
                     </div>
@@ -115,7 +115,7 @@ ExerciseAddForm.propTypes = {
     categoryList: React.PropTypes.array.isRequired,
     header: React.PropTypes.string.isRequired,
     exerciseName: React.PropTypes.string,
-    onCancel: React.PropTypes.func,
+    resetState: React.PropTypes.func,
     postGif : React.PropTypes.func,
     editMode: React.PropTypes.bool,
 };

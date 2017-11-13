@@ -241,3 +241,8 @@
 .badge{
     max-height: 40px;
 }
+
+.margin-auto{
+    margin:auto;
+    width: 100%;
+}

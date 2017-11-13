@@ -1,8 +1,7 @@
 import React from 'react'
 import WorkoutGroup from "../../others/inputFieldGroup/WorkoutGroup";
 import {
-    getSavedWorkoutByLabel, addWorkoutToRedux, addCreatedWorkoutToServer, clearWorkoutFromRedux,
-    updateSavedWorkoutToServer, updateSavedWorkoutOnServer
+    getSavedWorkoutByLabel, addWorkoutToRedux, clearWorkoutFromRedux, updateSavedWorkoutOnServer
 } from "../../../actions/workoutActions"
 import {connect} from 'react-redux'
 import SingleScreen2 from "../../others/frames/SingleScreen2";

@@ -31,3 +31,12 @@
 .padding-top{
     padding-top: 4%!important;
 }
+
+.admin-icon-box{
+    width: 40%;
+    margin: auto;
+}
+
+.admin-icon-box .exercise-icon{
+    margin: 0;
+}

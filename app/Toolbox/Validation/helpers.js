@@ -188,3 +188,11 @@ export function validateGifFormWithoutExercise(gif, muscle_group) {
 
     return {errors, isValid}
 }
+
+export function validateMuscleGroupCategory(data) {
+    const {muscle_group} = data;
+    const {errors, isValid} = validate({
+        muscle_group: [muscle_group, 'isRequired'],
+    });
+    return {errors, isValid}
+}

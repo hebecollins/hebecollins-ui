@@ -1,10 +1,9 @@
 import React from 'react'
 import {Loading} from "../../others/extra/Loading";
 import {getCategoryList, postGifForExercise} from "../../../actions/adminActions/gifActions";
-import {Fade} from "../../others/extra/Animation";
 import {connect} from 'react-redux'
-import {ButtonOrange} from "../../others/display/Buttons";
-import {UploadFile} from "../../others/inputField/InputFieldWithIconAddOn";
+import EditCategory from "./EditCategory";
+import AddCategory from "./AddCategory";
 
 class CategoryList extends React.Component {
     constructor(props) {
@@ -13,13 +12,13 @@ class CategoryList extends React.Component {
             categoryList: [],
             imgUrls: [],
             img: '',
-            isEditing: false,
+            isAdding: false,
             hasServerResponded: false,
         };
 
         this.onUpload = this.onUpload.bind(this);
         this.onCancel = this.onCancel.bind(this);
-        this.onEdit = this.onEdit.bind(this);
+        this.onAdding = this.onAdding.bind(this);
     }
 
     /**sends request for gif list, if success response comes, it sends another request for category list
@@ -40,50 +39,43 @@ class CategoryList extends React.Component {
     }
 
     onCancel() {
-        this.setState({isEditing: false})
+        this.setState({isAdding: false})
     }
 
-    onEdit() {
-        this.setState({isEditing: true})
+    onAdding() {
+        this.setState({isAdding: true})
     }
 
     render() {
-        const {categoryList, isEditing} = this.state;
+        const {categoryList} = this.state;
 
-        const labelList = categoryList.map((muscleGroup, index) => {
+        const categoryFormList = categoryList.map((muscleGroup, index) => {
                 return (
-                    <div className="exercise-control">
-                        <div className="exercise-details">
-                            <div className="orange-header">{muscleGroup}</div>
-                            {isEditing ? <div className="pull-right">
-                                    <ButtonOrange
-                                        onClick={() => this.renderGif(index)}
-                                        disabled={false}
-                                        label={"Done"}/>
-                                    <ButtonOrange
-                                        onClick={this.onCancel}
-                                        disabled={false}
-                                        label={"Cancel"}/>
-                                </div> :
-                                <ButtonOrange
-                                    onClick={this.onEdit}
-                                    disabled={false}
-                                    label={"edit"}/>
-
-                            }
-                        </div>
-                    </div>
+                    <EditCategory
+                        key={index}
+                        muscleGroup={muscleGroup}
+                        header={muscleGroup.toUpperCase()}
+                    />
                 );
             }
         );
 
-        const uploadImg = <UploadFile onUpload={this.onUpload} field={"img"}/>
+        const addNew =
+                <AddCategory
+                    header="Adding a new muscle group category"
+                    onCancel={this.onCancel}
+                />
 
         return this.state.hasServerResponded ?
             <div className="content quote-box">
-                <h1 className="white-center">Pending GIFs To Be Added</h1>
+                <a onClick={this.onAdding} className="edit-icon-link top-right">
+                    <span className="glyphicon glyphicon-plus"/> Add New
+                </a>
+
+                <h1 className="white-center">Existing Muscle Group Category Icons</h1>
                 <div className="workout-group">
-                    <Fade>{labelList}</Fade>
+                    {this.state.isAdding ? addNew : <div/>}
+                    {categoryFormList}
                 </div>
             </div> : <Loading/>
     }
