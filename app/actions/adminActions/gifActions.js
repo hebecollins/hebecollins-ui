@@ -19,7 +19,7 @@ export const getExercisesWithGif = ()=>{
 /** gets list of exercises which does have a GIF on the server
  */
 export const getCategoryList = ()=>{
-    return get(BACKEND_ROUTES.ADMIN.LIST_CATEGORY)
+    return get(BACKEND_ROUTES.ADMIN.LIST_MUSCLE_GROUP)
 };
 
 
