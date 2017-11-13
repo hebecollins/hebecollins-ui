@@ -35,6 +35,7 @@ import ViewWorkoutForSelectedClient from "./components/hebecollins/commons/ViewW
 import EditViewedWorkout from "./components/hebecollins/trainer/EditViewedWorkout";
 import ViewSavedWorkout from "./components/hebecollins/trainer/ViewSavedWorkout";
 import EditSavedWorkout from "./components/hebecollins/trainer/EditSavedWorkout";
+import CategoryList from "./components/hebecollins/admin/CategoryList";
 
 export default (
     <Route path="/" component={App}>
@@ -87,6 +88,7 @@ export default (
         <Route path={getRouteByName('ADD_QUOTES')} component={authCheck(AddQuotes)}/>
         <Route path={getRouteByName('ADD_GIF')} component={authCheck(AddGIF)}/>
         <Route path={getRouteByName('GIF_LIST')} component={authCheck(GifList)}/>
+        <Route path={getRouteByName('CATEGORY_LIST')} component={authCheck(CategoryList)}/>
 
         <Route path='/*' component={NotFound}/>
 

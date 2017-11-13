@@ -29,7 +29,7 @@ class AddGIF extends React.Component {
                 this.setState({exerciseList: exerciseList, hasServerResponded: true});
                 getCategoryList().then(res => {
                     this.setState({categoryList: res.data})
-                })
+                }).catch(err => errorResponse(err))
             }
         ).catch(err => errorResponse(err))
     }
@@ -50,7 +50,7 @@ class AddGIF extends React.Component {
     render() {
         const {exerciseList, categoryList} = this.state;
 
-        const labelList = exerciseList.map((exercise, index) => {
+        const exerciseFormList = exerciseList.map((exercise, index) => {
                 const {exercise_name, id} = exercise;
                 return (
                     <GifAddForm
@@ -68,7 +68,7 @@ class AddGIF extends React.Component {
             <div className="content quote-box">
                 <h1 className="white-center">Pending GIFs To Be Added</h1>
                 <div className="workout-group">
-                    <Fade>{labelList}</Fade>
+                    <Fade>{exerciseFormList}</Fade>
                 </div>
             </div> :
             <Loading/>

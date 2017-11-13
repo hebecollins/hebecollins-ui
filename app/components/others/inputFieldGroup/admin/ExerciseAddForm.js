@@ -66,7 +66,6 @@ class ExerciseAddForm extends React.Component {
         const {errors, exercise_name} = this.state;
         return (
             <div className="gif-form">
-                <div className="exercse-control">
                     <div className="exercise-details">
                         <div className="orange-header">{header}</div>
 
@@ -107,7 +106,6 @@ class ExerciseAddForm extends React.Component {
                             label="Cancel"/>
                     </div>
                 </div>
-            </div>
         )
 
     }
