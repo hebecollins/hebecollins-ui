@@ -189,76 +189,6 @@
     display: inline-block;
 }
 
-/*======================================================================================*/
-/*list-individual-data is one entry in user-list. Each entry represents a link*/
-/*======================================================================================*/
-.list-individual-data {
-    min-height: 40px;
-    padding: 10px 0 10px 0;
-    display: flex;
-    border-bottom: 1px solid var(--light-gray);
-    margin-right: 20px;
-    cursor: pointer!important;
-}
-
-.list-individual-data:hover {
-    text-decoration: none;
-}
-
-.list-individual-data-clicked {
-    background-color: var(--light-gray);
-    margin-right: 20px;
-}
-
-.list-dropdown-mobile-visible{
-    background-color: var(--light-gray);
-    margin-right: 20px;
-    display: flex;
-}
-
-@media (min-width: 768px) {
-
-    .list-dropdown-mobile-visible{
-        display: none;
-    }
-}
-
-
-/*======================================================================================*/
-/*list-individual-info represents the text part of list-individual-data*/
-/*======================================================================================*/
-.list-individual-info {
-    display: inline-block;
-    color: black;
-    font-size: large;
-    padding-left: 10px;
-}
-
-
-/*======================================================================================*/
-/* represents list-monitor elements*/
-/*======================================================================================*/
-
-.list-monitor-right-box{
-    display: inline-block;
-    padding: 0 0 60px 15px;
-    position: relative;
-    width: 65%;
-}
-
-.list-monitor-left-box{
-    display: inline-block;
-    padding: 0 15px 60px 0;
-    border-right: 2px solid var(--light-gray);
-    position: relative;
-    width: 35%;
-}
-
-.list-monitor-elements{
-    display: flex;
-    padding-top: 15px;
-}
-
 
 /*======================================================================================*/
 /*represents scroll-bar*/
@@ -304,61 +234,6 @@
     font-size: medium;
 }
 
-
-/*======================================================================================*/
-/*workout*/
-/*========================================START===========================================*/
-.exercise-details{
-    margin:0 0 0 2%;
-    padding:1% 5% 4% 5%;
-    background-color: #1e1e1e;
-    border-radius: 20px;
-    width: 100%;
-}
-@media (max-width: 768px) {
-    .exercise-control{
-        width:100%;
-        padding: 10px 0 10px 0;
-    }
-
-    .workout-schedule-label {
-        width: 100%;
-    }
-
-    .exercise-badge{
-     display: none;
-    }
-}
-
-@media (min-width: 768px) {
-    .exercise-control {
-        width: 50%;
-        padding: 10px;
-    }
-
-    .workout-schedule-label {
-        width: 50%;
-    }
-
-}
-
-.exercise-control {
-    display: flex;
-    float: left;
-}
-
-.workout-group{
-    display: inline-block;
-    width: 100%;
-}
-
-
-.workout-schedule-label{
-    margin-top: 30px;
-    font-size: medium;
-    color: var(--dark-grey);
-}
-
 .margin{
     padding: 10px;
 }
@@ -366,4 +241,3 @@
 .badge{
     max-height: 40px;
 }
-/*======================================END================================================*/

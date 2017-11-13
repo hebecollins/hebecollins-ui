@@ -1,0 +1,57 @@
+.top-right{
+    right:30px;
+    top: 10px;
+    position: absolute;
+    z-index: 98;
+}
+
+.exercise-details{
+    margin:0 0 0 2%;
+    padding:1% 5% 4% 5%;
+    background-color: #1e1e1e;
+    border-radius: 20px;
+    width: 100%;
+}
+@media (max-width: 768px) {
+    .exercise-control{
+        width:100%;
+        padding: 10px 0 10px 0;
+    }
+
+    .workout-schedule-label {
+        width: 100%;
+    }
+
+    .exercise-badge{
+        display: none;
+    }
+}
+
+@media (min-width: 768px) {
+    .exercise-control {
+        width: 50%;
+        padding: 10px;
+    }
+
+    .workout-schedule-label {
+        width: 50%;
+    }
+
+}
+
+.exercise-control {
+    display: flex;
+    float: left;
+}
+
+.workout-group{
+    display: inline-block;
+    width: 100%;
+}
+
+
+.workout-schedule-label{
+    margin-top: 30px;
+    font-size: medium;
+    color: var(--dark-grey);
+}

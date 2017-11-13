@@ -1,7 +1,8 @@
 import {MODE} from "../mode";
 
 /*has to change as server changes*/
-const baseUrl = MODE === "local"? "http://hebecollinsui": "http://dev.hebecollins.com";
+const baseUrl = MODE === "local"? "http://hebecollinsui":
+    MODE === "local_qburst"?"http://localhost:3000":"http://dev.hebecollins.com";
 
 export const IMG_URL_OF = {
     GUEST_HOME: `${baseUrl}/images/background/guest_home.jpg`,

@@ -79,6 +79,32 @@ export function addCreatedWorkoutToServer(workout, gymId, label) {
 
 
 /**Used only by trainers
+ * Update workout created by trainer to the server with label as a tag
+ * @param workout => workout array
+ * @param gymId => gymId of selected gym
+ * @param label=> new label
+ * @param labelId=> labelId of older label
+ * */
+export function updateSavedWorkoutOnServer(workout, gymId, label,labelId) {
+    const route = `/${gymId}${BACKEND_ROUTES.TRAINER.WORKOUT.UPDATE_BY_LABEL}/${labelId}`;
+    const dataToBeSent = {
+        "label": label,
+        "workout": workout
+    };
+
+    return dispatch => {
+        return postJSON(dataToBeSent, route).then(res => {
+            dispatch(addFlashMessage({
+                type: "success",
+                text: res.data.msg
+            }));
+            redirectByName("SAVED_WORKOUT_LIST")
+        });
+    }
+}
+
+
+/**Used only by trainers
  * Gets saved Workout for a trainer by label
  * @param labelId => id corresponds to a particular label
  * */

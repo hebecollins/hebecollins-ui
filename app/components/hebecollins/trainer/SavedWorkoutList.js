@@ -10,9 +10,9 @@ import {Loading} from "../../others/extra/Loading";
 import isEmpty from 'lodash/isEmpty'
 import {redirectByName} from "../../../Toolbox/Helpers/redirect";
 import {errorResponse} from "../../../Toolbox/Helpers/responseHandler";
-import {addFlashMessage, saveSelectedLabel, saveSelectedUser} from "../../../actions/actionStore";
-import {deepCloneArray, deepCloneObject} from "../../../Toolbox/Helpers/extra";
-import {Fade, Slide} from "../../others/extra/Animation";
+import { saveSelectedLabel} from "../../../actions/actionStore";
+import {deepCloneArray} from "../../../Toolbox/Helpers/extra";
+import {Fade} from "../../others/extra/Animation";
 
 class SavedWorkoutList extends React.Component {
     constructor(props) {
@@ -23,7 +23,6 @@ class SavedWorkoutList extends React.Component {
         };
 
         this.onUse = this.onUse.bind(this);
-        this.onView = this.onView.bind(this);
         this.onDelete = this.onDelete.bind(this);
     }
 
@@ -59,6 +58,11 @@ class SavedWorkoutList extends React.Component {
         redirectByName("VIEW_SAVED_WORKOUT")
     }
 
+    onEdit(labelId, label) {
+        this.props.saveSelectedLabel(labelId,label);
+        redirectByName("EDIT_SAVED_WORKOUT")
+    }
+
     onDelete(labelId, index) {
         deleteSavedWorkoutFromServer(labelId).then(res => {
             let tempList = deepCloneArray(this.state.workoutList);
@@ -87,6 +91,9 @@ class SavedWorkoutList extends React.Component {
                             <ButtonOrange
                                 onClick={() => this.onView(label.id, label.label)}
                                 label={"View"}/>
+                            <ButtonOrange
+                                onClick={() => this.onEdit(label.id, label.label)}
+                                label={"Edit"}/>
                             <ButtonOrange
                                 onClick={() => this.onDelete(label.id, index)}
                                 label={"Delete"}/>

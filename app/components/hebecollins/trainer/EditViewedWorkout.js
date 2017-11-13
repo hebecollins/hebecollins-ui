@@ -73,7 +73,7 @@ class EditViewedWorkout extends React.Component {
                     />
                     <div className='pager'>
                         <button className="btn-hebecollins-orange" onClick={this.onSubmit}>
-                            Assign this workout to {selectedUser.nick_name}
+                            Update
                         </button>
                     </div>
                 </SingleScreen2>

@@ -13,8 +13,9 @@ require('../Toolbox/css/font-awesome.min.css');
 require('../Toolbox/css/commons/animation.css');
 require('../Toolbox/css/commons/autosuggestion.css');
 require('../Toolbox/css/commons/buttons.css');
-require('../Toolbox/css/commons/viewWorkoutForSelectedClient.css');
+require('../Toolbox/css/commons/workout.css');
 require('../Toolbox/css/commons/positions.css');
+require('../Toolbox/css/commons/list.css');
 require('../Toolbox/css/client/getCurrentWorkout.css');
 require('../Toolbox/css/admin/gif.css');
 

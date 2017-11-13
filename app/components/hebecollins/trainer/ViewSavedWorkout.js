@@ -39,7 +39,8 @@ class ViewSavedWorkout extends React.Component {
     render() {
         const {gymId, workout, selectedLabel} = this.props;
         return (
-            this.state.hasServerResponded ? <div className="quote-box content">
+            this.state.hasServerResponded ?
+                <div className="quote-box content">
                 <div className="horizontal-padding">
                     <h1 className="white-center">
                         Tag : <label className="list-monitor-header">{selectedLabel.label}</label>
