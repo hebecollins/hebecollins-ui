@@ -181,13 +181,10 @@ export function validateGifForm(data) {
 }
 
 export function validateGifFormWithoutExercise(gif, muscle_group) {
-    const gifToBeValidated = (gif.size) ? gif.size : '';
     const {errors, isValid} = validate({
         muscle_group: [muscle_group, 'isRequired'],
-        gif: [gifToBeValidated, 'isRequired'],
+        gif: [gif, 'isRequired'],
     });
-    return {
-        errors,
-        isValid
-    }
+
+    return {errors, isValid}
 }

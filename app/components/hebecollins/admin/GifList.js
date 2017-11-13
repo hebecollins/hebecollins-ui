@@ -10,9 +10,8 @@ import {deepCloneArray, scrollToError} from "../../../Toolbox/Helpers/extra";
 import {Fade} from "../../others/extra/Animation";
 import {getCategoryList, getExercisesWithGif, postGifForExercise} from "../../../actions/adminActions/gifActions";
 import {ExerciseGif} from "../../others/display/RenderExercise";
-import {Select, TextField, UploadFile} from "../../others/inputField/InputFieldWithIconAddOn";
-import {validateGifForm} from "../../../Toolbox/Validation/helpers";
 import {connect} from 'react-redux'
+import ExerciseAddForm from "../../others/inputFieldGroup/admin/ExerciseAddForm";
 
 class GifList extends React.Component {
     constructor(props) {
@@ -21,7 +20,7 @@ class GifList extends React.Component {
             exerciseList: [],//to list out exercises
             categoryList: [],//to list out muscle groups that are available in database
             exercise_name: '',
-            gif: {},
+            gif: '',
             muscle_group: '',
             hasServerResponded: false,
             isEditing: [],//array of boolean, it tells which of the given workouts are being edited
@@ -29,7 +28,6 @@ class GifList extends React.Component {
             disableButton: false,//triggers button disabling if true
             displayGif: false,//triggers gif display
             exerciseNameId: '',//required for getting Gif from the server
-            errors: ''//errors in the input field
         };
 
         //renders gif
@@ -41,23 +39,8 @@ class GifList extends React.Component {
         //turns isAdding new as true
         this.addNew = this.addNew.bind(this);
 
-        //submits all the changes and send it to server
-        this.onSubmit = this.onSubmit.bind(this);
-
-        //redundant
-        this.onCancelAdd = this.onCancelAdd.bind(this);
-
-        //redundant
-        this.onCancelEdit = this.onCancelEdit.bind(this);
-
         //resets state to its initial value
         this.resetState = this.resetState.bind(this);
-
-        // updates the changes happening in input field
-        this.onChange = this.onChange.bind(this);
-
-        //when any file gets uploaded
-        this.onUpload = this.onUpload.bind(this);
     }
 
     /*gets exercise list from the server and assign it to exerciseList state*/
@@ -91,45 +74,14 @@ class GifList extends React.Component {
 
     resetState() {
         this.setState({
-            exercise_name: '', gif: {}, muscle_group: '', errors: '',
+            exercise_name: '', gif: '', muscle_group: '', errors: '',
             isEditing: false, isAddingNew: false, disableButton: false
         })
-    }
-
-    onUpload(e) {
-        const gif = e.target.files[0];
-        this.setState({gif: gif});
-    }
-
-
-    onChange(e) {
-        this.setState({[e.target.name]: e.target.value})
     }
 
     addNew() {
         this.resetState();
         this.setState({isAddingNew: true, disableButton: true});
-    }
-
-    isValid() {
-        scrollToError();
-        console.log(this.state);
-        const {errors, isValid} = validateGifForm(this.state);
-        if (!isValid) {
-            this.setState({errors: errors})
-        }
-        return isValid;
-    }
-
-    onSubmit() {
-        const {exercise_name, muscle_group, gif} = this.state;
-        console.log(this.state.errors);
-        if (this.isValid()) {
-            this.props.postGifForExercise(gif, exercise_name, muscle_group).then(res => {
-                    this.resetState();
-                }
-            ).catch(err => errorResponse(err))
-        }
     }
 
     /** gets gif from the server with same exercise_name_id
@@ -155,73 +107,31 @@ class GifList extends React.Component {
         this.setState({isEditing: temp, exercise_name: exerciseName, disableButton: true});
     }
 
-    onCancelAdd() {
-        this.resetState();
-    };
-
-    onCancelEdit() {
-        this.resetState();
-    };
 
     render() {
-        const {exerciseList, exercise_name, gif, categoryList, errors, isEditing, disableButton} = this.state;
+        const {exerciseList, exercise_name, gif, categoryList, isEditing, disableButton} = this.state;
+        const {postGifForExercise} = this.props;
 
         const editForm =
-            <div className="gif-form">
-                <div className="exercse-control">
-                    <div className="exercise-details">
-                        <div className="orange-header">{exercise_name}</div>
-                        <div className="margin">
-                            <Select
-                                field="muscle_group" label="Select the target muscle group" isIconNeeded={false}
-                                onChange={this.onChange} error={errors.muscle_group}>
-                                {/*adds categoryList elements into option*/}
-                                {
-                                    categoryList.map((category, index) => {
-                                        return <option key={index}
-                                                       value={category}>{category.toUpperCase()}</option>
-                                    })
-                                }
-                            </Select>
+            <ExerciseAddForm
+                categoryList={categoryList}
+                header={exercise_name}
+                exerciseName={exercise_name}
+                editMode={true}
+                onCancel={this.resetState}
+                postGif={postGifForExercise}
+            />;
 
-                            <UploadFile onUpload={this.onUpload} field="gif" error={errors.gif}/>
-                            <ButtonOrange onClick={this.onSubmit} label="Update"/>
-                            <ButtonOrange onClick={this.resetState} label="Cancel"/>
-                        </div>
-                    </div>
-                </div>
-            </div>;
-
-        const gifContainer = <ExerciseGif exerciseName={exercise_name} gif={gif}/>
+        const gifContainer = <ExerciseGif exerciseName={exercise_name} gif={gif}/>;
 
         const addForm =
-            <div className="gif-form">
-                <div className="exercse-control">
-                    <div className="padding-top exercise-details">
-                        <TextField field="exercise_name" onChange={this.onChange} value={exercise_name}
-                                   label="Exercise Name" isIconNeeded={false} error={errors.exercise_name}/>
-
-                        <Select
-                            field="muscle_group" label="Select the target muscle group" isIconNeeded={false}
-                            onChange={this.onChange} error={errors.muscle_group}>
-                            {/*adds categoryList elements into option*/}
-                            {
-                                categoryList.map((category, index) => {
-                                    return <option key={index} value={category}>{category.toUpperCase()}</option>
-                                })
-                            }
-                        </Select>
-
-                        <UploadFile onUpload={this.onUpload} field="gif" error={errors.gif}/>
-
-                        <ButtonOrange
-                            onClick={this.onSubmit} label="Upload"/>
-                        <ButtonOrange
-                            onClick={this.onCancelAdd} label="Cancel"/>
-                    </div>
-                </div>
-            </div>;
-
+            <ExerciseAddForm
+                categoryList={categoryList}
+                header={"Adding New Exercise"}
+                editMode={false}
+                onCancel={this.resetState}
+                postGif={postGifForExercise}
+            />;
 
         const GifList = exerciseList.map((exercise, index) => {
                 const {exercise_name, id, muscle_group} = exercise;
@@ -257,12 +167,15 @@ class GifList extends React.Component {
             <div className="content">
                 <SingleScreen2>
                     <h1 className="white-center">Uploaded Gif List</h1>
-                    {this.state.isAddingNew ? addForm :
-                        <ButtonOrange
-                            onClick={this.addNew}
-                            label={"Add New"}
-                            disabled={disableButton}
-                        />
+                    {
+                        this.state.isAddingNew ? addForm :
+                            <div className="top-right">
+                                <button className="btn-hebecollins-orange"
+                                        onClick={this.addNew}
+                                        disabled={disableButton}>
+                                    <span className="glyphicon glyphicon-plus"/> Add New
+                                </button>
+                            </div>
                     }
                     <Fade>
                         <div>{GifList}</div>

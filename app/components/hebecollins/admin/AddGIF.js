@@ -5,7 +5,7 @@ import {getCategoryList, getExercisesWithoutGif, postGifForExercise} from "../..
 import {deepCloneArray} from "../../../Toolbox/Helpers/extra";
 import {Fade} from "../../others/extra/Animation";
 import {connect} from 'react-redux'
-import GifAddForm from "../../others/inputFieldGroup/GifAddForm";
+import GifAddForm from "../../others/inputFieldGroup/admin/GifAddForm";
 
 class AddGIF extends React.Component {
     constructor(props) {
