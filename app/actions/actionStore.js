@@ -132,6 +132,7 @@ export const deleteVerificationData = () => {
 /** Adding quotes
  */
 export const addQuote = (author, quote) => {
+    console.log(author);
     return {
         type: ADD_QUOTE,
         author: author,

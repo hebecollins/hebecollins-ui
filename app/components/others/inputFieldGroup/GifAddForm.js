@@ -1,6 +1,6 @@
 import React from 'react'
-import {ButtonOrange} from "../../others/display/Buttons";
-import {Select, UploadFile} from "../../others/inputField/InputFieldWithIconAddOn";
+import {ButtonOrange} from "../display/Buttons";
+import {Select, UploadFile} from "../inputField/InputFieldWithIconAddOn";
 import {validateGifFormWithoutExercise} from "../../../Toolbox/Validation/helpers";
 
 class GifAddForm extends React.Component {

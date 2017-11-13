@@ -1,9 +1,9 @@
-import {ADD_QUOTES,CLEAR_QUOTES} from "../actions/types";
+import {ADD_QUOTE,CLEAR_QUOTES} from "../actions/types";
 import shortid from 'shortid';
 
 export default (state = [], action = {}) => {
     switch (action.type) {
-        case ADD_QUOTES: {
+        case ADD_QUOTE: {
             return [
                 ...state,
                 {

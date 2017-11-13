@@ -37,6 +37,7 @@ class AddQuotes extends React.Component {
 
     onAddMore() {
         if (this.isValid()) {
+            console.log(this.state);
             this.props.postQuotesToReduxStore(this.state);
             this.setState({
                 author: "",

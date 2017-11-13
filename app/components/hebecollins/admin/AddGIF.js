@@ -5,10 +5,8 @@ import {getCategoryList, getExercisesWithoutGif, postGifForExercise} from "../..
 import {deepCloneArray} from "../../../Toolbox/Helpers/extra";
 import {Fade} from "../../others/extra/Animation";
 import {connect} from 'react-redux'
-import GifAddForm from "./GifAddForm";
+import GifAddForm from "../../others/inputFieldGroup/GifAddForm";
 
-
-//TODO: validation + make each card an individual state
 class AddGIF extends React.Component {
     constructor(props) {
         super(props);
