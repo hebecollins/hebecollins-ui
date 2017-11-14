@@ -1,7 +1,8 @@
 import React from 'react'
 import {Loading} from "../../others/extra/Loading";
 import {errorResponse} from "../../../Toolbox/Helpers/responseHandler";
-import {getCategoryList, getExercisesWithoutGif, postGifForExercise} from "../../../actions/adminActions/gifActions";
+import {getExercisesWithoutGif, postGifForExercise} from "../../../actions/adminActions/gifActions";
+import {getMuscleGroupList} from "../../../actions/adminActions/muscleGroupActions";
 import {deepCloneArray} from "../../../Toolbox/Helpers/extra";
 import {Fade} from "../../others/extra/Animation";
 import {connect} from 'react-redux'
@@ -27,7 +28,7 @@ class AddGIF extends React.Component {
             (res) => {
                 const exerciseList = res.data.exercise_list;
                 this.setState({exerciseList: exerciseList, hasServerResponded: true});
-                getCategoryList().then(res => {
+                getMuscleGroupList().then(res => {
                     this.setState({categoryList: res.data})
                 }).catch(err => errorResponse(err))
             }

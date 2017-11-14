@@ -1,12 +1,13 @@
 import React from 'react'
 import {IMG_URL_OF} from "../../../../config/imageUrl";
+import {BACKEND_ROUTES} from "../../../../config/backendRoutes";
+import {BASE_URL} from "../../../../config/baseURL";
 
 /**@param exercise => single exercise object with fields {exercise_name_id, exercise_name, sets, reps, muscle_group}
  * @param i => index of exercise for numbering
  */
 export const RenderExercise = ({exercise, index, renderGif}) => {
-    const {exercise_name_id, exercise_name, sets, reps, rest, muscle_group} = exercise;
-    const muscleGroup = muscle_group ? muscle_group : "default";
+    const {exercise_name_id, exercise_name, sets, reps, rest, muscle_group_id} = exercise;
     return (
         <div className="exercise-control">
             <span className="badge exercise-badge">{index + 1}</span>
@@ -38,8 +39,8 @@ export const RenderExercise = ({exercise, index, renderGif}) => {
                 </div>
                 <div className="exercise-icons">
                     <div className="exercise-icon">
-                        <img src={`${IMG_URL_OF.EXERCISES}./${muscleGroup}.png`}/>
-                    </div>
+                         <img src={`${BASE_URL}${BACKEND_ROUTES.COMMONS.GET_MUSCLE_GROUP_ICON}/${muscle_group_id}`}/>
+                        </div>
                     <div className="bottom right">
                         <button className="btn-icon"
                                 onClick={() => renderGif(exercise_name_id, exercise_name)}>

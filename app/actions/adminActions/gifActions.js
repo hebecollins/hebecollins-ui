@@ -16,13 +16,6 @@ export const getExercisesWithGif = ()=>{
     return get(BACKEND_ROUTES.ADMIN.EXERCISES_WITH_GIF)
 };
 
-/** gets list of exercises which does have a GIF on the server
- */
-export const getCategoryList = ()=>{
-    return get(BACKEND_ROUTES.ADMIN.LIST_MUSCLE_GROUP)
-};
-
-
 /** Posts gif for a given exercise
  * @param gif => .gif file
  * @param exerciseName => exerciseName

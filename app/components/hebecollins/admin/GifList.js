@@ -8,7 +8,8 @@ import {redirectByName} from "../../../Toolbox/Helpers/redirect";
 import {errorResponse} from "../../../Toolbox/Helpers/responseHandler";
 import {deepCloneArray, scrollToError} from "../../../Toolbox/Helpers/extra";
 import {Fade} from "../../others/extra/Animation";
-import {getCategoryList, getExercisesWithGif, postGifForExercise} from "../../../actions/adminActions/gifActions";
+import {getExercisesWithGif, postGifForExercise} from "../../../actions/adminActions/gifActions";
+import {getMuscleGroupList} from "../../../actions/adminActions/muscleGroupActions";
 import {ExerciseGif} from "../../others/display/RenderExercise";
 import {connect} from 'react-redux'
 import ExerciseAddForm from "../../others/inputFieldGroup/admin/ExerciseAddForm";
@@ -18,7 +19,7 @@ class GifList extends React.Component {
         super(props);
         this.state = {
             exerciseList: [],//to list out exercises
-            categoryList: [],//to list out muscle groups that are available in database
+            muscleGroupList: [],//to list out muscle groups that are available in database
             exercise_name: '',
             gif: '',
             muscle_group: '',
@@ -51,8 +52,8 @@ class GifList extends React.Component {
                 if (isEmpty(exerciseList)) redirectByName("NO_RECORDS_FOUND");
                 else {
                     this.setState({exerciseList: exerciseList, hasServerResponded: true});
-                    getCategoryList().then(res => {
-                        this.setState({categoryList: res.data})
+                    getMuscleGroupList().then(res => {
+                        this.setState({muscleGroupList: res.data})
                     });//for muscle group dropdown
                 }
             }
@@ -109,12 +110,12 @@ class GifList extends React.Component {
 
 
     render() {
-        const {exerciseList, exercise_name, gif, categoryList, isEditing, disableButton} = this.state;
+        const {exerciseList, exercise_name, gif, muscleGroupList, isEditing, disableButton} = this.state;
         const {postGifForExercise} = this.props;
 
         const editForm =
             <ExerciseAddForm
-                categoryList={categoryList}
+                muscleGroupList={muscleGroupList}
                 header={exercise_name}
                 exerciseName={exercise_name}
                 editMode={true}
@@ -126,7 +127,7 @@ class GifList extends React.Component {
 
         const addForm =
             <ExerciseAddForm
-                categoryList={categoryList}
+                muscleGroupList={muscleGroupList}
                 header={"Adding New Exercise"}
                 editMode={false}
                 resetState={this.resetState}

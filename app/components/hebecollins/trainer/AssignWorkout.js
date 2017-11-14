@@ -1,12 +1,13 @@
 import React from 'react'
 import WorkoutGroup from "../../others/inputFieldGroup/WorkoutGroup";
-import {addWorkoutToRedux, addAssignedWorkoutToServer, clearWorkoutFromRedux} from "../../../actions/workoutActions"
+import {addWorkoutToRedux, addAssignedWorkoutToServer} from "../../../actions/workoutActions"
 import {connect} from 'react-redux'
 import SingleScreen2 from "../../others/frames/SingleScreen2";
 import {errorResponse} from "../../../Toolbox/Helpers/responseHandler";
 import {redirectByName} from "../../../Toolbox/Helpers/redirect";
 import {scrollToError} from "../../../Toolbox/Helpers/extra";
 import isEmpty from 'lodash/isEmpty'
+import {clearWorkout} from "../../../actions/actionStore";
 
 class AssignWorkout extends React.Component {
     constructor(props) {
@@ -46,7 +47,7 @@ class AssignWorkout extends React.Component {
 
     //delete workout from redux once component is unmounted
     componentWillUnmount() {
-        this.props.clearWorkoutFromRedux();
+        this.props.clearWorkout();
     }
 
     render() {
@@ -87,7 +88,7 @@ const mapStateToProps=(state)=> ({
 
 const mapDispatchToProps = {
     addWorkoutToRedux,
-    clearWorkoutFromRedux,
+    clearWorkout,
     addAssignedWorkoutToServer
 };
 

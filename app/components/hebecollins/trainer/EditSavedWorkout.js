@@ -1,8 +1,9 @@
 import React from 'react'
 import WorkoutGroup from "../../others/inputFieldGroup/WorkoutGroup";
 import {
-    getSavedWorkoutByLabel, addWorkoutToRedux, clearWorkoutFromRedux, updateSavedWorkoutOnServer
+    getSavedWorkoutByLabel, addWorkoutToRedux, updateSavedWorkoutOnServer
 } from "../../../actions/workoutActions"
+import {clearWorkout} from "../../../actions/actionStore";
 import {connect} from 'react-redux'
 import SingleScreen2 from "../../others/frames/SingleScreen2";
 import {errorResponse} from "../../../Toolbox/Helpers/responseHandler";
@@ -55,7 +56,7 @@ class EditSavedWorkout extends React.Component {
 
     //to clear workout as soon as component is unmounted
     componentWillUnmount() {
-        this.props.clearWorkoutFromRedux();
+        this.props.clearWorkout();
     }
 
     onSubmit() {
@@ -131,7 +132,7 @@ function mapStateToProps(state) {
 
 const mapDispatchToProps = {
     addWorkoutToRedux,
-    clearWorkoutFromRedux,
+    clearWorkout,
     updateSavedWorkoutOnServer,
     getSavedWorkoutByLabel
 };

@@ -1,45 +1,46 @@
 import React from 'react'
 import {Loading} from "../../others/extra/Loading";
-import {getCategoryList, postGifForExercise} from "../../../actions/adminActions/gifActions";
+import {getMuscleGroupVerboseList,addMuscleGroupOnServer,updateMuscleGroupOnServer} from "../../../actions/adminActions/muscleGroupActions";
 import {connect} from 'react-redux'
-import EditCategory from "./EditCategory";
-import AddCategory from "./AddCategory";
+import EditCategory from "../../others/inputFieldGroup/admin/EditCategory";
+import AddCategory from "../../others/inputFieldGroup/admin/AddCategory";
+import {errorResponse} from "../../../Toolbox/Helpers/responseHandler";
 
 class CategoryList extends React.Component {
     constructor(props) {
         super(props);
         this.state = {
-            categoryList: [],
-            imgUrls: [],
+            muscleGroupListVerbose: [],
             img: '',
             isAdding: false,
             hasServerResponded: false,
         };
 
-        this.onUpload = this.onUpload.bind(this);
         this.onCancel = this.onCancel.bind(this);
         this.onAdding = this.onAdding.bind(this);
+        this.refresh = this.refresh.bind(this);
     }
 
     /**sends request for gif list, if success response comes, it sends another request for category list
      * to get the muscle_group entries
      */
     componentWillMount() {
-        getCategoryList().then(res => {
-                this.setState({categoryList: res.data, hasServerResponded: true})
-                //get all the PNGs from local
+        getMuscleGroupVerboseList().then(res => {
+                const muscleGroupList = res.data.muscle_group_list;
+                this.setState({
+                    muscleGroupListVerbose: muscleGroupList,
+                    hasServerResponded: true})
             }
-        ).catch(err => console.log("in errooro"))
-    }
-
-
-    onUpload(e) {
-        const img = e.target.files[0];//
-        this.setState({img: img});
+        ).catch(err => errorResponse(err))
     }
 
     onCancel() {
-        this.setState({isAdding: false})
+        this.setState({isAdding: false});
+    }
+
+    refresh(){
+        this.componentWillMount();
+        this.setState({isAdding: false});
     }
 
     onAdding() {
@@ -47,14 +48,15 @@ class CategoryList extends React.Component {
     }
 
     render() {
-        const {categoryList} = this.state;
+        const { muscleGroupListVerbose} = this.state;
 
-        const categoryFormList = categoryList.map((muscleGroup, index) => {
+        const categoryFormList = muscleGroupListVerbose.map((x, index) => {
                 return (
                     <EditCategory
                         key={index}
-                        muscleGroup={muscleGroup}
-                        header={muscleGroup.toUpperCase()}
+                        muscleGroupId={x.id}
+                        muscleGroup={x.muscle_group}
+                        updateMuscleGroupOnServer={this.props.updateMuscleGroupOnServer}
                     />
                 );
             }
@@ -63,8 +65,9 @@ class CategoryList extends React.Component {
         const addNew =
                 <AddCategory
                     header="Adding a new muscle group category"
-                    onCancel={this.onCancel}
-                />
+                    refresh={this.refresh}
+                    addMuscleGroupOnServer={this.props.addMuscleGroupOnServer}
+                />;
 
         return this.state.hasServerResponded ?
             <div className="content quote-box">
@@ -81,4 +84,9 @@ class CategoryList extends React.Component {
     }
 }
 
-export default connect(null, {postGifForExercise})(CategoryList);
+const mapDispatchToProps = {
+    addMuscleGroupOnServer,
+    updateMuscleGroupOnServer
+};
+
+export default connect(null, mapDispatchToProps)(CategoryList);

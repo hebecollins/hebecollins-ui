@@ -52,6 +52,7 @@ export const BACKEND_ROUTES = {
         REMARKS: "/remarks",//:gymId/remarks/:selectedUserId
         QUOTE: "/quote",
         GET_EXERCISE_GIF:"/workout/gif",///workout/gif/:exerciseNameId
+        GET_MUSCLE_GROUP_ICON:"/muscle-group/icon",////muscle-group/icon/:muscleGroupId
         SUGGESTION:{
             EXERCISES:"/suggestion/exercises"
         },
@@ -68,6 +69,8 @@ export const BACKEND_ROUTES = {
         EXERCISES_WITH_GIF: "/exercise/gif/exist",
         POST_EXERCISE_GIF: "/exercise/gif",
         LIST_MUSCLE_GROUP: "/list/muscle-group",
-        ADD_CATEGORY: "/add/category",
+        LIST_MUSCLE_GROUP_VERBOSE: "/list/verbose/muscle-group",
+        ADD_MUSCLE_GROUP: "/add/muscle-group",
+        UPDATE_MUSCLE_GROUP: "/update/muscle-group",
     },
 };

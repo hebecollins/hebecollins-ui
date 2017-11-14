@@ -9,7 +9,7 @@ class ExerciseAddForm extends React.Component {
     constructor(props) {
         super(props);
         this.state = {
-            categoryList: [],
+            muscleGroupList: [],
             hasServerResponded: false,
             gif: '',
             muscle_group: '',
@@ -62,7 +62,7 @@ class ExerciseAddForm extends React.Component {
     }
 
     render() {
-        const {categoryList, header, editMode} = this.props;
+        const {muscleGroupList, header, editMode} = this.props;
         const {errors, exercise_name} = this.state;
         return (
             <div className="gif-form">
@@ -86,9 +86,9 @@ class ExerciseAddForm extends React.Component {
                             error={errors.muscle_group}
                             onChange={this.onChange}
                         >
-                            {/*adds categoryList elements into option*/}
+                            {/*adds muscleGroupList elements into option*/}
                             {
-                                categoryList.map((category, index) => {
+                                muscleGroupList.map((category, index) => {
                                     return <option key={index} value={category}>{category.toUpperCase()}</option>
                                 })
                             }
@@ -112,7 +112,7 @@ class ExerciseAddForm extends React.Component {
 }
 
 ExerciseAddForm.propTypes = {
-    categoryList: React.PropTypes.array.isRequired,
+    muscleGroupList: React.PropTypes.array.isRequired,
     header: React.PropTypes.string.isRequired,
     exerciseName: React.PropTypes.string,
     resetState: React.PropTypes.func,

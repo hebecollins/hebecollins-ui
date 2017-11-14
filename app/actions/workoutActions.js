@@ -1,5 +1,5 @@
 import {deepCloneArray} from "../Toolbox/Helpers/extra";
-import {get, getMedia, postJSON} from "../Toolbox/Helpers/requestHandler";
+import {get, postJSON} from "../Toolbox/Helpers/requestHandler";
 import {BACKEND_ROUTES} from "../../config/backendRoutes";
 import {
     addFlashMessage, addWorkout, clearWorkout, deleteSelectedLabel, deleteSelectedUser, saveSelectedLabel,
@@ -148,14 +148,6 @@ export function getSelectedClientWorkoutToRedux(gymId, clientId) {
     }
 }
 
-/**clears workout data from redux
- * */
-export function clearWorkoutFromRedux() {
-    return dispatch => {
-        dispatch(clearWorkout());
-    }
-}
-
 /**gets saved workout list for a trainer in a particular gym from the server
  * @param gymId => gymId from selectedGym
  * */
@@ -191,26 +183,5 @@ export function getExerciseListToRedux() {
 export function getExerciseGifFromServer(id) {
     const route = `${BACKEND_ROUTES.COMMONS.GET_EXERCISE_GIF}/${id}`;
     return get(route)
-}
-
-
-/**Only used by trainer
- * Adds selected label to redux so that it can be used to fetch data from server to view/edit that workout
- * @param labelId => labelId of selected label
- * @param label => labelName of selected label
- * */
-export function saveSelectedLabelToRedux(labelId, label) {
-    return dispatch=>{
-        dispatch(saveSelectedLabel(labelId,label))
-    }
-}
-
-/**Only used by trainer
- * Gets exercise GIF corresponding to id from the server
- * */
-export function deleteSelectedLabelFromRedux() {
-    return dispatch=>{
-        dispatch(deleteSelectedLabel())
-    }
 }
 

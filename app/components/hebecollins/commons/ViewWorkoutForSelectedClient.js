@@ -4,7 +4,7 @@ import {connect} from 'react-redux'
 import {errorResponse} from "../../../Toolbox/Helpers/responseHandler";
 import {Loading} from "../../others/extra/Loading"
 import DisplayWorkout from "../../others/display/DisplayWorkout";
-import {clearWorkoutFromRedux} from "../../../actions/workoutActions"
+import {clearWorkout} from "../../../actions/actionStore";
 import {redirectByName} from "../../../Toolbox/Helpers/redirect";
 
 class ViewWorkoutForSelectedClient extends React.Component {
@@ -30,7 +30,7 @@ class ViewWorkoutForSelectedClient extends React.Component {
 
     //delete workout from redux once component is unmounted
     componentWillUnmount() {
-        this.props.clearWorkoutFromRedux();
+        this.props.clearWorkout();
     }
 
     render() {
@@ -58,6 +58,9 @@ const mapStateToProps = (state) => ({
     workout: state.workout.workout
 });
 
-const mapDispatchToProps = {getSelectedClientWorkoutToRedux, clearWorkoutFromRedux};
+const mapDispatchToProps = {
+    getSelectedClientWorkoutToRedux,
+    clearWorkout
+};
 
 export default connect(mapStateToProps, mapDispatchToProps)(ViewWorkoutForSelectedClient);

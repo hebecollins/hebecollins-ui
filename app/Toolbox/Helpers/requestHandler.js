@@ -1,12 +1,8 @@
-import {MODE} from '../../../mode';
 import axios from 'axios';
-import {developmentURL, productionURL, localURL, localQburstURL} from '../../../config/baseURL';
+import {BASE_URL} from '../../../config/baseURL';
 import querystring from 'querystring';
 
-axios.defaults.baseURL =
-    (MODE === 'production') ? productionURL :
-        (MODE === 'development') ? developmentURL :
-            (MODE === 'local_qburst') ? localQburstURL : localURL;
+axios.defaults.baseURL = BASE_URL;
 
 axios.defaults.withCredentials = true;
 
@@ -63,19 +59,4 @@ export function get (route) {
         url: route,
     };
     return axios(authOptions);
-}
-
-export function getMedia(route) {
-    const authOptions = {
-        method: 'GET',
-        url: route,
-        responseType: 'stream',
-        headers: {
-            'Accept': 'image/webp,image/apng,image/*,*/*;q=0.8',
-        },
-
-    };
-    return axios.get(route, {
-        responseType: 'blob'
-    });
 }
