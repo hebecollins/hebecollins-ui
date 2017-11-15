@@ -1,5 +1,5 @@
 import React from 'react'
-import {NavigationBar} from "./NavigationBar"
+import NavigationBar from "./NavigationBar"
 import {getRouteByName} from "../../../Toolbox/Helpers/routeHandler"
 import {NavLink} from './NavLink'
 
