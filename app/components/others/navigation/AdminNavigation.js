@@ -1,11 +1,11 @@
 import React from 'react'
-import {NavigationBar} from "./NavigationBar"
 import {getRouteByName} from "../../../Toolbox/Helpers/routeHandler"
 import {NavLink} from './NavLink'
+import NavigationBar from "./NavigationBar";
 
 export const AdminNavigation = ({logout}) => {
     const managerLinks = (
-        <ul className="nav navbar-nav navbar-right">
+        <ul className="nav navbar-nav">
             <li>
                 <NavLink to={getRouteByName("ADMIN_HOME")} onlyActiveOnIndex>Home</NavLink>
             </li>
@@ -21,6 +21,10 @@ export const AdminNavigation = ({logout}) => {
             <li>
                 <NavLink to={getRouteByName("CATEGORY_LIST")} onlyActiveOnIndex>Muscle Groups</NavLink>
             </li>
+            <li>
+                <a href="#" onClick={logout}>Logout</a>
+            </li>
+
             <li className="dropdown">
                 <a href="/" className="dropdown-toggle" data-toggle="dropdown">Account<b className="caret"></b></a>
                 <ul className="dropdown-menu">
@@ -32,10 +36,7 @@ export const AdminNavigation = ({logout}) => {
                         <NavLink to={getRouteByName('PASSWORD_CHANGE')}>Password Change</NavLink>
                     </li>
 
-                    <li>
-                        <a href="#" onClick={logout}>Logout</a>
-                    </li>
-                </ul>
+               </ul>
             </li>
         </ul>
     );
@@ -48,5 +49,5 @@ export const AdminNavigation = ({logout}) => {
 };
 
 AdminNavigation.propTypes = {
-    logout: React.PropTypes.func.isRequired
+    logout: React.PropTypes.func.isRequired,
 };

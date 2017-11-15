@@ -17,6 +17,7 @@ require('../Toolbox/css/commons/workout.css');
 require('../Toolbox/css/commons/positions.css');
 require('../Toolbox/css/commons/list.css');
 require('../Toolbox/css/commons/dropzone.css');
+require('../Toolbox/css/commons/navigationBar.css');
 require('../Toolbox/css/client/getCurrentWorkout.css');
 require('../Toolbox/css/admin/gif.css');
 

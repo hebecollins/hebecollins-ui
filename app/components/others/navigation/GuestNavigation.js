@@ -5,7 +5,7 @@ import {NavLink} from "./NavLink"
 
 export const GuestNavigation = () => {
     const guestLinks = (
-        <ul className="nav navbar-nav navbar-right">
+        <ul className="nav navbar-nav">
             <li>
                 <NavLink to={getRouteByName("HOME")} onlyActiveOnIndex>Home</NavLink>
             </li>

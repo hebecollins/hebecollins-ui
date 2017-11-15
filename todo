@@ -15,3 +15,5 @@
 
 * priority low: let trainers and managers categorize their client. There should be a separate button
                 in it to see by category.
+
+* upgrade webpack version.. also use webpack -p command to reduce the bundle size
