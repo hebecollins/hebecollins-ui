@@ -66,6 +66,9 @@
 .notification.false .notification-count {
     display: none;
 }
+.notification-count.false{
+    display: none;
+}
 
 .notification.false {
     position: absolute;
@@ -95,6 +98,14 @@
     background-color: transparent;
     border: 0;
     width: 40px;
+}
+
+.notif-box.notification-button{
+    width:100%;
+}
+
+.notif-box.notification-button:hover{
+    color:var(--dark-orange);
 }
 
 
@@ -220,7 +231,8 @@
 
 @media (min-width: 768px) {
     .notif-container{
-        width: 20%;
+        width: 30%;
+        right:10px;
     }
 }
 
@@ -232,11 +244,32 @@
 
 .notif-container{
     position: absolute;
-    right:0;
-    top:45px;
+    top:48px;
+    padding:8px;
     border: 1px solid var(--dark-grey);
-    background-color: #428bca;
-    color: black;
+    background-color: var(--dark-grey);
+    color: var(--dark-orange);
+    overflow: auto;
+}
+
+.notif-box{
+    display: flex;
+    margin-top:5px;
+    margin-bottom:5px;
+    padding:5px;
+    color:var(--light-orange);
+    background-color: black;
+}
+
+.notif-notif{
+    margin:auto auto auto 10px;
+}
+
+.notif-thumbnail{
+    border-radius: 50%;
+    max-width: 70px;
+    max-height: 70px;
+    display: inline-block;
 }
 
 

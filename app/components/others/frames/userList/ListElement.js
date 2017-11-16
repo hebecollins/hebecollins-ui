@@ -20,7 +20,7 @@ export const ListElement =
                 <a onClick={() => onClick(index)}
                    className={classnames("list-individual-data", {"list-individual-data-clicked": isClicked[index]})}>
                     <img className="list-thumbnail"
-                         src={"data:image/png;base64," + imgThumb}/>
+                         src={imgThumb}/>
                     <div className="list-individual-info">
                         <p className="list-individual-name"> {firstName + " " + middleName + " " + lastName}
                             {` (${nickName})`}</p>

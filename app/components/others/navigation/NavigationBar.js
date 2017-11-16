@@ -21,9 +21,11 @@ class NavigationBar extends React.Component {
 
 
     componentWillMount() {
-        getUnreadNotificationCount().then(res => {
-            this.setState({count: res.data.count});
-        });
+        if(this.props.isAuthenticated){
+            getUnreadNotificationCount().then(res => {
+                this.setState({count: res.data.count});
+            });
+        }
     }
 
 
@@ -40,15 +42,17 @@ class NavigationBar extends React.Component {
 
 
     notificationClicked() {
-        this.setState({isClicked: !this.state.isClicked})
+        this.setState({isClicked: !this.state.isClicked, count:0})
     }
 
 
     render() {
-        const {count, notifications, isClicked} = this.state;
+        const {count, isClicked} = this.state;
         const nickName = this.props.user.nick_name;
         const gymName = this.props.selectedGym.gym_name;
         const locality = this.props.selectedGym.locality;
+        const isAuthenticated = this.props.isAuthenticated;
+
         const userDetails =
             <div className="nav-user-detail">
                 <i className="nav-user-icon fa fa-user-o"/>
@@ -83,9 +87,9 @@ class NavigationBar extends React.Component {
                     </a>
                 </div>
 
-                {nickName ?
+                {isAuthenticated ?
                     <div>
-                        <div className={(!isClicked && count) ? "notification true" : "notification false"}>
+                        <div className={(isClicked || count) ? "notification true" : "notification false"}>
                             <div className="lg">
                                 {userDetails}
                             </div>
@@ -93,8 +97,7 @@ class NavigationBar extends React.Component {
                                 <div className="notification-icon">
                                     <span className="fa fa-bell"/>
                                 </div>
-
-                                <div className="notification-count">
+                                <div className={ count ? "notification-count":"notification-count false"}>
                                     <span className="label label-notification">{count}</span>
                                 </div>
                             </button>
@@ -116,6 +119,7 @@ class NavigationBar extends React.Component {
 
 const mapStateToProps = (state) => ({
     user: state.auth.user,
+    isAuthenticated: state.auth.isAuthenticated,
     selectedGym: state.selectedGym
 });
 

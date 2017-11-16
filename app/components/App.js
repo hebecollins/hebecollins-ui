@@ -3,7 +3,7 @@ import Navigation from './others/navigation/Navigation'
 import FlashMessageList from './others/flashMessage/FlashMessageList';
 import Footer from "./others/frames/Footer";
 
-require('../Toolbox/css/commons/alerts.css');
+require('../Toolbox/css/commons/extra.css');
 require('../Toolbox/css/text.css');
 require('../Toolbox/css/formFields.css');
 require('../Toolbox/css/contentBox.css');

@@ -1,6 +1,6 @@
 import $ from 'jquery'
 import isEmpty from 'lodash/isEmpty'
-
+import moment from 'moment'
 /**Takes any integer, positive or negative and returns its distance in weekday if 0 was sunday
  * For eg. If startDayNumber = 0, then 1 will be mon, 6 will be sat, -8 will be sat
  * @param i => integer distance from reference point.
@@ -51,13 +51,14 @@ export const deepCloneObject = (input) => {
  * @return String => in format 'dd monthName, yyyy'
  */
 export const getFormattedDate = (date) => {
-    const monthNames = ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"];
-    let parts = date.split('-');
-    const month = monthNames[parts[1] - 1];
-    const year = parts[0];
-    const day = parts[2];
-    return `${day} ${month}, ${year}`;
+    if( moment(date) >  moment().subtract(7, 'days')){
+        return moment(date).calendar()
+    }
+    else{
+        return moment().format("MMM Do YYYY");
+    }
 };
+
 
 export const getGenderFromGenderCode = (gender) => {
     switch (gender) {

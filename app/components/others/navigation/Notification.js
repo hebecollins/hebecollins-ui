@@ -1,5 +1,6 @@
 import React from 'react';
-import {getNotifications} from "../../../actions/notificationActions";
+import {getNotifications, markNotificationAsRead} from "../../../actions/notificationActions";
+import {getFormattedDate} from "../../../Toolbox/Helpers/extra";
 
 /** Designs the navigation bar look
  * */
@@ -11,23 +12,42 @@ class Notification extends React.Component {
         }
     }
 
-
     componentWillMount() {
        getNotifications().then(res=>{
-           this.setState({notifications:res.data.notifications})
+           const notifications = res.data.notifications;
+           this.setState({notifications:notifications});
        })
     }
 
-    render() {
+    componentWillUnmount(){
 
+        const markedIdsAsRead = this.state.notifications.map((notification, index)=>{
+            return notification.id
+        });
+        markNotificationAsRead(markedIdsAsRead);
+    }
+
+    onClick(){
+
+    }
+
+    render() {
         let notifBox  = this.state.notifications.map((notif, index)=>{
-           return <div key={index} className="notif-box">
-               {notif.notification}{notif.created_at}
+           return(
+            <button key={index} onClick = {this.onClick} className="notif-box notification-button">
+               <img className="notif-thumbnail" src={notif.img_thumb}/>
+               <div className="notif-notif">
+               <p>{notif.notification}</p>
+                   <p><span className="space-glyphicon glyphicon glyphicon-time"/>{getFormattedDate(notif.created_at)}</p>
+
                </div>
+               </button>
+           )
         });
 
         return (
             <div className="notif-container">
+                <p>Notifications</p>
                 {notifBox}
             </div>
         )

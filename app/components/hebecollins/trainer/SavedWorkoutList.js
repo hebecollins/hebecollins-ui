@@ -11,7 +11,7 @@ import isEmpty from 'lodash/isEmpty'
 import {redirectByName} from "../../../Toolbox/Helpers/redirect";
 import {errorResponse} from "../../../Toolbox/Helpers/responseHandler";
 import { saveSelectedLabel} from "../../../actions/actionStore";
-import {deepCloneArray} from "../../../Toolbox/Helpers/extra";
+import {deepCloneArray, getFormattedDate} from "../../../Toolbox/Helpers/extra";
 import {Fade} from "../../others/extra/Animation";
 
 class SavedWorkoutList extends React.Component {
@@ -82,7 +82,7 @@ class SavedWorkoutList extends React.Component {
                             <label className="field">Name :</label>
                             <label className="value">{label.label}</label><br/>
                             <label className="field">Created On :</label>
-                            <label className="value">{label.created_at}</label><br/>
+                            <label className="value">{getFormattedDate(label.created_at)}</label><br/>
                         </div>
                         <div className="pull-right">
                             <ButtonOrange
