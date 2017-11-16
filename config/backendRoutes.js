@@ -58,7 +58,9 @@ export const BACKEND_ROUTES = {
         },
         WORKOUT:{
             GET_BY_ID:"/workout" ///:gymId/workout/:clientId
-        }
+        },
+        NOTIFICATION:"/notification",
+        NOTIFICATION_COUNT:"/notification-count"
     },
 
 

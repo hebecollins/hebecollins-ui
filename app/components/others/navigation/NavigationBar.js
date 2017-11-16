@@ -2,28 +2,50 @@ import React from 'react';
 import $ from 'jquery'
 import {connect} from 'react-redux'
 import {redirectByName} from "../../../Toolbox/Helpers/redirect";
+import {getNotifications, getUnreadNotificationCount} from "../../../actions/notificationActions";
+import classnames from 'classnames';
+import Notification from "./Notification";
 
 /** Designs the navigation bar look
  * */
 class NavigationBar extends React.Component {
+    constructor(props) {
+        super(props);
+        this.state = {
+            notifications: '',
+            count: '',
+            isClicked: ''
+        }
+        this.notificationClicked = this.notificationClicked.bind(this)
+    }
+
+
+    componentWillMount() {
+        getUnreadNotificationCount().then(res => {
+            this.setState({count: res.data.count});
+        });
+    }
+
 
     componentDidMount() {
-        // $('button').on('click', function(){
-        //     alert('alert bro')
-        // })
         $('.nav a').on('click', function () {
             $('.navbar-toggle').click() //bootstrap 3.x by Richard
         });
 
-        $("[data-toggle='navHeaderCollapse']").click(function() {
+        $("[data-toggle='navHeaderCollapse']").click(function () {
             let selector = $(this).data("target");
             $(selector).toggleClass('in');
         });
     }
 
 
-    render() {
+    notificationClicked() {
+        this.setState({isClicked: !this.state.isClicked})
+    }
 
+
+    render() {
+        const {count, notifications, isClicked} = this.state;
         const nickName = this.props.user.nick_name;
         const gymName = this.props.selectedGym.gym_name;
         const locality = this.props.selectedGym.locality;
@@ -56,25 +78,37 @@ class NavigationBar extends React.Component {
                         </div>
                         <div>{this.props.children}</div>
                     </div>
-                    <a onClick={()=>redirectByName("HOME")} className="hebecollins-home">
+                    <a onClick={() => redirectByName("HOME")} className="hebecollins-home">
                         HEBECOLLINS
                     </a>
                 </div>
 
                 {nickName ?
-                    <div className="notification true">{/*need to put a check and pass notifications*/}
-                        <div className="lg">
-                            {userDetails}
+                    <div>
+                        <div className={(!isClicked && count) ? "notification true" : "notification false"}>
+                            <div className="lg">
+                                {userDetails}
+                            </div>
+                            <button className="flex notification-button" onClick={this.notificationClicked}>
+                                <div className="notification-icon">
+                                    <span className="fa fa-bell"/>
+                                </div>
+
+                                <div className="notification-count">
+                                    <span className="label label-notification">{count}</span>
+                                </div>
+                            </button>
                         </div>
-                        <div className="notification-icon">
-                            <span className="fa fa-bell"/>
-                        </div>
-                        <div className="notification-count">
-                            <span className="label label-notification">1</span>
-                        </div>
+
+                        {  isClicked  ?
+                            <Notification/>
+                            : <div/>
+                        }
+
                     </div>
                     : <div/>
                 }
+
             </div>
         );
     };
