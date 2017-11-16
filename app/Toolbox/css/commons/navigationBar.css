@@ -22,7 +22,7 @@
         position: absolute;
         margin-top: 50px;
         background-color: #1e1e1e;
-        width: 100%;
+        width: 0;
     }
 }
 
@@ -58,7 +58,6 @@
     font-size: x-large;
     display: flex;
     color: var(--light-orange);
-    /*color: var(--light-gray);*/
     margin-top: 5px;
     margin-right: 15px;
     right: 0;
@@ -159,25 +158,56 @@
 }
 
 
-/*.navHeaderCollapse{*/
-    /*width: 0;*/
-    /*display: block;*/
-/*}*/
+@media (min-width: 768px) {
 
-/*.navHeaderCollapse.in{*/
-    /*width: 25%;*/
-    /*display: block;*/
-/*}*/
+    .navHeaderCollapse{
+        width: 0;
+        display: block;
+    }
 
-/*.navHeaderCollapse {*/
-    /*-webkit-transition: width 0.5s ease;*/
-    /*-moz-transition: width 0.5s ease;*/
-    /*-o-transition: width 0.5s ease;*/
-    /*transition: width 0.3s ease-out;*/
-    /*white-space: nowrap;*/
-    /*vertical-align: middle;*/
-    /*height: 100%;*/
-/*}*/
+    .navHeaderCollapse.in{
+        width: 25%;
+        display: block;
+    }
+
+    .navHeaderCollapse {
+        -webkit-transition: width 0.5s ease;
+        -moz-transition: width 0.5s ease;
+        -o-transition: width 0.5s ease;
+        transition: width 0.3s ease-out;
+        white-space: nowrap;
+        vertical-align: middle;
+        height: 100vh;
+        display: block;
+        overflow: hidden;
+    }
+}
+
+
+@media (max-width: 768px) {
+
+    .navHeaderCollapse{
+        height: 0;
+        display: block;
+    }
+
+    .navHeaderCollapse.in{
+        height: 100vh;
+        display: block;
+    }
+
+    .navHeaderCollapse {
+        -webkit-transition: height 0.5s ease;
+        -moz-transition: height 0.5s ease;
+        -o-transition: height 0.5s ease;
+        transition: height 0.3s ease-out;
+        white-space: nowrap;
+        vertical-align: middle;
+        overflow: hidden;
+        width: 100%;
+
+    }
+}
 
 
 /*===========FOLLOWING MUST BE DEPLOYED AFTER TESTING=============================*/

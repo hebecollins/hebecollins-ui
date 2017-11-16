@@ -15,10 +15,7 @@ class NavigationBar extends React.Component {
             $('.navbar-toggle').click() //bootstrap 3.x by Richard
         });
 
-        // $('.navbar-toggle').click(function(){
-        //     $('div').animate({width: 'toggle'});
-        // });
-        $("[data-toggle='collaps']").click(function() {
+        $("[data-toggle='navHeaderCollapse']").click(function() {
             let selector = $(this).data("target");
             $(selector).toggleClass('in');
         });
@@ -47,13 +44,13 @@ class NavigationBar extends React.Component {
                 <div className="nav-hebecollins flex">
                     <button
                         className="navbar-toggle"
-                        data-toggle="collapse"
+                        data-toggle="navHeaderCollapse"
                         data-target=".navHeaderCollapse">
                         <span className="icon-bar"/>
                         <span className="icon-bar"/>
                         <span className="icon-bar"/>
                     </button>
-                    <div className="nav-hebecollins-menu collapse navHeaderCollapse">
+                    <div className="nav-hebecollins-menu collapse2 navHeaderCollapse">
                         <div className="sm">
                             {userDetails}
                         </div>
