@@ -221,9 +221,11 @@ class ClientListForTrainer extends React.Component {
                 <div className="row">
 
                     {/*left side of clientList page*/}
-                    <div className="col col-lg-5 col-md-5 col-sm-5 col-xs-12 round-edged-box">
+                    <div className="col col-lg-5 col-md-5 col-sm-5 col-xs-12 round-edged-box less-padding">
                         <p className="list-header">Client List</p>
-                        {listBox(this.state.clients)}
+                        <div className="user-list">
+                            {listBox(this.state.clients)}
+                        </div>
                     </div>
 
                     {/*right side of the clientList page. It is mobile hidden*/}

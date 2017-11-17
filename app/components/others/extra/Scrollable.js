@@ -12,8 +12,8 @@ export default class Scrollable extends React.Component {
                 {...this.props}
                 style={{
                     width: "auto",
-                    height: 300,
-                    color: "white"
+                    height: "inherit",
+                    color: "white",
                 }}
                 >
 

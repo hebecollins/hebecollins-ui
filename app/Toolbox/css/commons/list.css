@@ -1,9 +1,23 @@
 /*======================================================================================*/
 /*list-individual-data is one entry in user-list. Each entry represents a link*/
 /*======================================================================================*/
+
+@media (min-width: 768px) {
+    .user-list {
+        height: 350px;
+    }
+}
+
+@media (max-width: 768px) {
+    .user-list {
+        height: 400px;
+    }
+}
+
+
 .list-individual-data {
     min-height: 40px;
-    padding: 10px 0 10px 0;
+    padding: 10px;
     display: flex;
     border-bottom: 1px solid var(--light-gray);
     margin-right: 20px;
@@ -22,6 +36,7 @@
 .list-dropdown-mobile-visible{
     background-color: var(--light-gray);
     margin-right: 20px;
+    padding-left: 10px;
     display: flex;
 }
 
@@ -39,7 +54,7 @@
 .list-individual-info {
     display: inline-block;
     color: black;
-    font-size: large;
+    font-size: medium;
     padding-left: 10px;
 }
 

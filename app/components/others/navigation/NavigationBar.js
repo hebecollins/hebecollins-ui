@@ -14,14 +14,14 @@ class NavigationBar extends React.Component {
         this.state = {
             notifications: '',
             count: '',
-            isClicked: ''
+            isClicked: false
         }
         this.notificationClicked = this.notificationClicked.bind(this)
     }
 
 
     componentWillMount() {
-        if(this.props.isAuthenticated){
+        if (this.props.isAuthenticated) {
             getUnreadNotificationCount().then(res => {
                 this.setState({count: res.data.count});
             });
@@ -31,7 +31,7 @@ class NavigationBar extends React.Component {
 
     componentDidMount() {
         $('.nav a').on('click', function () {
-            $('.navbar-toggle').click() //bootstrap 3.x by Richard
+            $('.navbar-toggle').click()
         });
 
         $("[data-toggle='navHeaderCollapse']").click(function () {
@@ -40,9 +40,20 @@ class NavigationBar extends React.Component {
         });
     }
 
+    componentDidUpdate() {
+        //it closes notification container if anywhere is clicked if it is opened
+        if (this.state.isClicked) {
+            const self = this;
+            document.addEventListener("click", clickFunction);
+            function clickFunction(e) {
+                self.setState({isClicked: false});
+                document.removeEventListener("click", clickFunction);
+            }
+        }
+    }
 
     notificationClicked() {
-        this.setState({isClicked: !this.state.isClicked, count:0})
+        this.setState({isClicked: !this.state.isClicked, count: 0})
     }
 
 
@@ -97,13 +108,13 @@ class NavigationBar extends React.Component {
                                 <div className="notification-icon">
                                     <span className="fa fa-bell"/>
                                 </div>
-                                <div className={ count ? "notification-count":"notification-count false"}>
+                                <div className={count ? "notification-count" : "notification-count false"}>
                                     <span className="label label-notification">{count}</span>
                                 </div>
                             </button>
                         </div>
 
-                        {  isClicked  ?
+                        {isClicked ?
                             <Notification/>
                             : <div/>
                         }

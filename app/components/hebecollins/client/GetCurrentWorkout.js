@@ -43,9 +43,7 @@ class GetCurrentWorkout extends React.Component {
             el.addEventListener('click', () => {
                 el.removeEventListener('click', () => {
                 });
-                this.setState({displayGif: false}
-                )
-
+                this.setState({displayGif: false})
             });
         }
     }

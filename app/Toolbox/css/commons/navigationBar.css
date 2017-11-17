@@ -105,7 +105,7 @@
 }
 
 .notif-box.notification-button:hover{
-    color:var(--dark-orange);
+    background-color:var(--dark-orange);
 }
 
 
@@ -245,11 +245,15 @@
 .notif-container{
     position: absolute;
     top:48px;
-    padding:8px;
-    border: 1px solid var(--dark-grey);
+    padding:8px 8px 0 8px;
+    border-bottom: 8px solid var(--dark-grey);
     background-color: var(--dark-grey);
     color: var(--dark-orange);
-    overflow: auto;
+    overflow: hidden;
+    height:auto;
+}
+.notif-list{
+    height:500px;
 }
 
 .notif-box{
@@ -257,8 +261,8 @@
     margin-top:5px;
     margin-bottom:5px;
     padding:5px;
-    color:var(--light-orange);
-    background-color: black;
+    color:black;
+    background-color: var(--light-orange);
 }
 
 .notif-notif{
