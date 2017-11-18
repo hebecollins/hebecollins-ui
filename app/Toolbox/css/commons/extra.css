@@ -7,3 +7,7 @@
 .space-glyphicon{
     padding-right:5px;
 }
+
+.no-bottom-padding{
+    padding-bottom: 0!important;
+}

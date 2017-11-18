@@ -61,7 +61,7 @@ export const CommentBox = ({field, value, disabled, label, error, onChange, icon
                 value={value}
                 onChange={onChange}
                 name={field}
-                className="form-control"
+                className="form-control comment-box"
                 placeholder={label}
                 disabled={disabled}
             /></FieldFrame>

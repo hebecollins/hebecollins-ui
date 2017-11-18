@@ -28,23 +28,28 @@ class NavigationBar extends React.Component {
         }
     }
 
-
     componentDidMount() {
-        $('.nav a').on('click', function () {
+
+        $('.nav a').on('click', function (e) {
             $('.navbar-toggle').click()
         });
 
-        $("[data-toggle='navHeaderCollapse']").click(function () {
-            let selector = $(this).data("target");
-            $(selector).toggleClass('in');
-        });
+        $("[data-toggle='navHeaderCollapse']").click(
+            function () {
+                let selector = $(this).data("target");
+                $(selector).toggleClass('in');
+            }
+        )
+        ;
     }
 
     componentDidUpdate() {
+
         //it closes notification container if anywhere is clicked if it is opened
         if (this.state.isClicked) {
             const self = this;
             document.addEventListener("click", clickFunction);
+
             function clickFunction(e) {
                 self.setState({isClicked: false});
                 document.removeEventListener("click", clickFunction);
@@ -87,7 +92,7 @@ class NavigationBar extends React.Component {
                         <span className="icon-bar"/>
                         <span className="icon-bar"/>
                     </button>
-                    <div className="nav-hebecollins-menu collapse2 navHeaderCollapse">
+                    <div id="navbar" className="nav-hebecollins-menu collapse2 navHeaderCollapse">
                         <div className="sm">
                             {userDetails}
                         </div>
@@ -125,7 +130,8 @@ class NavigationBar extends React.Component {
 
             </div>
         );
-    };
+    }
+    ;
 }
 
 const mapStateToProps = (state) => ({

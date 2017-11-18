@@ -1,0 +1,49 @@
+.rating-group{
+    padding:10px;
+}
+.rating{
+    display: flex;;
+}
+.rating-label{
+    font-size: medium;
+    font-family: Calibri;
+    font-weight: 100;
+    color: white;
+    padding-right: 10px;
+    padding-top: 5px;
+    width:150px;
+}
+.rating-stars{
+
+}
+
+@media (min-width: 768px) {
+    .add-review{
+        width: 400px;
+    }
+}
+@media (max-width: 768px) {
+    .add-review{
+        width: 100%;
+        padding: 5px;
+    }
+}
+
+.add-review-box{
+    /*position: absolute;*/
+    padding-top: 10%;
+}
+
+.add-review-box .list-element{
+    /*position: absolute;*/
+    margin-bottom: 10px;
+}
+
+
+.rating-text .form-control{
+    font-size:small;
+}
+
+.rating-text .comment-box{
+    height:90px;
+}
