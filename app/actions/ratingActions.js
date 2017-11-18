@@ -1,5 +1,5 @@
 import {BACKEND_ROUTES} from "../../config/backendRoutes";
-import {postJSON} from "../Toolbox/Helpers/requestHandler";
+import {get, postJSON} from "../Toolbox/Helpers/requestHandler";
 
 /**posts trainer's review
  * @param data => data to be posted
@@ -7,7 +7,7 @@ import {postJSON} from "../Toolbox/Helpers/requestHandler";
  * @param gymId => currently selected gymId
  * */
 export const postTrainerReview = (data, trainerId, gymId) => {
-    const route = `${gymId}${BACKEND_ROUTES.COMMONS.RATE_TRAINER}/${trainerId}`;
+    const route = `${gymId}${BACKEND_ROUTES.COMMONS.REVIEW_TRAINER}/${trainerId}`;
     const datatoBePosted = {
         ratings: {
             quality_one: data.quality_one,
@@ -23,4 +23,9 @@ export const postTrainerReview = (data, trainerId, gymId) => {
     return postJSON(datatoBePosted, route).then(res => {
         console.log(res.data);
     });
+};
+
+export const getTrainerReviews = (gymId, trainerId) =>{
+    const route = `${gymId}${BACKEND_ROUTES.COMMONS.REVIEW_TRAINER}/${trainerId}`;
+    return get(route)
 };

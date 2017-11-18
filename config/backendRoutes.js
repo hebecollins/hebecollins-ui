@@ -62,7 +62,8 @@ export const BACKEND_ROUTES = {
         NOTIFICATION:"/notification",
         NOTIFICATION_COUNT:"/notification-count",
         NOTIFICATION_UPDATE:"/notification/update",
-        RATE_TRAINER:"/rate/trainer",
+        REVIEW_TRAINER:"/review/trainer",
+        GET_TRAINER_REVIEWS:"/review/trainer",
     },
 
 
