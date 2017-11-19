@@ -1,19 +1,18 @@
-* priority low: make save and assign workout option
 
-* priority moderate: make certain pages inaccessible if client is not selected
-* priority moderate(can be done in redirect section):
-    remove client data if any other page is accessed other than workout related pages
-    accessibility of page/route must be handled outside of a component
+PRIORITY HIGH:
+* after editing remarks, button are getting disappeared permanently. FIX THIS!
 
+PRIORITY MODERATE:
+* make certain pages inaccessible if client is not selected
+* remove client data if any other page is accessed other than workout related pages accessibility of page/route
+  must be handled outside of a component(can be done in redirect section)
+* upgrade webpack version to at least 2.0
 
-* priority low: make gymId store as a seperate entry and make it open for user to change it
+PRIORITY LOW:
+* make save and assign workout option
+* make gymId store as a seperate entry and make it open for user to change it
+* let trainers and managers categorize their client. There should be a separate button in it to see by category.
 
-* priority low: upgrade webpack version to atleast 2.0 after first attempt of image cropper
-    as image cropping can have issues
-
-* priority low: make open in new tab feature work by taking localStorage data and copying it to redux
-
-* priority low: let trainers and managers categorize their client. There should be a separate button
-                in it to see by category.
-
-* upgrade webpack version.. also use webpack -p command to reduce the bundle size
+NEW FEATURE IDEAS :
+* make an option in manager interface where he/she can see the list of people with pending fees.
+* user should get notification when his fees is pending.

@@ -34,8 +34,10 @@ export const ROUTES = [
     {ROUTE_NAME: 'CLIENT_HOME', ROUTE: '/client', PERMISSION: ['client']},
     {ROUTE_NAME: 'ACTIVATE_CLIENT', ROUTE: '/activate/client', PERMISSION: ['guest']},
     {ROUTE_NAME: 'GET_WORKOUT_FOR_TODAY',ROUTE: '/client/workout', PERMISSION: ['client']},
+
     {ROUTE_NAME: 'RATE_TRAINER',ROUTE: '/client/trainer/review/rate', PERMISSION: ['client']},
     {ROUTE_NAME: 'VIEW_TRAINER_REVIEW',ROUTE: '/client/trainer/review/view', PERMISSION: ['client']},
+    {ROUTE_NAME: 'VIEW_TRAINER_AVG_REVIEW',ROUTE: '/client/trainer/review/view/avg', PERMISSION: ['client']},
 
 
     //commons
