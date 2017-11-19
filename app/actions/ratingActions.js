@@ -1,5 +1,6 @@
 import {BACKEND_ROUTES} from "../../config/backendRoutes";
 import {get, postJSON} from "../Toolbox/Helpers/requestHandler";
+import {addFlashMessage} from "./actionStore";
 
 /**posts trainer's review
  * @param data => data to be posted
@@ -20,10 +21,15 @@ export const postTrainerReview = (data, gymId, trainerId ) => {
         }
     };
 
-    return postJSON(datatoBePosted, route).then(res => {
-        console.log(res.data);
-    });
-};
+    return dispatch=>{
+        return postJSON(datatoBePosted, route).then(res => {
+            dispatch(addFlashMessage({
+                type:"success",
+                text:res.data.msg
+            }))
+        });
+    }
+    };
 
 export const getTrainerReviews = (gymId, trainerId) =>{
     const route = `${gymId}${BACKEND_ROUTES.COMMONS.REVIEW_TRAINER}/${trainerId}`;

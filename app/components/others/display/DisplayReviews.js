@@ -1,26 +1,10 @@
 import React from 'react'
 import Rate from "../extra/Rate";
-import {getTrainerReviews} from "../../../actions/ratingActions";
 import {getFormattedDate} from "../../../Toolbox/Helpers/extra";
 
-class DisplayReviews extends React.Component {
-    constructor(props) {
-        super(props);
-        this.state = {
-            reviews: [],
-        };
-    }
+export const DisplayReviews =(props)=>{
 
-    componentWillMount() {
-        getTrainerReviews('59e380f606358', '59eeef3689aa8').then(res => {
-            const reviews = res.data.reviews;
-            this.setState({reviews: reviews});
-        })
-    }
-
-
-    render() {
-        const reviewBox = this.state.reviews.map((review, index) => {
+        const reviewBox = props.reviewList.map((review, index) => {
             return (
                 <div key={review.reviewer_id} className="review-list">
                     <div className="average-rating">
@@ -40,8 +24,9 @@ class DisplayReviews extends React.Component {
             )
         });
 
-        return <div className="content">{reviewBox}</div>
-    }
-}
+        return <div>{reviewBox}</div>
+    };
 
-export default DisplayReviews;
+DisplayReviews.propTypes = {
+    reviewList: React.PropTypes.array.isRequired
+};
