@@ -14,7 +14,6 @@ const Rate =(props)=>{
                 starRatedColor={"yellow"}
                 starEmptyColor={"grey"}
                 starSpacing="1px"
-                starWidthAndHeight="25px"
             />
         )
     };

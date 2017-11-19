@@ -33,7 +33,7 @@ class RatingForm extends React.Component {
     }
 
     onSubmit() {
-        postTrainerReview(this.state,'59eeef3689aa8','59e380f606358')
+        postTrainerReview(this.state,'59e380f606358','59eeef3689aa8')
     }
 
     qualityOne(rating) {

@@ -1,49 +1,122 @@
-.rating-group{
-    padding:10px;
+.rating-group {
+    padding: 10px;
 }
-.rating{
+
+.rating {
     display: flex;;
 }
-.rating-label{
+
+.rating-label {
     font-size: medium;
     font-family: Calibri;
     font-weight: 100;
     color: white;
     padding-right: 10px;
     padding-top: 5px;
-    width:150px;
+    width: 150px;
 }
-.rating-stars{
+
+.rating-stars {
 
 }
 
 @media (min-width: 768px) {
-    .add-review{
+    .add-review {
         width: 400px;
     }
 }
+
 @media (max-width: 768px) {
-    .add-review{
+    .add-review {
         width: 100%;
         padding: 5px;
     }
 }
 
-.add-review-box{
+.add-review-box {
     /*position: absolute;*/
     padding-top: 10%;
 }
 
-.add-review-box .list-element{
+.add-review-box .list-element {
     /*position: absolute;*/
     margin-bottom: 10px;
 }
 
-
-.rating-text .form-control{
-    font-size:small;
+.rating-text .form-control {
+    font-size: small;
 }
 
-.rating-text .comment-box{
-    height:90px;
+.rating-text .comment-box {
+    height: 90px;
+}
+
+/*==========================================================================================================*/
+/*DISPLAY REVIEW COMPONENT in view mode*/
+
+@media (min-width: 768px) {
+    .star-svg {
+        height: 25px !important;
+        width: 25px !important;
+    }
+    .average-rating{
+        width: 200px;
+    }
+
+    .review-list{
+        display: flex;
+    }
+}
+
+@media (max-width: 768px) {
+    .star-svg {
+        height: 25px !important;
+        width: 25px !important;
+    }
+
+    .average-rating {
+        display: grid;
+    }
+
+    .average-rating .rating-label {
+        margin: auto;
+        right: 0;
+        width: auto;
+        padding-top: 0;
+        padding-right: 0;
+    }
+
+    .average-rating .star-box {
+        margin: auto;
+    }
+
+    .average-rating .star-box .star-svg {
+        height: 15px !important;
+        width: 15px !important;
+    }
+    .review-description{
+        font-size: small!important;
+    }
+}
+
+.time-label{
+    text-align: right;
+}
+.time-label .rating-label{
+    width:auto;
+    padding-top: 0;
+    font-size: small;
+}
+
+.review-comment{
+    width: 100%;
+}
+.review-title{
+    font-size: large;
+    color: white;
+}
+.review-description{
+    color:white;
+    font-size: medium;
+    font-style: italic;
 }

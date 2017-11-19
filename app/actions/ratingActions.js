@@ -6,7 +6,7 @@ import {get, postJSON} from "../Toolbox/Helpers/requestHandler";
  * @param trainerId => trainerId for which review is given
  * @param gymId => currently selected gymId
  * */
-export const postTrainerReview = (data, trainerId, gymId) => {
+export const postTrainerReview = (data, gymId, trainerId ) => {
     const route = `${gymId}${BACKEND_ROUTES.COMMONS.REVIEW_TRAINER}/${trainerId}`;
     const datatoBePosted = {
         ratings: {

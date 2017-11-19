@@ -37,6 +37,7 @@ import ViewSavedWorkout from "./components/hebecollins/trainer/ViewSavedWorkout"
 import EditSavedWorkout from "./components/hebecollins/trainer/EditSavedWorkout";
 import CategoryList from "./components/hebecollins/admin/CategoryList";
 import RatingForm from "./components/others/inputFieldGroup/RatingForm";
+import DisplayReviews from "./components/others/display/DisplayReviews";
 
 export default (
     <Route path="/" component={App}>
@@ -75,7 +76,9 @@ export default (
         <Route path={getRouteByName('CLIENT_HOME')} component={authCheck(ClientHome)}/>
         <Route path={getRouteByName('ACTIVATE_CLIENT')} component={authCheck(ActivateClient)}/>
         <Route path={getRouteByName('GET_WORKOUT_FOR_TODAY')} component={authCheck(GetCurrentWorkout)}/>
+
         <Route path={getRouteByName('RATE_TRAINER')} component={authCheck(RatingForm)}/>
+        <Route path={getRouteByName('VIEW_TRAINER_REVIEW')} component={authCheck(DisplayReviews)}/>
 
 
         {/*commons*/}
