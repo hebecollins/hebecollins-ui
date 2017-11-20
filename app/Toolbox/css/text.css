@@ -214,3 +214,8 @@ hr{
     font-size: xx-large;
     margin: 0 5px 0 5px;
 }
+
+.x-small-label{
+    color: white;
+    font-size: 12px;
+}

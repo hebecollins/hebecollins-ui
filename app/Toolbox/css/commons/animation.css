@@ -51,12 +51,24 @@
     }
 }
 
-.loading{
-    color: var(--light-gray);
-    height:100%;
-    margin-left: 47%;
-    margin-top: 18%;
+@media (min-width: 768px){
+    .loading{
+        color: var(--light-gray);
+        height:100%;
+        margin-left: 47%;
+        margin-top: 300px;
+    }
 }
+
+@media (max-width: 768px) {
+    .loading{
+        color: var(--light-gray);
+        height:100%;
+        margin-left: 42%;
+        margin-top: 280px;
+    }
+}
+
 .loading-box{
     position: absolute;
     width: 100%;

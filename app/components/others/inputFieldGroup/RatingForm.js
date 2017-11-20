@@ -76,7 +76,7 @@ class RatingForm extends React.Component {
         return (
                 <div className="add-review-box">
                     <div className="add-review">
-                        <h1 className="orange-header no-bottom-padding">Write a Review</h1>
+                        <h1 className="orange-header no-bottom-padding">{this.props.header}</h1>
                         <hr/>
                         <div className="rating-group">
                             <div className="rating">
@@ -136,6 +136,7 @@ class RatingForm extends React.Component {
 RatingForm.propTypes = {
     onSubmit: React.PropTypes.func.isRequired,
     onCancel: React.PropTypes.func.isRequired,
+    header:React.PropTypes.string.isRequired,
     postTrainerReview: React.PropTypes.func.isRequired,
 };
 

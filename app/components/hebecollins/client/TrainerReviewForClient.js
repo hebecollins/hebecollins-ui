@@ -6,6 +6,8 @@ import {DisplayReviews} from "../../others/display/DisplayReviews";
 import {ButtonOrange} from "../../others/display/Buttons";
 import RatingForm from "../../others/inputFieldGroup/RatingForm";
 import {connect} from 'react-redux'
+import isEmpty from 'lodash/isEmpty'
+import {redirectByName} from "../../../Toolbox/Helpers/redirect";
 
 class TrainerReviewForClient extends React.Component {
     constructor(props) {
@@ -14,7 +16,7 @@ class TrainerReviewForClient extends React.Component {
             avgRatings: {},
             reviewList: [],
             isReviewing: false,
-            hasServerResponded:false
+            hasServerResponded: false
         };
         this.onReview = this.onReview.bind(this);
         this.onCancel = this.onCancel.bind(this);
@@ -22,13 +24,18 @@ class TrainerReviewForClient extends React.Component {
     }
 
     componentWillMount() {
-        this.setState({hasServerResponded:false});
-        getTrainerReviews('59e380f606358', '59eeef3689aa8').then(res => {
-                const avgRatings = res.data.avg_rating;
-                const reviewList = res.data.reviews;
-                this.setState({avgRatings: avgRatings, reviewList: reviewList, hasServerResponded:true});
-            }
-        )
+        const {selectedUser, selectedGym} = this.props;
+        if(isEmpty(selectedUser)){
+            redirectByName('TRAINER_LIST_FOR_CLIENT');
+        }else{
+            this.setState({hasServerResponded: false});
+            getTrainerReviews(selectedGym.gym_id, selectedUser.trainer_id).then(res => {
+                    const avgRatings = res.data.avg_rating;
+                    const reviewList = res.data.reviews;
+                    this.setState({avgRatings: avgRatings, reviewList: reviewList, hasServerResponded: true});
+                }
+            )
+        }
     }
 
     onReview() {
@@ -36,48 +43,64 @@ class TrainerReviewForClient extends React.Component {
     }
 
     onReviewSubmit(data) {
-        this.props.postTrainerReview(data,'59e380f606358','59eeef3689aa8').then(res=>{
+        const {selectedGym, selectedUser }=this.props;
+        this.props.postTrainerReview(data, selectedGym.gym_id, selectedUser.trainer_id).then(res => {
             this.componentWillMount();
             this.setState({isReviewing: false});
         })
     }
 
-    onCancel(){
+    onCancel() {
         this.setState({isReviewing: false});
     }
 
     render() {
         const {avgRatings, reviewList, isReviewing, hasServerResponded} = this.state;
+        console.log(reviewList);
 
         return (
             hasServerResponded ?
-                <div>
-                    <div className="content">
-                        <div className="black-box">
-                            <DisplayTrainerAvgReview avgRatings={avgRatings}/>
-                            <div className="write-review-box">
-                                <p className="field">Got an opinion ?</p>
-                                <ButtonOrange
-                                    onClick={this.onReview}
-                                    disabled={false}
-                                    label={"Write a Review"}/>
+                !isEmpty(avgRatings) ?
+                    <div>
+                        <div className="content">
+                            <div className="black-box">
+                                <DisplayTrainerAvgReview avgRatings={avgRatings}/>
+                                <div className="write-review-box">
+                                    <p className="field">Got an opinion ?</p>
+                                    <ButtonOrange
+                                        onClick={this.onReview}
+                                        disabled={false}
+                                        label={"Write a Review"}/>
+                                </div>
+                                <div className="orange-header">Recent Reviews</div>
+                                <DisplayReviews reviewList={reviewList}/>
                             </div>
-                            <div className="orange-header">Recent Reviews</div>
-                            <DisplayReviews reviewList={reviewList}/>
                         </div>
-                    </div>
-                    {isReviewing ?
-                        <div id="pop-on-screen">
-                            <RatingForm
+                        {isReviewing ?
+                            <div id="pop-on-screen">
+                                <RatingForm
+                                    onSubmit={this.onReviewSubmit}
+                                    header={"Write a review"}
+                                    onCancel={this.onCancel}
+                                    postTrainerReview={this.props.postTrainerReview}/>
+                            </div> : <div/>
+                        }
+                    </div> :
+                    <div id="pop-on-screen">
+                        <RatingForm
                             onSubmit={this.onReviewSubmit}
                             onCancel={this.onCancel}
-                            postTrainerReview={this.props.postTrainerReview}/>
-                        </div>: <div/>
-                    }
-                </div>
-                : <Loading/>
+                            header={"Be the first one to write a review"}
+                            postTrainerReview={this.props.postTrainerReview}
+                        />
+                    </div> : <Loading/>
         )
     }
 }
 
-export default connect(null, {postTrainerReview})(TrainerReviewForClient);
+const mapStateToProps =(state)=>({
+  selectedGym:state.selectedGym,
+  selectedUser:state.selectedUser
+});
+
+export default connect(mapStateToProps, {postTrainerReview})(TrainerReviewForClient);

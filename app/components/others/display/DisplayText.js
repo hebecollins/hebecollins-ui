@@ -12,7 +12,7 @@ export const FieldValue = ({field,value,noMargin}) => {
 
 FieldValue.propTypes={
     field: React.PropTypes.string.isRequired,
-    value: React.PropTypes.string.isRequired,
+    value: React.PropTypes.any.isRequired,
     noMargin: React.PropTypes.bool.isRequired,
 };
 

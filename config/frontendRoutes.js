@@ -35,9 +35,8 @@ export const ROUTES = [
     {ROUTE_NAME: 'ACTIVATE_CLIENT', ROUTE: '/activate/client', PERMISSION: ['guest']},
     {ROUTE_NAME: 'GET_WORKOUT_FOR_TODAY',ROUTE: '/client/workout', PERMISSION: ['client']},
 
-    {ROUTE_NAME: 'RATE_TRAINER',ROUTE: '/client/trainer/review/rate', PERMISSION: ['client']},
-    {ROUTE_NAME: 'VIEW_TRAINER_REVIEW',ROUTE: '/client/trainer/review/view', PERMISSION: ['client']},
-    {ROUTE_NAME: 'VIEW_TRAINER_AVG_REVIEW',ROUTE: '/client/trainer/review/view/avg', PERMISSION: ['client']},
+    {ROUTE_NAME: 'TRAINER_REVIEW_FOR_CLIENT',ROUTE: '/client/trainer/review', PERMISSION: ['client']},
+    {ROUTE_NAME: 'TRAINER_LIST_FOR_CLIENT',ROUTE: '/client/trainers', PERMISSION: ['client']},
 
 
     //commons

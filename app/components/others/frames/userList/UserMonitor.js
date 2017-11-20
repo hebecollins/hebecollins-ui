@@ -1,6 +1,6 @@
 import React from 'react'
 
-export const UserMonitor = ({firstName, middleName, lastName, nickName, children}) => {
+export const UserMonitor = ({name, nickName, children}) => {
 
     const LEFT_BOX = "left-box";
     const RIGHT_BOX = "right-box";
@@ -14,7 +14,7 @@ export const UserMonitor = ({firstName, middleName, lastName, nickName, children
     return (
         <div className="list-monitor">
             <p className="list-monitor-header">
-                {firstName + " " + middleName + " " + lastName +` (${nickName})`}
+                {name +` (${nickName})`}
             </p>
             <div className="list-monitor-elements">
                 <div className="list-monitor-left-box">
@@ -29,8 +29,6 @@ export const UserMonitor = ({firstName, middleName, lastName, nickName, children
 };
 
 UserMonitor.propTypes = {
-    firstName: React.PropTypes.string.isRequired,
-    middleName: React.PropTypes.string.isRequired,
-    lastName: React.PropTypes.string.isRequired,
+    name: React.PropTypes.string.isRequired,
     nickName: React.PropTypes.string.isRequired
 };

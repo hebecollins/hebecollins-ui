@@ -5,7 +5,7 @@ import {getFormattedDate} from "../../../../Toolbox/Helpers/extra";
 //
 export const ListElement =
     ({
-         index, nickName, imgThumb, firstName, middleName, lastName, onClick, isClicked, children
+         index, nickName, imgThumb, name, onClick, isClicked, children
      }) => {
         const MOBILE_VISIBLE = "mobile-visible";
         const ALL_VISIBLE = "all-visible";
@@ -22,8 +22,7 @@ export const ListElement =
                     <img className="list-thumbnail"
                          src={imgThumb}/>
                     <div className="list-individual-info">
-                        <p className="list-individual-name"> {firstName + " " + middleName + " " + lastName}
-                            {` (${nickName})`}</p>
+                        <p className="list-individual-name"> {name}{` (${nickName})`}</p>
                         {getComponent(ALL_VISIBLE)}
                     </div>
                 </a>
@@ -41,9 +40,7 @@ export const ListElement =
 
 ListElement.propTypes = {
     nickName: React.PropTypes.string.isRequired,
-    firstName: React.PropTypes.string.isRequired,
-    middleName: React.PropTypes.string.isRequired,
-    lastName: React.PropTypes.string.isRequired,
+    name: React.PropTypes.string.isRequired,
     imgThumb: React.PropTypes.string.isRequired,
     index: React.PropTypes.number.isRequired,
     isClicked: React.PropTypes.array.isRequired

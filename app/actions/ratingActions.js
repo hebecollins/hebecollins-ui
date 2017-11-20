@@ -31,6 +31,10 @@ export const postTrainerReview = (data, gymId, trainerId ) => {
     }
     };
 
+/**gets trainers review by trainerId
+ * @param gymId
+ * @param trainerId
+ * */
 export const getTrainerReviews = (gymId, trainerId) =>{
     const route = `${gymId}${BACKEND_ROUTES.COMMONS.REVIEW_TRAINER}/${trainerId}`;
     return get(route)

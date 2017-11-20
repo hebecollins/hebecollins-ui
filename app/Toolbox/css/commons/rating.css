@@ -18,15 +18,14 @@
 
 @media (min-width: 768px) {
     .add-review {
-        width: 400px;
+        padding:10px 20px 20px 20px;
+
         margin:auto;
     }
     .add-review-box{
-        width: 35%;
-        top:100px;
+        width: 400px;
+        top:60px;
         margin:auto;
-        padding-top: 15px;
-        padding-bottom: 25px;
     }}
 
 @media (max-width: 768px) {

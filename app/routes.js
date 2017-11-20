@@ -40,6 +40,7 @@ import RatingForm from "./components/others/inputFieldGroup/RatingForm";
 import DisplayReviews from "./components/others/display/DisplayReviews";
 import DisplayTrainerAvgReview from "./components/others/display/DisplayTrainerAvgRating";
 import TrainerReviewForClient from "./components/hebecollins/client/TrainerReviewForClient";
+import TrainerListForClient from "./components/hebecollins/client/TrainerListForClient";
 
 export default (
     <Route path="/" component={App}>
@@ -79,9 +80,8 @@ export default (
         <Route path={getRouteByName('ACTIVATE_CLIENT')} component={authCheck(ActivateClient)}/>
         <Route path={getRouteByName('GET_WORKOUT_FOR_TODAY')} component={authCheck(GetCurrentWorkout)}/>
 
-        <Route path={getRouteByName('RATE_TRAINER')} component={authCheck(RatingForm)}/>
-        <Route path={getRouteByName('VIEW_TRAINER_REVIEW')} component={authCheck(DisplayReviews)}/>
-        <Route path={getRouteByName('VIEW_TRAINER_AVG_REVIEW')} component={authCheck(TrainerReviewForClient)}/>
+        <Route path={getRouteByName('TRAINER_REVIEW_FOR_CLIENT')} component={authCheck(TrainerReviewForClient)}/>
+        <Route path={getRouteByName('TRAINER_LIST_FOR_CLIENT')} component={authCheck(TrainerListForClient)}/>
 
 
         {/*commons*/}
