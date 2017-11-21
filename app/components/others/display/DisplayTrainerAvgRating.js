@@ -27,28 +27,28 @@ export const DisplayTrainerAvgReview = (props) => {
                     </label>
                     <div>
                         <label className="quality-name">Quality One : </label>
-                        <label className="rating-in-number">{avgRatings.quality_one.toFixed(1)} / 5</label>
+                        <label className="rating-in-number">{parseFloat(avgRatings.quality_one).toFixed(1)} / 5</label>
                     </div>
                     <div>
                         <label className="quality-name">Quality Two : </label>
-                        <label className="rating-in-number">{avgRatings.quality_two.toFixed(1)} / 5</label>
+                        <label className="rating-in-number">{parseFloat(avgRatings.quality_two).toFixed(1)} / 5</label>
                     </div>
                     <div>
                         <label className="quality-name">Quality Three : </label>
-                        <label className="rating-in-number">{avgRatings.quality_three.toFixed(1)} / 5</label>
+                        <label className="rating-in-number">{parseFloat(avgRatings.quality_three).toFixed(1)} / 5</label>
                     </div>
                     <div>
                         <label className="quality-name">Quality Four : </label>
-                        <label className="rating-in-number">{avgRatings.quality_four.toFixed(1)} / 5</label>
+                        <label className="rating-in-number">{parseFloat(avgRatings.quality_four).toFixed(1)} / 5</label>
                     </div>
                     <div>
                         <label className="quality-name">Quality Five : </label>
-                        <label className="rating-in-number">{avgRatings.quality_five.toFixed(1)} / 5</label>
+                        <label className="rating-in-number">{parseFloat(avgRatings.quality_five).toFixed(1)} / 5</label>
                     </div>
                     <hr/>
                     <div>
                         <label className="quality-name big">Overall Rating : </label>
-                        <label className="rating-in-number">{avgRatings.average.toFixed(1)} / 5</label>
+                        <label className="rating-in-number">{parseFloat(avgRatings.average).toFixed(1)} / 5</label>
                     </div>
                 </div>
             </div>

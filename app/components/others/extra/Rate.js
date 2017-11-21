@@ -5,7 +5,7 @@ const Rate =(props)=>{
         let {value, onChange,isSelectable, isAggregateRating} = props;
         return (
             <Rating
-                rating={value}
+                rating={parseFloat(value)}
                 isSelectable={isSelectable}
                 isAggregateRating={isAggregateRating}
                 changeRating={onChange}
@@ -19,7 +19,7 @@ const Rate =(props)=>{
     };
 
 Rate.propTypes = {
-    value: React.PropTypes.number.isRequired,
+    value: React.PropTypes.any.isRequired,
     isSelectable: React.PropTypes.bool,
     isAggregateRating: React.PropTypes.bool,
     onChange: React.PropTypes.func,
