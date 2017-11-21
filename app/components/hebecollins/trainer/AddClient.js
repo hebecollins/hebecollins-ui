@@ -64,9 +64,7 @@ class AddClient extends React.Component {
 
             if (!isEmpty(user)) {
 
-                //TODO: change it to select from selected gym by the manager
-                const gymId = user.gym_list[0].gym_id;
-
+                const gymId = this.props.selectedGym.gym_id;
                 registerClient(this.state, gymId).then(
                     (res) => {
                         this.reset();//resetting the state so that it gets ready to take  another input
@@ -84,6 +82,9 @@ class AddClient extends React.Component {
         return (
             <div className="content">
                 <SingleScreen>
+                    <div className="icon-center">
+                        <span className="fa fa-user-plus"/>
+                    </div>
                     <p className="white-center">Add client under your supervision</p>
                     <AddUser
                         onChange={this.onChange}
@@ -104,7 +105,8 @@ class AddClient extends React.Component {
 
 function mapStateToProps(state) {
     return {
-        user: state.auth.user
+        user: state.auth.user,
+        selectedGym:state.selectedGym
     }
 }
 

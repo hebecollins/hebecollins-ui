@@ -219,3 +219,13 @@ hr{
     color: white;
     font-size: 12px;
 }
+
+.white-header{
+    color: white;
+    margin: auto;
+    width: auto;
+    font-size: 25px;
+    text-align: right;
+    font-family: Serif;
+    text-decoration: underline;
+}

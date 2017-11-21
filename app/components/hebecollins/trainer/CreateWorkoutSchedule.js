@@ -69,7 +69,7 @@ class CreateWorkoutSchedule extends React.Component {
             <div className="content">
                 <SingleScreen2>
                     <div className="white-center">
-                        Create A Workout Schedule
+                        Creating a Workout Schedule
                     </div>
                     <div className="workout-schedule-label">
                         <label>Put a label on your workout:</label>

@@ -10,7 +10,7 @@
     background-color: black;
 }
 
-/*html, body{*/
+ /*body{*/
     /*min-height: 100% !important;*/
     /*height: 100%;*/
 /*}*/
@@ -42,7 +42,7 @@
         background: rgba(204, 204, 204, 0.4);
         border-radius: 0;
         overflow: auto;
-        padding: 30px 5% 50px 5%;
+        padding: 20px 5% 50px 5%;
         margin: 0 10px 0 10px;
     }
 
@@ -97,7 +97,7 @@
         background: rgba(204, 204, 204, 0.4);
         border-radius: 0;
         overflow: auto;
-        padding: 30px 5% 40px 5%;
+        padding: 20px 5% 40px 5%;
     }
 
 
@@ -132,7 +132,7 @@
 
 #flash-message {
     position: absolute;
-    top: 62px;
+    top: 55px;
     min-width: 100%;
     min-height: 60px;
     z-index: 98;
@@ -140,7 +140,7 @@
 
 .content {
     position: relative;
-    padding: 72px 0 40px 0;
+    padding: 55px 0 40px 0;
     margin-top: 50px;
 }
 
@@ -260,6 +260,16 @@
     font-weight: normal;
     margin: 0;
     font-size: medium;
+}
+
+@media (max-width: 768px) {
+    .field{
+        font-size: 15px!important;
+    }
+
+    .value{
+        font-size: 15px !important;
+    }
 }
 
 .value{
