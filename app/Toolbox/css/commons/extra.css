@@ -10,5 +10,6 @@
 }
 
 .no-bottom-padding{
+    margin-top:5px;
     padding-bottom: 0!important;
 }

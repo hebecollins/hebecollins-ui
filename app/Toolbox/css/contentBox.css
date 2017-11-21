@@ -164,6 +164,15 @@
     padding: 0 7% 7% 7%;
 }
 
+@media (max-width: 768px) {
+    .content-child-two-screen {
+        padding: 0;
+    }
+    .col{
+        padding:8px;
+    }
+}
+
 .navbar {
     position: fixed;
     margin-bottom: 0;

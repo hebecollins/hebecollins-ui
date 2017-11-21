@@ -224,6 +224,9 @@
     color: var(--dark-orange);
 }
 
+.large{
+    font-size: 22px !important;
+}
 
 /*===============================================================================================*/
 /*DISPLAY TRAINER AVG RATING COMPONENT*/
