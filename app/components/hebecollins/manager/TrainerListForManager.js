@@ -12,7 +12,7 @@ import {UserMonitor} from "../../others/frames/userList/UserMonitor";
 import {Loading} from "../../others/extra/Loading"
 import Rate from "../../others/extra/Rate";
 
-class TrainerListForClient extends React.Component {
+class TrainerListForManager extends React.Component {
     constructor(props) {
         super(props);
         this.state = {
@@ -53,7 +53,7 @@ class TrainerListForClient extends React.Component {
         const trainerCloned = deepCloneArray(this.state.trainers[this.state.index]);
         console.log(trainerCloned);
         this.props.addSelectedTrainerToRedux(trainerCloned);
-        redirectByName('TRAINER_REVIEW_FOR_CLIENT');
+        redirectByName('TRAINER_REVIEW_FOR_MANAGER');
     }
 
     onChange(e) {
@@ -191,4 +191,4 @@ function mapStateToProps(state) {
     }
 }
 
-export default connect(mapStateToProps, {addSelectedTrainerToRedux})(TrainerListForClient);
+export default connect(mapStateToProps, {addSelectedTrainerToRedux})(TrainerListForManager);

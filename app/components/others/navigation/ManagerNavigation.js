@@ -15,6 +15,9 @@ export const ManagerNavigation = ({logout}) => {
             <li>
                 <NavLink to={getRouteByName("CLIENT_LIST_FOR_MANAGER")} onlyActiveOnIndex>Clients</NavLink>
             </li>
+             <li>
+                <NavLink to={getRouteByName("TRAINER_LIST_FOR_MANAGER")} onlyActiveOnIndex>Trainers</NavLink>
+            </li>
 
 
             <li className="dropdown">

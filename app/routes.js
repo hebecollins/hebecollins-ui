@@ -41,6 +41,8 @@ import DisplayReviews from "./components/others/display/DisplayReviews";
 import DisplayTrainerAvgReview from "./components/others/display/DisplayTrainerAvgRating";
 import TrainerReviewForClient from "./components/hebecollins/client/TrainerReviewForClient";
 import TrainerListForClient from "./components/hebecollins/client/TrainerListForClient";
+import TrainerListForManager from "./components/hebecollins/manager/TrainerListForManager";
+import TrainerReviewForManager from "./components/hebecollins/manager/TrainerReviewForManager";
 
 export default (
     <Route path="/" component={App}>
@@ -60,6 +62,8 @@ export default (
         <Route path={getRouteByName('ACTIVATE_MANAGER')} component={authCheck(Activate)}/>
         <Route path={getRouteByName('ADD_TRAINER')} component={authCheck(AddTrainer)}/>
         <Route path={getRouteByName('CLIENT_LIST_FOR_MANAGER')} component={authCheck(ClientListForManager)}/>
+        <Route path={getRouteByName('TRAINER_LIST_FOR_MANAGER')} component={authCheck(TrainerListForManager)}/>
+        <Route path={getRouteByName('TRAINER_REVIEW_FOR_MANAGER')} component={authCheck(TrainerReviewForManager)}/>
 
 
         {/*trainer*/}
@@ -79,7 +83,6 @@ export default (
         <Route path={getRouteByName('CLIENT_HOME')} component={authCheck(ClientHome)}/>
         <Route path={getRouteByName('ACTIVATE_CLIENT')} component={authCheck(ActivateClient)}/>
         <Route path={getRouteByName('GET_WORKOUT_FOR_TODAY')} component={authCheck(GetCurrentWorkout)}/>
-
         <Route path={getRouteByName('TRAINER_REVIEW_FOR_CLIENT')} component={authCheck(TrainerReviewForClient)}/>
         <Route path={getRouteByName('TRAINER_LIST_FOR_CLIENT')} component={authCheck(TrainerListForClient)}/>
 

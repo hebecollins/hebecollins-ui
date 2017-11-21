@@ -247,3 +247,7 @@
 .write-review-box .review-button{
     right: 0;
 }
+
+.pop-on-screen.opaque{
+    background: rgba(0,0,0,1) !important;
+}

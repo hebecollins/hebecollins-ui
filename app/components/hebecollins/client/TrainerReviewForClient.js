@@ -54,6 +54,7 @@ class TrainerReviewForClient extends React.Component {
         this.setState({isReviewing: false});
     }
 
+
     render() {
         const {avgRatings, reviewList, isReviewing, hasServerResponded} = this.state;
         console.log(reviewList);
@@ -77,7 +78,7 @@ class TrainerReviewForClient extends React.Component {
                             </div>
                         </div>
                         {isReviewing ?
-                            <div id="pop-on-screen">
+                            <div className="pop-on-screen">
                                 <RatingForm
                                     onSubmit={this.onReviewSubmit}
                                     header={"Write a review"}
@@ -86,10 +87,10 @@ class TrainerReviewForClient extends React.Component {
                             </div> : <div/>
                         }
                     </div> :
-                    <div id="pop-on-screen">
+                    <div className="pop-on-screen opaque">
                         <RatingForm
                             onSubmit={this.onReviewSubmit}
-                            onCancel={this.onCancel}
+                            onCancel={()=>redirectByName("TRAINER_LIST_FOR_CLIENT")}
                             header={"Be the first one to write a review"}
                             postTrainerReview={this.props.postTrainerReview}
                         />

@@ -16,6 +16,8 @@ export const ROUTES = [
     {ROUTE_NAME: 'ACTIVATE_MANAGER', ROUTE: '/activate/manager', PERMISSION: ['guest']},
     {ROUTE_NAME: 'ADD_TRAINER', ROUTE: '/add/trainer', PERMISSION: ['manager']},
     {ROUTE_NAME: 'CLIENT_LIST_FOR_MANAGER', ROUTE: '/manager/clients', PERMISSION: ['manager']},
+    {ROUTE_NAME: 'TRAINER_LIST_FOR_MANAGER', ROUTE: '/manager/trainers', PERMISSION: ['manager']},
+    {ROUTE_NAME: 'TRAINER_REVIEW_FOR_MANAGER', ROUTE: '/manager/trainer/review', PERMISSION: ['manager']},
 
     //trainer
     {ROUTE_NAME: 'TRAINER_HOME', ROUTE: '/trainer', PERMISSION: ['trainer']},
@@ -34,7 +36,6 @@ export const ROUTES = [
     {ROUTE_NAME: 'CLIENT_HOME', ROUTE: '/client', PERMISSION: ['client']},
     {ROUTE_NAME: 'ACTIVATE_CLIENT', ROUTE: '/activate/client', PERMISSION: ['guest']},
     {ROUTE_NAME: 'GET_WORKOUT_FOR_TODAY',ROUTE: '/client/workout', PERMISSION: ['client']},
-
     {ROUTE_NAME: 'TRAINER_REVIEW_FOR_CLIENT',ROUTE: '/client/trainer/review', PERMISSION: ['client']},
     {ROUTE_NAME: 'TRAINER_LIST_FOR_CLIENT',ROUTE: '/client/trainers', PERMISSION: ['client']},
 
