@@ -65,7 +65,7 @@ class AddTrainer extends React.Component {
             if (!isEmpty(user)) {
 
                 //TODO: change it to select from selected gym by the manager
-                const gymId = user.gym_list[0].gym_id;
+                const gymId = this.props.selectedGym.gym_id;
 
                 registerTrainer(this.state, gymId).then(
                     (res) => {
@@ -84,6 +84,9 @@ class AddTrainer extends React.Component {
         return (
             <div className="content">
                 <SingleScreen>
+                    <div className="icon-center">
+                        <span className="fa fa-user-plus"/>
+                    </div>
                     <p className="white-center">Add trainer to your gym</p>
                     <AddUser
                         onChange={this.onChange}
@@ -104,7 +107,8 @@ class AddTrainer extends React.Component {
 
 function mapStateToProps(state) {
     return {
-        user: state.auth.user
+        user: state.auth.user,
+        selectedGym:state.selectedGym
     }
 }
 
