@@ -8,6 +8,7 @@ import RatingForm from "../../others/inputFieldGroup/RatingForm";
 import {connect} from 'react-redux'
 import isEmpty from 'lodash/isEmpty'
 import {redirectByName} from "../../../Toolbox/Helpers/redirect";
+import {deleteSelectedUserFromRedux} from "../../../actions/userListActions";
 
 class TrainerReviewForClient extends React.Component {
     constructor(props) {
@@ -25,17 +26,26 @@ class TrainerReviewForClient extends React.Component {
 
     componentWillMount() {
         const {selectedUser, selectedGym} = this.props;
-        if(isEmpty(selectedUser)){
+        if (isEmpty(selectedUser)) {
             redirectByName('TRAINER_LIST_FOR_CLIENT');
-        }else{
+        } else {
             this.setState({hasServerResponded: false});
             getTrainerReviews(selectedGym.gym_id, selectedUser.trainer_id).then(res => {
                     const avgRatings = res.data.avg_rating;
                     const reviewList = res.data.reviews;
-                    this.setState({avgRatings: avgRatings, reviewList: reviewList, hasServerResponded: true});
+
+                    this.setState({
+                        avgRatings: avgRatings,
+                        reviewList: reviewList,
+                        hasServerResponded: true
+                    });
                 }
             )
         }
+    }
+
+    componentWillUnmount(){
+        this.props.deleteSelectedUserFromRedux();
     }
 
     onReview() {
@@ -43,7 +53,7 @@ class TrainerReviewForClient extends React.Component {
     }
 
     onReviewSubmit(data) {
-        const {selectedGym, selectedUser }=this.props;
+        const {selectedGym, selectedUser} = this.props;
         this.props.postTrainerReview(data, selectedGym.gym_id, selectedUser.trainer_id).then(res => {
             this.componentWillMount();
             this.setState({isReviewing: false});
@@ -56,8 +66,7 @@ class TrainerReviewForClient extends React.Component {
 
 
     render() {
-        const {avgRatings, reviewList, isReviewing, hasServerResponded} = this.state;
-        console.log(reviewList);
+        const {avgRatings, reviewList,isReviewing, hasServerResponded} = this.state;
 
         return (
             hasServerResponded ?
@@ -65,7 +74,10 @@ class TrainerReviewForClient extends React.Component {
                     <div>
                         <div className="content">
                             <div className="black-box">
-                                <DisplayTrainerAvgReview avgRatings={avgRatings}/>
+                                <DisplayTrainerAvgReview
+                                    avgRatings={avgRatings}
+                                    selectedGym={this.props.selectedGym}
+                                    selectedUser={this.props.selectedUser}/>
                                 <div className="write-review-box">
                                     <p className="field">Got an opinion ?</p>
                                     <ButtonOrange
@@ -90,7 +102,7 @@ class TrainerReviewForClient extends React.Component {
                     <div className="pop-on-screen opaque">
                         <RatingForm
                             onSubmit={this.onReviewSubmit}
-                            onCancel={()=>redirectByName("TRAINER_LIST_FOR_CLIENT")}
+                            onCancel={() => redirectByName("TRAINER_LIST_FOR_CLIENT")}
                             header={"Be the first one to write a review"}
                             postTrainerReview={this.props.postTrainerReview}
                         />
@@ -99,9 +111,11 @@ class TrainerReviewForClient extends React.Component {
     }
 }
 
-const mapStateToProps =(state)=>({
-  selectedGym:state.selectedGym,
-  selectedUser:state.selectedUser
+const mapStateToProps = (state) => ({
+    selectedGym: state.selectedGym,
+    selectedUser: state.selectedUser
 });
 
-export default connect(mapStateToProps, {postTrainerReview})(TrainerReviewForClient);
+const mapDispatchToProps = {postTrainerReview, deleteSelectedUserFromRedux};
+
+export default connect(mapStateToProps, mapDispatchToProps)(TrainerReviewForClient);

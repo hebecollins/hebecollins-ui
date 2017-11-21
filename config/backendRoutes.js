@@ -44,6 +44,7 @@ export const BACKEND_ROUTES = {
         WORKOUT:{
             CURRENT:"/client/workout",// :gymId/"/client/workout
         },
+        TRAINER_LIST: "/client/trainers",//:gymId/manager/trainers
     },
 
 
@@ -64,7 +65,6 @@ export const BACKEND_ROUTES = {
         NOTIFICATION_UPDATE:"/notification/update",
         REVIEW_TRAINER:"/review/trainer",
         GET_TRAINER_REVIEWS:"/review/trainer",
-        TRAINER_LIST:"/trainers",///:gymId/trainers
     },
 
 

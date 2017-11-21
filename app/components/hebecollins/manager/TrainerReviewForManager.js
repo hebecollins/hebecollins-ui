@@ -4,10 +4,10 @@ import {Loading} from "../../others/extra/Loading";
 import {DisplayTrainerAvgReview} from "../../others/display/DisplayTrainerAvgRating";
 import {DisplayReviews} from "../../others/display/DisplayReviews";
 import {ButtonOrange} from "../../others/display/Buttons";
-import RatingForm from "../../others/inputFieldGroup/RatingForm";
 import {connect} from 'react-redux'
 import isEmpty from 'lodash/isEmpty'
 import {redirectByName} from "../../../Toolbox/Helpers/redirect";
+import {deleteSelectedUserFromRedux} from "../../../actions/userListActions";
 
 class TrainerReviewForManager extends React.Component {
     constructor(props) {
@@ -34,8 +34,12 @@ class TrainerReviewForManager extends React.Component {
         }
     }
 
+    componentWillUnmount(){
+        this.props.deleteSelectedUserFromRedux();
+    }
+
     render() {
-        const {avgRatings, reviewList, isReviewing, hasServerResponded} = this.state;
+        const {avgRatings, reviewList, hasServerResponded} = this.state;
 
         const noReviewsYet =
             <div className="no-reviews-yet">
@@ -47,7 +51,11 @@ class TrainerReviewForManager extends React.Component {
                 !isEmpty(avgRatings) ?
                         <div className="content">
                             <div className="black-box">
-                                <DisplayTrainerAvgReview avgRatings={avgRatings}/>
+                                <DisplayTrainerAvgReview
+                                    avgRatings={avgRatings}
+                                    selectedGym={this.props.selectedGym}
+                                    selectedUser={this.props.selectedUser}
+                                />
                                 <div className="orange-header">Recent Reviews</div>
                                 <DisplayReviews reviewList={reviewList}/>
                             </div>
@@ -71,4 +79,6 @@ const mapStateToProps = (state) => ({
     selectedUser: state.selectedUser
 });
 
-export default connect(mapStateToProps, {postTrainerReview})(TrainerReviewForManager);
+const mapDispatchToProps = {postTrainerReview, deleteSelectedUserFromRedux};
+
+export default connect(mapStateToProps, mapDispatchToProps )(TrainerReviewForManager);

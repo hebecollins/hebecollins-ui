@@ -26,7 +26,7 @@ export const trainerListForManager = (gymId) => {
 /** trainerList for client
  */
 export const trainerListForClient = (gymId) => {
-    const route = `/${gymId}${BACKEND_ROUTES.COMMONS.TRAINER_LIST}`;
+    const route = `/${gymId}${BACKEND_ROUTES.CLIENT.TRAINER_LIST}`;
     return get(route)
 };
 
@@ -70,5 +70,12 @@ export const addSelectedTrainerToRedux = (trainerDetails) => {
     return dispatch => {
         localStorage.setItem('selectedUser', JSON.stringify(selectedUser));
         return dispatch(saveSelectedUser(selectedUser))
+    }
+};
+
+export const deleteSelectedUserFromRedux = () =>{
+    return dispatch => {
+        localStorage.removeItem("selectedUser");
+        return dispatch(deleteSelectedUser());
     }
 };
