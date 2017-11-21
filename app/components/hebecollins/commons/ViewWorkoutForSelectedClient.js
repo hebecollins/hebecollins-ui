@@ -18,7 +18,7 @@ class ViewWorkoutForSelectedClient extends React.Component {
 
     componentWillMount() {
         const {gymId, getSelectedClientWorkoutToRedux, selectedUser} = this.props;
-        const clientId = selectedUser.user_id;
+        const clientId = selectedUser.client_id;
         getSelectedClientWorkoutToRedux(gymId, clientId).then((res) => {
             this.setState({hasServerResponded: true});
 

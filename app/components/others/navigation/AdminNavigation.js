@@ -28,10 +28,7 @@ export const AdminNavigation = ({logout}) => {
             <li className="dropdown">
                 <a href="/" className="dropdown-toggle" data-toggle="dropdown">Account<b className="caret"></b></a>
                 <ul className="dropdown-menu">
-                    <li>
-                        <a href="#">qfit, sashthamangalam</a>
-                    </li>
-
+       
                     <li>
                         <NavLink to={getRouteByName('PASSWORD_CHANGE')}>Password Change</NavLink>
                     </li>

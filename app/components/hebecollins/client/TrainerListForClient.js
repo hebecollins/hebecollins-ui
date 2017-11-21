@@ -51,7 +51,6 @@ class TrainerListForClient extends React.Component {
 
     onReviewButtonClick() {
         const trainerCloned = deepCloneArray(this.state.trainers[this.state.index]);
-        console.log(trainerCloned);
         this.props.addSelectedTrainerToRedux(trainerCloned);
         redirectByName('TRAINER_REVIEW_FOR_CLIENT');
     }

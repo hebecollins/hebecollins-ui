@@ -1,8 +1,7 @@
 import React from 'react'
-import {addSelectedUserToRedux, clientListForManager, postRemarkToServer} from "../../../actions/userListActions"
+import {addSelectedClientToRedux, clientListForManager, postRemarkToServer} from "../../../actions/userListActions"
 import {connect} from "react-redux"
 import {errorResponse} from "../../../Toolbox/Helpers/responseHandler"
-import isEmpty from 'lodash/isEmpty'
 import {ListElement} from "../../others/frames/userList/ListElement"
 import Scrollable from "../../others/extra/Scrollable";
 import {deepCloneArray, getFormattedDate, getGenderFromGenderCode} from "../../../Toolbox/Helpers/extra";
@@ -12,7 +11,6 @@ import {FieldValue} from "../../others/display/DisplayText";
 import {ButtonOrange} from "../../others/display/Buttons";
 import {UserMonitor} from "../../others/frames/userList/UserMonitor";
 import {Remarks} from "../../others/display/Remarks";
-import {addFlashMessage} from "../../../actions/actionStore";
 import {Loading} from "../../others/extra/Loading"
 
 class ClientListForManager extends React.Component {
@@ -25,7 +23,7 @@ class ClientListForManager extends React.Component {
             isEditingRemarks: false,//if the person is editing this
             isLoading: false,//when edit remark button is pressed this turns true, when it is submitted it turns fasle
             remarks: "",
-            responseRecieved: false//whether array returned from server is empty
+            hasServerResponded: false//whether array returned from server is empty
         };
         this.editRemarks = this.editRemarks.bind(this);
         this.remarkSubmitted = this.remarkSubmitted.bind(this);
@@ -40,34 +38,39 @@ class ClientListForManager extends React.Component {
         clientListForManager(selectedGym.gym_id).then(
             (res) => {
                 const clients = res.data.clients;
-                this.setState({clients: clients, responseRecieved: true});
-
-                //adds first user in the list to redux
-                const clientCloned = deepCloneArray(clients[this.state.index]);
-                this.props.addSelectedUserToRedux(clientCloned.client_id, "client", clientCloned.nick_name);
+                this.setState({clients: clients, hasServerResponded: true});
             }
-        ).catch(err => redirectByName("NO_RECORDS_FOUND")
-        )
+        ).catch(err => errorResponse(err))
     }
 
 
-    /** It gets triggered when a user is selected from the list
-     * @param index => index of the user from the client[] array
-     */
+    // It gets triggered when a user is selected from the list
     onClick(index) {
-        const clientCloned = deepCloneArray(this.state.clients[index]);
-        this.props.addSelectedUserToRedux(clientCloned.client_id, "client", clientCloned.nick_name);
         const isClicked = [];
         isClicked[index] = true;
-        this.setState({index: index, isClicked: deepCloneArray(isClicked)})
+        this.setState({
+            index: index,
+            isClicked: deepCloneArray(isClicked),
+            isEditingRemarks: false,
+            remarks: ''
+        })
     }
 
-    editRemarks() {//it is called when 'edit' button is clicked
-        this.setState({isEditingRemarks: true, isLoading: false});
+    //writes the currently selected client to redux
+    currentSelectedClient() {
+        const clientCloned = deepCloneArray(this.state.clients[this.state.index]);
+        this.props.addSelectedClientToRedux(clientCloned);
+        return clientCloned;
     }
 
     onChange(e) {
         this.setState({remarks: e.target.value})
+    }
+
+    //it is called when 'edit' button is clicked
+    editRemarks() {
+        const currentClient = this.currentSelectedClient();
+        this.setState({isEditingRemarks: true, isLoading: false, remarks: currentClient.remarks});
     }
 
     /**When a remark is submitted, it sends remark to server and if it gets a success response
@@ -80,11 +83,11 @@ class ClientListForManager extends React.Component {
         const {selectedUser, selectedGym} = this.props;
         this.setState({isLoading: true});
 
-        postRemarkToServer(this.state.remarks, selectedUser.user_id, selectedGym.gym_id).then(
+        postRemarkToServer(this.state.remarks, selectedUser.client_id, selectedGym.gym_id).then(
             (res) => {
                 let tempClients = deepCloneArray(this.state.clients);
                 tempClients[index].remarks = this.state.remarks;
-                this.setState({isEditingRemarks: false, clients: tempClients});
+                this.setState({isEditingRemarks: false, isLoading: false, clients: tempClients});
             }
         ).catch((err) => errorResponse(err));
     }
@@ -110,16 +113,14 @@ class ClientListForManager extends React.Component {
                 <Scrollable>
                     {clients.map((client, key) => {
                             const {
-                                nick_name, first_name, middle_name, last_name, img_thumb, joining_date
+                                nick_name, name, img_thumb, joining_date
                             } = client;
                             return <div key={key}>
                                 <ListElement
                                     index={key}
                                     isClicked={this.state.isClicked}
                                     nickName={nick_name}
-                                    firstName={first_name}
-                                    middleName={middle_name}
-                                    lastName={last_name}
+                                    name={name}
                                     imgThumb={img_thumb}
                                     onClick={this.onClick.bind(this)}>
 
@@ -145,12 +146,10 @@ class ClientListForManager extends React.Component {
 
         //it is the description of client on the right side of the screen
         const monitorBox = (client) => {
-            const {nick_name, first_name, middle_name, last_name} = client;
+            const {nick_name, name} = client;
             return (
                 <UserMonitor
-                    firstName={first_name}
-                    middleName={middle_name}
-                    lastName={last_name}
+                    name={name}
                     nickName={nick_name}>
 
                     {/*left side of list-monitor box*/}
@@ -168,7 +167,7 @@ class ClientListForManager extends React.Component {
             return (
                 <div key="left-box">
 
-                    <FieldValue field={"Batch"} value={batch}/>
+                    <FieldValue field={"Batch"} value={batch ? batch : message.notEntered}/>
                     <FieldValue field={"Age"} value={age}/>
                     <FieldValue field={"Gender"} value={getGenderFromGenderCode(gender)}/>
                     <FieldValue field={"Goal"} value={primary_goal ? primary_goal : message.notEntered}/>
@@ -203,7 +202,7 @@ class ClientListForManager extends React.Component {
             )
         };
 
-        return this.state.responseRecieved ?
+        return this.state.hasServerResponded ?
             <div className="content">
                 <div className="row">
 
@@ -231,4 +230,4 @@ function mapStateToProps(state) {
     }
 }
 
-export default connect(mapStateToProps, {addSelectedUserToRedux})(ClientListForManager);
+export default connect(mapStateToProps, {addSelectedClientToRedux})(ClientListForManager);

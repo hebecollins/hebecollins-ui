@@ -22,7 +22,7 @@ class EditViewedWorkout extends React.Component {
 
     componentWillMount() {
         const {gymId, getSelectedClientWorkoutToRedux, selectedUser} = this.props;
-        const clientId = selectedUser.user_id;
+        const clientId = selectedUser.client_id;
         getSelectedClientWorkoutToRedux(gymId, clientId).then((res) => {
             this.setState({hasServerResponded: true});
 
@@ -41,7 +41,7 @@ class EditViewedWorkout extends React.Component {
             //setTimeout holds the execution of below method for sometime so that redux updates can be reflected here
             setTimeout(() => {
                 const {addAssignedWorkoutToServer, selectedUser, gymId, workout} = self.props;
-                const clientId = selectedUser.user_id;
+                const clientId = selectedUser.client_id;
                 addAssignedWorkoutToServer(workout, gymId, clientId).catch(
                     err => {
                         errorResponse(err);

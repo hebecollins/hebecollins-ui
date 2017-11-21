@@ -1,5 +1,5 @@
 import React from 'react'
-import {addSelectedTrainerToRedux, trainerListForClient} from "../../../actions/userListActions"
+import {addSelectedTrainerToRedux, postRemarkToServer, trainerListForManager} from "../../../actions/userListActions"
 import {connect} from "react-redux"
 import {errorResponse} from "../../../Toolbox/Helpers/responseHandler"
 import {ListElement} from "../../others/frames/userList/ListElement"
@@ -11,54 +11,90 @@ import {ButtonOrange} from "../../others/display/Buttons";
 import {UserMonitor} from "../../others/frames/userList/UserMonitor";
 import {Loading} from "../../others/extra/Loading"
 import Rate from "../../others/extra/Rate";
+import {Remarks} from "../../others/display/Remarks";
+import {message} from "../../../Toolbox/Helpers/messages";
 
 class TrainerListForManager extends React.Component {
     constructor(props) {
         super(props);
         this.state = {
-            trainers: [],//it is the list of client information sent from the server
-            index: 0,//index of the client []
-            isClicked: [true],//if a tab in client list is clicked
+            trainers: [],//it is the list of trainers information sent from the server
+            index: 0,//index of the trainers []
+            isClicked: [true],//if a tab in trainers list is clicked
             isLoading: false,//when edit remark button is pressed this turns true, when it is submitted it turns fasle
+            isEditingRemarks: false,//if the person is editing this
+            remarks: "",
             hasServerResponded: false//whether array returned from server is empty
         };
         this.onChange = this.onChange.bind(this);
         this.onReviewButtonClick = this.onReviewButtonClick.bind(this);
+        this.editRemarks = this.editRemarks.bind(this);
+        this.remarkSubmitted = this.remarkSubmitted.bind(this);
     }
 
-    /** It sends clientList request to the server and stores the first client from that response in
-     * redux and local storage.
-     */
     componentWillMount() {
         const {selectedGym} = this.props;
-        trainerListForClient(selectedGym.gym_id).then(
-            (res) => {
-                const trainers = res.data.trainers;
-                this.setState({trainers: trainers, hasServerResponded: true});
-            }
-        ).catch(err => errorResponse(err))
+        trainerListForManager(selectedGym.gym_id).then((res) => {
+            const trainers = res.data.trainers;
+            this.setState({trainers: trainers, hasServerResponded: true});
+        }).catch(err => errorResponse(err))
     }
 
-
-    /** It gets triggered when a user is selected from the list
-     * @param index => index of the user from the client[] array
-     */
+    // It gets triggered when a user is selected from the list
     onClick(index) {
         const isClicked = [];
         isClicked[index] = true;
-        this.setState({index: index, isClicked: deepCloneArray(isClicked)})
+        this.setState({
+            index: index,
+            isClicked: deepCloneArray(isClicked),
+            isEditingRemarks: false,
+            remarks: ''
+        })
     }
 
-    onReviewButtonClick() {
+    //writes the currently selected trainer to redux
+    currentSelectedTrainer (){
         const trainerCloned = deepCloneArray(this.state.trainers[this.state.index]);
-        console.log(trainerCloned);
         this.props.addSelectedTrainerToRedux(trainerCloned);
-        redirectByName('TRAINER_REVIEW_FOR_MANAGER');
+        return trainerCloned;
     }
+
 
     onChange(e) {
         this.setState({remarks: e.target.value})
     }
+
+    editRemarks() {//it is called when 'edit' button is clicked
+        const currentTrainer = this.currentSelectedTrainer();
+        this.setState({isEditingRemarks: true, isLoading: false, remarks: currentTrainer.remarks});
+    }
+
+
+    /**When a remark is submitted, it sends remark to server and if it gets a success response
+     * it copies that remark into trainers[] array. So, basically it is not fetching the updated
+     * remark from the server but assuming that if server is sending a 'success', it means
+     * remark has been updated.
+     * @param index => integer, index of array client
+     * */
+    remarkSubmitted(index) {
+        const {selectedUser, selectedGym} = this.props;
+        this.setState({isLoading: true});
+
+        postRemarkToServer(this.state.remarks, selectedUser.trainer_id, selectedGym.gym_id).then(
+            (res) => {
+                let tempTrainers = deepCloneArray(this.state.trainers);
+                tempTrainers[index].remarks = this.state.remarks;
+                this.setState({isEditingRemarks: false, isLoading: false, trainers: tempTrainers});
+            }
+        ).catch((err) => errorResponse(err));
+    }
+
+    //when view review button is clicked
+    onReviewButtonClick() {
+        this.currentSelectedTrainer();
+        redirectByName('TRAINER_REVIEW_FOR_MANAGER');
+    }
+
 
     render() {
         const viewProfileButton =
@@ -150,7 +186,7 @@ class TrainerListForManager extends React.Component {
         };
 
         const monitorSubBoxRight = (trainer) => {
-            const {experience, client_count} = trainer;
+            const {remarks, experience, client_count} = trainer;
             return (
                 <div key="right-box">
                     <FieldValue field={"Clients"} value={client_count}/>
@@ -158,6 +194,16 @@ class TrainerListForManager extends React.Component {
                     <div className="bottom-of-div pager">
                         {viewReviewButton}
                     </div>
+
+                    <Remarks
+                        value={remarks ? remarks : message.notEntered}
+                        remarks={this.state.remarks}
+                        isEditing={this.state.isEditingRemarks}
+                        isLoading={this.state.isLoading}
+                        editRemarks={this.editRemarks}
+                        onChange={this.onChange}
+                        onSubmit={() => this.remarkSubmitted(this.state.index)}/>
+
                 </div>
             )
         };

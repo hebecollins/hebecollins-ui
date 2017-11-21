@@ -19,7 +19,7 @@ export const BACKEND_ROUTES = {
         ACTIVATE: "/activate/manager",
         ADD_TRAINER: "/add/trainer",// :gymId/add/trainers
         CLIENT_LIST: "/manager/clients",//:gymId/trainer/clients
-        TRAINER_LIST: "",//:gymId/trainer/clients
+        TRAINER_LIST: "/manager/trainers",//:gymId/manager/trainers
     },
 
     //trainer routes

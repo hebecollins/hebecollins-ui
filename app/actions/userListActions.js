@@ -19,7 +19,7 @@ export const clientListForManager = (gymId) => {
 /** trainerList for manager
  */
 export const trainerListForManager = (gymId) => {
-    const route = `/${gymId}${BACKEND_ROUTES.COMMONS.TRAINER_LIST}`;
+    const route = `/${gymId}${BACKEND_ROUTES.MANAGER.TRAINER_LIST}`;
     return get(route)
 };
 
@@ -31,12 +31,11 @@ export const trainerListForClient = (gymId) => {
 };
 
 
-
 /** posting remark to server
  */
-export const postRemarkToServer = (remarks, userId,gymId) => {
+export const postRemarkToServer = (remarks, userId, gymId) => {
     const dataToBePosted = {
-        "remarks":remarks
+        "remarks": remarks
     };
     const route = `/${gymId}${BACKEND_ROUTES.COMMONS.REMARKS}/${userId}`;
     return postJSON(dataToBePosted, route)
@@ -44,11 +43,12 @@ export const postRemarkToServer = (remarks, userId,gymId) => {
 
 /** adding selected users basic information to localStorage and redux to make it available even if page refreshes
  */
-export const addSelectedUserToRedux=(userId,userType,nickName)=>{
+export const addSelectedClientToRedux = (clientDetails) => {
     const selectedUser = {
-        "user_id":userId,
-        "user_type":userType,
-        "nick_name":nickName
+        "client_id": clientDetails.client_id,
+        "nick_name": clientDetails.nick_name,
+        "name":clientDetails.name,
+        "img_thumb":clientDetails.img_thumb
     };
     return dispatch => {
         localStorage.setItem('selectedUser', JSON.stringify(selectedUser));
@@ -58,26 +58,17 @@ export const addSelectedUserToRedux=(userId,userType,nickName)=>{
 
 /** adding selected trainers information to localStorage and redux to make it available even if page refreshes
  */
-export const addSelectedTrainerToRedux=(userDetails)=>{
+export const addSelectedTrainerToRedux = (trainerDetails) => {
     const selectedUser = {
-        "trainer_id":userDetails.trainer_id,
-        "name":userDetails.name,
-        "img_thumb":userDetails.img_thumb,
-        "nick_name":userDetails.nick_name,
-        "rank":userDetails.rank
-
+        "trainer_id": trainerDetails.trainer_id,
+        "name": trainerDetails.name,
+        "img_thumb": trainerDetails.img_thumb,
+        "nick_name": trainerDetails.nick_name,
+        "rank": trainerDetails.rank
     };
 
     return dispatch => {
         localStorage.setItem('selectedUser', JSON.stringify(selectedUser));
         return dispatch(saveSelectedUser(selectedUser))
     }
-};
-
-
-
-export const deleteSelectedUserFromRedux = ()=>{
-  return dispatch=>{
-   dispatch(deleteSelectedUser());
-  }
 };

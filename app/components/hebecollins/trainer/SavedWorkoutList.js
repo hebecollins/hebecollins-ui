@@ -121,7 +121,6 @@ class SavedWorkoutList extends React.Component {
 
 function mapStateToProps(state) {
     return {
-        selectedUser: state.selectedUser,
         gymId: state.selectedGym.gym_id
     }
 }

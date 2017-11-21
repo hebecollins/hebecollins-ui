@@ -1,5 +1,5 @@
 import React from 'react'
-import {addSelectedUserToRedux, clientListForTrainer, postRemarkToServer} from "../../../actions/userListActions"
+import {addSelectedClientToRedux, clientListForTrainer, postRemarkToServer} from "../../../actions/userListActions"
 import {connect} from "react-redux"
 import {errorResponse} from "../../../Toolbox/Helpers/responseHandler"
 import isEmpty from 'lodash/isEmpty'
@@ -24,11 +24,14 @@ class ClientListForTrainer extends React.Component {
             isEditingRemarks: false,//if the person is editing this
             isLoading: false,//when edit remark button is pressed this turns true, when it is submitted it turns fasle
             remarks: "",
-            responseRecieved: false//whether array returned from server is empty
+            hasServerResponded: false//whether array returned from server is empty
         };
         this.editRemarks = this.editRemarks.bind(this);
         this.remarkSubmitted = this.remarkSubmitted.bind(this);
         this.onChange = this.onChange.bind(this);
+        this.addWorkoutClick = this.addWorkoutClick.bind(this);
+        this.viewProfileClick = this.viewProfileClick.bind(this);
+        this.viewWorkoutClick = this.viewWorkoutClick.bind(this);
     }
 
     /** It sends clientList request to the server and stores the first client from that response in
@@ -39,32 +42,39 @@ class ClientListForTrainer extends React.Component {
         clientListForTrainer(selectedGym.gym_id).then(
             (res) => {
                 const clients = res.data.clients;
-                this.setState({clients: clients, responseRecieved: true});
-                //adds first user in the list to redux
-                const clientCloned = deepCloneArray(clients[this.state.index]);
-                this.props.addSelectedUserToRedux(clientCloned.client_id, "client", clientCloned.nick_name);
-            }
-        ).catch(err => redirectByName("NO_RECORDS_FOUND"))
+                this.setState({clients: clients, hasServerResponded: true});
+               }
+        ).catch(err => errorResponse(err))
     }
 
 
-    /** It gets triggered when a user is selected from the list
-     * @param index => index of the user from the client[] array
-     */
+    // It gets triggered when a user is selected from the list
     onClick(index) {
-        const clientCloned = deepCloneArray(this.state.clients[index]);
-        this.props.addSelectedUserToRedux(clientCloned.client_id, "client", clientCloned.nick_name);
         const isClicked = [];
         isClicked[index] = true;
-        this.setState({index: index, isClicked: deepCloneArray(isClicked)})
+        this.setState({
+            index: index,
+            isClicked: deepCloneArray(isClicked),
+            isEditingRemarks: false,
+            remarks: ''
+        })
     }
 
-    editRemarks() {//it is called when 'edit' button is clicked
-        this.setState({isEditingRemarks: true, isLoading: false});
+    //writes the currently selected client to redux
+    currentSelectedClient() {
+        const clientCloned = deepCloneArray(this.state.clients[this.state.index]);
+        this.props.addSelectedClientToRedux(clientCloned);
+        return clientCloned;
     }
 
     onChange(e) {
         this.setState({remarks: e.target.value})
+    }
+
+    //it is called when 'edit' button is clicked
+    editRemarks() {
+        const currentClient = this.currentSelectedClient();
+        this.setState({isEditingRemarks: true, isLoading: false, remarks: currentClient.remarks});
     }
 
     /**When a remark is submitted, it sends remark to server and if it gets a success response
@@ -77,19 +87,33 @@ class ClientListForTrainer extends React.Component {
         const {selectedUser, selectedGym} = this.props;
         this.setState({isLoading: true});
 
-        postRemarkToServer(this.state.remarks, selectedUser.user_id, selectedGym.gym_id).then(
-            (res) => {
+        postRemarkToServer(this.state.remarks, selectedUser.client_id, selectedGym.gym_id).then((res) => {
                 let tempClients = deepCloneArray(this.state.clients);
                 tempClients[index].remarks = this.state.remarks;
-                this.setState({isEditingRemarks: false, clients: tempClients});
+                this.setState({isEditingRemarks: false,isLoading:false, clients: tempClients});
             }
         ).catch((err) => errorResponse(err));
+    }
+
+    viewProfileClick(){
+        this.currentSelectedClient();
+        redirectByName('CLIENT_PROFILE')
+    }
+
+    addWorkoutClick(){
+        this.currentSelectedClient();
+        redirectByName('ASSIGN_WORKOUT')
+    }
+
+    viewWorkoutClick(){
+        this.currentSelectedClient();
+        redirectByName('VIEW_WORKOUT_FOR_SELECTED_CLIENT')
     }
 
     render() {
         const viewProfileButton =
             <ButtonOrange
-                onClick={() => redirectByName('CLIENT_PROFILE')}
+                onClick={this.viewProfileClick}
                 disabled={this.state.isLoading}
                 label={"View Profile"}/>;
 
@@ -97,14 +121,14 @@ class ClientListForTrainer extends React.Component {
         //redirects towards addWorkout page
         const addWorkoutButton =
             <ButtonOrange
-                onClick={() => redirectByName('ASSIGN_WORKOUT')}
+                onClick={this.addWorkoutClick}
                 disabled={this.state.isLoading}
                 label={"Assign Workout"}/>;
 
 
         const viewWorkoutButton =
             <ButtonOrange
-                onClick={() => redirectByName('VIEW_WORKOUT_FOR_SELECTED_CLIENT')}
+                onClick={this.viewWorkoutClick}
                 disabled={this.state.isLoading}
                 label={"View Workout"}/>;
 
@@ -115,7 +139,7 @@ class ClientListForTrainer extends React.Component {
                 <Scrollable>
                     {clients.map((client, key) => {
                             const {
-                                nick_name, first_name, middle_name, last_name, img_thumb,
+                                nick_name, name, img_thumb,
                                 primary_goal, workout_update_date
                             } = client;
                             return <div key={key}>
@@ -123,9 +147,7 @@ class ClientListForTrainer extends React.Component {
                                     index={key}
                                     isClicked={this.state.isClicked}
                                     nickName={nick_name}
-                                    firstName={first_name}
-                                    middleName={middle_name}
-                                    lastName={last_name}
+                                    name={name}
                                     imgThumb={img_thumb}
                                     onClick={this.onClick.bind(this)}>
 
@@ -157,13 +179,9 @@ class ClientListForTrainer extends React.Component {
 
         //it is the description of client on the right side of the screen
         const monitorBox = (client) => {
-            const {nick_name, first_name, middle_name, last_name} = client;
+            const {nick_name, name} = client;
             return (
-                <UserMonitor
-                    firstName={first_name}
-                    middleName={middle_name}
-                    lastName={last_name}
-                    nickName={nick_name}>
+                <UserMonitor name={name} nickName={nick_name}>
 
                     {/*left side of list-monitor box*/}
                     {monitorSubBoxLeft(client)}
@@ -180,7 +198,7 @@ class ClientListForTrainer extends React.Component {
             return (
                 <div key="left-box">
 
-                    <FieldValue field={"Batch"} value={batch}/>
+                    <FieldValue field={"Batch"} value={batch ? batch : message.notEntered}/>
                     <FieldValue field={"Age"} value={age}/>
                     <FieldValue field={"Gender"} value={getGenderFromGenderCode(gender)}/>
                     <FieldValue field={"Joined On"} value={getFormattedDate(joining_date)}/>
@@ -216,7 +234,7 @@ class ClientListForTrainer extends React.Component {
             )
         };
 
-        return this.state.responseRecieved ?
+        return this.state.hasServerResponded ?
             <div className="content">
                 <div className="row">
 
@@ -245,4 +263,4 @@ function mapStateToProps(state) {
     }
 }
 
-export default connect(mapStateToProps, {addSelectedUserToRedux})(ClientListForTrainer);
+export default connect(mapStateToProps, {addSelectedClientToRedux})(ClientListForTrainer);
