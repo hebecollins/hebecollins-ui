@@ -10,7 +10,6 @@ module.exports = {
             disableDotRule: true,
         }
     },
-    devtool: 'cheap-module-eval-source-map',
     entry: [
         path.join(__dirname, '/app/index.js')
     ],
@@ -20,9 +19,15 @@ module.exports = {
         filename: "bundle.js",
     },
     plugins: [
-        new webpack.optimize.OccurrenceOrderPlugin(),
-        new webpack.HotModuleReplacementPlugin()
+        new webpack.DefinePlugin({ // <-- key to reducing React's size
+            'process.env': {
+                'NODE_ENV': JSON.stringify('production')
+            }
+        }),
+        new webpack.optimize.UglifyJsPlugin(), //minify everything
+        new webpack.optimize.AggressiveMergingPlugin()//Merge chunks
     ],
+
     module: {
         rules: [
             {
@@ -46,7 +51,7 @@ module.exports = {
                 test: /\.(gif|png|jpe?g|svg|webp)$/i,
                 loaders: [
                     'file-loader?hash=sha512&digest=hex&name=[hash].[ext]',
-                    'image-webpack-loader?' + JSON.stringify(
+                    'image-webpack-loader?'+JSON.stringify(
                         {
                             mozjpeg: {
                                 quality: 65

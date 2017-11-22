@@ -4,9 +4,8 @@ import DateTime from 'react-datetime';
 
 //mobile no. files
 import IntlTelInput from 'react-intl-tel-input';
-import 'file?name=libphonenumber.js!../../../../node_modules/react-intl-tel-input/dist/libphonenumber.js';
+import 'file-loader?name=libphonenumber.js!../../../../node_modules/react-intl-tel-input/dist/libphonenumber.js';
 import './../../../../node_modules/react-intl-tel-input/dist/main.css';
-import {scrollToError} from "../../../Toolbox/Helpers/extra";
 
 
 /** It is an input text field component with icon as add-on

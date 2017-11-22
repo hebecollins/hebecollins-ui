@@ -12,10 +12,10 @@ import {saveSelectedGym, saveSelectedUser, setCurrentUser} from "./actions/actio
 const store = createStore(
     // (state = {})=> state,//empty reducer
     rootReducer,
-    // compose(
+    compose(
         applyMiddleware(thunk),
-        // window.__REDUX_DEVTOOLS_EXTENSION__ && window.__REDUX_DEVTOOLS_EXTENSION__()
-    // )
+        window.__REDUX_DEVTOOLS_EXTENSION__ && window.__REDUX_DEVTOOLS_EXTENSION__()
+    )
 );
 
 /*copies currentUser details from local storage to redux store*/
