@@ -10,7 +10,7 @@ module.exports = {
             disableDotRule: true,
         }
     },
-    devtool: 'cheap-module-eval-source-map',
+    // devtool: 'cheap-module-eval-source-map',
     entry: [
         path.join(__dirname, '/app/index.js')
     ],
