@@ -3,10 +3,8 @@ import {getExerciseGifFromServer} from "../../../actions/workoutActions";
 import {ButtonOrange} from "../../others/display/Buttons";
 import SingleScreen2 from "../../others/frames/SingleScreen2";
 import {Loading} from "../../others/extra/Loading";
-import isEmpty from 'lodash/isEmpty'
-import {redirectByName} from "../../../Toolbox/Helpers/redirect";
 import {errorResponse} from "../../../Toolbox/Helpers/responseHandler";
-import {deepCloneArray, scrollToError} from "../../../Toolbox/Helpers/extra";
+import {deepCloneArray} from "../../../Toolbox/Helpers/extra";
 import {Fade} from "../../others/extra/Animation";
 import {getExercisesWithGif, postGifForExercise} from "../../../actions/adminActions/gifActions";
 import {getMuscleGroupList} from "../../../actions/adminActions/muscleGroupActions";
@@ -46,16 +44,13 @@ class GifList extends React.Component {
 
     /*gets exercise list from the server and assign it to exerciseList state*/
     componentWillMount() {
-        getExercisesWithGif().then((res) => {
+        getExercisesWithGif().then(res => {
                 const exerciseList = res.data.exercise_list;
 
-                if (isEmpty(exerciseList)) redirectByName("NO_RECORDS_FOUND");
-                else {
                     this.setState({exerciseList: exerciseList, hasServerResponded: true});
                     getMuscleGroupList().then(res => {
                         this.setState({muscleGroupList: res.data})
                     });//for muscle group dropdown
-                }
             }
         ).catch(err => errorResponse(err))
     }
