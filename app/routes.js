@@ -36,13 +36,11 @@ import EditViewedWorkout from "./components/hebecollins/trainer/EditViewedWorkou
 import ViewSavedWorkout from "./components/hebecollins/trainer/ViewSavedWorkout";
 import EditSavedWorkout from "./components/hebecollins/trainer/EditSavedWorkout";
 import CategoryList from "./components/hebecollins/admin/CategoryList";
-import RatingForm from "./components/others/inputFieldGroup/RatingForm";
-import DisplayReviews from "./components/others/display/DisplayReviews";
-import DisplayTrainerAvgReview from "./components/others/display/DisplayTrainerAvgRating";
 import TrainerReviewForClient from "./components/hebecollins/client/TrainerReviewForClient";
 import TrainerListForClient from "./components/hebecollins/client/TrainerListForClient";
 import TrainerListForManager from "./components/hebecollins/manager/TrainerListForManager";
 import TrainerReviewForManager from "./components/hebecollins/manager/TrainerReviewForManager";
+import {ImageCrop} from "./components/others/extra/ImageCrop";
 
 export default (
     <Route path="/" component={App}>
@@ -100,6 +98,9 @@ export default (
         <Route path={getRouteByName('ADD_GIF')} component={authCheck(AddGIF)}/>
         <Route path={getRouteByName('GIF_LIST')} component={authCheck(GifList)}/>
         <Route path={getRouteByName('CATEGORY_LIST')} component={authCheck(CategoryList)}/>
+
+        {/*test route*/}
+        <Route path={getRouteByName('TEST_ROUTE')} component={authCheck(ImageCrop)}/>
 
         <Route path='/*' component={NotFound}/>
 

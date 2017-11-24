@@ -53,4 +53,7 @@ export const ROUTES = [
     {ROUTE_NAME: 'GIF_LIST', ROUTE: '/list/gif', PERMISSION: ['admin']},
     {ROUTE_NAME: 'CATEGORY_LIST', ROUTE: '/list/category', PERMISSION: ['admin']},
 
+    //test route
+    {ROUTE_NAME:'TEST_ROUTE', ROUTE:'/test', PERMISSION:['guest']}
+
 ];
