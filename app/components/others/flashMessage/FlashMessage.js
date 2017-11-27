@@ -18,7 +18,7 @@ class FlashMessage extends React.Component {
         let self = this;
         setTimeout(function () {
             self.onClick();
-        }, 5000);
+        }, 500000);
     }
 
     render() {

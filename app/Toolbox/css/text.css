@@ -41,6 +41,12 @@
     margin: 0 0 60px 0;
 }
 
+@media (max-width: 768px) {
+    blockquote{
+        font-size: 20px !important;
+    }
+}
+
 blockquote {
     font-family: Georgia, serif;
     font-size: x-large;

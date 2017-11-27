@@ -15,7 +15,7 @@ class NavigationBar extends React.Component {
             notifications: '',
             count: '',
             isClicked: false
-        }
+        };
         this.notificationClicked = this.notificationClicked.bind(this)
     }
 
@@ -94,7 +94,7 @@ class NavigationBar extends React.Component {
                     </button>
                     <div id="navbar" className="nav-hebecollins-menu collapse2 navHeaderCollapse">
                         <div className="sm">
-                            {userDetails}
+                            {isAuthenticated?userDetails:<div/>}
                         </div>
                         <div>{this.props.children}</div>
                     </div>
@@ -130,8 +130,7 @@ class NavigationBar extends React.Component {
 
             </div>
         );
-    }
-    ;
+    };
 }
 
 const mapStateToProps = (state) => ({
