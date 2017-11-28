@@ -3,6 +3,7 @@ import {TextField} from '../inputField/InputFieldWithIconAddOn'
 import {validateLogin} from "../../../Toolbox/Validation/helpers";
 import {errorResponse} from "../../../Toolbox/Helpers/responseHandler";
 import {getRouteByName} from "../../../Toolbox/Helpers/routeHandler";
+import {LoadingTransparent} from "../extra/Loading";
 
 class LoginForm extends React.Component {
 
@@ -93,6 +94,7 @@ class LoginForm extends React.Component {
                 <label className="control-label">
                     <a className="forgot-password" href={getRouteByName('PASSWORD_RECOVER')}>forgot password?</a>
                 </label>
+                {isLoading?<LoadingTransparent/>:<div/>}
             </form>
         )
     }
