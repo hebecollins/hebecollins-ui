@@ -8,3 +8,11 @@ export const Loading = () => {
       </div>
     )
 };
+
+export const LoadingTransparent = () => {
+    return (
+      <div className="loading-box loading-transparent">
+          <ReactLoading className="loading" delay={0} type="spinningBubbles"/>
+      </div>
+    )
+};

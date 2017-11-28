@@ -141,7 +141,7 @@
 
 .content {
     position: relative;
-    padding: 55px 0 40px 0;
+    padding: 55px 5px 40px 5px;
     margin-top: 50px;
     min-height: 80vh;
 }

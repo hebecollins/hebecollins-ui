@@ -1,9 +1,9 @@
 import React from 'react'
-import {getCurrentWorkoutToRedux, getExerciseGifFromServer, getGifFromServer} from "../../../actions/workoutActions";
-import {currentDayOfWeek, dayOfWeek, deepCloneArray} from "../../../Toolbox/Helpers/extra";
+import { getExerciseGifFromServer} from "../../../actions/workoutActions";
+import {dayOfWeek, deepCloneArray} from "../../../Toolbox/Helpers/extra";
 import {errorResponse} from "../../../Toolbox/Helpers/responseHandler";
 import isEmpty from 'lodash/isEmpty'
-import {Loading} from "../../others/extra/Loading"
+import {LoadingTransparent} from "../../others/extra/Loading"
 import {ExerciseGif, RenderExercise} from "../../others/display/RenderExercise";
 import {DaySet} from "../../others/frames/DaySet";
 
@@ -14,6 +14,7 @@ class DisplayWorkout extends React.Component {
             dayWorkout: [],
             index: this.props.index,
             hasServerResponded: false,
+            gifLoading:false,
             displayGif: false,
             exerciseNameId: '',
             exerciseName: '',
@@ -57,14 +58,15 @@ class DisplayWorkout extends React.Component {
     }
 
     renderGif(exerciseNameId, exerciseName) {
-        this.setState({hasServerResponded: false});
+        this.setState({hasServerResponded: false, gifLoading:true});
         getExerciseGifFromServer(exerciseNameId).then(res =>
             this.setState({
                 displayGif: true,
                 exerciseNameId: exerciseNameId,
                 exerciseName: exerciseName,
                 img: res.data,
-                hasServerResponded: true
+                hasServerResponded: true,
+                gifLoading:false
             })
         );
     }
@@ -95,9 +97,7 @@ class DisplayWorkout extends React.Component {
                         {!isEmpty(dayWorkout) ? renderWorkout : renderRest}
                     </div>
                     {daySet()}
-                <div>
-                    {this.state.displayGif ? gifContainer : <div/>}
-                </div>
+                    {this.state.displayGif ? gifContainer : this.state.gifLoading?<LoadingTransparent/>: <div/>}
             </div>
         )
     }
