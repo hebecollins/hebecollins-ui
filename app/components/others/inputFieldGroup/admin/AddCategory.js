@@ -49,8 +49,7 @@ class AddCategory extends React.Component {
             const {img, muscle_group} = this.state;
             this.props.addMuscleGroupOnServer(img, muscle_group).then(res=>{
                 this.props.refresh();
-            })
-                .catch(err=>{
+            }).catch(err=>{
                 const response=errorResponse(err);
                 if (response !== null) {
                     this.setState({errors: response})

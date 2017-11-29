@@ -7,16 +7,11 @@ class Dropzone extends React.Component {
         super(props);
         this.state = {preview: null};
         this.handleDrop = this.handleDrop.bind(this)
-        this.handleDropRejected = this.handleDropRejected.bind(this)
     }
 
     handleDrop(file) {
         this.setState({preview: file[0].preview});
         this.props.onUpload(file[0]);
-    }
-
-    handleDropRejected(file) {
-        console.log("rejected" + file);
     }
 
     render() {
