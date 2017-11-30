@@ -13,12 +13,12 @@ export class ImageCrop extends React.Component {
             crop: {},
             image: '',
             test: '',
+            imageLoaded: '',
             isImageUploaded: false
         };
         this.onChange = this.onChange.bind(this)
         this.onImageLoaded = this.onImageLoaded.bind(this)
         this.onSubmit = this.onSubmit.bind(this)
-        this.onComplete = this.onComplete.bind(this)
         this.onUpload = this.onUpload.bind(this)
     }
 
@@ -29,74 +29,59 @@ export class ImageCrop extends React.Component {
     onSubmit() {
         const {crop, image} = this.state;
 
-        console.log("crop");
-        console.log(crop);
-        console.log("image");
-        console.log(image);
-
         const canvas = document.createElement('canvas');
-        canvas.width = crop.width;
-        canvas.height = crop.height;
+        let imgSelected = document.getElementsByClassName('ReactCrop__crop-selection');
+        let imgUncropped = document.getElementsByClassName('ReactCrop__image');
+        let cs = getComputedStyle(imgSelected[0]);
+        let uncroppedImageDimensions = getComputedStyle(imgUncropped[0]);
+
+        console.log(crop);
+
+        let width = parseInt(cs.getPropertyValue('width'));
+        let height = parseInt(cs.getPropertyValue('height'));
+
+        let widthUncropped = parseInt(uncroppedImageDimensions.getPropertyValue('width'));
+        let heightuncropped = parseInt(uncroppedImageDimensions.getPropertyValue('height'));
+
+        let x = widthUncropped * ((crop.x) / 100);
+        let y = heightuncropped * ((crop.y) / 100);
+
+        console.log(x);
+        console.log(y);
+
+        canvas.width = width;
+        canvas.height = height;
         const ctx = canvas.getContext('2d');
-        let img = new Image();
-        img.src = this.state.image;
+        let img = this.state.imageLoaded;
+        // new Image();
+        // img.src = image;
 
         ctx.drawImage(
             img,
-            crop.x,
-            crop.y,
-            crop.width,
-            crop.height,
+            x,
+            y,
+            width,
+            height,
             0,
             0,
-            crop.width,
-            crop.height
+            width,
+            height
         );
 
         img.setAttribute('crossOrigin', 'anonymous');
-        console.log(img);
-        console.log(canvas);
-
 
         const base64Image = canvas.toDataURL('image/jpeg');
 
         this.setState({test: base64Image});
-
-        console.log("base64Image");
-        console.log(base64Image);
-        console.log(ctx);
     }
-
-    onComplete(crop, pixelCrop) {
-        // console.log(crop);
-        // console.log(pixelCrop);
-        // const canvas = document.createElement('canvas');
-        // canvas.width = pixelCrop.width;
-        // canvas.height = pixelCrop.height;
-        // const ctx = canvas.getContext('2d');
-        //
-        // const image = this.state.image;
-        // ctx.drawImage(
-        //     image,
-        //     pixelCrop.x,
-        //     pixelCrop.y,
-        //     pixelCrop.width,
-        //     pixelCrop.height,
-        //     0,
-        //     0,
-        //     pixelCrop.width,
-        //     pixelCrop.height
-        // );
-    }
-
 
     onUpload(img) {
-        this.setState({image: img.preview, isImageUploaded:true});
-        console.log(img)
+        this.setState({image: img.preview, isImageUploaded: true});
     }
 
 
     onImageLoaded(image) {
+        console.log("loaded");
         console.log(image);
         this.setState({
             crop: makeAspectCrop({
@@ -104,29 +89,28 @@ export class ImageCrop extends React.Component {
                 y: 10,
                 aspect: 1,
                 width: 50,
-            }, image.width / image.height)
+            }, image.width / image.height), imageLoaded: image
         })
     }
 
     render() {
         return <div className="content test">
-            {this.state.isImageUploaded ?
-                <div>
-                    <ReactCrop
-                        src={this.state.image}
-                        crop={this.state.crop}
-                        onImageLoaded={this.onImageLoaded}
-                        onChange={this.onChange}
-                        keepSelection={true}
-                        onComplete={this.onComplete}
-                    />
+            {
+                this.state.isImageUploaded ?
+                    <div>
+                        <ReactCrop
+                            src={this.state.image}
+                            crop={this.state.crop}
+                            onImageLoaded={this.onImageLoaded}
+                            onChange={this.onChange}
+                            keepSelection={true}
+                        />
 
-                    {!isEmpty(this.state.image) ? <img src={this.state.test}/> : <div/>}
-                    <ButtonOrange onClick={this.onSubmit} label={"submit"}/>
-                </div>:
-            <Dropzone onUpload={this.onUpload} label={"upload image"}/>
+                        {!isEmpty(this.state.image) ? <img src={this.state.test}/> : <div/>}
+                        <ButtonOrange onClick={this.onSubmit} label={"submit"}/>
+                    </div> :
+                    <Dropzone onUpload={this.onUpload} label={"upload image"}/>
             }
-
         </div>
     }
 }
