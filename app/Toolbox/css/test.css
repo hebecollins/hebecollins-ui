@@ -6,3 +6,8 @@
     /*width: 40vh;*/
     /*height: 40vh;*/
 /*}*/
+
+.ReactCrop__image{
+    width: 300px;
+    height: 300px;
+}

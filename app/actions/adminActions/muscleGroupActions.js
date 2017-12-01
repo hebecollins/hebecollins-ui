@@ -41,6 +41,7 @@ export const addMuscleGroupOnServer = (icon, muscleGroup)=>{
 /** update muscleGroup along with its icon
  */
 export const updateMuscleGroupOnServer = (icon, muscleGroup)=>{
+    console.log(icon);
     const dataToBeSent = {
         icon:icon,
         muscle_group:muscleGroup

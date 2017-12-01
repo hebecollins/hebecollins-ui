@@ -16,10 +16,10 @@ export class ImageCrop extends React.Component {
             imageLoaded: '',
             isImageUploaded: false
         };
-        this.onChange = this.onChange.bind(this)
-        this.onImageLoaded = this.onImageLoaded.bind(this)
-        this.onSubmit = this.onSubmit.bind(this)
-        this.onUpload = this.onUpload.bind(this)
+        this.onChange = this.onChange.bind(this);
+        this.onImageLoaded = this.onImageLoaded.bind(this);
+        this.onSubmit = this.onSubmit.bind(this);
+        this.onUpload = this.onUpload.bind(this);
     }
 
     onChange(crop) {
@@ -30,59 +30,52 @@ export class ImageCrop extends React.Component {
         const {crop, image} = this.state;
 
         const canvas = document.createElement('canvas');
-        let imgSelected = document.getElementsByClassName('ReactCrop__crop-selection');
         let imgUncropped = document.getElementsByClassName('ReactCrop__image');
-        let cs = getComputedStyle(imgSelected[0]);
-        let uncroppedImageDimensions = getComputedStyle(imgUncropped[0]);
 
-        console.log(crop);
+        const widthUncropped = imgUncropped[0].naturalWidth;
+        const heightUncropped = imgUncropped[0].naturalHeight;
 
-        let width = parseInt(cs.getPropertyValue('width'));
-        let height = parseInt(cs.getPropertyValue('height'));
-
-        let widthUncropped = parseInt(uncroppedImageDimensions.getPropertyValue('width'));
-        let heightuncropped = parseInt(uncroppedImageDimensions.getPropertyValue('height'));
+        const width = crop.width * widthUncropped / 100;
+        const height = crop.height * heightUncropped / 100;
 
         let x = widthUncropped * ((crop.x) / 100);
-        let y = heightuncropped * ((crop.y) / 100);
-
-        console.log(x);
-        console.log(y);
+        let y = heightUncropped * ((crop.y) / 100);
 
         canvas.width = width;
         canvas.height = height;
+
         const ctx = canvas.getContext('2d');
         let img = this.state.imageLoaded;
-        // new Image();
-        // img.src = image;
 
-        ctx.drawImage(
-            img,
-            x,
-            y,
-            width,
-            height,
-            0,
-            0,
-            width,
-            height
-        );
+        ctx.drawImage(img, x, y, width, height, 0, 0, width, height);
 
         img.setAttribute('crossOrigin', 'anonymous');
-
         const base64Image = canvas.toDataURL('image/jpeg');
-
         this.setState({test: base64Image});
+
+
+        this.urltoFile(base64Image, 'hello.jpg', 'image/jpg')
+            .then(function (file) {
+                console.log(file);
+            })
+    }
+
+    urltoFile(url, filename, mimeType) {
+        return (fetch(url)
+                .then(function (res) {
+                    return res.arrayBuffer();
+                })
+                .then(function (buf) {
+                    return new File([buf], filename, {type: mimeType});
+                })
+        );
     }
 
     onUpload(img) {
         this.setState({image: img.preview, isImageUploaded: true});
     }
 
-
     onImageLoaded(image) {
-        console.log("loaded");
-        console.log(image);
         this.setState({
             crop: makeAspectCrop({
                 x: 10,

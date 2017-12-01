@@ -15,7 +15,6 @@ import {redirectTo, redirectToHome} from "./Toolbox/Helpers/redirect";
 export default function (Component) {
     class Permission extends React.Component {
         componentWillMount() {//gets called just once before first render
-            console.log("hello");
             const route = this.props.location.pathname;
             const {isAuthenticated, user} = this.props;
             /** if(notAutheticated AND requires guest){
@@ -36,8 +35,6 @@ export default function (Component) {
             }
             else {
                 const userType = user.user_type;
-                console.log(route);
-                console.log(userType);
                 if (!getPermissionByRoute(route).includes(userType)) {
                     redirectTo('/'+userType);
                 }
