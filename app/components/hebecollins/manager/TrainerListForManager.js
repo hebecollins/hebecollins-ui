@@ -13,6 +13,7 @@ import {Loading} from "../../others/extra/Loading"
 import Rate from "../../others/extra/Rate";
 import {Remarks} from "../../others/display/Remarks";
 import {message} from "../../../Toolbox/Helpers/messages";
+import isEmpty from 'lodash/isEmpty'
 
 class TrainerListForManager extends React.Component {
     constructor(props) {
@@ -36,6 +37,9 @@ class TrainerListForManager extends React.Component {
         const {selectedGym} = this.props;
         trainerListForManager(selectedGym.gym_id).then((res) => {
             const trainers = res.data.trainers;
+            if(isEmpty(trainers)){
+                redirectByName('NO_RECORDS_FOUND');
+            }
             this.setState({trainers: trainers, hasServerResponded: true});
         }).catch(err => errorResponse(err))
     }

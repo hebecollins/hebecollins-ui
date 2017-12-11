@@ -41,6 +41,8 @@ import TrainerListForClient from "./components/hebecollins/client/TrainerListFor
 import TrainerListForManager from "./components/hebecollins/manager/TrainerListForManager";
 import TrainerReviewForManager from "./components/hebecollins/manager/TrainerReviewForManager";
 import {ImageCrop} from "./components/others/extra/ImageCrop";
+import TrainerProfileInEditMode from "./components/hebecollins/trainer/TrainerProfileInEditMode";
+import AddGym from "./components/hebecollins/manager/AddGym";
 
 export default (
     <Route path="/" component={App}>
@@ -59,6 +61,7 @@ export default (
         <Route path={getRouteByName('MANAGER_HOME')} component={authCheck(ManagerHome)}/>
         <Route path={getRouteByName('ACTIVATE_MANAGER')} component={authCheck(Activate)}/>
         <Route path={getRouteByName('ADD_TRAINER')} component={authCheck(AddTrainer)}/>
+        <Route path={getRouteByName('ADD_GYM')} component={authCheck(AddGym)}/>
         <Route path={getRouteByName('CLIENT_LIST_FOR_MANAGER')} component={authCheck(ClientListForManager)}/>
         <Route path={getRouteByName('TRAINER_LIST_FOR_MANAGER')} component={authCheck(TrainerListForManager)}/>
         <Route path={getRouteByName('TRAINER_REVIEW_FOR_MANAGER')} component={authCheck(TrainerReviewForManager)}/>
@@ -75,6 +78,7 @@ export default (
         <Route path={getRouteByName('SAVED_WORKOUT_LIST')} component={authCheck(SavedWorkoutList)}/>
         <Route path={getRouteByName('VIEW_SAVED_WORKOUT')} component={authCheck(ViewSavedWorkout)}/>
         <Route path={getRouteByName('EDIT_SAVED_WORKOUT')} component={authCheck(EditSavedWorkout)}/>
+        <Route path={getRouteByName('TRAINER_PROFILE_IN_EDIT_MODE')} component={authCheck(TrainerProfileInEditMode)}/>
 
 
         {/*client*/}

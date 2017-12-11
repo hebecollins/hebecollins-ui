@@ -5,6 +5,7 @@ import {redirectByName} from "../../../Toolbox/Helpers/redirect";
 import {getNotifications, getUnreadNotificationCount} from "../../../actions/notificationActions";
 import classnames from 'classnames';
 import Notification from "./Notification";
+import {setDefaultGym} from "../../../actions/authActions";
 
 /** Designs the navigation bar look
  * */
@@ -14,9 +15,12 @@ class NavigationBar extends React.Component {
         this.state = {
             notifications: '',
             count: '',
+            showGyms: false,
             isClicked: false
         };
-        this.notificationClicked = this.notificationClicked.bind(this)
+        this.notificationClicked = this.notificationClicked.bind(this);
+        this.listGyms = this.listGyms.bind(this);
+        this.selectGym = this.selectGym.bind(this);
     }
 
 
@@ -61,13 +65,34 @@ class NavigationBar extends React.Component {
         this.setState({isClicked: !this.state.isClicked, count: 0})
     }
 
+    listGyms() {
+        this.setState({showGyms: !this.state.showGyms})
+    }
+
+    selectGym(gym){
+        this.props.setDefaultGym(gym);
+        location.reload();
+    }
 
     render() {
-        const {count, isClicked} = this.state;
+        const {count, isClicked, showGyms} = this.state;
         const nickName = this.props.user.nick_name;
+        const gymList = this.props.user.gym_list;
         const gymName = this.props.selectedGym.gym_name;
         const locality = this.props.selectedGym.locality;
         const isAuthenticated = this.props.isAuthenticated;
+
+        const gyms = () => {
+            return (
+                <div className="gym-list">
+                    {gymList.map((gym, index) => {
+                        return <div key={index}>
+                            <a onClick={()=>this.selectGym(gym)} className="gym" >{gym.gym_name},{gym.locality}</a>
+                        </div>
+                    })}
+                </div>
+            )
+        };
 
         const userDetails =
             <div className="nav-user-detail">
@@ -75,8 +100,15 @@ class NavigationBar extends React.Component {
                 <div className="nav-username">
                     {nickName}
                 </div>
-                <div className="nav-gymname">
+                <div className="nav-gymname flex">
                     {gymName},{locality}
+                    {gymList && gymList.length > 1 ?
+                        <div className="button" onClick={this.listGyms}>
+                            <span className="caret"/>{
+                                showGyms?gyms():<div/>
+                        }
+                        </div> :
+                        <div/>}
                 </div>
             </div>;
 
@@ -94,7 +126,7 @@ class NavigationBar extends React.Component {
                     </button>
                     <div id="navbar" className="nav-hebecollins-menu collapse2 navHeaderCollapse">
                         <div className="sm">
-                            {isAuthenticated?userDetails:<div/>}
+                            {isAuthenticated ? userDetails : <div/>}
                         </div>
                         <div>{this.props.children}</div>
                     </div>
@@ -139,4 +171,4 @@ const mapStateToProps = (state) => ({
     selectedGym: state.selectedGym
 });
 
-export default connect(mapStateToProps, null)(NavigationBar);
+export default connect(mapStateToProps, {setDefaultGym})(NavigationBar);

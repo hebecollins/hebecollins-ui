@@ -26,7 +26,7 @@ export function validatePersonalDetails(data) {
 export function validateGymDetails(data) {
     const {gym_name, street_address, locality, district, pin, state, country} = data;
     const {errors, isValid} = validate({
-        gym_name: [gym_name, 'isRequired', 'isAlpha', 'max(15)', 'min(3)'],
+        gym_name: [gym_name, 'isRequired', 'max(15)', 'min(3)'],
         street_address: [street_address, 'max(40)'],
         locality: [locality, 'isRequired', 'isAlpha', 'max(30)', 'min(2)'],
         district: [district, 'isRequired', 'isAlpha', 'max(30)', 'min(2)'],

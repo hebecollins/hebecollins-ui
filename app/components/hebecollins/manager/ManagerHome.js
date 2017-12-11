@@ -20,6 +20,7 @@ class ManagerHome extends React.Component {
                     <li>
                         <button
                             className="btn-hebecollins-black"
+                            onClick={()=>redirectByName("ADD_GYM")}
                         >Add Gym
                         </button>
                     </li>

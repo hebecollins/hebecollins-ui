@@ -276,6 +276,29 @@
     display: inline-block;
 }
 
+.gym-list{
+    position: absolute;
+    width: auto;
+    height: auto;
+    background-color: var(--light-orange);
+    color: black;
+    padding:5px;
+    right: 10px;
+    text-align: left;
+    z-index: 100;
+}
+.gym{
+    width: 100%;
+    float: left;
+    color: black;
+    padding:3px;
+}
+.gym:hover{
+    background-color: var(--dark-orange);
+    color: black;
+    text-decoration: none;
+    cursor: pointer;
+}
 
 /*===========FOLLOWING MUST BE DEPLOYED AFTER TESTING=============================*/
 

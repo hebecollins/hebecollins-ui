@@ -5,6 +5,7 @@ import 'react-image-crop/dist/ReactCrop.css';
 import {ButtonOrange} from "../display/Buttons";
 import Dropzone from "./Dropzone";
 import isEmpty from 'lodash/isEmpty'
+import {updateProfilePic} from "../../../actions/profileActions";
 
 export class ImageCrop extends React.Component {
     constructor(props) {
@@ -56,7 +57,7 @@ export class ImageCrop extends React.Component {
 
         this.urltoFile(base64Image, 'hello.jpg', 'image/jpg')
             .then(function (file) {
-                console.log(file);
+                updateProfilePic(file);
             })
     }
 

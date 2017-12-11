@@ -15,6 +15,7 @@ export const ROUTES = [
     {ROUTE_NAME: 'MANAGER_HOME', ROUTE: '/manager', PERMISSION: ['manager']},
     {ROUTE_NAME: 'ACTIVATE_MANAGER', ROUTE: '/activate/manager', PERMISSION: ['guest']},
     {ROUTE_NAME: 'ADD_TRAINER', ROUTE: '/add/trainer', PERMISSION: ['manager']},
+    {ROUTE_NAME: 'ADD_GYM', ROUTE: '/add/gym', PERMISSION: ['manager']},
     {ROUTE_NAME: 'CLIENT_LIST_FOR_MANAGER', ROUTE: '/manager/clients', PERMISSION: ['manager']},
     {ROUTE_NAME: 'TRAINER_LIST_FOR_MANAGER', ROUTE: '/manager/trainers', PERMISSION: ['manager']},
     {ROUTE_NAME: 'TRAINER_REVIEW_FOR_MANAGER', ROUTE: '/manager/trainer/review', PERMISSION: ['manager']},
@@ -30,6 +31,7 @@ export const ROUTES = [
     {ROUTE_NAME: 'VIEW_SAVED_WORKOUT', ROUTE: '/trainer/workout/view', PERMISSION: ['trainer']},
     {ROUTE_NAME: 'EDIT_SAVED_WORKOUT', ROUTE: '/trainer/workout/edit', PERMISSION: ['trainer']},
     {ROUTE_NAME: 'EDIT_VIEWED_WORKOUT', ROUTE: '/workout/edit', PERMISSION: ['trainer']},
+    {ROUTE_NAME: 'TRAINER_PROFILE_IN_EDIT_MODE', ROUTE: '/trainer/profile', PERMISSION: ['trainer']},
 
 
     //client
@@ -54,6 +56,6 @@ export const ROUTES = [
     {ROUTE_NAME: 'CATEGORY_LIST', ROUTE: '/list/category', PERMISSION: ['admin']},
 
     //test route
-    {ROUTE_NAME:'TEST_ROUTE', ROUTE:'/test', PERMISSION:['guest']}
+    {ROUTE_NAME:'TEST_ROUTE', ROUTE:'/test', PERMISSION:['guest','client','trainer','manager']}
 
 ];

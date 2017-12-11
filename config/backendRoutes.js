@@ -18,6 +18,7 @@ export const BACKEND_ROUTES = {
     MANAGER:{
         ACTIVATE: "/activate/manager",
         ADD_TRAINER: "/add/trainer",// :gymId/add/trainers
+        ADD_GYM: "/add/gym",// :gymId/add/trainers
         CLIENT_LIST: "/manager/clients",//:gymId/trainer/clients
         TRAINER_LIST: "/manager/trainers",//:gymId/manager/trainers
     },
@@ -47,7 +48,6 @@ export const BACKEND_ROUTES = {
         TRAINER_LIST: "/client/trainers",//:gymId/manager/trainers
     },
 
-
     //common routes used by more than one user type
     COMMONS:{
         REMARKS: "/remarks",//:gymId/remarks/:selectedUserId
@@ -65,8 +65,8 @@ export const BACKEND_ROUTES = {
         NOTIFICATION_UPDATE:"/notification/update",
         REVIEW_TRAINER:"/review/trainer",
         GET_TRAINER_REVIEWS:"/review/trainer",
+        POST_PROFILE_PIC:"/profile-pic"
     },
-
 
     //admin routes
     ADMIN:{

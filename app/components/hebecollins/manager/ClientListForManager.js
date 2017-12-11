@@ -11,7 +11,8 @@ import {FieldValue} from "../../others/display/DisplayText";
 import {ButtonOrange} from "../../others/display/Buttons";
 import {UserMonitor} from "../../others/frames/userList/UserMonitor";
 import {Remarks} from "../../others/display/Remarks";
-import {Loading} from "../../others/extra/Loading"
+import {Loading} from "../../others/extra/Loading";
+import isEmpty from "lodash/isEmpty";
 
 class ClientListForManager extends React.Component {
     constructor(props) {
@@ -38,6 +39,9 @@ class ClientListForManager extends React.Component {
         clientListForManager(selectedGym.gym_id).then(
             (res) => {
                 const clients = res.data.clients;
+                if(isEmpty(clients)){
+                    redirectByName('NO_RECORDS_FOUND');
+                }
                 this.setState({clients: clients, hasServerResponded: true});
             }
         ).catch(err => errorResponse(err))

@@ -7,6 +7,7 @@ import isEmpty from 'lodash/isEmpty'
 import {Loading} from "../../others/extra/Loading"
 import {ExerciseGif, RenderExercise} from "../../others/display/RenderExercise";
 import {DaySet} from "../../others/frames/DaySet";
+import {redirectByName} from "../../../Toolbox/Helpers/redirect";
 
 class GetCurrentWorkout extends React.Component {
     constructor(props) {
@@ -33,7 +34,8 @@ class GetCurrentWorkout extends React.Component {
 
         }).catch(err => {
             this.setState({hasServerResponded: true});
-            errorResponse(err)
+            errorResponse(err);
+            redirectByName("NO_RECORDS_FOUND")
         })
     }
 
@@ -55,7 +57,7 @@ class GetCurrentWorkout extends React.Component {
     }
 
     getWorkout() {
-       //making it wait until previous state updates
+        //making it wait until previous state updates
         setTimeout(() => {
                 const workout = deepCloneArray(this.props.workout);
                 const currentDay = dayOfWeek(this.state.index);
