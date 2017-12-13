@@ -1,11 +1,11 @@
 import React from 'react'
 import ReactCrop, {makeAspectCrop} from 'react-image-crop';
-import {IMG_URL_OF} from "../../../../config/imageUrl";
 import 'react-image-crop/dist/ReactCrop.css';
 import {ButtonOrange} from "../display/Buttons";
 import Dropzone from "./Dropzone";
-import isEmpty from 'lodash/isEmpty'
 import {updateProfilePic} from "../../../actions/profileActions";
+import {errorResponse} from "../../../Toolbox/Helpers/responseHandler";
+import {LoadingTransparent} from "./Loading";
 
 export class ImageCrop extends React.Component {
     constructor(props) {
@@ -15,7 +15,8 @@ export class ImageCrop extends React.Component {
             image: '',
             test: '',
             imageLoaded: '',
-            isImageUploaded: false
+            isImageUploaded: false,
+            hasServerResponded:true
         };
         this.onChange = this.onChange.bind(this);
         this.onImageLoaded = this.onImageLoaded.bind(this);
@@ -28,6 +29,7 @@ export class ImageCrop extends React.Component {
     };
 
     onSubmit() {
+        this.setState({hasServerResponded: false});
         const {crop, image} = this.state;
 
         const canvas = document.createElement('canvas');
@@ -54,11 +56,14 @@ export class ImageCrop extends React.Component {
         const base64Image = canvas.toDataURL('image/jpeg');
         this.setState({test: base64Image});
 
-
+        const self = this;
         this.urltoFile(base64Image, 'hello.jpg', 'image/jpg')
             .then(function (file) {
-                updateProfilePic(file);
-            })
+                updateProfilePic(file).then(res=>{
+                    self.setState({hasServerResponded: false});
+                    self.props.onSubmit(base64Image);
+                }).catch(err=>errorResponse(err));
+            });
     }
 
     urltoFile(url, filename, mimeType) {
@@ -88,9 +93,10 @@ export class ImageCrop extends React.Component {
     }
 
     render() {
-        return <div className="content test">
-            {
-                this.state.isImageUploaded ?
+        return (
+            <div>
+                { this.state.hasServerResponded ?
+                    this.state.isImageUploaded ?
                     <div>
                         <ReactCrop
                             src={this.state.image}
@@ -99,12 +105,15 @@ export class ImageCrop extends React.Component {
                             onChange={this.onChange}
                             keepSelection={true}
                         />
-
-                        {!isEmpty(this.state.image) ? <img src={this.state.test}/> : <div/>}
                         <ButtonOrange onClick={this.onSubmit} label={"submit"}/>
                     </div> :
-                    <Dropzone onUpload={this.onUpload} label={"upload image"}/>
-            }
-        </div>
+                    <Dropzone onUpload={this.onUpload} label={"click here to upload an image"}/>
+                :<LoadingTransparent/>}
+            </div>
+        )
     }
 }
+
+ImageCrop.propTypes = {
+    onSubmit: React.PropTypes.func.isRequired
+};

@@ -65,7 +65,8 @@ export const BACKEND_ROUTES = {
         NOTIFICATION_UPDATE:"/notification/update",
         REVIEW_TRAINER:"/review/trainer",
         GET_TRAINER_REVIEWS:"/review/trainer",
-        POST_PROFILE_PIC:"/profile-pic"
+        POST_PROFILE_PIC:"/profile-pic",
+        PROFILE:"/profile"
     },
 
     //admin routes

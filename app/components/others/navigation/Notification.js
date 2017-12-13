@@ -2,6 +2,7 @@ import React from 'react';
 import {getNotifications, markNotificationAsRead} from "../../../actions/notificationActions";
 import {getFormattedDate} from "../../../Toolbox/Helpers/extra";
 import Scrollable from "../extra/Scrollable";
+import {redirectByName} from "../../../Toolbox/Helpers/redirect";
 
 /** Designs the navigation bar look
  * */
@@ -25,17 +26,22 @@ class Notification extends React.Component {
         const markedIdsAsRead = this.state.notifications.map((notification, index) => {
             return notification.id
         });
-        // markNotificationAsRead(markedIdsAsRead);
+        markNotificationAsRead(markedIdsAsRead);
     }
 
-    onClick() {
-        console.log("hellllo")
+    onClick(category) {
+        if(category === "workout"){
+            redirectByName("GET_WORKOUT_FOR_TODAY");
+        }
+        if(category === "client_account_activate"){
+            redirectByName("CLIENT_LIST_FOR_TRAINERS");
+        }
     }
 
     render() {
         let notifBox = this.state.notifications.map((notif, index) => {
             return (
-                <button key={index} onClick={this.onClick} className="notif-box notification-button">
+                <button key={index} onClick={()=>this.onClick(notif.category)} className="notif-box notification-button">
                     <img className="notif-thumbnail" src={notif.img_thumb}/>
                     <div className="notif-notif">
                         <p>{notif.notification}</p>

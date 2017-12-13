@@ -21,8 +21,9 @@ require('../Toolbox/css/commons/navigationBar.css');
 require('../Toolbox/css/commons/rating.css');
 require('../Toolbox/css/client/getCurrentWorkout.css');
 require('../Toolbox/css/admin/gif.css');
-require('../Toolbox/css/test.css');
+require('../Toolbox/css/commons/imageCrop.css');
 require('../Toolbox/css/commons/footer.css');
+require('../Toolbox/css/commons/profile.css');
 
 
 class App extends React.Component {

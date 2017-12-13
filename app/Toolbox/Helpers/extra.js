@@ -51,14 +51,14 @@ export const deepCloneObject = (input) => {
  * @return String => in format 'dd monthName, yyyy'
  */
 export const getFormattedDate = (date) => {
+
     if( moment(date) >  moment().subtract(7, 'days')){
         return moment(date).calendar()
     }
     else{
-        return moment().format("MMM Do YYYY");
+        return moment(date).format("MMM Do YYYY");
     }
 };
-
 
 export const getGenderFromGenderCode = (gender) => {
     switch (gender) {
