@@ -16,16 +16,21 @@ export class ImageCrop extends React.Component {
             test: '',
             imageLoaded: '',
             isImageUploaded: false,
-            hasServerResponded:true
+            hasServerResponded: true
         };
         this.onChange = this.onChange.bind(this);
         this.onImageLoaded = this.onImageLoaded.bind(this);
         this.onSubmit = this.onSubmit.bind(this);
         this.onUpload = this.onUpload.bind(this);
+        this.onCancel = this.onCancel.bind(this);
     }
 
     onChange(crop) {
         this.setState({crop});
+    };
+
+    onCancel() {
+        this.props.onCancel();
     };
 
     onSubmit() {
@@ -59,10 +64,10 @@ export class ImageCrop extends React.Component {
         const self = this;
         this.urltoFile(base64Image, 'hello.jpg', 'image/jpg')
             .then(function (file) {
-                updateProfilePic(file).then(res=>{
+                updateProfilePic(file).then(res => {
                     self.setState({hasServerResponded: false});
                     self.props.onSubmit(base64Image);
-                }).catch(err=>errorResponse(err));
+                }).catch(err => errorResponse(err));
             });
     }
 
@@ -95,25 +100,32 @@ export class ImageCrop extends React.Component {
     render() {
         return (
             <div>
-                { this.state.hasServerResponded ?
+                {this.state.hasServerResponded ?
                     this.state.isImageUploaded ?
-                    <div>
-                        <ReactCrop
-                            src={this.state.image}
-                            crop={this.state.crop}
-                            onImageLoaded={this.onImageLoaded}
-                            onChange={this.onChange}
-                            keepSelection={true}
-                        />
-                        <ButtonOrange onClick={this.onSubmit} label={"submit"}/>
-                    </div> :
-                    <Dropzone onUpload={this.onUpload} label={"click here to upload an image"}/>
-                :<LoadingTransparent/>}
+                        <div>
+                            <ReactCrop
+                                src={this.state.image}
+                                crop={this.state.crop}
+                                onImageLoaded={this.onImageLoaded}
+                                onChange={this.onChange}
+                                keepSelection={true}
+                            />
+                            <ButtonOrange onClick={this.onSubmit} label={"Submit"}/>
+                            <ButtonOrange onClick={this.onCancel} label={"Cancel"}/>
+                        </div> :
+                        <div>
+                            <Dropzone onUpload={this.onUpload} label={"drop or click here to upload an image"}/>
+                            <div id="cancel">
+                                <ButtonOrange onClick={this.onCancel} label={"Cancel"}/>
+                            </div>
+                        </div>
+                    : <LoadingTransparent/>}
             </div>
         )
     }
 }
 
 ImageCrop.propTypes = {
-    onSubmit: React.PropTypes.func.isRequired
+    onSubmit: React.PropTypes.func.isRequired,
+    onCancel: React.PropTypes.func.isRequired,
 };

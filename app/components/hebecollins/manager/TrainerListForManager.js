@@ -29,6 +29,7 @@ class TrainerListForManager extends React.Component {
         };
         this.onChange = this.onChange.bind(this);
         this.onReviewButtonClick = this.onReviewButtonClick.bind(this);
+        this.onViewProfileClick = this.onViewProfileClick.bind(this);
         this.editRemarks = this.editRemarks.bind(this);
         this.remarkSubmitted = this.remarkSubmitted.bind(this);
     }
@@ -100,10 +101,17 @@ class TrainerListForManager extends React.Component {
     }
 
 
+    //when view profile button is clicked
+    onViewProfileClick() {
+        this.currentSelectedTrainer();
+        redirectByName('TRAINER_PROFILE_IN_VIEW_MODE');
+    }
+
+
     render() {
         const viewProfileButton =
             <ButtonOrange
-                onClick={() => redirectByName('CLIENT_PROFILE')}
+                onClick={this.onViewProfileClick}
                 disabled={this.state.isLoading}
                 label={"View Profile"}/>;
 

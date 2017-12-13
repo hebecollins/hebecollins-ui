@@ -1,12 +1,10 @@
 import React from 'react'
-import {getProfile, updateProfileInfo} from "../../../actions/profileActions";
+import {getProfile, updateProfileInfoForTrainer} from "../../../actions/profileActions";
 import {errorResponse} from "../../../Toolbox/Helpers/responseHandler";
-import {getFormattedDate, getGenderFromGenderCode} from "../../../Toolbox/Helpers/extra";
 import {Loading} from "../../others/extra/Loading";
-import {CommentBox, TextField} from "../../others/inputField/InputFieldWithIconAddOn";
-import {ButtonOrange} from "../../others/display/Buttons";
-import {EditInfo} from "../../others/display/EditInfo";
+import {EditBox, EditInfo} from "../../others/display/EditInfo";
 import {ImageCrop} from "../../others/extra/ImageCrop";
+import {BasicInfo, ContactInfo} from "../../others/display/ProfileInfo";
 
 class TrainerProfileInEditMode extends React.Component {
     constructor(props) {
@@ -23,7 +21,8 @@ class TrainerProfileInEditMode extends React.Component {
             speciality: '',
             certifications: '',
             achievements: '',
-            editingImage: false
+            editingImage: false,
+            isLoading: false
         };
         this.experienceEditing = this.experienceEditing.bind(this);
         this.achievementEditing = this.achievementEditing.bind(this);
@@ -32,6 +31,7 @@ class TrainerProfileInEditMode extends React.Component {
         this.editImage = this.editImage.bind(this);
         this.onSubmit = this.onSubmit.bind(this);
         this.onChange = this.onChange.bind(this);
+        this.onCancel = this.onCancel.bind(this);
         this.onImageSubmit = this.onImageSubmit.bind(this);
     }
 
@@ -77,13 +77,19 @@ class TrainerProfileInEditMode extends React.Component {
         this.setState({editingImage: false, profile_pic: profilePic})
     }
 
+    onCancel() {
+        this.setState({editingImage: false})
+    }
+
     onSubmit() {
-        updateProfileInfo(this.state).then(res => {
+        this.setState({isLoading: true});
+        updateProfileInfoForTrainer(this.state).then(res => {
                 this.setState({
                     isExperienceEditing: false,
                     isAchievementsEditing: false,
                     isCertificationsEditing: false,
-                    isSpecialityEditing: false
+                    isSpecialityEditing: false,
+                    isLoading: false
                 })
             }
         )
@@ -93,111 +99,56 @@ class TrainerProfileInEditMode extends React.Component {
         const {
             info, hasServerResponded, isExperienceEditing, isAchievementsEditing, editingImage, profile_pic,
             isCertificationsEditing, isSpecialityEditing, experience, certifications, achievements, speciality
+            , isLoading
         } = this.state;
 
-        const experienceForm = <div>
-            <CommentBox
-                field={"experience"}
-                value={experience}
-                label={""}
-                onChange={this.onChange}
-                isIconNeeded={false}
-            />
-            <ButtonOrange disabled={false} label={"Done"} onClick={this.onSubmit}/>
-            <ButtonOrange disabled={false} label={"Cancel"} onClick={this.experienceEditing}/>
-        </div>;
+        const experienceForm =
+            <EditBox onChange={this.onChange} onSubmit={this.onSubmit} onCancel={this.experienceEditing}
+                     isLoading={isLoading} field={"experience"} value={experience}/>;
 
-        const certificationForm = <div>
-            <CommentBox
-                field={"certifications"}
-                value={certifications}
-                label={""}
-                onChange={this.onChange}
-                isIconNeeded={false}
-            />
-            <ButtonOrange disabled={false} label={"Done"} onClick={this.onSubmit}/>
-            <ButtonOrange disabled={false} label={"Cancel"} onClick={this.certificationEditing}/>
-        </div>;
+        const certificationForm =
+            <EditBox onChange={this.onChange} onSubmit={this.onSubmit} onCancel={this.certificationEditing}
+                     isLoading={isLoading} field={"certifications"} value={certifications}/>;
 
-        const achievementForm = <div>
-            <CommentBox
-                field={"achievements"}
-                value={achievements}
-                label={""}
-                onChange={this.onChange}
-                isIconNeeded={false}
-            />
-            <ButtonOrange disabled={false} label={"Done"} onClick={this.onSubmit}/>
-            <ButtonOrange disabled={false} label={"Cancel"} onClick={this.achievementEditing}/>
-        </div>;
+        const achievementForm =
+            <EditBox onChange={this.onChange} onSubmit={this.onSubmit} onCancel={this.achievementEditing}
+                     isLoading={isLoading} field={"achievements"} value={achievements}/>;
 
-        const specialityForm = <div>
-            <CommentBox
-                field={"speciality"}
-                value={speciality}
-                label={""}
-                onChange={this.onChange}
-                isIconNeeded={false}
-            />
-            <ButtonOrange disabled={false} label={"Done"} onClick={this.onSubmit}/>
-            <ButtonOrange disabled={false} label={"Cancel"} onClick={this.specialityEditing}/>
-        </div>;
 
+        const specialityForm =
+            <EditBox onChange={this.onChange} onSubmit={this.onSubmit} onCancel={this.specialityEditing}
+                     isLoading={isLoading} field={"speciality"} value={speciality}/>;
 
         return ( !hasServerResponded ? <Loading/> : <div className="content quote-box">
                 <div className="black-box">
                     <div className="profile">
                         <div className="profile-pic-container">
                             <img className="profile-pic" src={profile_pic}/>
-
                             {editingImage ? <div className="pop-on-screen">
-                                <ImageCrop onSubmit={this.onImageSubmit}/>
-                            </div> : <div/>
-                            }
-
+                                <ImageCrop onSubmit={this.onImageSubmit} onCancel={this.onCancel}/>
+                            </div> : <div/>}
                             <div className="edit-image-icon">
                                 <a onClick={this.editImage}>
                                     <span className="glyphicon glyphicon-camera"/>
                                 </a>
                             </div>
                         </div>
+
                         <div className="profile-data">
-                            <div className="heading">Basic Information</div>
-                            <div className="flex">
-                                <h1 className="field">Full Name : </h1>
-                                <h1 className="value">{info.name}</h1>
-                            </div>
-                            <div className="flex">
-                                <h1 className="field">Nick Name : </h1>
-                                <h1 className="value">{info.nick_name}</h1>
-                            </div>
-                            <div className="flex">
-                                <h1 className="field">Gender : </h1>
-                                <h1 className="value">{getGenderFromGenderCode(info.gender)}</h1>
-                            </div>
-                            <div className="flex">
-                                <h1 className="field">Age : </h1>
-                                <h1 className="value">{getGenderFromGenderCode(info.age)}</h1>
-                            </div>
-                            <div className="flex">
-                                <h1 className="field">Birthday : </h1>
-                                <h1 className="value">{getFormattedDate(info.dob)}</h1>
-                            </div>
+                            <BasicInfo
+                                name={info.name}
+                                nick_name={info.nick_name}
+                                dob={info.dob}
+                                gender={info.gender}
+                                age={info.age}/>
 
-
-                            <div className="heading">Contact Information</div>
-                            <div className="flex">
-                                <h1 className="field">Email : </h1>
-                                <h1 className="value">{info.email}</h1>
-                            </div>
-                            <div className="flex">
-                                <h1 className="field">Mobile : </h1>
-                                <h1 className="value">{`+${info.country_code}-` + info.mobile}</h1>
-                            </div>
-
+                            <ContactInfo
+                                email={info.email}
+                                country_code={info.country_code}
+                                mobile={info.mobile}
+                            />
 
                             <div className="heading">Professional Information</div>
-
                             <EditInfo
                                 editingForm={experienceForm}
                                 label={"Experience"}
@@ -205,7 +156,6 @@ class TrainerProfileInEditMode extends React.Component {
                                 editingAction={this.experienceEditing}
                                 isEditing={isExperienceEditing}
                             />
-
                             <EditInfo
                                 editingForm={certificationForm}
                                 label={"Certifications"}
@@ -229,7 +179,6 @@ class TrainerProfileInEditMode extends React.Component {
                                 editingAction={this.specialityEditing}
                                 isEditing={isSpecialityEditing}
                             />
-
                         </div>
                     </div>
                 </div>

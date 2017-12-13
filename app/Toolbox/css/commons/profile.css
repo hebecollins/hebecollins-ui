@@ -91,6 +91,10 @@
     color: white;
 }
 
+.orange-field{
+    margin:8px;
+}
+
 .orange-field .field{
     color: var(--light-orange);
 }
@@ -98,4 +102,13 @@
     color: white;
     width: 100%;
     margin-bottom: 10px;
+    margin-left: 10px;
+}
+
+.edit-box{
+    margin-top: 5px;
+    margin-bottom: 15px;
+}
+.edit-box-buttons{
+    margin-top: -12px;
 }

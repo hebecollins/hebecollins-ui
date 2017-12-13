@@ -100,7 +100,7 @@ class ClientListForTrainer extends React.Component {
 
     viewProfileClick(){
         this.currentSelectedClient();
-        redirectByName('CLIENT_PROFILE')
+        redirectByName('CLIENT_PROFILE_IN_VIEW_MODE')
     }
 
     addWorkoutClick(){

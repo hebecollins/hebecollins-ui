@@ -29,6 +29,7 @@ class ClientListForManager extends React.Component {
         this.editRemarks = this.editRemarks.bind(this);
         this.remarkSubmitted = this.remarkSubmitted.bind(this);
         this.onChange = this.onChange.bind(this);
+        this.viewProfileClick = this.viewProfileClick.bind(this);
     }
 
     /** It sends clientList request to the server and stores the first client from that response in
@@ -96,11 +97,16 @@ class ClientListForManager extends React.Component {
         ).catch((err) => errorResponse(err));
     }
 
+    viewProfileClick(){
+        this.currentSelectedClient();
+        redirectByName('CLIENT_PROFILE_IN_VIEW_MODE')
+    }
+
     render() {
 
         const viewProfileButton =
             <ButtonOrange
-                onClick={() => redirectByName('NO_RECORDS_FOUND')}
+                onClick={this.viewProfileClick}
                 disabled={this.state.isLoading}
                 label={"View Profile"}/>;
 

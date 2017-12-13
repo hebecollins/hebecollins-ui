@@ -24,6 +24,7 @@ class TrainerListForClient extends React.Component {
         };
         this.onChange = this.onChange.bind(this);
         this.onReviewButtonClick = this.onReviewButtonClick.bind(this);
+        this.onViewProfileClick = this.onViewProfileClick.bind(this);
     }
 
     /** It sends clientList request to the server and stores the first client from that response in
@@ -55,6 +56,12 @@ class TrainerListForClient extends React.Component {
         redirectByName('TRAINER_REVIEW_FOR_CLIENT');
     }
 
+    onViewProfileClick() {
+        const trainerCloned = deepCloneArray(this.state.trainers[this.state.index]);
+        this.props.addSelectedTrainerToRedux(trainerCloned);
+        redirectByName('TRAINER_PROFILE_IN_VIEW_MODE');
+    }
+
     onChange(e) {
         this.setState({remarks: e.target.value})
     }
@@ -62,7 +69,7 @@ class TrainerListForClient extends React.Component {
     render() {
         const viewProfileButton =
             <ButtonOrange
-                onClick={() => redirectByName('CLIENT_PROFILE')}
+                onClick={this.onViewProfileClick}
                 disabled={this.state.isLoading}
                 label={"View Profile"}/>;
 

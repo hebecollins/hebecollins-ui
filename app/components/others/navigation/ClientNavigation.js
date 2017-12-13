@@ -10,6 +10,9 @@ export const ClientNavigation =({logout})=>{
                     <NavLink to={getRouteByName("CLIENT_HOME")} onlyActiveOnIndex>Home</NavLink>
                 </li>
                 <li>
+                    <NavLink to={getRouteByName("CLIENT_PROFILE_IN_EDIT_MODE")} onlyActiveOnIndex>Profile</NavLink>
+                </li>
+                <li>
                     <NavLink to={getRouteByName("GET_WORKOUT_FOR_TODAY")} onlyActiveOnIndex>Get Workout</NavLink>
                 </li>
                 <li>

@@ -40,12 +40,14 @@ export const ROUTES = [
     {ROUTE_NAME: 'GET_WORKOUT_FOR_TODAY',ROUTE: '/client/workout', PERMISSION: ['client']},
     {ROUTE_NAME: 'TRAINER_REVIEW_FOR_CLIENT',ROUTE: '/client/trainer/review', PERMISSION: ['client']},
     {ROUTE_NAME: 'TRAINER_LIST_FOR_CLIENT',ROUTE: '/client/trainers', PERMISSION: ['client']},
+    {ROUTE_NAME: 'CLIENT_PROFILE_IN_EDIT_MODE', ROUTE: '/client/profile', PERMISSION: ['client']},
 
 
     //commons
     {ROUTE_NAME: 'NO_RECORDS_FOUND', ROUTE: '/404', PERMISSION: ['manager', 'trainer', 'client','admin']},
-    {ROUTE_NAME: 'CLIENT_PROFILE', ROUTE: '/client/profile', PERMISSION: ['manager', 'client', 'trainer']},//temporary
     {ROUTE_NAME: 'VIEW_WORKOUT_FOR_SELECTED_CLIENT', ROUTE: '/workout/view', PERMISSION: ['manager', 'trainer']},//temporary
+    {ROUTE_NAME: 'TRAINER_PROFILE_IN_VIEW_MODE', ROUTE: '/profile/trainer', PERMISSION: ['manager', 'client', 'trainer']},//temporary
+    {ROUTE_NAME: 'CLIENT_PROFILE_IN_VIEW_MODE', ROUTE: '/profile/client', PERMISSION: ['manager', 'client', 'trainer']},//temporary
 
 
     //admin

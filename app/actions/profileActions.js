@@ -13,12 +13,27 @@ export const getProfile = ()=>{
     return get(route)
 };
 
-export const updateProfileInfo = (data) =>{
+export const getProfileById= (gymId, userId)=>{
+    const route = `${gymId}${BACKEND_ROUTES.COMMONS.PROFILE}/${userId}`;
+    return get(route)
+};
+
+export const updateProfileInfoForTrainer = (data) =>{
   const dataToBePosted = {
       experience:data.experience,
       achievements : data.achievements,
       certifications: data.certifications,
       speciality: data.speciality
+  };
+
+  return postJSON(dataToBePosted, BACKEND_ROUTES.COMMONS.PROFILE)
+};
+
+export const updateProfileInfoForClient = (data) =>{
+  const dataToBePosted = {
+      batch:data.batch,
+      primary_goal : data.goal,
+      goal_description: data.goal_description,
   };
 
   return postJSON(dataToBePosted, BACKEND_ROUTES.COMMONS.PROFILE)

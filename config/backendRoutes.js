@@ -66,7 +66,8 @@ export const BACKEND_ROUTES = {
         REVIEW_TRAINER:"/review/trainer",
         GET_TRAINER_REVIEWS:"/review/trainer",
         POST_PROFILE_PIC:"/profile-pic",
-        PROFILE:"/profile"
+        PROFILE:"/profile",
+        PROFILE_BY_ID:"/profile"//:gymId/profile/:userId
     },
 
     //admin routes

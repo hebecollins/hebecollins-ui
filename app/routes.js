@@ -43,6 +43,9 @@ import TrainerReviewForManager from "./components/hebecollins/manager/TrainerRev
 import {ImageCrop} from "./components/others/extra/ImageCrop";
 import TrainerProfileInEditMode from "./components/hebecollins/trainer/TrainerProfileInEditMode";
 import AddGym from "./components/hebecollins/manager/AddGym";
+import TrainerProfileInViewMode from "./components/hebecollins/commons/TrainerProfileInViewMode";
+import ClientProfileInViewMode from "./components/hebecollins/commons/ClientProfileInViewMode";
+import ClientProfileInEditMode from "./components/hebecollins/client/ClientProfileInEditMode";
 
 export default (
     <Route path="/" component={App}>
@@ -87,13 +90,15 @@ export default (
         <Route path={getRouteByName('GET_WORKOUT_FOR_TODAY')} component={authCheck(GetCurrentWorkout)}/>
         <Route path={getRouteByName('TRAINER_REVIEW_FOR_CLIENT')} component={authCheck(TrainerReviewForClient)}/>
         <Route path={getRouteByName('TRAINER_LIST_FOR_CLIENT')} component={authCheck(TrainerListForClient)}/>
+        <Route path={getRouteByName('CLIENT_PROFILE_IN_EDIT_MODE')} component={authCheck(ClientProfileInEditMode)}/>
 
 
         {/*commons*/}
-        <Route path={getRouteByName('CLIENT_PROFILE')} component={authCheck(ClientProfile)}/>
         <Route path={getRouteByName('VIEW_WORKOUT_FOR_SELECTED_CLIENT')}
                component={authCheck(ViewWorkoutForSelectedClient)}/>
         <Route path={getRouteByName('NO_RECORDS_FOUND')} component={authCheck(NoRecordsFound)}/>
+        <Route path={getRouteByName('TRAINER_PROFILE_IN_VIEW_MODE')} component={authCheck(TrainerProfileInViewMode)}/>
+        <Route path={getRouteByName('CLIENT_PROFILE_IN_VIEW_MODE')} component={authCheck(ClientProfileInViewMode)}/>
 
 
         {/*admin*/}
@@ -107,6 +112,5 @@ export default (
         <Route path={getRouteByName('TEST_ROUTE')} component={authCheck(ImageCrop)}/>
 
         <Route path='/*' component={NotFound}/>
-
     </Route>
 )
