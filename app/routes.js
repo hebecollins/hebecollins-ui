@@ -46,6 +46,10 @@ import AddGym from "./components/hebecollins/manager/AddGym";
 import TrainerProfileInViewMode from "./components/hebecollins/commons/TrainerProfileInViewMode";
 import ClientProfileInViewMode from "./components/hebecollins/commons/ClientProfileInViewMode";
 import ClientProfileInEditMode from "./components/hebecollins/client/ClientProfileInEditMode";
+import GymProfileInViewMode from "./components/hebecollins/commons/GymProfileInViewMode";
+import GymProfileInEditMode from "./components/hebecollins/manager/GymProfileInEditMode";
+import GymList from "./components/hebecollins/commons/GymList";
+import LocationMap from "./components/others/frames/LocationMap";
 
 export default (
     <Route path="/" component={App}>
@@ -68,6 +72,7 @@ export default (
         <Route path={getRouteByName('CLIENT_LIST_FOR_MANAGER')} component={authCheck(ClientListForManager)}/>
         <Route path={getRouteByName('TRAINER_LIST_FOR_MANAGER')} component={authCheck(TrainerListForManager)}/>
         <Route path={getRouteByName('TRAINER_REVIEW_FOR_MANAGER')} component={authCheck(TrainerReviewForManager)}/>
+        <Route path={getRouteByName('GYM_PROFILE_IN_EDIT_MODE')} component={authCheck(GymProfileInEditMode)}/>
 
 
         {/*trainer*/}
@@ -99,6 +104,8 @@ export default (
         <Route path={getRouteByName('NO_RECORDS_FOUND')} component={authCheck(NoRecordsFound)}/>
         <Route path={getRouteByName('TRAINER_PROFILE_IN_VIEW_MODE')} component={authCheck(TrainerProfileInViewMode)}/>
         <Route path={getRouteByName('CLIENT_PROFILE_IN_VIEW_MODE')} component={authCheck(ClientProfileInViewMode)}/>
+        <Route path={getRouteByName('GYM_PROFILE_IN_VIEW_MODE')} component={authCheck(GymProfileInViewMode)}/>
+        <Route path={getRouteByName('GYM_LIST')} component={authCheck(GymList)}/>
 
 
         {/*admin*/}
@@ -109,7 +116,7 @@ export default (
         <Route path={getRouteByName('CATEGORY_LIST')} component={authCheck(CategoryList)}/>
 
         {/*test route*/}
-        <Route path={getRouteByName('TEST_ROUTE')} component={authCheck(ImageCrop)}/>
+        <Route path={getRouteByName('TEST_ROUTE')} component={authCheck(LocationMap)}/>
 
         <Route path='/*' component={NotFound}/>
     </Route>

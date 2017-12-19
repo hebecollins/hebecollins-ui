@@ -2,10 +2,9 @@ import React from 'react'
 import ReactCrop, {makeAspectCrop} from 'react-image-crop';
 import 'react-image-crop/dist/ReactCrop.css';
 import {ButtonOrange} from "../display/Buttons";
-import Dropzone from "./Dropzone";
 import {updateProfilePic} from "../../../actions/profileActions";
 import {errorResponse} from "../../../Toolbox/Helpers/responseHandler";
-import {LoadingTransparent} from "./Loading";
+import {LoadingTransparent, Loading} from "./Loading";
 
 export class ImageCrop extends React.Component {
     constructor(props) {
@@ -21,8 +20,19 @@ export class ImageCrop extends React.Component {
         this.onChange = this.onChange.bind(this);
         this.onImageLoaded = this.onImageLoaded.bind(this);
         this.onSubmit = this.onSubmit.bind(this);
-        this.onUpload = this.onUpload.bind(this);
         this.onCancel = this.onCancel.bind(this);
+    }
+
+    componentWillMount() {
+        const self = this;
+        let reader = new FileReader();
+        reader.readAsDataURL(this.props.image);
+        reader.onload = function () {
+            self.setState({image: reader.result, isImageUploaded: true});
+        };
+        reader.onerror = function (error) {
+            console.log('Error: ', error);
+        };
     }
 
     onChange(crop) {
@@ -64,7 +74,7 @@ export class ImageCrop extends React.Component {
         const self = this;
         this.urltoFile(base64Image, 'hello.jpg', 'image/jpg')
             .then(function (file) {
-                updateProfilePic(file).then(res => {
+                self.props.uploadImageToServer(file).then(res => {
                     self.setState({hasServerResponded: false});
                     self.props.onSubmit(base64Image);
                 }).catch(err => errorResponse(err));
@@ -82,16 +92,12 @@ export class ImageCrop extends React.Component {
         );
     }
 
-    onUpload(img) {
-        this.setState({image: img.preview, isImageUploaded: true});
-    }
-
     onImageLoaded(image) {
         this.setState({
             crop: makeAspectCrop({
                 x: 10,
                 y: 10,
-                aspect: 1,
+                aspect: this.props.aspectRatio,
                 width: 50,
             }, image.width / image.height), imageLoaded: image
         })
@@ -113,12 +119,7 @@ export class ImageCrop extends React.Component {
                             <ButtonOrange onClick={this.onSubmit} label={"Submit"}/>
                             <ButtonOrange onClick={this.onCancel} label={"Cancel"}/>
                         </div> :
-                        <div>
-                            <Dropzone onUpload={this.onUpload} label={"drop or click here to upload an image"}/>
-                            <div id="cancel">
-                                <ButtonOrange onClick={this.onCancel} label={"Cancel"}/>
-                            </div>
-                        </div>
+                        <LoadingTransparent/>
                     : <LoadingTransparent/>}
             </div>
         )
@@ -128,4 +129,11 @@ export class ImageCrop extends React.Component {
 ImageCrop.propTypes = {
     onSubmit: React.PropTypes.func.isRequired,
     onCancel: React.PropTypes.func.isRequired,
+    image: React.PropTypes.any.isRequired,
+    uploadImageToServer: React.PropTypes.func.isRequired,
+    aspectRatio: React.PropTypes.number.isRequired,
+};
+
+ImageCrop.defaultProps = {
+    aspectRatio: 1
 };

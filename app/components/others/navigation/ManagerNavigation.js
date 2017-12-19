@@ -16,6 +16,9 @@ export const ManagerNavigation = ({logout}) => {
                 <NavLink to={getRouteByName("ADD_GYM")} onlyActiveOnIndex>Add Gym</NavLink>
             </li>
             <li>
+                <NavLink to={getRouteByName("GYM_PROFILE_IN_EDIT_MODE")} onlyActiveOnIndex>Gym Profile</NavLink>
+            </li>
+            <li>
                 <NavLink to={getRouteByName("CLIENT_LIST_FOR_MANAGER")} onlyActiveOnIndex>Clients</NavLink>
             </li>
             <li>

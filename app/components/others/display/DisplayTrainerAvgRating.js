@@ -61,4 +61,3 @@ DisplayTrainerAvgReview.propTypes = {
     selectedGym: React.PropTypes.object.isRequired,
     selectedUser: React.PropTypes.object.isRequired,
 };
-

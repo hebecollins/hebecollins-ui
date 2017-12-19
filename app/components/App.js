@@ -24,6 +24,8 @@ require('../Toolbox/css/admin/gif.css');
 require('../Toolbox/css/commons/imageCrop.css');
 require('../Toolbox/css/commons/footer.css');
 require('../Toolbox/css/commons/profile.css');
+require('../Toolbox/css/commons/gymProfile.css');
+require('../Toolbox/css/commons/gymList.css');
 
 
 class App extends React.Component {

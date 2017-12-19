@@ -63,8 +63,16 @@
     color: white;
     float: right;
     margin-right: 3%;
-    margin-top: -40px;
+    margin-top: -51px;
     border-radius: 5px;
+}
+
+.edit-image-icon > label{
+    float: right;
+}
+
+.edit-image-icon .form-group .upload-box {
+    display: none;
 }
 
 .heading{
@@ -112,3 +120,4 @@
 .edit-box-buttons{
     margin-top: -12px;
 }
+

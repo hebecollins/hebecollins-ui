@@ -18,6 +18,9 @@ export const ClientNavigation =({logout})=>{
                 <li>
                     <NavLink to={getRouteByName("TRAINER_LIST_FOR_CLIENT")} onlyActiveOnIndex>Trainers</NavLink>
                 </li>
+                <li>
+                    <NavLink to={getRouteByName("GYM_PROFILE_IN_VIEW_MODE")} onlyActiveOnIndex>Gym</NavLink>
+                </li>
                 <li><a href="#" onClick={logout}>Logout</a></li>
             </ul>
         );

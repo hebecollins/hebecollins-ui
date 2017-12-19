@@ -11,8 +11,12 @@ export const GuestNavigation = () => {
             </li>
 
             <li>
-                <NavLink to={getRouteByName("VERIFY")} onlyActiveOnIndex>About Us</NavLink>
+                <NavLink to={getRouteByName("GYM_LIST")} onlyActiveOnIndex>Find Gym Nearby</NavLink>
             </li>
+
+            {/*<li>*/}
+                {/*<NavLink to={getRouteByName("VERIFY")} onlyActiveOnIndex>About Us</NavLink>*/}
+            {/*</li>*/}
         </ul>
     );
 

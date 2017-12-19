@@ -5,6 +5,8 @@ import {Loading} from "../../others/extra/Loading";
 import {EditBox, EditInfo} from "../../others/display/EditInfo";
 import {ImageCrop} from "../../others/extra/ImageCrop";
 import {BasicInfo, ContactInfo} from "../../others/display/ProfileInfo";
+import {UploadFile} from "../../others/inputField/InputFieldWithIconAddOn";
+import {updateProfilePic} from "../../../actions/profileActions";
 
 class TrainerProfileInEditMode extends React.Component {
     constructor(props) {
@@ -22,16 +24,17 @@ class TrainerProfileInEditMode extends React.Component {
             certifications: '',
             achievements: '',
             editingImage: false,
-            isLoading: false
+            isLoading: false,
+            uploadedImage: ''
         };
         this.experienceEditing = this.experienceEditing.bind(this);
         this.achievementEditing = this.achievementEditing.bind(this);
         this.specialityEditing = this.specialityEditing.bind(this);
         this.certificationEditing = this.certificationEditing.bind(this);
-        this.editImage = this.editImage.bind(this);
         this.onSubmit = this.onSubmit.bind(this);
         this.onChange = this.onChange.bind(this);
         this.onCancel = this.onCancel.bind(this);
+        this.onImageUpload = this.onImageUpload.bind(this);
         this.onImageSubmit = this.onImageSubmit.bind(this);
     }
 
@@ -69,8 +72,9 @@ class TrainerProfileInEditMode extends React.Component {
         this.setState({isSpecialityEditing: !this.state.isSpecialityEditing})
     }
 
-    editImage() {
-        this.setState({editingImage: true})
+    onImageUpload(e) {
+        const image = e.target.files[0];
+        this.setState({uploadedImage: image, editingImage: true});
     }
 
     onImageSubmit(profilePic) {
@@ -125,12 +129,18 @@ class TrainerProfileInEditMode extends React.Component {
                         <div className="profile-pic-container">
                             <img className="profile-pic" src={profile_pic}/>
                             {editingImage ? <div className="pop-on-screen">
-                                <ImageCrop onSubmit={this.onImageSubmit} onCancel={this.onCancel}/>
+                                <ImageCrop
+                                    onSubmit={this.onImageSubmit}
+                                    onCancel={this.onCancel}
+                                    image={this.state.uploadedImage}
+                                    uploadImageToServer={updateProfilePic}
+                                />
                             </div> : <div/>}
                             <div className="edit-image-icon">
-                                <a onClick={this.editImage}>
+                                <label htmlFor="image-upload">
                                     <span className="glyphicon glyphicon-camera"/>
-                                </a>
+                                </label>
+                                <UploadFile onUpload={this.onImageUpload} field='image-upload'/>
                             </div>
                         </div>
 

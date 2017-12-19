@@ -35,10 +35,9 @@ export function postForm(data, route, params = {}) {
 
 
 /**Sends media content.
- * */
+ **/
 export function postMedia(data, route, params = {}) {
     let formData = new FormData();
-
     Object.keys(data).map((key) => {
         formData.append(key, data[key]);
     });

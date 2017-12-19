@@ -1,10 +1,14 @@
 import React from 'react'
-import {getProfile, updateProfileInfoForClient, updateProfileInfoForTrainer} from "../../../actions/profileActions";
+import {
+    getProfile, updateProfileInfoForClient, updateProfileInfoForTrainer,
+    updateProfilePic
+} from "../../../actions/profileActions";
 import {errorResponse} from "../../../Toolbox/Helpers/responseHandler";
 import {Loading} from "../../others/extra/Loading";
 import {EditBox, EditInfo, EditOptions} from "../../others/display/EditInfo";
 import {ImageCrop} from "../../others/extra/ImageCrop";
 import {BasicInfo, ContactInfo} from "../../others/display/ProfileInfo";
+import {UploadFile} from "../../others/inputField/InputFieldWithIconAddOn";
 
 class ClientProfileInEditMode extends React.Component {
     constructor(props) {
@@ -20,15 +24,16 @@ class ClientProfileInEditMode extends React.Component {
             goal: '',
             goal_description: '',
             editingImage: false,
+            uploadedImage:'',
             isLoading: false
         };
         this.batchEditing = this.batchEditing.bind(this);
         this.goalEditing = this.goalEditing.bind(this);
         this.goalDescriptionEditing = this.goalDescriptionEditing.bind(this);
-        this.editImage = this.editImage.bind(this);
         this.onSubmit = this.onSubmit.bind(this);
         this.onChange = this.onChange.bind(this);
         this.onCancel = this.onCancel.bind(this);
+        this.onImageUpload = this.onImageUpload.bind(this);
         this.onImageSubmit = this.onImageSubmit.bind(this);
     }
 
@@ -61,8 +66,9 @@ class ClientProfileInEditMode extends React.Component {
         this.setState({isGoalDescriptionEditing: !this.state.isGoalDescriptionEditing})
     }
 
-    editImage() {
-        this.setState({editingImage: true})
+    onImageUpload(e){
+        const image = e.target.files[0];
+        this.setState({uploadedImage:image, editingImage:true});
     }
 
     onImageSubmit(profilePic) {
@@ -121,12 +127,18 @@ class ClientProfileInEditMode extends React.Component {
                         <div className="profile-pic-container">
                             <img className="profile-pic" src={profile_pic}/>
                             {editingImage ? <div className="pop-on-screen">
-                                <ImageCrop onSubmit={this.onImageSubmit} onCancel={this.onCancel}/>
+                                <ImageCrop
+                                    onSubmit={this.onImageSubmit}
+                                    onCancel={this.onCancel}
+                                    image={this.state.uploadedImage}
+                                    uploadImageToServer={updateProfilePic}
+                                />
                             </div> : <div/>}
                             <div className="edit-image-icon">
-                                <a onClick={this.editImage}>
+                                <label htmlFor="image-upload">
                                     <span className="glyphicon glyphicon-camera"/>
-                                </a>
+                                </label>
+                                <UploadFile onUpload={this.onImageUpload} field='image-upload'/>
                             </div>
                         </div>
 

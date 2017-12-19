@@ -1,0 +1,22 @@
+.list-logo-container {
+    width: 30%;
+    margin-top: 10px;
+}
+
+.list-logo {
+    width: 100%;
+}
+
+.list-rating {
+    margin-left: 10px;
+}
+
+@media (min-width: 768px) {
+
+}
+
+@media (max-width: 768px) {
+    .list-detail .orange-header{
+        font-size: medium !important;
+    }
+}

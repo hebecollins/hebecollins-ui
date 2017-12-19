@@ -1,5 +1,8 @@
 import React from 'react'
-import {addSelectedClientToRedux, clientListForManager, postRemarkToServer} from "../../../actions/userListActions"
+import {
+    addSelectedClientToRedux, addSelectedTrainerToRedux, clientListForManager,
+    postRemarkToServer
+} from "../../../actions/userListActions"
 import {connect} from "react-redux"
 import {errorResponse} from "../../../Toolbox/Helpers/responseHandler"
 import {ListElement} from "../../others/frames/userList/ListElement"
@@ -30,6 +33,7 @@ class ClientListForManager extends React.Component {
         this.remarkSubmitted = this.remarkSubmitted.bind(this);
         this.onChange = this.onChange.bind(this);
         this.viewProfileClick = this.viewProfileClick.bind(this);
+        this.viewTrainerProfileClick = this.viewTrainerProfileClick.bind(this);
     }
 
     /** It sends clientList request to the server and stores the first client from that response in
@@ -102,6 +106,16 @@ class ClientListForManager extends React.Component {
         redirectByName('CLIENT_PROFILE_IN_VIEW_MODE')
     }
 
+    viewTrainerProfileClick(){
+        const clientCloned = deepCloneArray(this.state.clients[this.state.index]);
+        const trainerDetails = {
+          trainer_id:clientCloned.current_trainer_id,
+          name:clientCloned.current_trainer
+        };
+        this.props.addSelectedTrainerToRedux(trainerDetails);
+        redirectByName('TRAINER_PROFILE_IN_VIEW_MODE')
+    }
+
     render() {
 
         const viewProfileButton =
@@ -113,7 +127,7 @@ class ClientListForManager extends React.Component {
         //redirects towards addWorkout page
         const viewTrainerProfileButton =
             <ButtonOrange
-                onClick={() => redirectByName('NO_RECORDS_FOUND')}
+                onClick={this.viewTrainerProfileClick}
                 disabled={this.state.isLoading}
                 label={"View Trainer's Profile"}/>;
 
@@ -240,4 +254,4 @@ function mapStateToProps(state) {
     }
 }
 
-export default connect(mapStateToProps, {addSelectedClientToRedux})(ClientListForManager);
+export default connect(mapStateToProps, {addSelectedClientToRedux, addSelectedTrainerToRedux})(ClientListForManager);

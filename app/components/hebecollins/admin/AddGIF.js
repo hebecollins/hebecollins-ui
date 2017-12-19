@@ -71,8 +71,7 @@ class AddGIF extends React.Component {
                 <div className="workout-group">
                     <Fade>{exerciseFormList}</Fade>
                 </div>
-            </div> :
-            <Loading/>
+            </div> : <Loading/>
     }
 }
 

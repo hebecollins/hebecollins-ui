@@ -1,10 +1,11 @@
 import React from 'react'
 import Rate from "../extra/Rate";
 import {getFormattedDate} from "../../../Toolbox/Helpers/extra";
+import isEmpty from 'lodash/isEmpty'
 
 export const DisplayReviews =(props)=>{
 
-        const reviewBox = props.reviewList.map((review, index) => {
+        const reviewBox = !isEmpty(props.reviewList)? props.reviewList.map((review, index) => {
             return (
                 <div key={review.reviewer_id} className="review-list">
                     <div className="average-rating">
@@ -19,11 +20,10 @@ export const DisplayReviews =(props)=>{
                         <div className="time-label">
                             <p className="rating-label">{getFormattedDate(review.updated_at)}</p>
                         </div>
-                    </div>
+                    </div><hr/>
                 </div>
             )
-        });
-
+        }):<div/>;
         return <div>{reviewBox}</div>
     };
 

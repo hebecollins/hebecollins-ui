@@ -73,6 +73,7 @@ class RatingForm extends React.Component {
 
     render() {
         let {quality_one, quality_two, quality_three, quality_four, quality_five} = this.state;
+        const {qualityOne, qualityTwo, qualityThree, qualityFour, qualityFive} = this.props;
         return (
                 <div className="add-review-box">
                     <div className="add-review">
@@ -80,25 +81,25 @@ class RatingForm extends React.Component {
                         <hr/>
                         <div className="rating-group">
                             <div className="rating">
-                                <label className="rating-label">Quality One</label>
+                                <label className="rating-label">{qualityOne}</label>
                                 <div className="rating-stars">
                                     <Rate value={quality_one} onChange={this.qualityOne}/>
                                 </div>
                             </div>
                             <div className="rating">
-                                <label className="rating-label">Quality One</label>
+                                <label className="rating-label">{qualityTwo}</label>
                                 <Rate value={quality_two} onChange={this.qualityTwo}/>
                             </div>
                             <div className="rating">
-                                <label className="rating-label">Quality One</label>
+                                <label className="rating-label">{qualityThree}</label>
                                 <Rate value={quality_three} onChange={this.qualityThree}/>
                             </div>
                             <div className="rating">
-                                <label className="rating-label">Quality One</label>
+                                <label className="rating-label">{qualityFour}</label>
                                 <Rate value={quality_four} onChange={this.qualityFour}/>
                             </div>
                             <div className="rating">
-                                <label className="rating-label">Quality Five</label>
+                                <label className="rating-label">{qualityFive}</label>
                                 <Rate value={quality_five} onChange={this.qualityFive}/>
                             </div>
                         </div>
@@ -137,7 +138,19 @@ RatingForm.propTypes = {
     onSubmit: React.PropTypes.func.isRequired,
     onCancel: React.PropTypes.func.isRequired,
     header:React.PropTypes.string.isRequired,
-    postTrainerReview: React.PropTypes.func.isRequired,
+    qualityOne:React.PropTypes.string.isRequired,
+    qualityTwo:React.PropTypes.string.isRequired,
+    qualityThree:React.PropTypes.string.isRequired,
+    qualityFour:React.PropTypes.string.isRequired,
+    qualityFive:React.PropTypes.string.isRequired,
+};
+
+RatingForm.defaultProps={
+    qualityOne:'Quality One',
+    qualityTwo:'Quality Two',
+    qualityThree:'Quality Three',
+    qualityFour:'Quality Four',
+    qualityFive:'Quality Five',
 };
 
 export default RatingForm;

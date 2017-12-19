@@ -21,6 +21,12 @@ export const BACKEND_ROUTES = {
         ADD_GYM: "/add/gym",// :gymId/add/trainers
         CLIENT_LIST: "/manager/clients",//:gymId/trainer/clients
         TRAINER_LIST: "/manager/trainers",//:gymId/manager/trainers
+        GYM:{
+            COVER_PHOTO:'/gym/cover-photo',//:gymId/gym/cover-photo
+            LOGO:'/gym/logo',//:gymId/gym/logo
+            PROFILE:'/profile/gym',//:gymId/profile/gym
+            REVIEWS:'/review/gym'//:gymId/profile/gym
+        }
     },
 
     //trainer routes
@@ -66,8 +72,14 @@ export const BACKEND_ROUTES = {
         REVIEW_TRAINER:"/review/trainer",
         GET_TRAINER_REVIEWS:"/review/trainer",
         POST_PROFILE_PIC:"/profile-pic",
+
+        //user profile
         PROFILE:"/profile",
-        PROFILE_BY_ID:"/profile"//:gymId/profile/:userId
+        PROFILE_BY_ID:"/profile",//:gymId/profile/:userId
+
+        //gym profile
+        GYM_PROFILE:"/gym/profile",//:gymId/profile/gym
+        GYM_LIST:"/list/gyms"//list/gyms
     },
 
     //admin routes

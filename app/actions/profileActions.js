@@ -38,3 +38,4 @@ export const updateProfileInfoForClient = (data) =>{
 
   return postJSON(dataToBePosted, BACKEND_ROUTES.COMMONS.PROFILE)
 };
+

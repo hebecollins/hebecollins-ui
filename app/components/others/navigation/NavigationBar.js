@@ -43,8 +43,7 @@ class NavigationBar extends React.Component {
                 let selector = $(this).data("target");
                 $(selector).toggleClass('in');
             }
-        )
-        ;
+        );
     }
 
     componentDidUpdate() {
@@ -69,9 +68,9 @@ class NavigationBar extends React.Component {
         this.setState({showGyms: !this.state.showGyms})
     }
 
-    selectGym(gym){
+    selectGym(gym) {
         this.props.setDefaultGym(gym);
-        location.reload();
+        redirectByName("HOME")
     }
 
     render() {
@@ -87,7 +86,7 @@ class NavigationBar extends React.Component {
                 <div className="gym-list">
                     {gymList.map((gym, index) => {
                         return <div key={index}>
-                            <a onClick={()=>this.selectGym(gym)} className="gym" >{gym.gym_name},{gym.locality}</a>
+                            <a onClick={() => this.selectGym(gym)} className="gym">{gym.gym_name},{gym.locality}</a>
                         </div>
                     })}
                 </div>
@@ -105,13 +104,12 @@ class NavigationBar extends React.Component {
                     {gymList && gymList.length > 1 ?
                         <div className="button" onClick={this.listGyms}>
                             <span className="caret"/>{
-                                showGyms?gyms():<div/>
+                            showGyms ? gyms() : <div/>
                         }
-                        </div> :
-                        <div/>}
+                        </div> : <div/>
+                    }
                 </div>
             </div>;
-
 
         return (
             <div className="navbar navbar-inverse">
