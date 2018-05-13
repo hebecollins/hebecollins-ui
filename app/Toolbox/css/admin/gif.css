@@ -1,0 +1,42 @@
+.inline-field{
+    width: 100%;
+    display: flex;
+}
+
+.upload-box{
+    border: 1px dotted white;
+    margin-bottom: 12px;
+}
+.upload{
+    padding: 10px;
+    color: white
+}
+
+@media (min-width: 768px) {
+    .list-element{
+        padding: 12px;
+    }
+
+    .gif-form {
+        width:90%;
+        margin:auto;
+    }}
+
+@media (max-width: 768px) {
+    .list-element{
+        margin: 20px 0 50px 0;
+    }
+}
+
+.padding-top{
+    padding-top: 4%!important;
+}
+
+.admin-icon-box{
+    width: 40%;
+    margin: auto;
+}
+
+.admin-icon-box .exercise-icon{
+    margin: 0;
+}

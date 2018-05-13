@@ -1,0 +1,14 @@
+1. big container at home page (class = container)
+2. Each big box will consist(mostly) to two boxes(one just for phone-version) (class = box-left, box-right)
+3. Navigation box (class = navbar)
+4. A box containing signupAndLogin and quote box(class = hebecollins-content)
+5. Boxes inside hebecollins-content
+    * hebecollins-partition-left
+    * hebecollins-partition-right
+        OR
+    * hebecollins-whole
+
+1. text-link which should change color on hovering. For eg. forgot-password (class = text-link)
+2. text along with checkbox. for-eg remember me (class = checkbox-text)
+3. text which stays at the center and white in color.(class = white-center)
+4. textBox. properties inside textbox (class = text-box)

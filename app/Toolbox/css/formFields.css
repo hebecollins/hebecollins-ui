@@ -1,0 +1,94 @@
+/*warning signs*/
+.has-error .help-block {
+    color: white;
+}
+
+.checkbox-text {
+    color: #cccccc;
+}
+
+.gender{
+    background: rgba(0, 0, 0, 0.6);
+    color:white;
+}
+
+option{
+    background: rgba(0, 0, 0, 0.8);
+}
+
+/*btn-hebecollins*/
+.btn-hebecollins-reverse {
+    background-color: #cccccc;
+    color: black;
+    -webkit-border-radius: 0;
+    -moz-border-radius: 0;
+    border-radius: 0;
+}
+
+.btn-hebecollins {
+    background-color: #ea3e0d;
+    color: black;
+    -webkit-border-radius: 0;
+    -moz-border-radius: 0;
+    border-radius: 0;
+}
+
+.btn-hebecollins:focus {
+    background-color: #cccccc;
+    border-color: #1e1e1e;
+}
+
+.btn-hebecollins-reverse:disabled,
+.btn-hebecollins-reverse[disabled] {
+    border: 0;
+    background-color: #ea3e0d;
+    color: black;
+    opacity: 1;
+}
+
+.btn-hebecollins:disabled,
+.btn-hebecollins[disabled] {
+    border: 1px solid #999999;
+    background-color: #cccccc;
+    color: black;
+    opacity: 0;
+    width: 100%;
+}
+
+
+.form-control{
+    background-color:transparent;
+    color: white;
+    height:40px;
+    font-size:16px;
+}
+.form-control[disabled], fieldset[disabled] .form-control {
+     cursor: default;
+}
+
+.form-control[disabled], .form-control[readonly], fieldset[disabled] .form-control {
+    background-color: transparent;
+}
+
+
+.btn-next{
+    border-radius:0 !important;
+    background-color: var(--dark-orange);
+    color:black;
+    border-width: 0;
+}
+
+.in-line.form-control{
+    width: 60px;
+    background-color: transparent;
+    margin: 0 0 0 10px;
+    color: white;
+    padding:0 0 0 5px;
+    display: initial;
+}
+.no-margin{
+    margin: 0!important;
+}
+.input-group{
+    margin-bottom:15px;
+}

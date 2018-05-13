@@ -1,0 +1,17 @@
+* priority low: make save and assign workout option
+
+* priority moderate: make certain pages inaccessible if client is not selected
+* priority moderate(can be done in redirect section):
+    remove client data if any other page is accessed other than workout related pages
+    accessibility of page/route must be handled outside of a component
+
+
+* priority low: make gymId store as a seperate entry and make it open for user to change it
+
+* priority low: upgrade webpack version to atleast 2.0 after first attempt of image cropper
+    as image cropping can have issues
+
+* priority low: make open in new tab feature work by taking localStorage data and copying it to redux
+
+* priority low: let trainers and managers categorize their client. There should be a separate button
+                in it to see by category.

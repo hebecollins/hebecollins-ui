@@ -1,0 +1,26 @@
+.dropzone{
+    width: 100%;
+    color: white;
+    border: 1px dashed wheat;
+}
+
+@media (min-width: 768px) {
+    .dropzone{
+        height: 220px;
+    }
+}
+
+@media (max-width: 768px) {
+    .dropzone{
+        height: 150px;
+    }
+}
+
+.dropzone-img{
+    width: 100%;
+    border:1px dashed wheat;
+}
+
+.dropzone-label{
+    margin: 20px;
+}

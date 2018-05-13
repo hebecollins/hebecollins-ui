@@ -1,0 +1,69 @@
+/*======================================================================================*/
+/*list-individual-data is one entry in user-list. Each entry represents a link*/
+/*======================================================================================*/
+.list-individual-data {
+    min-height: 40px;
+    padding: 10px 0 10px 0;
+    display: flex;
+    border-bottom: 1px solid var(--light-gray);
+    margin-right: 20px;
+    cursor: pointer!important;
+}
+
+.list-individual-data:hover {
+    text-decoration: none;
+}
+
+.list-individual-data-clicked {
+    background-color: var(--light-gray);
+    margin-right: 20px;
+}
+
+.list-dropdown-mobile-visible{
+    background-color: var(--light-gray);
+    margin-right: 20px;
+    display: flex;
+}
+
+@media (min-width: 768px) {
+
+    .list-dropdown-mobile-visible{
+        display: none;
+    }
+}
+
+
+/*======================================================================================*/
+/*list-individual-info represents the text part of list-individual-data*/
+/*======================================================================================*/
+.list-individual-info {
+    display: inline-block;
+    color: black;
+    font-size: large;
+    padding-left: 10px;
+}
+
+
+/*======================================================================================*/
+/* represents list-monitor elements*/
+/*======================================================================================*/
+
+.list-monitor-right-box{
+    display: inline-block;
+    padding: 0 0 60px 15px;
+    position: relative;
+    width: 65%;
+}
+
+.list-monitor-left-box{
+    display: inline-block;
+    padding: 0 15px 60px 0;
+    border-right: 2px solid var(--light-gray);
+    position: relative;
+    width: 35%;
+}
+
+.list-monitor-elements{
+    display: flex;
+    padding-top: 15px;
+}

@@ -1,0 +1,36 @@
+img {
+    width:inherit;
+}
+
+.img-responsive2{
+    width: 45px;
+    float: left;
+    margin: 3px;
+    padding: 3px;
+}
+
+/*for margin between logo and left end*/
+.container-fluid>.navbar-collapse, .container-fluid>.navbar-header, .container>.navbar-collapse, .container>.navbar-header {
+    margin-left:-10px
+}
+
+/*menu icon for small screens*/
+.navbar-toggle{
+    margin-right: 5%;
+}
+
+
+.logo-extended{
+    width: 100%;
+    float: left;
+    margin: 3px;
+    padding: 3px;
+}
+
+.list-thumbnail{
+    border-radius: 50%;
+    max-width:70px;
+    max-height:70px;
+    display:inline-block;
+    border:2px solid var(--dark-orange);
+}

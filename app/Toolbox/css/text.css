@@ -1,0 +1,216 @@
+.forgot-password {
+    color: #cccccc;
+    text-decoration: underline;
+}
+
+/* unvisited link */
+.forgot-password:visited {
+    color: #cccccc;
+}
+
+/* visited link */
+.forgot-password:hover {
+    color: #ea3e0d;
+}
+
+/* mouse over link */
+.forgot-password:active {
+    color: #cccccc;
+}
+
+/*txt at signup page Sign Up for free*/
+.white-center {
+    color: white;
+    text-align: center;
+    font-size: 25px;
+}
+
+.all-caps {
+    text-transform: uppercase;
+    font-family: cursive;
+    font-size: medium;
+    text-align: center;
+    color: white;
+    margin: 0 0 5% 0;
+
+}
+
+.quote {
+    text-align: center;
+    color: var(--dark-grey);
+    margin: 0 0 60px 0;
+}
+
+blockquote {
+    font-family: Georgia, serif;
+    font-size: x-large;
+    font-style: italic;
+    line-height: 1.45;
+    position: relative;
+    padding: 10px 25px;
+    border-left: 5px solid var(--dark-grey);
+    border-right: 5px solid var(--dark-grey);
+}
+
+blockquote:before {
+    display: block;
+    padding-left: 10px;
+    content: "\201C";
+    font-size: 80px;
+    position: absolute;
+    left: -13px;
+    top: -20px;
+    color: var(--dark-grey);
+}
+
+.white-fade {
+    text-align: center;
+    opacity: 0.40;
+}
+
+#horizontal-line {
+    opacity: 0.40;
+}
+
+.icon {
+    opacity: 1 !important;
+}
+
+.icon-center {
+    color: var(--dark-orange);
+    text-align: center;
+    font-size: 100px;
+    background: rgba(0, 0, 0, 0.6);
+}
+
+.icon-text-field {
+    color: var(--light-orange);
+    background-color: transparent;
+}
+
+.badge{
+    padding:10px 12px 10px 12px;
+    font-size: large;
+    margin: 10px 0 10px 0;
+    height: max-content;
+    background-color: var(--dark-orange);
+}
+
+/*==========================================================================================*/
+/*used for listing user's information in a list in features like clientList, trainerList*/
+/*=======================================START===============================================*/
+.list-individual-name{
+    margin: 0;
+    font-weight: bold;
+}
+
+.list-individual-joining-date{
+    margin: 0;
+    color: white;
+    font-size: medium;
+}
+
+.list-individual-workout-date{
+    margin: 0;
+    color: white;
+    font-size: medium;
+}
+
+.list-header{
+    text-transform: uppercase;
+    font-size: large;
+    color: var(--light-orange);
+    text-align: center;
+    font-family: Arial;
+    font-weight: bold;
+}
+
+.list-monitor-header{
+    margin-bottom: 20px;
+    font-weight: bold;
+    font-size: xx-large;
+    color:black;
+}
+
+.list-monitor-elements{
+    padding: 20px 0 10px 0;
+    font-weight: bold;
+    font-size: large;
+    color:white;
+}
+
+p{
+    margin-bottom: 5px;
+}
+
+.edit-icon-link:hover{
+    color: var(--dark-orange);
+}
+.edit-icon-link{
+    color: white;
+    cursor: pointer;
+}
+/*=======================================END==============================================*/
+
+
+
+/*========================================================================================*/
+/*used in addWorkout feature*/
+/*======================================START=============================================*/
+.black{
+    color:black;
+    font-size: medium;
+}
+
+.day-link{
+    color: black;
+    cursor: pointer;
+    text-transform: uppercase;
+    font-size: medium;
+}
+
+.day-link:hover{
+    text-decoration: none;
+    color: white;
+    text-transform: uppercase;
+    font-size: medium;
+}
+
+.day-link:visited{
+    text-decoration: none;
+    color: black;
+    text-transform: uppercase;
+    font-size: medium;
+}
+
+.day{
+    color: white;
+    text-transform: uppercase;
+    font-size: large;
+    font-weight: bold;
+    margin: 0;
+}
+
+hr{
+    display: block;
+    border-color: var(--light-gray);
+    margin: 10px 0 10px 0;
+}
+
+/*========================================END==============================================*/
+
+
+
+.text-field{
+    background-color: var(--dark-orange) !important;
+}
+
+.close{
+    opacity:0.4;
+    margin-bottom:10px;
+}
+
+.large-glyphicon{
+    font-size: xx-large;
+    margin: 0 5px 0 5px;
+}

@@ -1,0 +1,248 @@
+
+:root {
+    --dark-orange: #ea3e0d;
+    --light-orange: #e67817;
+    --dark-grey: #1e1e1e;
+    --light-gray:#454a4e
+}
+
+#app {
+    background-color: black;
+}
+
+/*html, body{*/
+    /*min-height: 100% !important;*/
+    /*height: 100%;*/
+/*}*/
+
+@media (max-width: 768px) {
+    #page {
+        background-image: url("http://dev.hebecollins.com/images/guest_home_mobile.jpg");
+        background-size: cover;
+        background-repeat: no-repeat;
+        background-attachment: fixed;
+        height: 100%;
+        top: 0;
+        left: 0;
+        display: inline-block;
+        width: 100%;
+    }
+
+    .layer {
+        background: rgba(0, 0, 0, .6);
+    }
+
+    .login-signup {
+        background: rgba(204, 204, 204, 0.2);
+        border-radius: 0;
+        padding: 10% 5% 15% 5%;
+    }
+
+    .white-box {
+        background: rgba(204, 204, 204, 0.4);
+        border-radius: 0;
+        overflow: auto;
+        padding: 30px 5% 50px 5%;
+        margin: 0 10px 0 10px;
+    }
+
+    /*home page*/
+    .quote-box {
+        background: rgba(230, 120, 23, .6);
+        padding-left: 10px !important;
+        padding-right: 10px !important;
+    }
+
+    .single-screen-2{
+        margin:0;
+    }
+
+}
+
+@media (min-width: 768px) {
+    #page {
+        background-image: url("http://dev.hebecollins.com/images/guest_home.jpg");
+        /*display: inline-block;*/
+        /*height: 100vh;*/
+        left: 0;
+        top: 0;
+        bottom: 0;
+        height: 100%;
+        width: 100%;
+        background-size: cover;
+        background-repeat: no-repeat;
+        background-attachment: fixed;
+    }
+
+    .layer {
+        background: rgba(0, 0, 0, .6);
+    }
+
+    .login-signup {
+        background: rgba(204, 204, 204, 0.2);
+        border-radius: 0;
+        padding: 30px 5% 30px 5%;
+    }
+
+    .white-box {
+        background: rgba(204, 204, 204, 0.4);
+        border-radius: 0;
+        overflow: auto;
+        padding: 30px 5% 40px 5%;
+    }
+
+    /*home page*/
+    .quote-box {
+        background: rgba(230, 120, 23, .6);
+        min-height: 500px;
+    }
+
+    .single-screen-2{
+        margin:0 5% 0 5%;
+    }
+
+}
+
+.description {
+    background: rgba(204, 204, 204, 0.2);
+    border-radius: 0;
+    padding: 30px 5% 50px 5%;
+    color: white;
+    font-size: larger;
+}
+
+#flash-message {
+    position: absolute;
+    top: 62px;
+    min-width: 100%;
+    min-height: 60px;
+    z-index: 98;
+}
+
+.content {
+    position: relative;
+    padding: 72px 0 40px 0;
+    margin-top: 50px;
+}
+
+.active {
+    font-size: large;
+    color: black !important;
+    background: var(--dark-orange) !important;
+}
+
+#footer {
+    background-color: black;
+    min-width: 100%;
+    color: white;
+    float: left;
+    min-height: 100px;
+    border: solid var(--light-orange);
+    border-width: 2px 0 0 0;
+}
+
+.content-child-two-screen {
+    padding: 0 7% 7% 7%;
+}
+
+.navbar {
+    position: fixed;
+    margin-bottom: 0;
+    left: 0;
+    right: 0;
+    top: 0;
+    z-index: 99;
+    background-color: black;
+    border-width: 2px;
+    border-bottom-color: var(--light-orange); /*hebecollins-theme-color-2*/
+}
+
+.row {
+    display: flex; /* equal height of the children */
+}
+
+.hebecollins-content {
+    padding-top: 6em;
+    padding-bottom: 10em;
+    min-height: 100%;
+}
+
+.format-form {
+    padding-left: 5%;
+    padding-right: 5%;
+}
+
+.monitor {
+    height: 100% !important;
+}
+
+.monitor-data-box {
+    color: white;
+}
+
+.round-edged-box {
+    background: rgba(204, 204, 204, 0.4);
+    margin: 0 30px 0 30px;
+    border-radius: 20px;
+    overflow: auto;
+    padding: 20px 3% 40px 3%;
+    display: inline-block;
+}
+
+
+/*======================================================================================*/
+/*represents scroll-bar*/
+/*========================================START===========================================*/
+.scrollbar-track-vertical {
+    position: absolute;
+    width: 10px;
+    right: 2px;
+    bottom: 2px;
+    top: 2px;
+    border-radius: 3px;
+    background-color: var(--light-gray);
+}
+
+.scrollbar-thumb-vertical {
+    position: relative;
+    display: block;
+    cursor: pointer;
+    border-radius: inherit;
+    background-color: var(--light-orange);
+}
+/*======================================END================================================*/
+
+.bottom-of-div{
+    bottom: 0;
+    position: absolute;
+    margin: 0 !important;
+    display: flex;
+}
+
+.field{
+    color: white;
+    font-weight: normal;
+    margin: 0;
+    font-size: medium;
+}
+
+.value{
+    color: var(--dark-grey);
+    font-weight: normal;
+    padding-left: 5px;
+    margin: 0;
+    font-size: medium;
+}
+
+.margin{
+    padding: 10px;
+}
+
+.badge{
+    max-height: 40px;
+}
+
+.margin-auto{
+    margin:auto;
+    width: 100%;
+}
